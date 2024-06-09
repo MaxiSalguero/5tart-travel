@@ -5,7 +5,7 @@ import {
   Logger,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UserEntity } from 'src/entidades/user.entity';
+import { UserEntity } from 'src/entidades/users.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ShelterEntity } from 'src/entidades/shelter.entity';

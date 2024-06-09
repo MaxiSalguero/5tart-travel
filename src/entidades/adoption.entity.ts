@@ -6,7 +6,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { UserEntity } from './user.entity';
+import { UserEntity } from './users.entity';
 import { ShelterEntity } from './shelter.entity';
 import { PetsEntity } from './pets.entity';
 

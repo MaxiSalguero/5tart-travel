@@ -4,7 +4,7 @@ import { CreateAdopcionDto } from "src/dto/createAdopcion.dto";
 import { AdoptionEntity } from "src/entidades/adoption.entity";
 import { PetsEntity } from "src/entidades/pets.entity";
 import { ShelterEntity } from "src/entidades/shelter.entity";
-import { UserEntity } from "src/entidades/user.entity";
+import { UserEntity } from "src/entidades/users.entity";
 import { PetsService } from "src/pets/pets.service";
 import { Repository } from "typeorm";
 

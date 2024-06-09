@@ -1,7 +1,7 @@
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { configDotenv } from 'dotenv';
 
-configDotenv({ path: '.development.env' });
+configDotenv({ path: '.env' });
 
 export const jwtConfig: JwtModuleOptions = {
   global: true,

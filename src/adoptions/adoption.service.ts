@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AdoptionRepository } from './adoption.repository';
 import { AdoptionEntity } from 'src/entidades/adoption.entity';
-import { UserEntity } from 'src/entidades/user.entity';
+import { UserEntity } from 'src/entidades/users.entity';
 import { ShelterEntity } from 'src/entidades/shelter.entity';
 import { CreateAdopcionDto } from 'src/dto/createAdopcion.dto';
 

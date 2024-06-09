@@ -10,7 +10,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import { ChatRepository } from './chatRepository';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from 'src/entidades/user.entity';
+import { UserEntity } from 'src/entidades/users.entity';
 import { Repository } from 'typeorm';
 import { ChatService } from './chat.service';
 

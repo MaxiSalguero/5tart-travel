@@ -9,7 +9,7 @@ import {
 import { AdoptionEntity } from './adoption.entity';
 import { PetsEntity } from './pets.entity';
 import { OrderDetailsEntity } from './orderDetail.entity';
-import { UserEntity } from './user.entity';
+import { UserEntity } from './users.entity';
 
 @Entity({
   name: 'shelter',

@@ -5,7 +5,7 @@ import {
   OnModuleInit,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from 'src/entidades/user.entity';
+import { UserEntity } from 'src/entidades/users.entity';
 import { MailService } from 'src/mails/mail.service';
 import { Repository } from 'typeorm';
 import * as cron from 'node-cron';

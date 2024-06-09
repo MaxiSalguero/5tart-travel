@@ -5,7 +5,7 @@ import { ChatRepository } from './chatRepository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ChatGateway } from './chat.gateway';
 import { MessageEntity } from 'src/entidades/message.entity';
-import { UserEntity } from 'src/entidades/user.entity';
+import { UserEntity } from 'src/entidades/users.entity';
 
 
 @Module({
