@@ -34,13 +34,14 @@ export class PetsController {
   @UseGuards(AuthGuard)
   @Post()
   addPet(@Body() pet: CreatePetsDto, @Req() request) {
-    const shelterId = request.user.id
+    const shelterId = request.user.id;
     if (!shelterId) {
       throw new Error('Shelter ID is required');
     }
     return this.petsService.addPet(pet, shelterId);
   }
-  @Post('contition/:id')
+
+  @Post('condition/:id')
   conditionPet(id: string) {
     return this.petsService.conditionPet(id);
   }
@@ -49,6 +50,7 @@ export class PetsController {
   deletePet(@Param('id', ParseUUIDPipe) id: string) {
     return this.petsService.deletePet(id);
   }
+
   @Put(':id')
   updatedPet(
     @Param('id', ParseUUIDPipe) id: string,
