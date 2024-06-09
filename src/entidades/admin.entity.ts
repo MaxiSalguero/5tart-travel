@@ -1,35 +1,25 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import {v4 as uuid} from "uuid"
-
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({
-    name: 'admin'
+  name: 'admin',
 })
+export class AdminEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string
 
-export class AdminEntity{
+  @Column({
+    type: 'varchar',
+  })
+  name: string;
 
-    @PrimaryGeneratedColumn("uuid")
-    id: string = uuid()
+  @Column({
+    type: 'varchar',
+    unique: true,
+  })
+  email: string;
 
-
-    @Column({
-        type:"varchar",
-        nullable: false,
-    })
-    name: string
-
-
-    @Column({
-        type:"varchar",
-        unique: true,
-        nullable: false,
-    })
-    email: string
-    
-
-    @Column({
-        type:"varchar",
-        nullable: false,
-    })
-    password: string
+  @Column({
+    type: 'varchar',
+  })
+  password: string;
 }

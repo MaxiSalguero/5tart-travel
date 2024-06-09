@@ -1,11 +1,9 @@
 import { Module } from '@nestjs/common';
 import { GoogleController } from './google.controller';
-import { GoogleService } from './google.service';
-import { ConfigModule } from '@nestjs/config';
+import { GoogleStrategy } from './google.strategy';
 
 @Module({
-  imports: [ConfigModule.forRoot()],
   controllers: [GoogleController],
-  providers: [GoogleService]
+  providers: [GoogleStrategy]
 })
 export class GoogleModule {}

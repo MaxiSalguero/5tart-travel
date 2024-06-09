@@ -1,15 +1,14 @@
-import { ApiProperty } from "@nestjs/swagger"
-import { IsDate, IsEmpty, IsNotEmpty, IsNumber, IsString } from "class-validator"
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsNotEmpty,
+  IsNumber,
+} from 'class-validator';
 
 export class CreateDonationDto {
-  
   @IsNotEmpty()
   @IsNumber()
   @ApiProperty({
-    example: "100"
+    example: '100',
   })
-  amount: number
-
-
- 
+  amount: number;
 }

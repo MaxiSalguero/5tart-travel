@@ -77,5 +77,5 @@ export class CreateUserDto {
   location?: string;
 
   @IsEmpty()
-  isActive: boolean
+  isActive: boolean;
 }

@@ -1,5 +1,10 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { v4 as uuid } from 'uuid';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 // import { DonationEntity } from './donation.entity';
 import { AdoptionEntity } from './adoption.entity';
 import { PetsEntity } from './pets.entity';
@@ -11,20 +16,24 @@ import { UserEntity } from './user.entity';
 })
 export class ShelterEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string = uuid();
+  id: string;
 
   @Column({
     type: 'varchar',
-    nullable: false,
   })
   name: string;
 
   @Column({
     type: 'varchar',
     unique: true,
-    nullable: false,
   })
   email: string;
+
+  @Column({
+    type: 'varchar',
+    length: 255,
+  })
+  password: string;
 
   @Column({
     type: 'int',
@@ -36,37 +45,34 @@ export class ShelterEntity {
     type: 'int',
     nullable: true,
   })
-  phone?: number
+  phone?: number;
 
   @Column({
     type: 'varchar',
-    nullable: false,
   })
   shelter_name: string;
 
   @Column({
     type: 'varchar',
-    nullable: false,
   })
   location: string;
 
   @Column({
     type: 'varchar',
-    nullable: false,
   })
   zona: string;
 
   @Column({
     type: 'varchar',
-    nullable: false,
   })
   description: string;
-  
+
   @Column({
-    type: "text",
-    default: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"
+    type: 'text',
+    default:
+      'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png',
   })
-  imgUrl: string
+  imgUrl: string;
 
   @Column({
     nullable: true,
@@ -80,11 +86,16 @@ export class ShelterEntity {
   })
   isActive: boolean;
 
+  @Column({
+    nullable: true,
+    default: 'user',
+  })
+  role?: string;
+
   // @Column({
   //   nullable: true,
   // })
   // donations: number;
-
 
   @ManyToMany(() => UserEntity, (user) => user.favorite)
   user: UserEntity[];
@@ -96,6 +107,5 @@ export class ShelterEntity {
   pets: PetsEntity[];
 
   @ManyToMany(() => OrderDetailsEntity, (orderdetail) => orderdetail.shelters)
-  orderDetail: OrderDetailsEntity[]
-
+  orderDetail: OrderDetailsEntity[];
 }

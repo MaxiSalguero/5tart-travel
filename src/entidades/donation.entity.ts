@@ -3,7 +3,6 @@
 // import { UserEntity } from "./user.entity";
 // import { ShelterEntity } from "./shelter.entity";
 
-
 // @Entity({
 //     name:'donation'
 // })
@@ -16,16 +15,14 @@
 //         type: "decimal",
 //         precision: 10,
 //         scale: 2,
-//         nullable: false   
+//         nullable: false
 //     })
 //     amount: number
-
 
 //     @Column({
 //         nullable: true,
 //     })
 //     date: Date
-
 
 //     @ManyToOne(() => ShelterEntity, shelter => shelter.donations)
 //     shelter: ShelterEntity;

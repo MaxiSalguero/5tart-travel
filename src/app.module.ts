@@ -11,7 +11,6 @@ import { PetsModule } from './pets/pets.module';
 import { ChatModule } from './chats/chat.module';
 import { databaseConfig } from './config/database.config';
 import { FileUploadModule } from './file_upload/file_upload.module';
-import { Auth0Module } from './auth0/auth0.module';
 import { MailModule } from './mails/mail.module';
 import { ConfigModule } from '@nestjs/config';
 import { GoogleModule } from './google/google.module';
@@ -25,12 +24,13 @@ import { CarritoModule } from './carrito/carrito.module';
 
 @Module({
   imports: [
-      ConfigModule.forRoot({
-        isGlobal: true,
-      }),
-      TypeOrmModule.forFeature([ShelterEntity, PetsEntity]),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    TypeOrmModule.forFeature([ShelterEntity, PetsEntity]),
     databaseConfig,
     FacebookModule,
+    GoogleModule,
     SerchModule,
     UsersModule,
     SheltersModule,
@@ -40,13 +40,11 @@ import { CarritoModule } from './carrito/carrito.module';
     PetsModule,
     ChatModule,
     FileUploadModule,
-    Auth0Module,
     MailModule,
-    GoogleModule,
     MercadoPagoModule,
-    CarritoModule
+    CarritoModule,
   ],
-  controllers: [AppController], 
-  providers: [AppService,PreloadService],
+  controllers: [AppController],
+  providers: [AppService, PreloadService],
 })
 export class AppModule {}

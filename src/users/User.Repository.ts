@@ -1,24 +1,31 @@
-import { Injectable, Logger, NotFoundException, OnModuleInit } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { UserEntity } from "src/entidades/user.entity";
-import { MailService } from "src/mails/mail.service";
-import { Repository } from "typeorm";
+import {
+  Injectable,
+  Logger,
+  NotFoundException,
+  OnModuleInit,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UserEntity } from 'src/entidades/user.entity';
+import { MailService } from 'src/mails/mail.service';
+import { Repository } from 'typeorm';
 import * as cron from 'node-cron';
-import { ShelterEntity } from "src/entidades/shelter.entity";
+import { ShelterEntity } from 'src/entidades/shelter.entity';
 
 @Injectable()
 export class UserRepository implements OnModuleInit {
   private readonly logger = new Logger(MailService.name);
-  constructor(@InjectRepository(UserEntity)
-  private readonly usersRepository: Repository<UserEntity>,
+  constructor(
+    @InjectRepository(UserEntity)
+    private readonly usersRepository: Repository<UserEntity>,
     @InjectRepository(ShelterEntity)
     private readonly sheltersRepository: Repository<ShelterEntity>,
-    private readonly mailService: MailService,) { }
+    private readonly mailService: MailService,
+  ) {}
   async onModuleInit() {
     this.scheduleEmails();
   }
   async getUsers() {
-    const users = await this.usersRepository.find()
+    const users = await this.usersRepository.find();
 
     if (users.length === 0) {
       throw new NotFoundException('no existen usuarios');
@@ -27,19 +34,16 @@ export class UserRepository implements OnModuleInit {
     return users;
   }
 
-
-
   async getUserById(id: string) {
-    const user = await this.usersRepository.find({ where: { id } })
+    const user = await this.usersRepository.find({ where: { id } });
     if (!user) {
-      throw new NotFoundException('no se encontro el usuario')
+      throw new NotFoundException('no se encontro el usuario');
     }
     return { user };
   }
   async updatedProfile(id: string, user: Partial<UserEntity>) {
     const updateUser = await this.usersRepository.findOne({ where: { id } });
     if (!updateUser) {
-
       throw new NotFoundException(`no se encontro el usuario con id ${id}`);
     }
     await this.usersRepository.merge(updateUser, user);
@@ -56,11 +60,11 @@ export class UserRepository implements OnModuleInit {
       throw new NotFoundException(`no se encontro el usuario con id ${id}`);
     }
     if (deleteUser.isActive === false) {
-      throw new NotFoundException('el usuario ya no existe')
+      throw new NotFoundException('el usuario ya no existe');
     }
     deleteUser.isActive = false;
 
-    await this.mailService.deleteUserMail(deleteUser.email, deleteUser.name)
+    await this.mailService.deleteUserMail(deleteUser.email, deleteUser.name);
     return this.usersRepository.save(deleteUser);
   }
   async activeUsers(id: string) {
@@ -71,19 +75,21 @@ export class UserRepository implements OnModuleInit {
       throw new NotFoundException(`no se encontro el usuario con id ${id}`);
     }
     if (activeUser.isActive === true) {
-      throw new NotFoundException('el usuario ya esta activo')
+      throw new NotFoundException('el usuario ya esta activo');
     }
     activeUser.isActive = true;
 
-    await this.mailService.deleteUserMail(activeUser.email, activeUser.name)
+    await this.mailService.deleteUserMail(activeUser.email, activeUser.name);
     return this.usersRepository.save(activeUser);
   }
   async scheduleEmails() {
     cron.schedule('0 0 1 */3 *', async () => {
       const users = await this.usersRepository.find();
       const subject = 'Nuevas oportunidades de adopción';
-      const text = 'Huellas de esperanza tiene nuevas oportunidades de animalitos peludos para adoptar.';
-      const html = '<p>Huellas de esperanza tiene nuevas oportunidades de animalitos peludos para adoptar.</p>';
+      const text =
+        'Huellas de esperanza tiene nuevas oportunidades de animalitos peludos para adoptar.';
+      const html =
+        '<p>Huellas de esperanza tiene nuevas oportunidades de animalitos peludos para adoptar.</p>';
 
       for (const user of users) {
         await this.mailService.sendMail(user.email, subject, text, html);
@@ -93,12 +99,10 @@ export class UserRepository implements OnModuleInit {
     });
   }
 
-
-
   async addShelterFavorite(id: string, userId: string) {
     const user = await this.usersRepository.findOne({
       where: { id: userId },
-      relations: ['favorite']
+      relations: ['favorite'],
     });
 
     if (!user) {
@@ -115,17 +119,15 @@ export class UserRepository implements OnModuleInit {
 
     await this.usersRepository.save(user);
 
-
-    return "Añadido a Favoritos";
+    return 'Añadido a Favoritos';
   }
-
 
   async getFavorites() {
     const Users: UserEntity[] = await this.usersRepository.find({
       relations: {
-        favorite: true
-      }
-    })
+        favorite: true,
+      },
+    });
 
     if (!Users) {
       throw new NotFoundException(`No hay favoritos`);
@@ -133,5 +135,4 @@ export class UserRepository implements OnModuleInit {
 
     return Users;
   }
-
 }

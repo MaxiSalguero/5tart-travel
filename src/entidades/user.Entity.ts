@@ -1,5 +1,12 @@
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { v4 as uuid } from 'uuid';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 // import { DonationEntity } from './donation.entity';
 import { AdoptionEntity } from './adoption.entity';
 import { OrdersEntity } from './orders.entity';
@@ -10,7 +17,7 @@ import { ShelterEntity } from './shelter.entity';
 })
 export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string = uuid();
+  id: string
 
   @Column({
     type: 'varchar',
@@ -25,9 +32,14 @@ export class UserEntity {
   @Column({
     type: 'varchar',
     unique: true,
-    nullable: false,
   })
   email: string;
+
+  @Column({
+    type: 'varchar',
+    length: 255,
+  })
+  password: string;
 
   @Column()
   birthdate: Date;
@@ -50,9 +62,14 @@ export class UserEntity {
   })
   isActive: boolean;
 
+  @Column({
+    nullable: true,
+    default: 'user',
+  })
+  role?: string;
+
   // @OneToMany(() => DonationEntity, (donation) => donation.user)
   // donations: DonationEntity[];
-
 
   @ManyToMany(() => ShelterEntity, (favorite) => favorite.user)
   @JoinTable()
@@ -62,6 +79,6 @@ export class UserEntity {
   adoptions: AdoptionEntity[];
 
   @OneToMany(() => OrdersEntity, (orders) => orders.user)
-    @JoinColumn({ name: "order_id" })
-    orders: OrdersEntity[]
+  @JoinColumn({ name: 'order_id' })
+  orders: OrdersEntity[];
 }

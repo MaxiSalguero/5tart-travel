@@ -1,21 +1,15 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import {v4 as uuid} from "uuid"
-
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({
-    name:'favs'
+  name: 'favs',
 })
-export class FavsEntity{
+export class FavsEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string
 
-    @PrimaryGeneratedColumn("uuid")
-    id: string = uuid()
+  @Column()
+  user_id: string;
 
-
-    @Column()
-    user_id: string
-
-
-    @Column()
-    pet_id: string
-
+  @Column()
+  pet_id: string;
 }

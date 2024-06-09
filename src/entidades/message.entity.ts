@@ -1,17 +1,15 @@
-import { text } from "stream/consumers";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({
-    name: 'message'
+  name: 'message',
 })
-
 export class MessageEntity {
-    @PrimaryGeneratedColumn('uuid')
-    id : string
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column({type: 'text'})
-    content : string
+  @Column({ type: 'text' })
+  content: string;
 
-    @Column()
-    createdAt : Date
+  @Column()
+  createdAt: Date;
 }
