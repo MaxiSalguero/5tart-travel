@@ -1,33 +1,23 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { v4 as uuid } from "uuid"
-
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({
-    name: 'volunteer'
+  name: 'volunter',
 })
 export class VolunteerEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @PrimaryGeneratedColumn("uuid")
-    id: string = uuid()
+  @Column()
+  date: Date;
 
+  @Column({
+    default: true,
+  })
+  status: boolean;
 
-    @Column({
-        nullable: false,
-    })
-    date: Date
+  @Column()
+  shelter_id: string;
 
-
-    @Column({
-        nullable: false,
-        default: true
-    })
-    status: boolean
-
-
-    @Column()
-    shelter_id: string
-
-
-    @Column()
-    user_id: string
+  @Column()
+  user_id: string;
 }

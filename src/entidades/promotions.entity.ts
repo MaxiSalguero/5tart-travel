@@ -1,22 +1,16 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
-import { v4 as uuid } from "uuid"
-
+import { Column, PrimaryGeneratedColumn } from 'typeorm';
 
 export class PromotionsEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string = uuid();
+  @Column({
+    type: 'varchar',
+  })
+  title: string;
 
-    @Column({
-        type: 'varchar',
-        nullable: false,
-    })
-    title: string;
-
-    @Column({
-        type: 'varchar',
-        nullable: false,
-    })
-    description: string;
-
+  @Column({
+    type: 'varchar',
+  })
+  description: string;
 }

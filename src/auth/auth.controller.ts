@@ -3,7 +3,6 @@ import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/dto/createUser.dto';
 import { LoginDto } from 'src/dto/login.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { Auth0Guard } from '../guards/auth0.guard';
 import { CreateShelterDto } from 'src/dto/createShelter.dto';
 
 @ApiTags('Auth')
@@ -11,36 +10,25 @@ import { CreateShelterDto } from 'src/dto/createShelter.dto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @UseGuards(Auth0Guard)
   @Post('/register/user')
-  Register(@Body() register: CreateUserDto, @Req() req) {
-    const accessToken = req.auth0Token;
-    const { email, password, confirm_password, ...metadata } = register;
-    return this.authService.RegisterUser(
-      email,
-      password,
-      metadata,
-      accessToken,
-    );
+  registerUser(@Body() register: CreateUserDto, @Req() req) {
+    return this.authService.registerUser(register);
   }
 
-  @UseGuards(Auth0Guard)
   @Post('/register/shelter')
   registerShelter(@Body() register: CreateShelterDto, @Req() req) {
-    const accessToken = req.auth0Token;
-    const { email, password, ...metadata } = register;
-    
-    return this.authService.RegisterShelter(
-      email,
-      password,
-      metadata,
-      accessToken,
-    );
+    return this.authService.registerShelter(register);
   }
 
-  @Post('login')
-  Login(@Body() credential: LoginDto) {
+  @Post('login/user')
+  loginUser(@Body() credential: LoginDto) {
     const { email, password } = credential;
-    return this.authService.Login(email, password);
+    return this.authService.loginUser(email, password);
+  }
+
+  @Post('login/shelter')
+  loginShelter(@Body() credential: LoginDto) {
+    const { email, password } = credential;
+    return this.authService.loginShelter(email, password);
   }
 }

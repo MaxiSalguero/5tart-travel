@@ -1,27 +1,19 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import {v4 as uuid} from "uuid"
-
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { v4 as uuid } from 'uuid';
 
 @Entity({
-    name: 'chat'
+  name: 'chat',
 })
+export class ChatEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-export class ChatEntity{
+  @Column()
+  date: Date;
 
-    @PrimaryGeneratedColumn("uuid")
-    id: string = uuid()
+  @Column()
+  user_id: string;
 
-
-    @Column({
-        nullable: false,
-    })
-    date: Date
-
-
-    @Column()
-    user_id: string
-    
-
-    @Column()
-    shelter_id: string
+  @Column()
+  shelter_id: string;
 }

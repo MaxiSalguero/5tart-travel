@@ -1,4 +1,4 @@
-export enum petGender{
-    Hembra = "hembra",
-    Macho = "macho"
+export enum petGender {
+  Hembra = 'hembra',
+  Macho = 'macho',
 }
