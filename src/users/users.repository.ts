@@ -152,7 +152,7 @@ export class UserRepository implements OnModuleInit {
     const pet: PetsEntity = await this.petsRepository.findOneBy({ id: petId });
 
     if (!pet) {
-      throw new NotFoundException(`No se encontró el refugio`);
+      throw new NotFoundException(`No se encontró la mascota`);
     }
 
     user.favorite_pets.push(pet);
