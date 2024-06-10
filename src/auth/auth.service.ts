@@ -119,7 +119,7 @@ export class AuthService {
   }
 
   async loginShelter(email: string, password: string) {
-    const shelter = await this.userRepository.findOneBy({ email });
+    const shelter = await this.shelterRepository.findOneBy({ email });
     if (!shelter) throw new UnauthorizedException('Credenciales incorrectas');
 
     const isPasswordValid = await bcrypt.compare(password, shelter.password);

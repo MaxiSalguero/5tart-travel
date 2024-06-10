@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ShelterEntity } from './entidades/shelter.entity';
 import { PetsEntity } from './entidades/pets.entity';
-import * as dataPets from "./helpers/loadPets.json";
-import * as dataShelters from "./helpers/loadShelters.json";
+import * as dataPets from "./helpers/loadPets copy.json";
+import * as dataShelters from "./helpers/loadShelters copy.json";
 
 @Injectable()
 export class PreloadService implements OnModuleInit {
@@ -32,7 +32,8 @@ export class PreloadService implements OnModuleInit {
                     location: shelter.location,
                     description: shelter.description,
                     imgUrl:shelter.imgUrl,
-                    zona: shelter.zona
+                    zona: shelter.zona,
+                    rate: shelter.rate
                 },
             });
 
@@ -54,6 +55,7 @@ export class PreloadService implements OnModuleInit {
                 const existingPet = await this.petsRepository.findOne({
                     where: {
                         name: pet.name,
+                        species: pet.species,
                         breed: pet.breed,
                         sexo: pet.sexo,
                         age: pet.age,

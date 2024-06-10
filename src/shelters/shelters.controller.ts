@@ -27,7 +27,7 @@ export class SheltersController {
     return this.sheltersService.getShelterById(id);
   }
 
-  @Put('profile')
+  @Put('profile/:id')
   updatedProfile(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() user: UpdateShelterDto,

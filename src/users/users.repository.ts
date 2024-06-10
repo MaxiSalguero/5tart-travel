@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   Logger,
   NotFoundException,
@@ -10,6 +11,7 @@ import { MailService } from 'src/mails/mail.service';
 import { Repository } from 'typeorm';
 import * as cron from 'node-cron';
 import { ShelterEntity } from 'src/entidades/shelter.entity';
+import { PetsEntity } from 'src/entidades/pets.entity';
 
 @Injectable()
 export class UserRepository implements OnModuleInit {
@@ -19,16 +21,21 @@ export class UserRepository implements OnModuleInit {
     private readonly usersRepository: Repository<UserEntity>,
     @InjectRepository(ShelterEntity)
     private readonly sheltersRepository: Repository<ShelterEntity>,
+    @InjectRepository(PetsEntity)
+    private readonly petsRepository: Repository<PetsEntity>,
     private readonly mailService: MailService,
   ) {}
   async onModuleInit() {
     this.scheduleEmails();
   }
+
   async getUsers() {
-    const users = await this.usersRepository.find();
+    const users = await this.usersRepository.find({
+      relations: ['pets', 'favorite_shelters', 'favorite_pets'],
+    });
 
     if (users.length === 0) {
-      throw new NotFoundException('no existen usuarios');
+      throw new NotFoundException('No existen usuarios');
     }
 
     return users;
@@ -41,6 +48,7 @@ export class UserRepository implements OnModuleInit {
     }
     return { user };
   }
+
   async updatedProfile(id: string, user: Partial<UserEntity>) {
     const updateUser = await this.usersRepository.findOne({ where: { id } });
     if (!updateUser) {
@@ -56,6 +64,7 @@ export class UserRepository implements OnModuleInit {
     const deleteUser = await this.usersRepository.findOne({
       where: { id },
     });
+
     if (!deleteUser) {
       throw new NotFoundException(`no se encontro el usuario con id ${id}`);
     }
@@ -67,13 +76,16 @@ export class UserRepository implements OnModuleInit {
     await this.mailService.deleteUserMail(deleteUser.email, deleteUser.name);
     return this.usersRepository.save(deleteUser);
   }
+
   async activeUsers(id: string) {
     const activeUser = await this.usersRepository.findOne({
       where: { id },
     });
+
     if (!activeUser) {
       throw new NotFoundException(`no se encontro el usuario con id ${id}`);
     }
+
     if (activeUser.isActive === true) {
       throw new NotFoundException('el usuario ya esta activo');
     }
@@ -82,14 +94,19 @@ export class UserRepository implements OnModuleInit {
     await this.mailService.deleteUserMail(activeUser.email, activeUser.name);
     return this.usersRepository.save(activeUser);
   }
+
   async scheduleEmails() {
     cron.schedule('0 0 1 */3 *', async () => {
       const users = await this.usersRepository.find();
-      const subject = 'Nuevas oportunidades de adopción';
+      const subject = '¡Castraciones gratuitas en Huellas de Esperanza!';
       const text =
-        'Huellas de esperanza tiene nuevas oportunidades de animalitos peludos para adoptar.';
-      const html =
-        '<p>Huellas de esperanza tiene nuevas oportunidades de animalitos peludos para adoptar.</p>';
+        '¡Te traemos una promoción especial! Huellas de Esperanza ofrece castraciones gratuitas para tu mascota. La próxima jornada se realizará pronto en nuestro refugio. ¡Visita nuestra página para obtener más información!';
+      const html = `<div style="border: 2px solid #ff3366; padding: 20px; background: #ffffff; border-radius: 15px; text-align: center;">
+            <p style="color: #ff3366; font-size: 24px; font-weight: bold; margin-bottom: 10px;">¡Castraciones gratuitas en Huellas de Esperanza!</p>
+            <p style="color: #000; font-size: 16px;">¡Te traemos una promoción especial! Huellas de Esperanza ofrece <span style="font-weight: bold;">castraciones gratuitas</span> para tu mascota. La próxima jornada se realizará pronto en nuestro refugio. ¡Visita nuestra página para obtener más información!</p>
+            <p style="color: #000; font-size: 16px;">¡No pierdas esta oportunidad y visita nuestra página para informarte sobre cómo participar!</p>
+            <a href="http://tu-pagina-web.com" style="display: inline-block; padding: 10px 20px; background: #ff3366; color: #ffffff; text-decoration: none; border-radius: 5px; margin-top: 20px;">Visitar Huellas de Esperanza</a>
+        </div>`;
 
       for (const user of users) {
         await this.mailService.sendMail(user.email, subject, text, html);
@@ -100,9 +117,9 @@ export class UserRepository implements OnModuleInit {
   }
 
   async addShelterFavorite(id: string, userId: string) {
-    const user = await this.usersRepository.findOne({
+    const user: UserEntity = await this.usersRepository.findOne({
       where: { id: userId },
-      relations: ['favorite'],
+      relations: ['favorite_shelters'],
     });
 
     if (!user) {
@@ -115,7 +132,30 @@ export class UserRepository implements OnModuleInit {
       throw new NotFoundException(`No se encontró el refugio`);
     }
 
-    user.favorite.push(shelter);
+    user.favorite_shelters.push(shelter);
+
+    await this.usersRepository.save(user);
+
+    return 'Añadido a Favoritos';
+  }
+
+  async addPetFavorite(petId: string, userId: string) {
+    const user: UserEntity = await this.usersRepository.findOne({
+      where: { id: userId },
+      relations: ['favorite_pets'],
+    });
+
+    if (!user) {
+      throw new NotFoundException(`No se encontró el usuario`);
+    }
+
+    const pet: PetsEntity = await this.petsRepository.findOneBy({ id: petId });
+
+    if (!pet) {
+      throw new NotFoundException(`No se encontró el refugio`);
+    }
+
+    user.favorite_pets.push(pet);
 
     await this.usersRepository.save(user);
 
@@ -125,7 +165,8 @@ export class UserRepository implements OnModuleInit {
   async getFavorites() {
     const Users: UserEntity[] = await this.usersRepository.find({
       relations: {
-        favorite: true,
+        favorite_pets: true,
+        favorite_shelters: true,
       },
     });
 
@@ -134,5 +175,39 @@ export class UserRepository implements OnModuleInit {
     }
 
     return Users;
+  }
+
+  async PutPetFavorite(petId: any, userId: string) {
+    const user: UserEntity = await this.usersRepository.findOne({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      throw new BadRequestException('Usuario no encontrado');
+    }
+
+    user.favorite_pets = user.favorite_pets.filter((pet) => pet.id != petId);
+
+    await this.usersRepository.save(user);
+
+    return 'Mascota eliminada de favoritos';
+  }
+
+  async PutShelterFavorite(shelterId: any, userId: string) {
+    const user: UserEntity = await this.usersRepository.findOne({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      throw new BadRequestException('Usuario no encontrado');
+    }
+
+    user.favorite_shelters = user.favorite_shelters.filter(
+      (shelter) => shelter.id != shelterId,
+    );
+
+    await this.usersRepository.save(user);
+
+    return 'Refugio eliminado de favoritos';
   }
 }

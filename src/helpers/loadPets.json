@@ -5,8 +5,10 @@
     "breed": "Poodle",
     "category": "Perro",
     "age": 3,
+
     "month":1,
     "pet_size": "Little",
+
     "imgUrl": "https://res.cloudinary.com/dd1yaduhv/image/upload/v1717561471/zwpl6aalthsjhgagwn9n.jpg",
     "description": "Un perro inteligente y cariñoso.",
     "shelter": "Refugio de Animales Palermo"
@@ -65,6 +67,7 @@
       "breed": "Golden Retriever",
       "category": "Perro",
       "age": 4,
+
       "month":11,
       "pet_size": "Big",
       "imgUrl": "https://res.cloudinary.com/dd1yaduhv/image/upload/v1717561552/iw5oj0drtzkzbzeybi03.jpg",
@@ -77,6 +80,7 @@
     "breed": "Bulldog Francés",
     "category": "Perro",
     "age": 2,
+
     "month":6,
     "pet_size": "Little",
     "imgUrl": "https://res.cloudinary.com/dd1yaduhv/image/upload/v1717561575/pgbucicnbai0dicomhf1.jpg",
@@ -137,6 +141,7 @@
   "breed": "Labrador Retriever",
   "category": "Perro",
   "age": 4,
+
   "month":8,
   "pet_size": "Big",
   "imgUrl": "https://res.cloudinary.com/dd1yaduhv/image/upload/v1717561697/dfofsbytxyond4mi1xma.jpg",
@@ -149,8 +154,10 @@
   "breed": "Bulldog Francés",
   "category": "Perro",
   "age": 0,
+
   "month":6,
   "pet_size": "Little",
+
   "imgUrl": "https://res.cloudinary.com/dd1yaduhv/image/upload/v1717561717/ae2zxoe4ktkwwcldxbpq.jpg",
   "description": "Una perra juguetona y amigable.",
   "shelter": "Refugio Canino de Morón"
@@ -185,7 +192,7 @@
   "breed": "Persa",
   "category": "Gato",
   "age": 0,
-  "month":10,
+  "month":"10",
   "pet_size": "mediano",
   "imgUrl": "https://res.cloudinary.com/dd1yaduhv/image/upload/v1717561818/koncc7ms4dtpxhctkspf.jpg",
   "description": "Una gata elegante y cariñosa.",
@@ -197,7 +204,7 @@
   "breed": "Siamés",
   "category": "Gato",
   "age": 0,
-  "month":8,
+  "month":"8",
   "pet_size": "mediano",
   "imgUrl": "img.jpg",
   "description": "Un gato tranquilo y sociable.",
@@ -233,7 +240,7 @@
   "breed": "Persa",
   "category": "Gato",
   "age": 3,
-  "month":9,
+  "month":"9",
   "pet_size": "mediano",
   "imgUrl": "https://res.cloudinary.com/dd1yaduhv/image/upload/v1717561915/yovagnsk7hzis4hvox0g.jpg",
   "description": "Una gata cariñosa y curiosa.",
@@ -281,7 +288,7 @@
   "breed": "mestizo",
   "category": "Gato",
   "age": 4,
-  "month":1,
+  "month":"1",
   "pet_size": "mediano",
   "imgUrl": "https://res.cloudinary.com/dd1yaduhv/image/upload/v1717562359/h09y4kfddpaer0wjjbew.jpg",
   "description": "Un gato cariñoso y enérgico.",
@@ -305,7 +312,7 @@
   "breed": "Siamés",
   "category": "Gato",
   "age": 3,
-  "month":1,
+  "month":"1",
   "pet_size": "mediano",
   "imgUrl": "https://res.cloudinary.com/dd1yaduhv/image/upload/v1717562091/ifmtuyoeu2iwpsgmtmqi.jpg",
   "description": "Una gata tranquila y afectuosa.",
@@ -353,7 +360,7 @@
   "breed": "mestizo",
   "category": "Gato",
   "age": 0,
-  "month":11,
+  "month":"11",
   "pet_size": "mediano",
   "imgUrl": "https://res.cloudinary.com/dd1yaduhv/image/upload/v1717562557/eveulf59ovdntexjerv5.jpg",
   "description": "Una gata cariñosa y afectuosa.",

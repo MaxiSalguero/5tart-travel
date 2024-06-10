@@ -11,6 +11,7 @@ import {
 import { AdoptionEntity } from './adoption.entity';
 import { OrdersEntity } from './orders.entity';
 import { ShelterEntity } from './shelter.entity';
+import { PetsEntity } from './pets.entity';
 
 @Entity({
   name: 'users',
@@ -57,6 +58,12 @@ export class UserEntity {
   location?: string | undefined;
 
   @Column({
+    type: "text",
+    default: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"
+  })
+  imgUrl: string
+
+  @Column({
     nullable: true,
     default: true,
   })
@@ -68,17 +75,22 @@ export class UserEntity {
   })
   role?: string;
 
-  // @OneToMany(() => DonationEntity, (donation) => donation.user)
-  // donations: DonationEntity[];
-
-  @ManyToMany(() => ShelterEntity, (favorite) => favorite.user)
+  @ManyToMany(() => ShelterEntity, (favorite_shelters) => favorite_shelters.user)
   @JoinTable()
-  favorite: ShelterEntity[];
+  favorite_shelters: ShelterEntity[];
+
+  @ManyToMany(() => PetsEntity, (favorite_pets) => favorite_pets.user)
+  @JoinTable()
+  favorite_pets: PetsEntity[];
 
   @OneToMany(() => AdoptionEntity, (adoptions) => adoptions.user)
   adoptions: AdoptionEntity[];
 
   @OneToMany(() => OrdersEntity, (orders) => orders.user)
-  @JoinColumn({ name: 'order_id' })
-  orders: OrdersEntity[];
+  @JoinColumn({ name: "order_id" })
+  orders: OrdersEntity[]
+
+  @OneToMany(() => PetsEntity, pets => pets.users)
+  @JoinColumn()
+  pets: PetsEntity[];
 }

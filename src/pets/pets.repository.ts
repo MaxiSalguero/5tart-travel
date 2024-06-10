@@ -41,13 +41,13 @@ export class PetsRepository {
       where: { id: shelterId },
     });
 
-    console.log(shelter);
     if (!shelter) {
       throw new Error('Shelter not found');
     }
     if (!shelterId) {
       throw new Error('Shelter ID is required');
     }
+
     const Pets = this.petsRepository.create({
       ...pet,
       shelter: shelter,
@@ -68,6 +68,7 @@ export class PetsRepository {
 
     return updatePet;
   }
+  
   async conditionPet(id: string) {
     const conditionpet = await this.petsRepository.findOne({
       where: { id },

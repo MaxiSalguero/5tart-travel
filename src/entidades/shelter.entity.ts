@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -42,7 +43,7 @@ export class ShelterEntity {
   dni: number;
 
   @Column({
-    type: 'int',
+    type: 'bigint',
     nullable: true,
   })
   phone?: number;
@@ -88,22 +89,24 @@ export class ShelterEntity {
 
   @Column({
     nullable: true,
+    type: 'decimal',
+  })
+  rate: number;
+
+  @Column({
+    nullable: true,
     default: 'user',
   })
   role?: string;
 
-  // @Column({
-  //   nullable: true,
-  // })
-  // donations: number;
-
-  @ManyToMany(() => UserEntity, (user) => user.favorite)
+  @ManyToMany(() => UserEntity, (user) => user.favorite_shelters)
   user: UserEntity[];
 
   @ManyToMany(() => AdoptionEntity, (adoptions) => adoptions.shelter)
   adoptions: AdoptionEntity[];
 
   @OneToMany(() => PetsEntity, (pets) => pets.shelter)
+  @JoinColumn()
   pets: PetsEntity[];
 
   @ManyToMany(() => OrderDetailsEntity, (orderdetail) => orderdetail.shelters)

@@ -7,10 +7,11 @@ import { OrdersEntity } from 'src/entidades/orders.entity';
 import { OrderDetailsEntity } from 'src/entidades/orderDetail.entity';
 import { UserEntity } from 'src/entidades/users.entity';
 import { ShelterEntity } from 'src/entidades/shelter.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports:[TypeOrmModule.forFeature([OrdersEntity,OrderDetailsEntity,UserEntity,ShelterEntity])],
   controllers: [CarritoController],
-  providers: [CarritoService, CarritoRepository]
+  providers: [CarritoService, CarritoRepository, JwtService]
 })
 export class CarritoModule {}

@@ -15,10 +15,13 @@ import { PetsEntity } from './pets.entity';
 })
 export class AdoptionEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string
 
   @Column()
   date: Date;
+
+  @Column()
+  isActive: boolean;
 
   @ManyToOne(() => UserEntity, (user) => user.adoptions)
   user: UserEntity;

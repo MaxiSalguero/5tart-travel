@@ -20,6 +20,7 @@ export class PetsService {
   updatedPet(id: string, pet: Partial<PetsEntity>) {
     return this.petsRepository.updatedPet(id, pet);
   }
+
   conditionPet(id: string) {
     return this.petsRepository.conditionPet(id);
   }

@@ -19,7 +19,7 @@ export class SerchService {
     return this.shelterService.filterShelters(exotic_animals, location, zona);
   }
 
-  searchGeneral(
+  searchGeneral1(
     exotic_animals?,
     location?,
     shelter_name?,
@@ -27,7 +27,7 @@ export class SerchService {
     pet_size?,
     age?,
   ) {
-    return this.searchRepository.searchGeneral(
+    return this.searchRepository.searchGeneral1(
       exotic_animals,
       location,
       shelter_name,
@@ -35,5 +35,9 @@ export class SerchService {
       pet_size,
       age,
     );
+  }
+
+  searchGeneral(query: string) {
+    return this.searchRepository.searchGeneral(query);
   }
 }
