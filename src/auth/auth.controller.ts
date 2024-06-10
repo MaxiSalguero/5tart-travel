@@ -20,7 +20,7 @@ export class AuthController {
     return this.authService.registerShelter(register);
   }
 
-  @Post('login')
+  @Post('login/shelter')
   login(@Body() credential: LoginDto) {
     const { email, password } = credential;
     return this.authService.login(email, password);
