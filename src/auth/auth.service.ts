@@ -98,43 +98,50 @@ export class AuthService {
     return { succes: 'Usuario registrado correctamente' };
   }
 
-  async loginUser(email: string, password: string) {
+  async login(email: string, password: string) {
     const user = await this.userRepository.findOneBy({ email });
-    if (!user) throw new UnauthorizedException('Credenciales incorrectas');
-
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid)
-      throw new UnauthorizedException('Credenciales incorrectas');
-
-    const userPayload = {
-      sub: user.id,
-      id: user.id,
-      email: user.email,
-      roles: user.role
-    };
-
-    const token = this.jwtService.sign(userPayload);
-
-    return { succes: 'Usuario logueado correctamente', token };
-  }
-
-  async loginShelter(email: string, password: string) {
     const shelter = await this.shelterRepository.findOneBy({ email });
-    if (!shelter) throw new UnauthorizedException('Credenciales incorrectas');
 
-    const isPasswordValid = await bcrypt.compare(password, shelter.password);
-    if (!isPasswordValid)
+    if (user) {
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+
+      if (!isPasswordValid)
+        throw new UnauthorizedException('Credenciales incorrectas');
+
+      const userPayload = {
+        sub: user.id,
+        id: user.id,
+        email: user.email,
+        roles: user.role,
+      };
+
+      const token = this.jwtService.sign(userPayload);
+
+      return { succes: 'Usuario logueado correctamente', token };
+    } else if (!user) {
+      if (shelter) {
+        const isPasswordValid = await bcrypt.compare(
+          password,
+          shelter.password,
+        );
+
+        if (!isPasswordValid)
+          throw new UnauthorizedException('Credenciales incorrectas');
+
+        const shelterPayload = {
+          sub: shelter.id,
+          id: shelter.id,
+          email: shelter.email,
+          roles: shelter.role,
+        };
+
+        const token = this.jwtService.sign(shelterPayload);
+
+        return { succes: 'Refugio logueado correctamente', token };
+      } else if (!shelter) {
+        throw new UnauthorizedException('Credenciales incorrectas');
+      }
       throw new UnauthorizedException('Credenciales incorrectas');
-
-    const shelterPayload = {
-      sub: shelter.id,
-      id: shelter.id,
-      email: shelter.email,
-      roles: shelter.role
-    };
-
-    const token = this.jwtService.sign(shelterPayload);
-
-    return { succes: 'Refugio logueado correctamente', token };
+    }
   }
 }
