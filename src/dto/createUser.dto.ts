@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsEmpty } from 'class-validator';
+import { IsEmpty, Length } from 'class-validator';
 import {
   IsDate,
   IsEmail,
@@ -16,15 +16,23 @@ import { MatchPassword } from 'src/decorators/password.decorator';
 export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
+  @Length(2, 30)
+  @Matches(/^[a-zA-Z ]+$/, {
+    message: 'El nombre solo puede contener letras y espacios',
+  })
   @ApiProperty({
-    example: 'Juan',
+    example: 'Juan Carlos',
   })
   name: string;
 
   @IsNotEmpty()
   @IsString()
+  @Length(2, 30)
+  @Matches(/^[a-zA-Z ]+$/, {
+    message: 'El apellido solo puede contener letras y espacios',
+  })
   @ApiProperty({
-    example: 'Castillo',
+    example: 'Castjhkjhkjhkillo',
   })
   last_name: string;
 
@@ -39,6 +47,7 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsString()
+  @Length(8)
   @ApiProperty({
     example: '********',
   })
@@ -67,9 +76,16 @@ export class CreateUserDto {
   @IsInt()
   @ApiProperty({
     description: 'Debe ser un numero de telefono',
-    example: '11 3344-5566',
+    example: 1133445566,
   })
   phone?: number;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty({
+    example: 'colocar una imagen',
+  })
+  imgUrl?: string;
 
   @IsOptional()
   @IsString()

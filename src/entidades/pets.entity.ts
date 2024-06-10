@@ -1,5 +1,6 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ShelterEntity } from './shelter.entity';
+import { UserEntity } from './users.entity';
 
 @Entity({
   name: 'pet',
@@ -25,11 +26,16 @@ export class PetsEntity {
   })
   breed: string;
 
+  @Column({
+    type: 'varchar',
+  })
+  species: string;
+
   @Column()
   age: number;
 
   @Column()
-  month: number;
+  month: string;
 
   @Column({
     type: 'varchar',
@@ -69,5 +75,12 @@ export class PetsEntity {
   isActive: boolean;
 
   @ManyToOne(() => ShelterEntity, (shelter) => shelter.pets)
+  @JoinColumn()
   shelter: ShelterEntity;
+
+  @ManyToMany(() => UserEntity, (user) => user.favorite_pets)
+  user: UserEntity[];
+
+  @ManyToOne(() => UserEntity, (user) => user.pets)
+  users: UserEntity;
 }

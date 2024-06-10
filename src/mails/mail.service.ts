@@ -2,13 +2,12 @@ import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
 
-
 @Injectable()
-export class MailService  {
+export class MailService {
   private transporter: nodemailer.Transporter;
   private readonly logger = new Logger(MailService.name);
 
-  constructor(private configService: ConfigService,){
+  constructor(private configService: ConfigService) {
     this.transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -17,7 +16,6 @@ export class MailService  {
       },
     });
   }
-
 
   async sendMail(to: string, subject: string, text: string, html?: string) {
     if (!to) {
@@ -42,8 +40,11 @@ export class MailService  {
     }
   }
 
-
-  async registerUserMail(userEmail: string, username: string,password: string) {
+  async registerUserMail(
+    userEmail: string,
+    username: string,
+    password: string,
+  ) {
     const subject = 'Bienvenido a Huellas de Esperanza';
     const text = `Hola ${username},
 
@@ -57,28 +58,30 @@ export class MailService  {
     El equipo de Huellas de Esperanza`;
 
     const html = `
-    <div style="border: 1px solid black; padding: 20px; background: linear-gradient(to bottom, #ff0066, #ffffff); border-radius: 15px; text-align: center;">
-    <p><strong>¡Hola, ${username}!</strong></p>
-    <p><strong>¡Bienvenido/a a Huellas de Esperanza!</strong></p>
-    <p>Nos alegra mucho que te hayas unido a nuestra comunidad. En Huellas de Esperanza, trabajamos para conectar a adorables mascotas con personas llenas de amor como tú. Ahora puedes explorar y adoptar mascotas que necesitan un hogar y todo tu cariño.</p>
-    <p>Tus credenciales son: </p> 
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <div style="border: 1px solid black; padding: 5px; border-radius: 10px; margin-bottom: 5px; text-align: left;">
-            <p style="margin: 0;">usuario: ${userEmail}</p>
-            <p style="margin: 0;">contraseña: ${password}</p>
+     <div style="border: 2px solid #ff3366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto;">
+        <p><strong>¡Hola, ${username}!</strong></p>
+        <p><strong>¡Bienvenido/a a Huellas de Esperanza!</strong></p>
+        <p>Nos alegra mucho que te hayas unido a nuestra comunidad. En Huellas de Esperanza, trabajamos para conectar a adorables mascotas con personas llenas de amor como tú. Ahora puedes explorar y adoptar mascotas que necesitan un hogar y todo tu cariño.</p>
+        <p>Tus credenciales son: </p>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div style="border: 2px solid #ff3366; padding: 10px; border-radius: 10px; margin-bottom: 10px; background: white; text-align: left; display: inline-block;">
+                <p style="margin: 0;">usuario: ${userEmail}</p>
+                <p style="margin: 0;">contraseña: ${password}</p>
+            </div>
         </div>
-        
-    </div>
-    <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
-    <p>¡Saludos!</p>
-    <p>El equipo de Huellas de Esperanza</p>
-</div>`;
-    this.logger.log(`Enviando correo a ${userEmail} con asunto "${subject}" y texto "${text}"`);
+        <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
+        <p>¡Saludos!</p>
+        <p>El Equipo de Huellas de Esperanza</p>
+    </div>`;
+    this.logger.log(
+      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${text}"`,
+    );
     await this.sendMail(userEmail, subject, text, html);
-}
-async cambioPasswordMail(userEmail: string, username: string) {
-  const subject = 'Solicitud de Cambio de Contraseña - Huellas de Esperanza';
-  const text = `Hola ${username},
+  }
+  
+  async cambioPasswordMail(userEmail: string, username: string) {
+    const subject = 'Solicitud de Cambio de Contraseña - Huellas de Esperanza';
+    const text = `Hola ${username},
 
   Hemos recibido una solicitud para cambiar la contraseña de tu cuenta en Huellas de Esperanza. Si no solicitaste este cambio, por favor ignora este correo.
 
@@ -91,24 +94,33 @@ async cambioPasswordMail(userEmail: string, username: string) {
   Saludos cordiales,
   El equipo de Huellas de Esperanza`;
 
-  const html = `
-  <div style="border: 1px solid black; padding: 20px; background: linear-gradient(to bottom, #ff0066, #ffffff); border-radius: 15px; text-align: center;">
-  <p>¡Hola, <strong>${username}</strong>!</p>
-  <p>Hemos recibido una solicitud para cambiar la contraseña de tu cuenta en Huellas de Esperanza. Si no solicitaste este cambio, por favor ignora este correo.</p>
-  <p>Para cambiar tu contraseña, sigue el enlace a continuación:</p>
-  <p><a href="[ENLACE PARA CAMBIAR CONTRASEÑA]" style="display: inline-block; padding: 10px 20px; background: linear-gradient(to bottom, #ff0066, #ffffff); color: white; text-decoration: none; border-radius: 5px; box-shadow: 0 5px 15px rgba(255, 0, 102, 0.3); transition: all 0.3s ease;">
-      Cambiar Contraseña
-  </a></p>
-  <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
-  <p>¡Saludos!</p>
-  <p>El Equipo de Huellas de Esperanza</p>
-</div>`;
-  this.logger.log(`Enviando correo a ${userEmail} con asunto "${subject}" y texto "${text}"`);
-  await this.sendMail(userEmail, subject, text, html);
-}
-async registershelterMail(userEmail: string, username: string,password: string) {
-  const subject = 'Bienvenido a Huellas de Esperanza';
-  const text = `Hola ${username},
+    const html = `
+  <div style="border: 2px solid #ff3366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto;">
+        <p>¡Hola, <strong>${username}</strong>!</p>
+        <p>Hemos recibido una solicitud para cambiar la contraseña de tu cuenta en Huellas de Esperanza. Si no solicitaste este cambio, por favor ignora este correo.</p>
+        <p>Para cambiar tu contraseña, sigue el enlace a continuación:</p>
+        <p>
+          <a href="[ENLACE PARA CAMBIAR CONTRASEÑA]" style="display: inline-block; padding: 10px 20px; background: linear-gradient(to bottom, #ff3366, #ffffff); color: white; text-decoration: none; border-radius: 5px; box-shadow: 0 5px 15px rgba(255, 0, 102, 0.3); transition: all 0.3s ease;">
+            Cambiar Contraseña
+          </a>
+        </p>
+        <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
+        <p>¡Saludos!</p>
+        <p>El Equipo de Huellas de Esperanza</p>
+      </div>`;
+    this.logger.log(
+      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${text}"`,
+    );
+    await this.sendMail(userEmail, subject, text, html);
+  }
+
+  async registershelterMail(
+    userEmail: string,
+    username: string,
+    password: string,
+  ) {
+    const subject = 'Bienvenido a Huellas de Esperanza';
+    const text = `Hola ${username},
 
   ¡Bienvenido/a al equipo de refugios de Huellas de Esperanza!
 
@@ -119,26 +131,29 @@ async registershelterMail(userEmail: string, username: string,password: string) 
   Saludos cordiales,
   El equipo de Huellas de Esperanza`;
 
-  const html = `
-  <div style="border: 1px solid black; padding: 20px; background: linear-gradient(to bottom, #ff0066, #ffffff); border-radius: 15px; text-align: center;">
-    <p><strong>¡Hola, ${username}!</strong></p>
-    <p><strong>¡Bienvenido/a a Huellas de Esperanza!</strong></p>
-    <p>Nos alegra mucho que te hayas unido a nuestra comunidad. En Huellas de Esperanza, trabajamos para conectar a adorables mascotas con personas llenas de amor como tú. Ahora puedes explorar y adoptar mascotas que necesitan un hogar y todo tu cariño.</p>
-    <p>Tus credenciales son: </p> 
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <div style="border: 1px solid black; padding: 5px; border-radius: 10px; margin-bottom: 5px; text-align: left;">
-            <p style="margin: 0;">usuario: ${userEmail}</p>
-            <p style="margin: 0;">contraseña: ${password}</p>
+    const html = `
+  <div style="border: 2px solid #ff3366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto;">
+        <p><strong>¡Hola, ${username}!</strong></p>
+        <p><strong>¡Bienvenido/a a Huellas de Esperanza!</strong></p>
+        <p>Nos alegra mucho que te hayas unido a nuestra comunidad. En Huellas de Esperanza, trabajamos para conectar a adorables mascotas con personas llenas de amor como tú.</p>
+        <p>Hemos recibido tu solicitud y estamos procesándola. A continuación, te enviamos tus credenciales:</p> 
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div style="border: 2px solid #ff3366; padding: 10px; border-radius: 10px; margin-bottom: 10px; background: white; text-align: left; display: inline-block;">
+                <p style="margin: 0;">Usuario: ${userEmail}</p>
+                <p style="margin: 0;">Contraseña: ${password}</p>
+            </div>
         </div>
-        
-    </div>
-    <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
-    <p>¡Saludos!</p>
-    <p>El equipo de Huellas de Esperanza</p>
-</div>`;
-  this.logger.log(`Enviando correo a ${userEmail} con asunto "${subject}" y texto "${text}"`);
-  await this.sendMail(userEmail, subject, text, html);
-}
+        <p>A la brevedad, te enviaremos la confirmación para que tu refugio pueda comenzar a subir los perros disponibles para adopción en nuestra página.</p>
+        <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
+        <p>¡Saludos!</p>
+        <p>El Equipo de Huellas de Esperanza</p>
+    </div>`;
+    this.logger.log(
+      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${text}"`,
+    );
+    await this.sendMail(userEmail, subject, text, html);
+  }
+
   async deleteUserMail(userEmail: string, username: string) {
     const subject = 'Bienvenido a Huellas de Esperanza';
     const text = `Hola ${username},
@@ -151,17 +166,20 @@ async registershelterMail(userEmail: string, username: string,password: string) 
     
     Saludos,
     Tu Empresa`;
-    const html= `<div style="border: 1px solid black; padding: 20px; background: linear-gradient(to bottom, #ff0066, #ffffff); border-radius: 15px; text-align: center;">
-    <p>¡Hola, <strong>${username}</strong>!</p>
+    const html = `<div style="border: 2px solid #ff3366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto;">
+    <p><strong>¡Hola, ${username}!</strong></p>
     <p>Tu cuenta ha sido cerrada correctamente.</p>
-    <p>Te informamos que hemos dado cumplimiento a su solicitud de acuerdo con la ley 25.326.</p>
+    <p>Te informamos que hemos dado cumplimiento a tu solicitud de acuerdo con la ley 25.326.</p>
     <p>Asimismo, te informamos que la empresa debe dar cumplimiento obligatorio al artículo 328 del Código Civil y Comercial de la Nación que obliga al guardado de información relativa a operaciones financieras.</p>
     <p>¡Saludos!</p>
     <p>El Equipo de Huellas de Esperanza</p>
-</div>`
-  this.logger.log(`Enviando correo a ${userEmail} con asunto "${subject}" y texto "${text}"`);
-    await this.sendMail(userEmail, subject, text,html);
-}
+</div>`;
+    this.logger.log(
+      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${text}"`,
+    );
+    await this.sendMail(userEmail, subject, text, html);
+  }
+
   async deleteshelterMail(userEmail: string, username: string) {
     const subject = 'Cierre de cuenta en Huellas de Esperanza';
     const text = `Hola ${username},
@@ -178,17 +196,20 @@ async registershelterMail(userEmail: string, username: string,password: string) 
     El equipo de Huellas de Esperanza`;
 
     const html = `
-    <div style="border: 1px solid black; padding: 20px; background: linear-gradient(to bottom, #ff0066, #ffffff); border-radius: 15px; text-align: center;">
-        <p>¡Hola, <strong>${username}</strong>!</p>
+    <div style="border: 2px solid #ff3366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto;">
+        <p><strong>¡Hola, ${username}!</strong></p>
         <p>Tu cuenta ha sido cerrada correctamente.</p>
-        <p>Te informamos que hemos dado cumplimiento a su solicitud de acuerdo con la ley 25.326.</p>
+        <p>Te informamos que hemos dado cumplimiento a tu solicitud de acuerdo con la ley 25.326.</p>
         <p>Asimismo, te informamos que la empresa debe dar cumplimiento obligatorio al artículo 328 del Código Civil y Comercial de la Nación que obliga al guardado de información relativa a operaciones financieras.</p>
         <p>¡Saludos!</p>
         <p>El Equipo de Huellas de Esperanza</p>
     </div>`;
-    this.logger.log(`Enviando correo a ${userEmail} con asunto "${subject}" y texto "${text}"`);
+    this.logger.log(
+      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${text}"`,
+    );
     await this.sendMail(userEmail, subject, text, html);
-}
+  }
+
   async sendShelterActivationMail(shelterEmail: string, shelterName: string) {
     const subject = 'Bienvenido a Huellas de Esperanza';
     const text = `¡Hola, ${shelterName}!
@@ -204,26 +225,79 @@ async registershelterMail(userEmail: string, username: string,password: string) 
     ¡Saludos!
     El equipo de Huellas de Esperanza`;
 
-    const html = `<div style="position: relative; border: 1px solid black; padding: 20px;background: linear-gradient(to bottom, #ff0066, #ffffff); border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center;">
+    const html = `<div style="position: relative; border: 2px solid #ff3366; padding: 20px;background: white; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; max-width: 600px; margin: 0 auto;">
     <p>¡Hola, <strong>${shelterName}</strong>!</p>
     <p>Tu cuenta ha sido activada correctamente.</p>
     <p>Nos alegra darte la bienvenida a Huellas de Esperanza. Ahora puedes acceder a tu cuenta y disfrutar de nuestros servicios.</p>
-    <p>Para iniciar sesión, haz clic en el siguiente enlace: <span id="enlace"></p>
-    <p><a href="http://example.com/login" style="display: inline-block; padding: 8px 15px; margin-top: 10px; color: white; background: linear-gradient(to bottom, #ff0066, #ffffff); text-decoration: none; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 1px solid #000; border-bottom: 4px solid #000;">Iniciar Sesión</a></span></p>
+    <p>Para iniciar sesión, haz clic en el siguiente enlace:</p>
+    <p><a href="http://example.com/login" style="display: inline-block; padding: 8px 15px; margin-top: 10px; color: white; background: linear-gradient(to bottom, #ff0066, #ffffff); text-decoration: none; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 1px solid #ff3366; border-bottom: 4px solid #ff3366;">Iniciar Sesión</a></p>
     <p>Además, te proporcionaremos un instructivo detallado sobre cómo registrar a las mascotas que se encuentran disponibles para la adopción.</p>
     <p>¡Saludos!</p>
     <p>El equipo de Huellas de Esperanza</p>
-</div>`;
+</div>
+`;
 
-    this.logger.log(`Enviando correo a ${shelterEmail} con asunto "${subject}" y texto "${text}"`);
+    this.logger.log(
+      `Enviando correo a ${shelterEmail} con asunto "${subject}" y texto "${text}"`,
+    );
     await this.sendMail(shelterEmail, subject, text, html);
-}
-  async sendDonationMail(userEmail: string, shelterName: string) {
-    const subject = 'Gracias por tu donación';
-    const text = `Gracias por haber donado en Huellas de Esperanza, al refugio ${shelterName}.`;
-    await this.sendMail(userEmail, subject, text);
-}
- async sendVolunteerMail(userEmail: string, shelterName: string) {
+  }
+
+  async sendPostulacion(
+    sheltername: string,
+    pet: string,
+    username: string,
+    userEmail: string,
+  ) {
+    const subject = 'Confirmación de Postulación de Adopción';
+    const text = `Hola ${username},
+
+  Nos alegra informarte que hemos registrado tu postulación para la adopción de ${pet} del refugio ${sheltername}.
+  En un lapso de 72 horas, recibirás una respuesta por correo electrónico confirmando si tu solicitud ha sido aceptada o no.
+
+  Saludos cordiales,
+  El Equipo de Huellas de Esperanza`;
+
+    const html = ` <div style="position: relative; border: 2px solid #ff3366; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; max-width: 600px; margin: 0 auto;">
+      <p>¡Hola, <strong>${username}</strong>!</p>
+      <p>Tu solicitud ha sido recibida correctamente.</p>
+      <p>Nos alegra informarte que hemos registrado tu postulación para la adopción de <strong>${pet}</strong> del refugio <strong>${sheltername}</strong>.</p>
+      <p>En un lapso de 72 horas, recibirás una respuesta por correo electrónico confirmando si tu solicitud ha sido aceptada o no.</p>
+      <p>Mientras tanto, si tienes alguna pregunta o necesitas más información, no dudes en ponerte en contacto con nosotros. Estamos aquí para ayudarte en todo lo que necesites.</p>
+      <p>¡Saludos cordiales!</p>
+      <p>El Equipo de Huellas de Esperanza</p>
+  </div>`;
+
+    this.logger.log(
+      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${text}"`,
+    );
+    await this.sendMail(userEmail, subject, text, html);
+  }
+
+  async confirmPostulacion(
+    userEmail: string,
+    nombreDelPerro: string,
+    nombreDelUsuario: string,
+  ) {
+    const subject = '¡Confirmación de Adopción!';
+    const text = `¡Hola ${nombreDelUsuario}!\n\n¡Estamos llenos de alegría al anunciarte que tu solicitud de adopción para ${nombreDelPerro} ha sido aceptada! Es un momento emocionante para ti y para ${nombreDelPerro}, el comienzo de una nueva y hermosa aventura juntos! No dudes en contactarnos si necesitas cualquier cosa en este nuevo viaje. ¡Felicidades una vez más por esta maravillosa adopción!\n\nCon cariño, El Equipo de Huellas de Esperanza`;
+
+    const html = `<div style="position: relative; border: 2px solid #ff3366; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; max-width: 600px; margin: 0 auto;">
+      <p>¡Hola, <strong>${nombreDelUsuario}</strong>!</p>
+      <p>¡Estamos llenos de alegría al anunciarte que tu solicitud de adopción para <strong>${nombreDelPerro}</strong> ha sido aceptada!</p>
+      <p>Es un momento emocionante para ti y para <strong>${nombreDelPerro}</strong>, el comienzo de una nueva y hermosa aventura juntos! No dudes en contactarnos si necesitas cualquier cosa en este nuevo viaje.</p>
+      <p>¡Felicidades una vez más por esta maravillosa adopción!</p>
+      <p>Con cariño,</p>
+      <p>El Equipo de Huellas de Esperanza</p>
+  </div>`;
+
+    this.logger.log(
+      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${text}"`,
+    );
+    await this.sendMail(userEmail, subject, text, html);
+  }
+
+  async sendVolunteerMail(userEmail: string, shelterName: string) {
     const subject = 'Gracias por ser voluntario';
     const text = `Gracias por elegir ser voluntario. Se le informará al refugio ${shelterName} que usted es voluntario. El refugio se comunicará con usted, vía email.`;
     await this.sendMail(userEmail, subject, text);

@@ -46,9 +46,9 @@ export class PetsController {
     return this.petsService.conditionPet(id);
   }
 
-  @Post(':id')
-  deletePet(@Param('id', ParseUUIDPipe) id: string) {
-    return this.petsService.deletePet(id);
+  @Post('delete/:id')
+  deletePet(@Param('id', ParseUUIDPipe) id: string){
+      return this.petsService.deletePet(id);
   }
 
   @Put(':id')

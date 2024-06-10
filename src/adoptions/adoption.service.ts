@@ -7,30 +7,33 @@ import { CreateAdopcionDto } from 'src/dto/createAdopcion.dto';
 
 @Injectable()
 export class AdoptionService {
-    constructor (private readonly adoptionrepository:AdoptionRepository){}
+  constructor(private readonly adoptionrepository: AdoptionRepository) {}
 
-    
-    async AllAdoptions(){
-        return await this.adoptionrepository.AllAdoptions()
-    }
+  async AllAdoptions() {
+    return await this.adoptionrepository.AllAdoptions();
+  }
 
-    async adoptionsById( id : string){
-        return await this.adoptionrepository.AdoptionsById(id)
-    }
+  async adoptionsById(id: string) {
+    return await this.adoptionrepository.AdoptionsById(id);
+  }
 
-    async newAdoption( user: string, shelter: string, pet: string ){
-        return await this.adoptionrepository.NewAdoption(user, shelter, pet)
-    }
+  async newAdoption(user: string, pet: string) {
+    return await this.adoptionrepository.newAdoption(user, pet);
+  }
 
-    async Delete( id : string ){
-        return await this.adoptionrepository.Delete(id)
-    }
+  async Delete(id: string) {
+    return await this.adoptionrepository.Delete(id);
+  }
 
-    async adoptionUser(userid: string){
-        return await this.adoptionrepository.AdoptionUser(userid)
-    }
+  async activateAdoption(adoptionId: string) {
+    return await this.adoptionrepository.activateAdoption(adoptionId);
+  }
 
-    async adoptionShelter(shelterid: string){
-        return await this.adoptionrepository.AdoptionShelter(shelterid)
-    }
+  async adoptionUser(userid: string) {
+    return await this.adoptionrepository.AdoptionUser(userid);
+  }
+
+  async adoptionShelter(shelterid: string) {
+    return await this.adoptionrepository.AdoptionShelter(shelterid);
+  }
 }
