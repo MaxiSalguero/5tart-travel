@@ -1,7 +1,6 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   ParseUUIDPipe,
@@ -13,8 +12,9 @@ import {
 import { PetsService } from './pets.service';
 import { CreatePetsDto } from 'src/dto/createPets.dto';
 import { UpdatePetsDto } from 'src/dto/updatePets.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../guards/auth.guard';
+import { CreateListImgDto } from 'src/dto/createListImg.dto';
 
 @ApiTags('Pets')
 @Controller('pets')
@@ -31,6 +31,7 @@ export class PetsController {
     return this.petsService.getPetById(id);
   }
 
+  @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Post()
   addPet(@Body() pet: CreatePetsDto, @Req() request) {
@@ -39,6 +40,13 @@ export class PetsController {
       throw new Error('Shelter ID is required');
     }
     return this.petsService.addPet(pet, shelterId);
+  }
+
+  @Post('/addImg/:id')
+  addPetImg(@Param('id', ParseUUIDPipe) id: string, @Body() imgUrl: CreateListImgDto) {
+      const {listImg} = imgUrl
+
+      return this.petsService.addPetImg(id, listImg);
   }
 
   @Post('condition/:id')

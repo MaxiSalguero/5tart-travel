@@ -135,9 +135,9 @@ export class AuthService {
           roles: shelter.role,
         };
 
-        const token = this.jwtService.sign(shelterPayload);
+        const access_token = this.jwtService.sign(shelterPayload);
 
-        return { succes: 'Refugio logueado correctamente', token };
+        return { succes: 'Usuario logueado correctamente', access_token };
       } else if (!shelter) {
         throw new UnauthorizedException('Credenciales incorrectas');
       }
