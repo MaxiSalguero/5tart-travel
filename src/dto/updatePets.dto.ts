@@ -58,7 +58,7 @@ export class UpdatePetsDto {
   @IsOptional()
   @IsString()
   @ApiProperty({
-    description: 'Imagen del producto',
+    description: 'Imagen de la mascota',
     example: 'img.jpg',
   })
   imgUrl?: string;
@@ -74,7 +74,7 @@ export class UpdatePetsDto {
   @IsString()
   @Length(2, 200)
   @ApiProperty({
-    description: 'Descripción del producto',
+    description: 'Descripción de la mascota',
     example: '...',
   })
   description?: string;
