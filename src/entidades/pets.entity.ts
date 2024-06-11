@@ -57,6 +57,13 @@ export class PetsEntity {
   imgUrl: string;
 
   @Column({
+    nullable: true,
+    type: "text",
+    array:true
+  })
+  listImg?: string[];
+
+  @Column({
     type: 'varchar',
     nullable: true,
   })

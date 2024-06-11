@@ -4,7 +4,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreatePetsDto } from 'src/dto/createPets.dto';
 import { PetsEntity } from 'src/entidades/pets.entity';
 import { ShelterEntity } from 'src/entidades/shelter.entity';
 import { Repository } from 'typeorm';
@@ -68,7 +67,7 @@ export class PetsRepository {
 
     return updatePet;
   }
-  
+
   async conditionPet(id: string) {
     const conditionpet = await this.petsRepository.findOne({
       where: { id },
@@ -121,5 +120,27 @@ export class PetsRepository {
     }
 
     return await this.petsRepository.find({ where: conditions });
+  }
+
+  async addPetImg(id: string, listImg) {
+    const pet: PetsEntity = await this.petsRepository.findOne({
+      where: { id },
+    });
+
+    if (!pet) {
+      throw new BadRequestException('Mascota no encontrada');
+    }
+
+    const arrayImg = await Promise.all(
+      listImg.map((img) => {
+        return img;
+      }),
+    );
+
+    pet.listImg = arrayImg;
+
+    await this.petsRepository.save(pet);
+
+    return pet;
   }
 }
