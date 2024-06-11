@@ -35,6 +35,7 @@ export class UpdateShelterDto {
 
   @IsOptional()
   @IsString()
+  @Length(4,50)
   @ApiProperty({
     example: '********',
   })

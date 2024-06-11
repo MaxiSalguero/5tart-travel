@@ -39,6 +39,7 @@ export class UpdateUserDto{
 
     @IsOptional()
     @IsString()
+    @Length(4,50)
     @ApiProperty({
         example: "********"
     })
