@@ -8,7 +8,6 @@ import { SheltersModule } from './shelters/shelters.module';
 import { AdoptionModule } from './adoptions/adoption.module';
 import { AuthModule } from './auth/auth.module';
 import { PetsModule } from './pets/pets.module';
-import { ChatModule } from './chats/chat.module';
 import { databaseConfig } from './config/database.config';
 import { FileUploadModule } from './file_upload/file_upload.module';
 import { MailModule } from './mails/mail.module';
@@ -21,6 +20,9 @@ import { PetsEntity } from './entidades/pets.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MercadoPagoModule } from './mercado-pago/mercado-pago.module';
 import { CarritoModule } from './carrito/carrito.module';
+import { ChatModule } from './chat/chat.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -28,13 +30,15 @@ import { CarritoModule } from './carrito/carrito.module';
       isGlobal: true,
     }),
     TypeOrmModule.forFeature([ShelterEntity, PetsEntity]),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
     databaseConfig,
     FacebookModule,
     GoogleModule,
     SerchModule,
     UsersModule,
     SheltersModule,
-    // DonationModule,
     AdoptionModule,
     AuthModule,
     PetsModule,
