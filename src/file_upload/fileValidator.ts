@@ -11,15 +11,15 @@ import {
         throw new BadRequestException('No se ha proporcionado ningún archivo');
       }
   
-      const allowedFileTypes = ['jpg', 'jpeg', 'png', 'webp', 'gif','jfif' ,'svg'];
+      const allowedFileTypes = ['jpg', 'jpeg', 'png', 'webp', 'gif','jfif','svg'];
       if (!allowedFileTypes.includes(file.mimetype.split('/')[1])) {
         throw new BadRequestException('Tipo de archivo no válido');
       }
   
-      const maxSize = 200000;
+      const maxSize = 700000;
       if (file.size > maxSize) {
         throw new BadRequestException(
-          'Tamaño de archivo excede el límite permitido de 200kb',
+          'Tamaño de archivo excede el límite permitido de 700kb',
         );
       }
   

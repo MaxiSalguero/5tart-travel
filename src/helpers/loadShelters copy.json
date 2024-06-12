@@ -8,7 +8,7 @@
         "shelter_name": "Refugio de Animales Palermo",
         "location": "Palermo",
         "zona": "CABA",
-        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1717562786/snybeab8jfw77xysuogr.jpg",
+        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1718149462/rn7xtkf59soccdprdit7.webp",
         "description": "Refugio para animales rescatados en la zona de Palermo",
         "exotic_animals": false,
         "isActive": true,
@@ -24,7 +24,7 @@
         "location": "Belgrano",
         "zona": "CABA",
         "description": "Espacio de acogida para animales callejeros en Belgrano",
-        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1717562804/qta6uqn1srususb8osln.jpg",
+        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1718149556/lw1pfcndzdfaye9g2gup.jpg",
         "exotic_animals": false,
         "isActive": true,
         "rate": 4.7
@@ -39,7 +39,7 @@
         "location": "Barracas",
         "zona": "Zona Sur",
         "description": "Centro de rescate animal en la zona de Barracas",
-        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1717562843/ob8lijw1i868mk83p1c8.jpg",
+        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1718149693/r2eqsk9hfenmwbwbvj1u.jpg",
         "exotic_animals": false,
         "isActive": true,
         "rate": 4.6
@@ -54,7 +54,7 @@
         "location": "Lomas de Zamora",
         "zona": "Zona Sur",
         "description": "Refugio especializado en la protección y adopción de animales",
-        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1717562863/f5qtlrolikpsuaoubxhh.jpg",
+        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1718149729/hsfz7isbrwwqzwdur4vu.webp",
         "exotic_animals": false,
         "isActive": true,
         "rate": 4.8
@@ -69,7 +69,7 @@
         "location": "Morón",
         "zona": "Zona Oeste",
         "description": "Refugio dedicado al rescate y rehabilitación de perros en situación de calle",
-        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1717562912/negk9rrstgznj8k7fgbp.jpg",
+        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1718149752/hlkqgve9kqyizerfif2h.jpg",
         "exotic_animals": false,
         "isActive": true,
         "rate": 4.4
@@ -84,7 +84,7 @@
         "location": "Ituzaingó",
         "zona": "Zona Oeste",
         "description": "Refugio que acoge y busca hogar para gatos abandonados en Ituzaingó",
-        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1717562904/ckwnpa6hy0rtnfafuavf.jpg",
+        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1718149806/mui5nfa7sg6umphawb1h.jpg",
         "exotic_animals": false,
         "isActive": true,
         "rate": 4.9
@@ -99,7 +99,7 @@
         "location": "San Isidro",
         "zona": "Zona Norte",
         "description": "Refugio dedicado al rescate y rehabilitación de perros abandonados en San Isidro",
-        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1717562955/dmpgxuzsh1j62lmsl5yu.jpg",
+        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1718149817/fmcequjpbkawyk69hd52.jpg",
         "exotic_animals": false,
         "isActive": true,
         "rate": 4.3
@@ -114,7 +114,7 @@
         "location": "Vicente López",
         "zona": "Zona Norte",
         "description": "Refugio que acoge y busca hogar para gatos abandonados en Vicente López",
-        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1717562946/emindgj6kmfua6fliyrz.jpg",
+        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1718149995/fsb35hrx3w4k1dapbzjk.webp",
         "exotic_animals": false,
         "isActive": true,
         "rate": 4.6
@@ -129,7 +129,7 @@
         "location": "Tandil",
         "zona": "Interior de la Provincia",
         "description": "Refugio dedicado al rescate y rehabilitación de animales en Tandil",
-        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1717562998/gtz4yxpvzu4y3ky1xf2q.jpg",
+        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1718150181/krfhulpdzqmabkpsuvzw.jpg",
         "exotic_animals": false,
         "isActive": true,
         "rate": 4.7
@@ -144,7 +144,7 @@
         "location": "Junín",
         "zona": "Interior de la Provincia",
         "description": "Refugio que acoge y busca hogar para mascotas abandonadas en Junín",
-        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1717563008/j5zatpgmimcldp598tah.jpg",
+        "imgUrl":"https://res.cloudinary.com/dd1yaduhv/image/upload/v1718150195/geprfslio6uvmvpd98nl.jpg",
         "exotic_animals": false,
         "isActive": true,
         "rate": 4.8
