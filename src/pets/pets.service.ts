@@ -29,7 +29,7 @@ export class PetsService {
     return this.petsRepository.deletePet(id);
   }
 
-  addPetImg(id: string, listImg) {
-    return this.petsRepository.addPetImg(id, listImg);
+  addPetImg(id: string, imgUrl) {
+    return this.petsRepository.addPetImg(id, imgUrl);
   }
 }

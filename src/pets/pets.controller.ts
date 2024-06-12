@@ -15,6 +15,7 @@ import { UpdatePetsDto } from 'src/dto/updatePets.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../guards/auth.guard';
 import { CreateListImgDto } from 'src/dto/createListImg.dto';
+import { ImgDto } from 'src/dto/imgList.dto';
 
 @ApiTags('Pets')
 @Controller('pets')
@@ -43,10 +44,9 @@ export class PetsController {
   }
 
   @Post('/addImg/:id')
-  addPetImg(@Param('id', ParseUUIDPipe) id: string, @Body() imgUrl: CreateListImgDto) {
-      const {listImg} = imgUrl
+  addPetImg(@Param('id', ParseUUIDPipe) id: string, @Body() imgUrl: ImgDto[]) {
 
-      return this.petsService.addPetImg(id, listImg);
+      return this.petsService.addPetImg(id, imgUrl);
   }
 
   @Post('condition/:id')

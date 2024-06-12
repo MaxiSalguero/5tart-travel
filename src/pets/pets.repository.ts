@@ -122,7 +122,7 @@ export class PetsRepository {
     return await this.petsRepository.find({ where: conditions });
   }
 
-  async addPetImg(id: string, listImg) {
+  async addPetImg(id: string, imgUrl) {
     const pet: PetsEntity = await this.petsRepository.findOne({
       where: { id },
     });
@@ -132,7 +132,7 @@ export class PetsRepository {
     }
 
     const arrayImg = await Promise.all(
-      listImg.map((img) => {
+      imgUrl.map((img) => {
         return img;
       }),
     );
