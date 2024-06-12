@@ -115,9 +115,9 @@ export class AuthService {
         roles: user.role,
       };
 
-      const token = this.jwtService.sign(userPayload);
+      const access_token = this.jwtService.sign(userPayload);
 
-      return { succes: 'Usuario logueado correctamente', token };
+      return { succes: 'Usuario logueado correctamente', access_token };
     } else if (!user) {
       if (shelter) {
         const isPasswordValid = await bcrypt.compare(
