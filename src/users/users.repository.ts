@@ -180,13 +180,15 @@ export class UserRepository implements OnModuleInit {
   async PutPetFavorite(petId: any, userId: string) {
     const user: UserEntity = await this.usersRepository.findOne({
       where: { id: userId },
+      relations: ['favorite_pets'],
     });
 
     if (!user) {
       throw new BadRequestException('Usuario no encontrado');
     }
+    const newPetsArray = user.favorite_pets.filter((pet) => pet.id != petId);
 
-    user.favorite_pets = user.favorite_pets.filter((pet) => pet.id != petId);
+    user.favorite_pets = newPetsArray;
 
     await this.usersRepository.save(user);
 
@@ -196,15 +198,18 @@ export class UserRepository implements OnModuleInit {
   async PutShelterFavorite(shelterId: any, userId: string) {
     const user: UserEntity = await this.usersRepository.findOne({
       where: { id: userId },
+      relations: ['favorite_shelters'],
     });
 
     if (!user) {
       throw new BadRequestException('Usuario no encontrado');
     }
 
-    user.favorite_shelters = user.favorite_shelters.filter(
+    const newSheltersArray = user.favorite_shelters.filter(
       (shelter) => shelter.id != shelterId,
     );
+
+    user.favorite_shelters = newSheltersArray;
 
     await this.usersRepository.save(user);
 
