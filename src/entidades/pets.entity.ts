@@ -28,6 +28,7 @@ export class PetsEntity {
 
   @Column({
     type: 'varchar',
+    nullable: true,
   })
   species: string;
 
