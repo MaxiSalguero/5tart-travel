@@ -1,8 +1,6 @@
 import {
   ConnectedSocket,
   MessageBody,
-  OnGatewayConnection,
-  OnGatewayDisconnect,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
@@ -72,7 +70,7 @@ export class ChatGateway implements OnModuleInit {
     @ConnectedSocket() client: Socket
   ) {
     try {
-      const message = await this.chatService.sendMessage(data.senderId, data.receiverId, data.content);
+      // const message = await this.chatService.sendMessage(data.senderId, data.receiverId, data.content);
       client.emit('private-message-sent', data);
       this.server.to(data.receiverId).emit('private-message-received', data);
     } catch (error) {
