@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Socket.io</title>
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        #chat-container {
+            max-width: 600px;
+            margin: 30px auto;
+            border: 1px solid #ddd;
+            box-shadow: 1px 3px 5px rgba(0,0,0,.5);
+            display: none;
+        }
+
+        #chat-window {
+            padding: 14px 0;
+            margin: 0 20px;
+            border-bottom: 1px solid #e9e9e9;
+            color: #555;
+        }
+
+        #output p {
+            color: #aaa;
+            padding: 14px 0;
+            margin: 0 20px;
+        }
+
+        #actions p {
+            padding: 14px 0;
+            margin: 0 20px;
+            border-bottom: 1px solid #e9e9e9;
+            color: #555;
+        }
+
+        input {
+            padding: 10px 20px;
+            box-sizing: border-box;
+            border: 0;
+            background: #eee;
+            display: block;
+            width: 100%;
+        }
+
+        button {
+            background: #575ed8;
+            color: #fff;
+            font-size: 18px;
+            border: 0;
+            padding: 12px 0;
+            width: 100%;
+            border-radius: 0 0 2px 2px;
+        }
+
+        #login-container {
+            max-width: 600px;
+            margin: 30px auto;
+            border: 1px solid #ddd;
+            box-shadow: 1px 3px 5px rgba(0,0,0,.5);
+        }
+
+        #login-container input,
+        #login-container button {
+            margin: 10px 0;
+        }
+
+        .chat-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chat-list li {
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .chat-list li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .chat-window {
+            display: none;
+        }
+
+        .chat-window.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat Socket.io</h1>
+
+    <div id="login-container">
+        <input type="text" id="login-username" placeholder="Email">
+        <input type="password" id="login-password" placeholder="Password">
+        <button id="login-button">Login</button>
+    </div>
+
+    <div id="chat-container">
+        <ul id="chat-list" class="chat-list"></ul>
+
+        <div id="chat-windows"></div>
+
+        <input type="text" id="recipient" placeholder="Recipient Email">
+        <input type="text" id="message" placeholder="Message">
+        <button id="send">Send</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        console.log('Codigo del chat');
+
+        const loginContainer = document.getElementById('login-container');
+        const chatContainer = document.getElementById('chat-container');
+        const loginButton = document.getElementById('login-button');
+        const sendButton = document.getElementById('send');
+        const chatList = document.getElementById('chat-list');
+        const chatWindows = document.getElementById('chat-windows');
+
+        let socket;
+        let token;
+        let username;
+        let password;
+        let activeChat = null;
+        const chats = {};
+
+        loginButton.addEventListener('click', async () => {
+            username = document.getElementById('login-username').value;
+            password = document.getElementById('login-password').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email:username, password:password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    token = data.id_token;
+                    loginContainer.style.display = 'none';
+                    chatContainer.style.display = 'block';
+                    initializeChat();
+                } else {
+                    alert('Login failed: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+            }
+        });
+
+        function initializeChat() {
+            socket = io({
+                query: {
+                    token: `Bearer ${token}`
+                },
+                auth: {
+                    username: username,
+            
+                }
+            });
+
+            const messageInput = document.getElementById('message');
+            const recipientInput = document.getElementById('recipient');
+            const output = document.getElementById('output');
+            const actions = document.getElementById('actions');
+
+            sendButton.addEventListener('click', () => {
+                const message = messageInput.value;
+                const recipient = recipientInput.value
+                if (message.trim() && recipient.trim()) {
+                    socket.emit('chatMessage', {message, recipient} );
+                    if (!chats[recipient]) {
+                        addChat(recipient);
+                    }
+                    appendMessage(recipient, `<p><strong>${username}</strong>: ${message}</p>`);
+                    messageInput.value = '';
+                }
+            });
+
+
+            socket.on('chatMessage', (data) => {
+                if (!chats[data.senderEmail]) {
+                    addChat(data.senderEmail);
+                }
+                appendMessage(data.senderEmail, `<p><strong>${data.senderEmail}</strong>: ${data.message}</p>`);
+            });
+
+            messageInput.addEventListener('keypress', () => {
+                const recipient = recipientInput.value
+                socket.emit('chatTyping', {username, recipient});
+            });
+
+            socket.on('chatTyping', (data) => {
+                const chatWindow = document.getElementById(`chat-${data}`);
+                if (chatWindow) {
+                    actions.innerHTML += `<p><em>${data}</em> está escribiendo...</p>`;
+                }
+            });
+
+            function addChat(user) {
+                chats[user] = [];
+                const chatListItem = document.createElement('li');
+                chatListItem.textContent = user;
+                chatListItem.addEventListener('click', () => {
+                    setActiveChat(user);
+                });
+                chatList.appendChild(chatListItem);
+
+                const chatWindow = document.createElement('div');
+                chatWindow.id = `chat-${user}`;
+                chatWindow.classList.add('chat-window');
+                chatWindows.appendChild(chatWindow);
+            }
+
+            function setActiveChat(user) {
+                if (activeChat) {
+                    document.getElementById(`chat-${activeChat}`).classList.remove('active');
+                }
+                activeChat = user;
+                document.getElementById(`chat-${user}`).classList.add('active');
+            }
+
+            function appendMessage(user, message) {
+                chats[user].push(message);
+                const chatWindow = document.getElementById(`chat-${user}`);
+                chatWindow.innerHTML = chats[user].join('');
+                if (activeChat === user) {
+                    chatWindow.scrollTop = chatWindow.scrollHeight;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
