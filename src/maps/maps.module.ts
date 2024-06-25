@@ -1,9 +1,11 @@
 import { Module } from "@nestjs/common";
-import { mapsServices } from "./maps.service";
+import { MapsController } from "./maps.controller";
+import { MapsService } from "./maps.service";
+
 
 @Module({
     imports: [],
-    controllers: [],
-    providers: [mapsServices]
+    controllers: [MapsController],
+    providers: [MapsService]
 })
 export class mapsModule { }

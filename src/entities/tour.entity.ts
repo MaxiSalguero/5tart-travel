@@ -1,6 +1,13 @@
-import { Entity } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({
     name:'tour'
 })
-export class tourEntity{}
+export class tourEntity{
+
+    @PrimaryGeneratedColumn('uuid')
+    id:string
+
+    @Column()
+    name:string
+}
