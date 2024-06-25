@@ -1,6 +1,9 @@
 import { Controller, Post, Body, NotFoundException } from '@nestjs/common';
 import { MapsService } from './maps.service';
+import { ApiTags } from '@nestjs/swagger';
 
+
+@ApiTags("Maps")
 @Controller('maps')
 export class MapsController {
     constructor(private readonly mapsService: MapsService) { }

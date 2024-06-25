@@ -1,4 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {v4 as uuid} from "uuid"
+
 
 @Entity({
     name:'tour'
@@ -6,8 +8,13 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 export class tourEntity{
 
     @PrimaryGeneratedColumn('uuid')
-    id:string
+    id:string = uuid()
 
     @Column()
     name:string
+
+    @Column({
+        default: new Date
+    })
+    date: Date
 }

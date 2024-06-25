@@ -1,12 +1,38 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {v4 as uuid} from "uuid"
+
 
 @Entity({
-    name:'users'
+    name: 'users'
 })
-export class userEntity{
+export class userEntity {
     @PrimaryGeneratedColumn('uuid')
-    id:string
+    id: string = uuid()
 
-    @Column()
-    name:string
+    @Column({
+        nullable: false
+    })
+    username: string
+    
+    @Column({
+        nullable: false
+    })
+    mail: string
+
+    @Column({
+        nullable: false
+    })
+    password: string
+
+    @Column({
+        nullable: false
+    })
+    confirm_password: string
+
+    @Column({
+        nullable: false
+    })
+    birthday: string
+
+
 }

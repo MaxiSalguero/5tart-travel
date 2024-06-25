@@ -1,13 +1,27 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {v4 as uuid} from "uuid"
 
 @Entity({
-    name:'agency'
+    name: 'agency'
 })
-
-export class agencyEntity{
+export class agencyEntity {
     @PrimaryGeneratedColumn('uuid')
-    id:string
+    id: string = uuid()
 
     @Column()
-    name:string
+    name_agency: string
+
+    @Column()
+    email: string
+
+    @Column()
+    password: string
+
+    @Column()
+    confirm_password: string
+
+    @Column()
+    address: string
+
+
 }
