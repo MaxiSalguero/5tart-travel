@@ -1,5 +1,3 @@
-// maps.service.ts
-
 import { Injectable, HttpException, NotFoundException } from '@nestjs/common';
 import axios from 'axios';
 
