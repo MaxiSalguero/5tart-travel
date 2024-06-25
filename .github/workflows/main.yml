@@ -24,4 +24,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/huellasdesperanza:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/5tart-travel:latest
+      
+      - name: Trigger Deploy on Render
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
