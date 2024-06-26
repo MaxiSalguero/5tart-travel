@@ -1,0 +1,43 @@
+[
+    {
+      "name_agency": "Viajes Patagonia",
+      "mail": "info@viajespatagonia.com",
+      "password": "password123",
+      "confirm_password": "password123",
+      "address": "Av. San Martín 123, Buenos Aires",
+      "imgUrl": "https://example.com/logo_viajes_patagonia.jpg"
+    },
+    {
+      "name_agency": "Mendoza Tours",
+      "mail": "contacto@mendozatours.com",
+      "password": "securepwd456",
+      "confirm_password": "securepwd456",
+      "address": "Calle Libertador 567, Mendoza",
+      "imgUrl": "https://example.com/logo_mendoza_tours.jpg"
+    },
+    {
+      "name_agency": "Cataratas Travel",
+      "mail": "info@cataratastravel.com",
+      "password": "mystrongpassword",
+      "confirm_password": "mystrongpassword",
+      "address": "Av. Cataratas 890, Iguazú",
+      "imgUrl": "https://example.com/logo_cataratas_travel.jpg"
+    },
+    {
+      "name_agency": "Salta Aventura",
+      "mail": "ventas@saltaaventura.com",
+      "password": "saltaaventura321",
+      "confirm_password": "saltaaventura321",
+      "address": "Av. Belgrano 456, Salta",
+      "imgUrl": "https://example.com/logo_salta_aventura.jpg"
+    },
+    {
+      "name_agency": "Tierra del Fuego Tours",
+      "mail": "contacto@tierradelfuegotours.com",
+      "password": "toursushuaia",
+      "confirm_password": "toursushuaia",
+      "address": "Calle Fuego 789, Ushuaia",
+      "imgUrl": "https://example.com/logo_tierra_del_fuego.jpg"
+    }
+  ]
+  

@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import {v4 as uuid} from "uuid"
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { v4 as uuid } from "uuid"
+import { TourEntity } from "./tour.entity";
 
 @Entity({
     name: 'agency'
@@ -23,5 +24,11 @@ export class AgencyEntity {
     @Column()
     address: string
 
+    @Column()
+    imgUrl: string
+
+    @OneToMany(() => TourEntity, (tours) => tours.agency)
+    @JoinColumn()
+    tours: TourEntity[];
 
 }
