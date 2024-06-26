@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Length } from 'class-validator';
+import { IsEmpty, Length } from 'class-validator';
 import {
   IsEmail,
   IsNotEmpty,
@@ -57,5 +57,9 @@ export class CreateAgencyDto {
     example: 'Av. Victorica 598, Moreno'
   })
   address : string;
+
+
+  @IsEmpty()
+  imgUrl: string
 
 }

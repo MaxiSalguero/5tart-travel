@@ -28,7 +28,7 @@ export class UserRepository {
         const newUser = this.usersRepository.create({...user});
         await this.usersRepository.save(newUser)
 
-        
+        return 'Usuario Creado'
     }
 
 }

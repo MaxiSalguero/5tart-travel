@@ -29,7 +29,6 @@ export class PreloadService implements OnModuleInit {
                     name_agency: agency.name_agency,
                     mail: agency.mail,
                     password: agency.password,
-                    confirm_password: agency.confirm_password,
                     address:agency.address,
                     imgUrl:agency.imgUrl,
                 },
