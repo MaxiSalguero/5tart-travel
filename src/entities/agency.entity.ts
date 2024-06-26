@@ -19,13 +19,12 @@ export class AgencyEntity {
     password: string
 
     @Column()
-    confirm_password: string
-
-    @Column()
     address: string
 
-    @Column()
-    imgUrl: string
+    @Column({
+        nullable: true
+    })
+    imgUrl?: string
 
     @OneToMany(() => TourEntity, (tours) => tours.agency)
     @JoinColumn()

@@ -15,6 +15,7 @@ import { PreloadService } from './app.PreloadService';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TourEntity } from './entities/tour.entity';
 import { AgencyEntity } from './entities/agency.entity';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -30,6 +31,11 @@ import { AgencyEntity } from './entities/agency.entity';
     mailsModule,
     agencyModule,
     AuthModule,
+    JwtModule.register({
+      global: true,
+      signOptions: {expiresIn: "1h" },
+      secret: process.env.JWT_SECRET,
+      }),
   ],
   controllers: [AppController],
   providers: [AppService, PreloadService],

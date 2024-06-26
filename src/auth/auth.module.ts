@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from 'src/entities/user.entity';
 import { AgencyEntity } from 'src/entities/agency.entity';
 import { AgencyRepository } from 'src/agency/agency.repository';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports:[TypeOrmModule.forFeature([UserEntity, AgencyEntity])],
