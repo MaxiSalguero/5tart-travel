@@ -10,6 +10,7 @@ import { mapsModule } from './maps/maps.module';
 import { mailsModule } from './mails/mails.module';
 import { agencyModule } from './agency/agency.module';
 import { databaseConfig } from './config/database.config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { databaseConfig } from './config/database.config';
     mapsModule,
     mailsModule,
     agencyModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

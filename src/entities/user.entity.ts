@@ -10,12 +10,15 @@ export class UserEntity {
     id: string = uuid()
 
     @Column({
-        nullable: false
+        nullable: false,
+        type: "varchar"
     })
     username: string
     
     @Column({
-        nullable: false
+        nullable: false,
+        type: "varchar",
+        unique: true
     })
     mail: string
 
@@ -27,12 +30,6 @@ export class UserEntity {
     @Column({
         nullable: false
     })
-    confirm_password: string
-
-    @Column({
-        nullable: false
-    })
     birthday: string
-
 
 }
