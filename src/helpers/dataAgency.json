@@ -5,7 +5,7 @@
       "password": "password123",
       "confirm_password": "password123",
       "address": "Av. San Martín 123, Buenos Aires",
-      "imgUrl": "https://example.com/logo_viajes_patagonia.jpg"
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431868/vytadvpx2rxn3k3upmrp.jpg"
     },
     {
       "name_agency": "Mendoza Tours",
@@ -13,7 +13,7 @@
       "password": "securepwd456",
       "confirm_password": "securepwd456",
       "address": "Calle Libertador 567, Mendoza",
-      "imgUrl": "https://example.com/logo_mendoza_tours.jpg"
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431868/gqovlwnb2kitjzgj410s.jpg"
     },
     {
       "name_agency": "Cataratas Travel",
@@ -21,7 +21,7 @@
       "password": "mystrongpassword",
       "confirm_password": "mystrongpassword",
       "address": "Av. Cataratas 890, Iguazú",
-      "imgUrl": "https://example.com/logo_cataratas_travel.jpg"
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431868/yzsgqdevkc0clgczmrrv.jpg"
     },
     {
       "name_agency": "Salta Aventura",
@@ -29,7 +29,7 @@
       "password": "saltaaventura321",
       "confirm_password": "saltaaventura321",
       "address": "Av. Belgrano 456, Salta",
-      "imgUrl": "https://example.com/logo_salta_aventura.jpg"
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431868/siwtifhwdttybirvdrvl.jpg"
     },
     {
       "name_agency": "Tierra del Fuego Tours",
@@ -37,7 +37,47 @@
       "password": "toursushuaia",
       "confirm_password": "toursushuaia",
       "address": "Calle Fuego 789, Ushuaia",
-      "imgUrl": "https://example.com/logo_tierra_del_fuego.jpg"
-    }
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431868/epks6ggneutpn8ofxdu0.jpg"
+    },
+    {
+        "name_agency": "Glaciares Tours",
+        "mail": "info@glaciarestours.com",
+        "password": "glaciarespwd789",
+        "confirm_password": "glaciarespwd789",
+        "address": "Av. Cabildo 4321, Capital Federal",
+        "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431868/njez8l0ea8enipnohegt.jpg"
+      },
+      {
+        "name_agency": "Mar del Plata Viajes",
+        "mail": "info@marplataviajes.com",
+        "password": "marplatapwd456",
+        "confirm_password": "marplatapwd456",
+        "address": "Calle Mitre 567, Capital Federal",
+        "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431868/kbffgrio2fbbpeqk667b.jpg"
+      },
+      {
+        "name_agency": "Córdoba Turismo",
+        "mail": "info@cordobaturismo.com",
+        "password": "cordobaturismo321",
+        "confirm_password": "cordobaturismo321",
+        "address": "Calle Olmos 987, Capital Federal",
+        "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431867/mrzvbuhp9hzrszy3bp3h.jpg"
+      },
+      {
+        "name_agency": "Rosario Travel",
+        "mail": "info@rosariotravel.com",
+        "password": "rosariotravelpwd",
+        "confirm_password": "rosariotravelpwd",
+        "address": "Bv. Oroño 345, Capital Federal",
+        "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431867/f2cdsfu6pua8c99pnlph.jpg"
+      },
+      {
+        "name_agency": "La Rioja Explora",
+        "mail": "info@lariojaexplora.com",
+        "password": "lariojaexplora987",
+        "confirm_password": "lariojaexplora987",
+        "address": "Av. San Juan 654, Capital Federal",
+        "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431867/ywx1x91yrfzo3bdkirvv.jpg"
+      }
   ]
   
