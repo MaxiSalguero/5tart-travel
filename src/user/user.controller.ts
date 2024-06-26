@@ -1,4 +1,15 @@
-import { Controller } from "@nestjs/common";
+import { Controller, Get } from "@nestjs/common";
+import { UserServices } from "./user.service";
+import { ApiTags } from "@nestjs/swagger";
 
-@Controller()
-export class userController { }
+@ApiTags('User')
+@Controller('user')
+export class userController {
+    constructor(private userService: UserServices){}
+
+    @Get()
+    getUsers(){
+        return this.userService.getUsers()
+    }
+
+}

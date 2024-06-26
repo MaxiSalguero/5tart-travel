@@ -5,7 +5,7 @@ import {v4 as uuid} from "uuid"
 @Entity({
     name:'tour'
 })
-export class tourEntity{
+export class TourEntity{
 
     @PrimaryGeneratedColumn('uuid')
     id:string = uuid()

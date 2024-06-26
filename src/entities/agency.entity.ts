@@ -4,7 +4,7 @@ import {v4 as uuid} from "uuid"
 @Entity({
     name: 'agency'
 })
-export class agencyEntity {
+export class AgencyEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string = uuid()
 
