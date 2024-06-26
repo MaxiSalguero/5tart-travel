@@ -11,7 +11,28 @@ export class TourEntity{
     id:string = uuid()
 
     @Column()
-    name:string
+    title: string
+
+    @Column()
+    price: number
+
+    @Column()
+    description: string
+
+    @Column()
+    fecha_ingreso: Date
+
+    @Column()
+    fecha_egreso: Date
+
+    @Column()
+    country: string
+
+    @Column()
+    region: string
+
+    @Column()
+    state: string
 
     @Column({
         default: new Date
