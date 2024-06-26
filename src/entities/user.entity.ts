@@ -23,13 +23,15 @@ export class UserEntity {
     mail: string
 
     @Column({
-        nullable: false
+        nullable: false,
+        type: "varchar"
+
     })
     password: string
 
     @Column({
-        nullable: false
+        nullable: false,
     })
-    birthday: string
+    birthday: Date
 
 }

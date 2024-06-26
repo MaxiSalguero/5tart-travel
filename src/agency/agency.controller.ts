@@ -1,4 +1,14 @@
-import { Controller } from "@nestjs/common";
+import { Controller, Get } from "@nestjs/common";
+import { AgencyServices } from "./agency.service";
+import { ApiTags } from "@nestjs/swagger";
 
-@Controller()
-export class agencyController { }
+@ApiTags('Agency')
+@Controller('agency')
+export class agencyController {
+    constructor(private agencyService: AgencyServices){}
+
+    @Get()
+    getAgency(){
+        return this.agencyService.getAgency()
+    }
+}

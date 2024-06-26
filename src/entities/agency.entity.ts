@@ -12,7 +12,7 @@ export class AgencyEntity {
     name_agency: string
 
     @Column()
-    email: string
+    mail: string
 
     @Column()
     password: string
