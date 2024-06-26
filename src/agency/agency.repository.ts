@@ -10,7 +10,7 @@ export class AgencyRepository{
                 private readonly agencyRepository: Repository<AgencyEntity> ){}
 
     async getAgency() {
-        const agencys: AgencyEntity[] = await this.agencyRepository.find()
+        const agencys: AgencyEntity[] = await this.agencyRepository.find({relations: {tours: true}})
 
         if (agencys.length == 0) {
             return 'No hay agencias registradas en la base de datos'

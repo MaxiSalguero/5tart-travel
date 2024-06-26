@@ -1,0 +1,82 @@
+[
+  {
+    "title": "Paquete de Viaje a Bariloche",
+    "price": 1500,
+    "description": "Disfruta de una semana en Bariloche con alojamiento y excursiones incluidas.",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431444/ncvde8xq30apqjk58ng9.jpg",
+    "address": "Av. Corrientes 1234, Capital Federal",
+    "agency": "Viajes Patagonia"
+  },
+  {
+    "title": "Paquete de Viaje a Mendoza",
+    "price": 2000,
+    "description": "Explora los viñedos de Mendoza con este paquete de 5 días.",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/jdppzdewqpzbosdviinx.jpg",
+    "address": "Calle Victor Hugo 5678, Moreno",
+    "agency": "Mendoza Tours"
+  },
+  {
+    "title": "Paquete de Viaje a Iguazú",
+    "price": 2500,
+    "description": "Visita las impresionantes Cataratas del Iguazú con alojamiento y tours incluidos.",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431442/sarqdjgjo6ca1x7qu4uk.jpg",
+    "address": "Av. del Libertador 91011, Merlo",
+    "agency": "Cataratas Travel"
+  },
+  {
+    "title": "Paquete de Viaje a Salta",
+    "price": 3000,
+    "description": "Descubre la belleza de Salta y sus alrededores con este paquete de 7 días.",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/gqlt8mkjkz8xumdjwdac.jpg",
+    "address": "Av. Rivadavia 1213, Capital Federal",
+    "agency": "Salta Aventura"
+  },
+  {
+    "title": "Paquete de Viaje a Ushuaia",
+    "price": 3500,
+    "description": "Aventura en el fin del mundo: visita Ushuaia con este paquete completo.",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/xnp9j5nsvgyoubaxdsx7.jpg",
+    "address": "Calle San Martín 1415, Capital Federal",
+    "agency": "Tierra del Fuego Tours"
+  },
+  {
+    "title": "Paquete de Viaje a El Calafate",
+    "price": 4000,
+    "description": "Maravíllate con el Glaciar Perito Moreno en El Calafate con este paquete de 4 días.",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/xnaksx69wllmflvwr0cl.jpg",
+    "address": "Av. Cabildo 4321, Capital Federal",
+    "agency": "Glaciares Tours"
+  },
+  {
+    "title": "Paquete de Viaje a Mar del Plata",
+    "price": 1800,
+    "description": "Relájate en las playas de Mar del Plata con este paquete de 3 días.",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/llin819v67a2fcwuzaqm.jpg",
+    "address": "Calle Mitre 567, Capital Federal",
+    "agency": "Mar del Plata Viajes"
+  },
+  {
+    "title": "Paquete de Viaje a Córdoba",
+    "price": 2200,
+    "description": "Explora la ciudad de Córdoba y sus sierras con este paquete de 5 días.",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/gjenpsjdcyla0c5exiye.jpg",
+    "address": "Calle Olmos 987, Capital Federal",
+    "agency": "Córdoba Turismo"
+  },
+  {
+    "title": "Paquete de Viaje a Rosario",
+    "price": 1700,
+    "description": "Disfruta de un fin de semana en Rosario con actividades y tours incluidos.",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/huvqpfg4moqc3pvk9e1g.jpg",
+    "address": "Bv. Oroño 345, Capital Federal",
+    "agency": "Rosario Travel"
+  },
+  {
+    "title": "Paquete de Viaje a La Rioja",
+    "price": 2100,
+    "description": "Descubre los paisajes y la cultura de La Rioja con este paquete de 4 días.",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/jkxnskiplutyg0doiysg.jpg",
+    "address": "Av. San Juan 654, Capital Federal",
+    "agency": "La Rioja Explora"
+  }
+]

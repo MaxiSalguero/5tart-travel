@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import {v4 as uuid} from "uuid"
+import { AgencyEntity } from "./agency.entity";
 
 
 @Entity({
@@ -20,22 +21,41 @@ export class TourEntity{
     description: string
 
     @Column()
-    fecha_ingreso: Date
+    imgUrl: string
+
+    // @Column()
+    // fecha_ingreso: Date
+
+    // @Column()
+    // fecha_egreso: Date
 
     @Column()
-    fecha_egreso: Date
+    address: string
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     country: string
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     region: string
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     state: string
 
     @Column({
         default: new Date
     })
     date: Date
+
+
+    @ManyToOne(() => AgencyEntity, (agency) => agency.tours)
+    @JoinColumn()
+    agency: AgencyEntity
+
+    
 }

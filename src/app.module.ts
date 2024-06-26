@@ -11,9 +11,14 @@ import { mailsModule } from './mails/mails.module';
 import { agencyModule } from './agency/agency.module';
 import { databaseConfig } from './config/database.config';
 import { AuthModule } from './auth/auth.module';
+import { PreloadService } from './app.PreloadService';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TourEntity } from './entities/tour.entity';
+import { AgencyEntity } from './entities/agency.entity';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([TourEntity,AgencyEntity]),
     databaseConfig,
     ChatModule,
     ServeStaticModule.forRoot({
@@ -27,6 +32,6 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PreloadService],
 })
 export class AppModule {}
