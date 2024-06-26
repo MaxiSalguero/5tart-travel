@@ -13,7 +13,7 @@ export class userController {
     // @ApiBearerAuth()
     // @UseGuards(AuthGuard)
     @Get()
-    getUsers(@Req() request){
+    getUsers(){
         // console.log(request.user.id);
         
         return this.userService.getUsers()
