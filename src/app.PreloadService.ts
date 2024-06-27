@@ -66,7 +66,8 @@ export class PreloadService implements OnModuleInit {
                 });
 
                 if (!existingTour) {
-                    await this.tourRepository.save({ ...tour, agency: agency });
+                    await this.tourRepository.save({ ...tour, agency: agency,country:geocodeData.country,region: geocodeData.region,
+                        state: geocodeData.state });
                 }
             }
         }
