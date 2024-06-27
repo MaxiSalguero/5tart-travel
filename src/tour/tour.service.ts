@@ -16,4 +16,13 @@ export class TourService {
     deleteAgency(id: string) {
         return this.tourRepository.deleteAgency(id)
     }
+
+    getToursBus() {
+        return this.tourRepository.getToursBus()
+    }
+
+    getToursPlane() {
+        return this.tourRepository.getToursPlane()
+    }
+    
 }
