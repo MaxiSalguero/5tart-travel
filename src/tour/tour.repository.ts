@@ -33,13 +33,14 @@ export class TourRepository {
 
         const geocodeData = await this.mapsservice.geocodeAddress(tour.address)
 
-
-        console.log(tour)
         const newTour = await this.tourRepository.create({
             ...tour,
             country: geocodeData.country,
             region: geocodeData.region,
             state: geocodeData.state,
+            lat:geocodeData.lat,
+            lon:geocodeData.lon,
+            display_name:geocodeData.display_name,
             agency: agency
         });
 

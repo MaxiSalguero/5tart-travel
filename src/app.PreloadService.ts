@@ -58,6 +58,9 @@ export class PreloadService implements OnModuleInit {
                         description: tour.description,
                         address: tour.address,
                         imgUrl: tour.imgUrl,
+                        lat: geocodeData.lat,
+                        lon: geocodeData.lon,
+                        display_name: geocodeData.display_name,
                         country: geocodeData.country,
                         region: geocodeData.region,
                         state: geocodeData.state,
@@ -66,8 +69,12 @@ export class PreloadService implements OnModuleInit {
                 });
 
                 if (!existingTour) {
-                    await this.tourRepository.save({ ...tour, agency: agency,country:geocodeData.country,region: geocodeData.region,
-                        state: geocodeData.state });
+                    await this.tourRepository.save({
+                        ...tour, agency: agency, country: geocodeData.country, region: geocodeData.region,
+                        state: geocodeData.state, lat: geocodeData.lat,
+                        lon: geocodeData.lon,
+                        display_name: geocodeData.display_name,
+                    });
                 }
             }
         }
