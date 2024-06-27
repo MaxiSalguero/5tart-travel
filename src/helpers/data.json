@@ -1,87 +1,132 @@
 [
   {
-    "title": "Paquete de Viaje a Bariloche",
+    "title": "Bariloche Escondido",
     "price": 1500,
     "description": "Disfruta de una semana en Bariloche con alojamiento y excursiones incluidas.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431444/ncvde8xq30apqjk58ng9.jpg",
     "address": "Av. Exequiel Bustillo 22900, San Carlos de Bariloche, Río Negro",
     "agency": "Viajes Patagonia",
-    "destino":"bariloche",
-    "fecha_ingreso":,
-    "fecha_egreso":,
-    "salida":"buenos aires",
-
+    "destino": "bariloche",
+    "fecha_ingreso": "2024-07-01",
+    "fecha_egreso": "2024-07-08",
+    "salida": "buenos aires",
+    "transportType": "bus"
   },
   {
-    "title": "Paquete de Viaje a Mendoza",
+    "title": "Mendoza Mágica",
     "price": 2000,
     "description": "Explora los viñedos de Mendoza con este paquete de 5 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/jdppzdewqpzbosdviinx.jpg",
-    "address": "Av. España 1210,  Mendoza",
-    "agency": "Mendoza Tours"
+    "address": "Av. España 1210, Mendoza",
+    "agency": "Mendoza Tours",
+    "destino": "mendoza",
+    "fecha_ingreso": "2024-07-10",
+    "fecha_egreso": "2024-07-15",
+    "salida": "buenos aires",
+    "transportType": "plane"
   },
   {
-    "title": "Paquete de Viaje a Iguazú",
+    "title": "Iguazú Inolvidable",
     "price": 2500,
     "description": "Visita las impresionantes Cataratas del Iguazú con alojamiento y tours incluidos.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431442/sarqdjgjo6ca1x7qu4uk.jpg",
     "address": "C. Bonpland 110, Puerto Iguazú, Misiones",
-    "agency": "Cataratas Travel"
+    "agency": "Cataratas Travel",
+    "destino": "iguazu",
+    "fecha_ingreso": "2024-07-20",
+    "fecha_egreso": "2024-07-27",
+    "salida": "buenos aires",
+    "transportType": "bus"
   },
   {
-    "title": "Paquete de Viaje a Salta",
+    "title": "Salta Encantadora",
     "price": 3000,
     "description": "Descubre la belleza de Salta y sus alrededores con este paquete de 7 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/gqlt8mkjkz8xumdjwdac.jpg",
-    "address": "Buenos Aires Nº1,  Salta",
-    "agency": "Salta Aventura"
+    "address": "Buenos Aires Nº1, Salta",
+    "agency": "Salta Aventura",
+    "destino": "salta",
+    "fecha_ingreso": "2024-08-01",
+    "fecha_egreso": "2024-08-08",
+    "salida": "buenos aires",
+    "transportType": "plane"
   },
   {
-    "title": "Paquete de Viaje a Ushuaia",
+    "title": "Ushuaia Aventura",
     "price": 3500,
     "description": "Aventura en el fin del mundo: visita Ushuaia con este paquete completo.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/xnp9j5nsvgyoubaxdsx7.jpg",
-    "address": "Paz 868,  Ushuaia, Tierra del Fuego",
-    "agency": "Tierra del Fuego Tours"
+    "address": "Paz 868, Ushuaia, Tierra del Fuego",
+    "agency": "Tierra del Fuego Tours",
+    "destino": "ushuaia",
+    "fecha_ingreso": "2024-08-10",
+    "fecha_egreso": "2024-08-17",
+    "salida": "buenos aires",
+    "transportType": "bus"
   },
   {
-    "title": "Paquete de Viaje a El Calafate",
+    "title": "El Calafate Maravilloso",
     "price": 4000,
     "description": "Maravíllate con el Glaciar Perito Moreno en El Calafate con este paquete de 4 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/xnaksx69wllmflvwr0cl.jpg",
-    "address": "Av. del Libertador 2047,  El Calafate, Santa Cruz",
-    "agency": "Glaciares Tours"
+    "address": "Av. del Libertador 2047, El Calafate, Santa Cruz",
+    "agency": "Glaciares Tours",
+    "destino": "el calafate",
+    "fecha_ingreso": "2024-09-01",
+    "fecha_egreso": "2024-09-05",
+    "salida": "buenos aires",
+    "transportType": "plane"
   },
   {
-    "title": "Paquete de Viaje a Mar del Plata",
+    "title": "Mar del Plata Relax",
     "price": 1800,
     "description": "Relájate en las playas de Mar del Plata con este paquete de 3 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/llin819v67a2fcwuzaqm.jpg",
-    "address": "Aristóbulo del Valle 3641,  Mar del Plata, Provincia de Buenos Aires",
-    "agency": "Mar del Plata Viajes"
+    "address": "Aristóbulo del Valle 3641, Mar del Plata, Provincia de Buenos Aires",
+    "agency": "Mar del Plata Viajes",
+    "destino": "mar del plata",
+    "fecha_ingreso": "2024-09-10",
+    "fecha_egreso": "2024-09-13",
+    "salida": "buenos aires",
+    "transportType": "bus"
   },
   {
-    "title": "Paquete de Viaje a Córdoba",
+    "title": "Córdoba Aventurera",
     "price": 2200,
     "description": "Explora la ciudad de Córdoba y sus sierras con este paquete de 5 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/gjenpsjdcyla0c5exiye.jpg",
-    "address": "Boulevard San Juan 165,  Córdoba",
-    "agency": "Córdoba Turismo"
+    "address": "Boulevard San Juan 165, Córdoba",
+    "agency": "Córdoba Turismo",
+    "destino": "cordoba",
+    "fecha_ingreso": "2024-09-15",
+    "fecha_egreso": "2024-09-20",
+    "salida": "buenos aires",
+    "transportType": "plane"
   },
   {
-    "title": "Paquete de Viaje a Rosario",
+    "title": "Rosario Cultural",
     "price": 1700,
     "description": "Disfruta de un fin de semana en Rosario con actividades y tours incluidos.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/huvqpfg4moqc3pvk9e1g.jpg",
     "address": "Córdoba 2554, Rosario, Santa Fe",
-    "agency": "Rosario Travel"
+    "agency": "Rosario Travel",
+    "destino": "rosario",
+    "fecha_ingreso": "2024-09-22",
+    "fecha_egreso": "2024-09-24",
+    "salida": "buenos aires",
+    "transportType": "bus"
   },
   {
-    "title": "Paquete de Viaje a La Rioja",
+    "title": "La Rioja Encantadora",
     "price": 2100,
     "description": "Descubre los paisajes y la cultura de La Rioja con este paquete de 4 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/jkxnskiplutyg0doiysg.jpg",
     "address": "República de Siria 398, 5300 La Rioja",
-    "agency": "La Rioja Explora"
+    "agency": "La Rioja Explora",
+    "destino": "la rioja",
+    "fecha_ingreso": "2024-10-01",
+    "fecha_egreso": "2024-10-05",
+    "salida": "buenos aires",
+    "transportType": "plane"
   }
 ]

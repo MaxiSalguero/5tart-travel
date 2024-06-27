@@ -72,6 +72,7 @@ export class CreateTourDto {
     @IsOptional()    
     oferta: boolean;
     
+    @ApiProperty()
     @IsNotEmpty()
     transportType:TransportType.BUS | TransportType.PLANE
 }
