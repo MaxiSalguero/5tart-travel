@@ -11,14 +11,20 @@ export class FilterService {
     private tourRepository: Repository<TourEntity>,
   ) {}
 
-  async findByLocation(country: string, region: string, state: string): Promise<TourEntity[]> {
-    const tours = await this.tourRepository.find({
-      where: {
-        country,
-        region,
-        state,
-      },
-    });
-    return tours;
-  }
+  async searchGeneral(price:number,country:string,region:string,state:string) {
+    if (!price||!country||!region||!state) {
+        return [];
+    }
+
+    const tour = await this.tourRepository.createQueryBuilder('tour')
+        .andWhere(
+            qb => {
+                qb.where('tour.country ILIKE :query', { query: `%${country}%` })
+                    .orWhere('tour.state ILIKE :query', { query: `%${state}%` })
+                    .orWhere('tour.region ILIKE :query', { query: `%${region}%` })
+                    .orWhere('tour.price ILIKE :query', { query: `%${price}%` })
+            }).getMany();
+
+return [...tour];
+}
 }
