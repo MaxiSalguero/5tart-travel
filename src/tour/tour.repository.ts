@@ -9,8 +9,8 @@ import { Repository } from "typeorm";
 export class TourRepository {
     constructor(@InjectRepository(TourEntity)
     private tourRepository: Repository<TourEntity>,
-    @InjectRepository(AgencyEntity)
-    private agencyRepository: Repository<AgencyEntity>,
+        @InjectRepository(AgencyEntity)
+        private agencyRepository: Repository<AgencyEntity>,
         private readonly mapsservice: MapsService) { }
 
     async getTours() {
@@ -25,15 +25,15 @@ export class TourRepository {
 
     async createTour(tour, userId) {
 
-        const agency: AgencyEntity = await this.agencyRepository.findOneBy({id: userId})
+        const agency: AgencyEntity = await this.agencyRepository.findOneBy({ id: userId })
 
         if (!agency) {
             throw new UnauthorizedException('Problema en los datos del usuario agencia')
         }
 
         const geocodeData = await this.mapsservice.geocodeAddress(tour.address)
-        
-    
+
+
         console.log(tour)
         const newTour = await this.tourRepository.create({
             ...tour,
@@ -42,7 +42,7 @@ export class TourRepository {
             state: geocodeData.state,
             agency: agency
         });
-        
+
         await this.tourRepository.save(newTour)
 
         return newTour
@@ -59,6 +59,26 @@ export class TourRepository {
 
         return 'Publicacion eliminada correctamente'
 
+    }
+
+    async getToursBus() {
+        const tours: TourEntity[] = await this.tourRepository.find({ where: { transportType: 'bus' } });
+
+        if (tours.length == 0) {
+            return 'No hay viajes con Autobus todavía';
+        }
+
+        return tours;
+    }
+
+    async getToursPlane() {
+        const tours: TourEntity[] = await this.tourRepository.find({ where: { transportType: 'plane' } });
+
+        if (tours.length == 0) {
+            return 'No hay viajes con Avion todavía';
+        }
+
+        return tours;
     }
 
 }
