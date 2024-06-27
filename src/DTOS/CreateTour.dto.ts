@@ -73,5 +73,5 @@ export class CreateTourDto {
     oferta: boolean;
     
     @IsNotEmpty()
-    transportType:TransportType
+    transportType:TransportType.BUS | TransportType.PLANE
 }

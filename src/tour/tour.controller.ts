@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Req, UseGuards } from "@nestjs/common";
 import { TourService } from "./tour.service";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { CreateTourDto } from "src/DTOS/CreateTour.dto";
+import { AuthGuard } from "src/guards/auth.guard";
 
 @ApiTags('Tours')
 @Controller('tours')
@@ -13,9 +14,15 @@ export class tourController {
         return this.tourService.getTours()
     }
 
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard)
     @Post()
-    createTour(@Body() tour: CreateTourDto){
-        return this.tourService.createTour(tour)
+    createTour(@Body() tour: CreateTourDto, @Req() req){
+        const userId = req.user.id
+        console.log(userId);
+        
+
+        return this.tourService.createTour(tour, userId)
     }
 
     @Delete(':id')
