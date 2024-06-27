@@ -23,6 +23,9 @@ export class filterService {
         if (region) {
             sconditions.region = region;
         }
+        if (state) {
+          sconditions.state = state;
+      }
 
         const tourFil = await this.tourRepository.find({ where: sconditions })
 
