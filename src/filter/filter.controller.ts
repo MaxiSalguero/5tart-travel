@@ -18,7 +18,7 @@ export class filterController {
     @Query('region') region: string,
     @Query('state') state: string,
     @Query('price') price: number,
-  ): Promise<TourEntity[]> {
+  ){
     return this.filterservice.searchGeneral(price, country, region, state);
   }
 }
