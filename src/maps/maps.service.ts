@@ -458,12 +458,6 @@ export class MapsService {
           'User-Agent': 'cincotravel/5.0 (contact@cincotravel.com)',
         },
       });
-
-      console.log('Request URL:', response.config.url);
-      console.log('Request Params:', response.config.params);
-      console.log('Response Status:', response.status);
-      console.log('Response Data:', response.data);
-
       if (response.status !== 200) {
         throw new HttpException(`Request failed with status code ${response.status}`, response.status);
       }
