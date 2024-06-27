@@ -27,10 +27,9 @@ const regiones = {
     { latMin: -42, latMax: -36, lonMin: -73, lonMax: -65 },  // Neuquén
     { latMin: -42, latMax: -38, lonMin: -70, lonMax: -62 },  // Río Negro
     { latMin: -46, latMax: -41, lonMin: -74, lonMax: -65 },  // Chubut
-    { latMin: -51, latMax: -45, lonMin: -74, lonMax: -62 }   // Santa Cruz
-  ],
-  'Extremo austral': [
+    { latMin: -51, latMax: -45, lonMin: -74, lonMax: -62 },   // Santa Cruz
     { latMin: -55, latMax: -50, lonMin: -75, lonMax: -60 }   // Tierra del Fuego, Antártida e Islas del Atlántico Sur
+
   ],
   'Pampeana': [
     { latMin: -41, latMax: -32, lonMin: -64, lonMax: -57 },  // Buenos Aires
@@ -51,6 +50,22 @@ const puntosTuristicos = {
       { name: 'Salto Yocuma', lat: -26.4303, lon: -54.9367 },
       { name: 'Guira Oga', lat: -25.6862, lon: -54.5075 },
       { name: 'Parque Temático de la Cruz', lat: -27.3896, lon: -55.8945 }
+    ], 'Córdoba': [
+      { name: 'Parque Nacional Quebrada del Condorito', 'lat': -31.5986, 'lon': -64.8656 },
+      { name: 'Los Terrones', 'lat': -30.8717, 'lon': -64.6611 },
+      { name: 'Dique San Roque', 'lat': -31.3480, 'lon': -64.4826 },
+      { name: 'Uritorco', 'lat': -30.8494, 'lon': -64.4944 },
+      { name: 'Camino de las Cien Curvas', 'lat': -31.3948, 'lon': -64.5261 },
+      { name: 'Champaquí', 'lat': -32.0500, 'lon': -64.8325 },
+      { name: 'Balneario Playas de Oro', 'lat': -31.4334, 'lon': -64.4974 },
+      { name: 'Balneario Soy y Río', 'lat': -31.4230, 'lon': -64.4910 },
+      { name: 'Apa Corral', 'lat': -32.2000, 'lon': -64.9833 },
+      { name: 'Yacanto', 'lat': -32.1483, 'lon': -64.7125 },
+      { name: 'Nono', 'lat': -31.7944, 'lon': -64.9761 },
+      { name: 'Valle de Punilla', 'lat': -30.9236, 'lon': -64.4954 },
+      { name: 'La Cumbrecita', 'lat': -31.8833, 'lon': -64.7728 },
+      { name: 'Mina Clavero', 'lat': -31.7211, 'lon': -65.0034 },
+      { name: 'Villa Carlos Paz', 'lat': -31.4241, 'lon': -64.4974 }
     ], 'Entre Ríos': [
       { name: 'Palacio San José', lat: -32.4497, lon: -58.2493 },
       { name: 'Parque Nacional El Palmar', lat: -32.3447, lon: -58.2874 },
@@ -222,9 +237,8 @@ const puntosTuristicos = {
       { name: 'Parque Astronómico de La Punta', lat: -33.1906, lon: -66.3056 },
       { name: 'Parque Nacional Sierra de las Quijadas', lat: -32.3558, lon: -67.2252 },
       { name: 'Laguna de la Niña Encantada', lat: -36.0781, lon: -69.7994 },
-      { name: 'Parque Nacional Quebrada del Condorito', lat: -31.4965, lon: -64.7946 },    ]
+      { name: 'Parque Nacional Quebrada del Condorito', lat: -31.4965, lon: -64.7946 },]
   },
-
   'Patagonia': {
     'Santa Cruz': [
       { name: 'Parque Nacional Los Glaciares', lat: -50.4833, lon: -73.05 },
@@ -310,13 +324,10 @@ const puntosTuristicos = {
       { name: 'Bosque de Arrayanes', 'lat': -40.8320, 'lon': -71.6330 },
       { name: 'Camino de los 7 Lagos', 'lat': -40.7057, 'lon': -71.6142 },
       { name: 'San Martín de los Andes', 'lat': -40.1573, 'lon': -71.3533 }
-    ],
-    'Neuquén': [
+    ], 'Neuquén': [
       { name: 'Río Limay', 'lat': -39.0433, 'lon': -68.3667 },
       { name: 'Represa El Chocón', 'lat': -39.2700, 'lon': -68.7647 }
-    ],
-
-    'Extremo austral': [
+    ],'Tierra del Fuego': [
       { name: 'Parque Nacional Tierra del Fuego', 'lat': -54.2514, 'lon': -68.6058 },
       { name: 'Cerro Castor', 'lat': -54.7359, 'lon': -68.0638 },
       { name: 'Ushuaia', 'lat': -54.8019, 'lon': -68.3029 },
@@ -408,23 +419,7 @@ const puntosTuristicos = {
       { name: 'Museo Provincial de Bellas Artes Rosa Galisteo de Rodríguez', 'lat': -31.6289, 'lon': -60.7037 },
       { name: 'Museo Histórico Provincial Brigadier Estanislao López', 'lat': -31.6281, 'lon': -60.7007 }
     ],
-    'Córdoba': [
-      { name: 'Parque Nacional Quebrada del Condorito', 'lat': -31.5986, 'lon': -64.8656 },
-      { name: 'Los Terrones', 'lat': -30.8717, 'lon': -64.6611 },
-      { name: 'Dique San Roque', 'lat': -31.3480, 'lon': -64.4826 },
-      { name: 'Uritorco', 'lat': -30.8494, 'lon': -64.4944 },
-      { name: 'Camino de las Cien Curvas', 'lat': -31.3948, 'lon': -64.5261 },
-      { name: 'Champaquí', 'lat': -32.0500, 'lon': -64.8325 },
-      { name: 'Balneario Playas de Oro', 'lat': -31.4334, 'lon': -64.4974 },
-      { name: 'Balneario Soy y Río', 'lat': -31.4230, 'lon': -64.4910 },
-      { name: 'Apa Corral', 'lat': -32.2000, 'lon': -64.9833 },
-      { name: 'Yacanto', 'lat': -32.1483, 'lon': -64.7125 },
-      { name: 'Nono', 'lat': -31.7944, 'lon': -64.9761 },
-      { name: 'Valle de Punilla', 'lat': -30.9236, 'lon': -64.4954 },
-      { name: 'La Cumbrecita', 'lat': -31.8833, 'lon': -64.7728 },
-      { name: 'Mina Clavero', 'lat': -31.7211, 'lon': -65.0034 },
-      { name: 'Villa Carlos Paz', 'lat': -31.4241, 'lon': -64.4974 }
-    ]
+
   }
 }
 
