@@ -5,7 +5,12 @@
     "description": "Disfruta de una semana en Bariloche con alojamiento y excursiones incluidas.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431444/ncvde8xq30apqjk58ng9.jpg",
     "address": "Av. Exequiel Bustillo 22900, San Carlos de Bariloche, Río Negro",
-    "agency": "Viajes Patagonia"
+    "agency": "Viajes Patagonia",
+    "destino":"bariloche",
+    "fecha_ingreso":,
+    "fecha_egreso":,
+    "salida":"buenos aires",
+
   },
   {
     "title": "Paquete de Viaje a Mendoza",
