@@ -4,7 +4,7 @@
     "price": 1500,
     "description": "Disfruta de una semana en Bariloche con alojamiento y excursiones incluidas.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431444/ncvde8xq30apqjk58ng9.jpg",
-    "address": "Av. Corrientes 1234, Capital Federal",
+    "address": "Av. Exequiel Bustillo 22900, San Carlos de Bariloche, Río Negro",
     "agency": "Viajes Patagonia"
   },
   {
@@ -12,7 +12,7 @@
     "price": 2000,
     "description": "Explora los viñedos de Mendoza con este paquete de 5 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/jdppzdewqpzbosdviinx.jpg",
-    "address": "Calle Victor Hugo 5678, Moreno",
+    "address": "Av. España 1210,  Mendoza",
     "agency": "Mendoza Tours"
   },
   {
@@ -20,7 +20,7 @@
     "price": 2500,
     "description": "Visita las impresionantes Cataratas del Iguazú con alojamiento y tours incluidos.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431442/sarqdjgjo6ca1x7qu4uk.jpg",
-    "address": "Av. del Libertador 91011, Merlo",
+    "address": "C. Bonpland 110, Puerto Iguazú, Misiones",
     "agency": "Cataratas Travel"
   },
   {
@@ -28,7 +28,7 @@
     "price": 3000,
     "description": "Descubre la belleza de Salta y sus alrededores con este paquete de 7 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/gqlt8mkjkz8xumdjwdac.jpg",
-    "address": "Av. Rivadavia 1213, Capital Federal",
+    "address": "Buenos Aires Nº1,  Salta",
     "agency": "Salta Aventura"
   },
   {
@@ -36,7 +36,7 @@
     "price": 3500,
     "description": "Aventura en el fin del mundo: visita Ushuaia con este paquete completo.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/xnp9j5nsvgyoubaxdsx7.jpg",
-    "address": "Calle San Martín 1415, Capital Federal",
+    "address": "Paz 868,  Ushuaia, Tierra del Fuego",
     "agency": "Tierra del Fuego Tours"
   },
   {
@@ -44,7 +44,7 @@
     "price": 4000,
     "description": "Maravíllate con el Glaciar Perito Moreno en El Calafate con este paquete de 4 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/xnaksx69wllmflvwr0cl.jpg",
-    "address": "Av. Cabildo 4321, Capital Federal",
+    "address": "Av. del Libertador 2047,  El Calafate, Santa Cruz",
     "agency": "Glaciares Tours"
   },
   {
@@ -52,7 +52,7 @@
     "price": 1800,
     "description": "Relájate en las playas de Mar del Plata con este paquete de 3 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/llin819v67a2fcwuzaqm.jpg",
-    "address": "Calle Mitre 567, Capital Federal",
+    "address": "Aristóbulo del Valle 3641,  Mar del Plata, Provincia de Buenos Aires",
     "agency": "Mar del Plata Viajes"
   },
   {
@@ -60,7 +60,7 @@
     "price": 2200,
     "description": "Explora la ciudad de Córdoba y sus sierras con este paquete de 5 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/gjenpsjdcyla0c5exiye.jpg",
-    "address": "Calle Olmos 987, Capital Federal",
+    "address": "Boulevard San Juan 165,  Córdoba",
     "agency": "Córdoba Turismo"
   },
   {
@@ -68,7 +68,7 @@
     "price": 1700,
     "description": "Disfruta de un fin de semana en Rosario con actividades y tours incluidos.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/huvqpfg4moqc3pvk9e1g.jpg",
-    "address": "Bv. Oroño 345, Capital Federal",
+    "address": "Córdoba 2554, Rosario, Santa Fe",
     "agency": "Rosario Travel"
   },
   {
@@ -76,7 +76,7 @@
     "price": 2100,
     "description": "Descubre los paisajes y la cultura de La Rioja con este paquete de 4 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/jkxnskiplutyg0doiysg.jpg",
-    "address": "Av. San Juan 654, Capital Federal",
+    "address": "República de Siria 398, 5300 La Rioja",
     "agency": "La Rioja Explora"
   }
 ]

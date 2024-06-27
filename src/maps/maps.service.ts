@@ -35,9 +35,10 @@ const regiones = {
   'Pampeana': [
     { latMin: -41, latMax: -32, lonMin: -64, lonMax: -57 },  // Buenos Aires
     { latMin: -39, latMax: -33, lonMin: -66, lonMax: -61 },  // La Pampa
-    { latMin: -34, latMax: -28, lonMin: -66, lonMax: -58 }   // Córdoba
+    { latMin: -35, latMax: -30, lonMin: -66, lonMax: -62 }   // Córdoba
   ]
 };
+
 const puntosTuristicos = {
   'litoral': {
     'Misiones': [
@@ -221,9 +222,7 @@ const puntosTuristicos = {
       { name: 'Parque Astronómico de La Punta', lat: -33.1906, lon: -66.3056 },
       { name: 'Parque Nacional Sierra de las Quijadas', lat: -32.3558, lon: -67.2252 },
       { name: 'Laguna de la Niña Encantada', lat: -36.0781, lon: -69.7994 },
-      { name: 'Parque Nacional Quebrada del Condorito', lat: -31.4965, lon: -64.7946 },
-      // Añade más puntos turísticos de San Luis aquí
-    ]
+      { name: 'Parque Nacional Quebrada del Condorito', lat: -31.4965, lon: -64.7946 },    ]
   },
 
   'Patagonia': {
