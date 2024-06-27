@@ -7,11 +7,13 @@ import { UserRepository } from "./user.repository";
 import { AuthService } from "src/auth/auth.service";
 import { AgencyRepository } from "src/agency/agency.repository";
 import { AgencyEntity } from "src/entities/agency.entity";
+import { mailsServices } from "src/mails/mails.service";
+import { ConfigService } from "@nestjs/config";
 
 
 @Module({
     imports:[TypeOrmModule.forFeature([UserEntity, AgencyEntity])],
     controllers:[userController],
-    providers:[UserServices, UserRepository, AuthService, AgencyRepository]
+    providers:[UserServices, UserRepository, AuthService, AgencyRepository,mailsServices,ConfigService]
 })
 export class userModule{}
