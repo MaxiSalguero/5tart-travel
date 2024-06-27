@@ -1,5 +1,6 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { AgencyEntity } from "src/entities/agency.entity";
 import { TourEntity } from "src/entities/tour.entity";
 import { MapsService } from "src/maps/maps.service";
 import { Repository } from "typeorm";
@@ -8,6 +9,8 @@ import { Repository } from "typeorm";
 export class TourRepository {
     constructor(@InjectRepository(TourEntity)
     private tourRepository: Repository<TourEntity>,
+    @InjectRepository(AgencyEntity)
+    private agencyRepository: Repository<AgencyEntity>,
         private readonly mapsservice: MapsService) { }
 
     async getTours() {
@@ -20,15 +23,26 @@ export class TourRepository {
         return Tours
     }
 
-    async createTour(tour) {
+    async createTour(tour, userId) {
+
+        const agency: AgencyEntity = await this.agencyRepository.findOneBy({id: userId})
+
+        if (!agency) {
+            throw new UnauthorizedException('Problema en los datos del usuario agencia')
+        }
+
         const geocodeData = await this.mapsservice.geocodeAddress(tour.address)
+        
+    
         console.log(tour)
         const newTour = await this.tourRepository.create({
             ...tour,
             country: geocodeData.country,
             region: geocodeData.region,
             state: geocodeData.state,
+            agency: agency
         });
+        
         await this.tourRepository.save(newTour)
 
         return newTour
