@@ -1,11 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsEmpty, IsNumber, IsOptional, Length } from 'class-validator';
+import { IsDate, IsEmpty, IsNumber, IsOptional, Length, isNotEmpty } from 'class-validator';
 import {
     IsNotEmpty,
     IsString,
     Matches,
 } from 'class-validator';
+import { TransportType } from 'src/entities/transporte.enum';
 
 export class CreateTourDto {
 
@@ -48,4 +49,29 @@ export class CreateTourDto {
     @ApiProperty()
     address: string;
 
+    @IsOptional()
+    @IsDate()
+    @ApiProperty()
+    fecha_ingreso:Date
+
+    @IsOptional()
+    @IsDate()
+    @ApiProperty()
+    fecha_egreso:Date
+
+    @IsOptional()
+    @IsString()
+    @ApiProperty()
+    destino: string;
+
+    @IsOptional()
+    @IsString()
+    @ApiProperty()
+    salida: string;
+
+    @IsOptional()    
+    oferta: boolean;
+    
+    @IsNotEmpty()
+    transportType:TransportType
 }
