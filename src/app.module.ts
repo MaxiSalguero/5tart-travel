@@ -16,6 +16,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TourEntity } from './entities/tour.entity';
 import { AgencyEntity } from './entities/agency.entity';
 import { JwtModule } from '@nestjs/jwt';
+import { MapsService } from './maps/maps.service';
 
 @Module({
   imports: [
@@ -38,6 +39,6 @@ import { JwtModule } from '@nestjs/jwt';
       }),
   ],
   controllers: [AppController],
-  providers: [AppService, PreloadService],
+  providers: [AppService, PreloadService,MapsService],
 })
 export class AppModule {}

@@ -5,6 +5,7 @@ import { AgencyEntity } from './entities/agency.entity';
 import { TourEntity } from './entities/tour.entity';
 import * as data from './helpers/data.json'
 import * as dataAgency from './helpers/dataAgency.json'
+import { MapsService } from './maps/maps.service';
 
 
 
@@ -14,8 +15,9 @@ export class PreloadService implements OnModuleInit {
         @InjectRepository(AgencyEntity)
         private readonly agencyRepository: Repository<AgencyEntity>,
         @InjectRepository(TourEntity)
-        private readonly tourRepository: Repository<TourEntity>
-    ) {}
+        private readonly tourRepository: Repository<TourEntity>,
+        private readonly mapsservice: MapsService
+    ) { }
 
     async onModuleInit() {
         await this.loadShelters();
@@ -23,14 +25,14 @@ export class PreloadService implements OnModuleInit {
     }
 
     async loadShelters() {
-        for (const agency of dataAgency ) {
+        for (const agency of dataAgency) {
             const existingShelter = await this.agencyRepository.findOne({
                 where: {
                     name_agency: agency.name_agency,
                     mail: agency.mail,
                     password: agency.password,
-                    address:agency.address,
-                    imgUrl:agency.imgUrl,
+                    address: agency.address,
+                    imgUrl: agency.imgUrl,
                 },
             });
 
@@ -47,7 +49,7 @@ export class PreloadService implements OnModuleInit {
             const agency = await this.agencyRepository.findOne({
                 where: { name_agency: tour.agency }
             });
-
+            const geocodeData = await this.mapsservice.geocodeAddress(tour.address)
             if (agency) {
                 const existingTour = await this.tourRepository.findOne({
                     where: {
@@ -56,12 +58,16 @@ export class PreloadService implements OnModuleInit {
                         description: tour.description,
                         address: tour.address,
                         imgUrl: tour.imgUrl,
+                        country: geocodeData.country,
+                        region: geocodeData.region,
+                        state: geocodeData.state,
                         agency: agency
                     },
                 });
 
                 if (!existingTour) {
-                    await this.tourRepository.save({ ...tour, agency: agency });
+                    await this.tourRepository.save({ ...tour, agency: agency,country:geocodeData.country,region: geocodeData.region,
+                        state: geocodeData.state });
                 }
             }
         }

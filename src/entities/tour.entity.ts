@@ -1,15 +1,16 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import {v4 as uuid} from "uuid"
+import { v4 as uuid } from "uuid"
 import { AgencyEntity } from "./agency.entity";
+import { TransportType } from "./transporte.enum";
 
 
 @Entity({
-    name:'tour'
+    name: 'tour'
 })
-export class TourEntity{
+export class TourEntity {
 
     @PrimaryGeneratedColumn('uuid')
-    id:string = uuid()
+    id: string = uuid()
 
     @Column()
     title: string
@@ -23,11 +24,17 @@ export class TourEntity{
     @Column()
     imgUrl: string
 
-    // @Column()
-    // fecha_ingreso: Date
+    @Column()
+    fecha_ingreso: Date
 
-    // @Column()
-    // fecha_egreso: Date
+    @Column()
+    fecha_egreso: Date
+
+    @Column()
+    destino: string
+
+    @Column()
+    salida: string
 
     @Column()
     address: string
@@ -52,10 +59,18 @@ export class TourEntity{
     })
     date: Date
 
+    @Column()
+    transportType: string;
+
+    @Column({
+        default: false
+    })
+    oferta: boolean;
+
 
     @ManyToOne(() => AgencyEntity, (agency) => agency.tours)
     @JoinColumn()
     agency: AgencyEntity
 
-    
+
 }

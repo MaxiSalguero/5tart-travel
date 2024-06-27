@@ -1,295 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Geocode Address</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    #result {
-      margin-top: 20px;
-    }
-    #map {
-      height: 400px;
-      margin-top: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geocodificación</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        label, input, button {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        #map {
+            height: 500px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Geocode Address</h1>
-  <form id="geocodeForm">
-    <label for="address">Enter Address:</label>
-    <input type="text" id="address" name="address" required>
-    <button type="submit">Geocode</button>
-  </form>
-  <div id="result"></div>
-  <div id="map"></div>
+    <div class="container">
+        <h1>Geocodificación</h1>
+        <form id="geocodeForm">
+            <label for="address">Dirección:</label>
+            <input type="text" id="address" name="address" required>
+            <button type="submit">Enviar</button>
+        </form>
+        <div class="result" id="result"></div>
+        <div id="map"></div>
+    </div>
 
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  <script>
-    const puntosTuristicos = {
-      'litoral': {'Misiones': [
-    { name: 'Puerto Iguazú', lat: -25.597, lon: -54.5735 },
-    { name: 'Las Cataratas del Iguazú', lat: -25.6866, lon: -54.4406 },
-    { name: 'Ruinas de San Ignacio', lat: -27.2567, lon: -55.5369 },
-    { name: 'La Aripuca', lat: -25.6206, lon: -54.5101 },
-    { name: 'Hito de las Tres Fronteras', lat: -25.5973, lon: -54.5824 },
-    { name: 'Minas de Wanda', lat: -25.9747, lon: -54.5527 },
-    { name: 'Salto Yocuma', lat: -26.4303, lon: -54.9367 },
-    { name: 'Guira Oga', lat: -25.6862, lon: -54.5075 },
-    { name: 'Parque Temático de la Cruz', lat: -27.3896, lon: -55.8945 }
-],'Entre Ríos': [
-    { name: 'Palacio San José', lat: -32.4497, lon: -58.2493 },
-    { name: 'Parque Nacional El Palmar', lat: -32.3447, lon: -58.2874 },
-    { name: 'Termas de Federación', lat: -31.9823, lon: -57.9082 },
-    { name: 'Termas de Colón', lat: -32.1788, lon: -58.1325 },
-    { name: 'Ñandubaysal', lat: -32.1147, lon: -58.2185 },
-    { name: 'Termas de Villa Elisa', lat: -32.1684, lon: -58.3469 }
-],'Corrientes': [
-    { name: 'Esteros del Iberá', lat: -28.25, lon: -57.5 },
-    { name: 'Parque Nacional Mburucuyá', lat: -28.0339, lon: -57.9 },
-    { name: 'Puente Pexoa', lat: -27.3333, lon: -56.85 },
-    { name: 'Represa Yacyretá', lat: -27.3833, lon: -56.8667 }
-],
-},
-      'Noroeste': {'Jujuy': [
-    { name: 'Tilcara', lat: -23.5762, lon: -65.3923 },
-    { name: 'Purmamarca', lat: -23.7442, lon: -65.4945 },
-    { name: 'Salinas Grandes', lat: -23.6815, lon: -66.0381 },
-    { name: 'Garganta del Diablo', lat: -23.5408, lon: -65.3978 },
-    { name: 'Paleta del Pintor', lat: -23.7401, lon: -65.4939 },
-    { name: 'Horconal', lat: -23.6658, lon: -65.6764 },
-    { name: 'Parque Nacional Calilegua', lat: -23.7143, lon: -64.8122 },
-    { name: 'Cuesta del Lipán', lat: -23.5473, lon: -65.4152 },
-    { name: 'Cuevas de Wayra y Aguirre', lat: -23.6162, lon: -65.4354 },
-    { name: 'Potrero de Yala', lat: -24.1238, lon: -65.3935 },
-    { name: 'Paseo de los Colorados', lat: -23.8132, lon: -65.4644 },
-    { name: 'Cerro de los Siete Colores', lat: -23.8074, lon: -65.4977 },
-    { name: 'Maimará', lat: -23.6176, lon: -65.4126 },
-    { name: 'El Porito', lat: -24.1652, lon: -65.3083 },
-    { name: 'Termas de Reyes', lat: -24.1728, lon: -65.4016 },
-    { name: 'Yala', lat: -24.1278, lon: -65.2922 },
-    { name: 'Cerro de los 14 Colores', lat: -23.5973, lon: -65.4247 },
-    { name: 'Termas del Río Jordan', lat: -24.2617, lon: -65.3625 },
-    { name: 'Tres Cruces', lat: -22.9546, lon: -65.0873 },
-    { name: 'Abra Pampa', lat: -22.7204, lon: -66.0383 },
-    { name: 'Quebrada de las Señoritas', lat: -23.6728, lon: -65.4411 },
-    { name: 'Uquía', lat: -23.8032, lon: -65.4731 },
-    { name: 'Iruya', lat: -22.7811, lon: -65.3464 },
-    { name: 'Huacalera', lat: -23.8705, lon: -65.3844 },
-    { name: 'Susques', lat: -23.4167, lon: -66.4833 },
-    { name: 'Abra de Abson Castro Tolay', lat: -23.8500, lon: -65.2667 },
-    { name: 'Pucará de Tilcara', lat: -23.5775, lon: -65.3527 }
-],'Salta': [
-    { name: 'Cerro San Bernardo', lat: -24.7906, lon: -65.4114 },
-    { name: 'Museo de Arqueología de Alta Montaña', lat: -24.7863, lon: -65.4119 },
-    { name: 'Catedral Basílica de Salta', lat: -24.7887, lon: -65.4121 },
-    { name: 'Virgen de los Tres Cerritos', lat: -24.8425, lon: -65.4090 },
-    { name: 'Teleférico San Bernardo', lat: -24.7869, lon: -65.4117 },
-    { name: 'Parque Nacional Los Cardones', lat: -25.1828, lon: -66.0869 },
-    { name: 'Monumento al General San Martín', lat: -24.7875, lon: -65.4133 },
-    { name: 'Cuesta del Obispo', lat: -25.1417, lon: -65.9340 },
-    { name: 'Quebrada de las Conchas', lat: -25.1250, lon: -66.0708 },
-    { name: 'Cachi', lat: -25.1214, lon: -66.1656 },
-    { name: 'Pasaje Quebrada de Escoipe', lat: -25.2589, lon: -65.9117 },
-    { name: 'Cafayate', lat: -26.0705, lon: -65.9760 },
-    { name: 'Piedra del Molino', lat: -25.3936, lon: -66.1898 },
-    { name: 'Viaducto La Polvorilla', lat: -24.0704, lon: -66.4888 },
-    { name: 'Quebrada del Toro', lat: -24.6022, lon: -65.8294 },
-    { name: 'Salar de Arizaro', lat: -24.9897, lon: -67.7003 },
-    { name: 'Tolar Grande', lat: -24.6937, lon: -67.5026 },
-    { name: 'Volcán Llullaillaco', lat: -24.7211, lon: -68.5569 },
-    { name: 'Ruinas de Tastil', lat: -24.5567, lon: -65.8572 },
-    { name: 'Tren de las Nubes', lat: -24.2206, lon: -65.2986 },
-    { name: 'Cuevas de Acsibi', lat: -22.2075, lon: -66.0553 },
-    { name: 'Abra del Acay', lat: -24.5467, lon: -66.1033 },
-    { name: 'Ojo de Cóndor', lat: -24.8322, lon: -66.2208 },
-    { name: 'Camino del Pasado', lat: -24.7840, lon: -65.4106 },
-    { name: 'Valle Encantado', lat: -24.9558, lon: -65.4245 }
-],'Tucumán': [
-    { name: 'Ciudad Sagrada de los Quilmes', lat: -26.9614, lon: -66.6108 },
-    { name: 'Museo Miguel Lillo de Ciencias Naturales', lat: -26.8185, lon: -65.2175 },
-    { name: 'Museo Pachamama', lat: -26.7300, lon: -65.2654 },
-    { name: 'Cascada Río Noque', lat: -26.9475, lon: -65.3860 },
-    { name: 'El Cadillal', lat: -26.8032, lon: -65.1740 },
-    { name: 'Parque Nacional Aconquija', lat: -27.1782, lon: -65.6187 },
-    { name: 'Tafí del Valle', lat: -26.8521, lon: -65.7097 },
-    { name: 'Abra del Infiernillo', lat: -27.1430, lon: -65.7396 },
-    { name: 'Amaicha del Valle', lat: -27.0618, lon: -65.6853 },
-    { name: 'Dique Escaba', lat: -27.2200, lon: -65.6591 },
-    { name: 'Reserva Natural Aguas Chiquitas', lat: -27.1953, lon: -65.5720 }
-],
-'Catamarca': [
-    { name: 'Virgen del Valle', lat: -28.4690, lon: -65.7808 },
-    { name: 'Dique El Jumeal', lat: -28.4836, lon: -65.7941 },
-    { name: 'Pueblo Perdido de la Quebrada', lat: -27.7217, lon: -67.0613 },
-    { name: 'Ruta Seismiles', lat: -27.7426, lon: -66.9934 },
-    { name: 'Termas de Fiambalá', lat: -27.6865, lon: -67.6160 },
-    { name: 'Tinogasta', lat: -28.0662, lon: -67.5646 }
-],'La Rioja': [
-    { name: 'Parque Nacional Talampaya', lat: -29.3451, lon: -67.5016 },
-    { name: 'Monumento al Chacho Peñaloza', lat: -29.4153, lon: -66.8502 },
-    { name: 'Cristo del Portezuelo', lat: -29.3950, lon: -66.8658 },
-    { name: 'Parque Nacional El Chiflón', lat: -30.6523, lon: -66.5043 },
-    { name: 'Cuesta de Miranda', lat: -30.0600, lon: -67.8900 },
-    { name: 'Castillo de Dionisio', lat: -29.1584, lon: -67.5774 },
-    { name: 'Parque de los Dinosaurios', lat: -29.4782, lon: -67.7854 },
-    { name: 'Mina La Mejicana', lat: -29.1733, lon: -67.5097 },
-    { name: 'Cañón Arcoiris y Ciudad Perdida', lat: -28.7298, lon: -67.3953 },
-    { name: 'Sitio Arqueológico del Hualco', lat: -28.7731, lon: -66.8977 },
-    { name: 'Vallecito Encantado', lat: -29.2537, lon: -67.1081 },
-    { name: 'Dique Los Sauces', lat: -29.4344, lon: -66.8677 }
-],'Santiago del Estero': [
-    { name: 'Reserva Natural Tara Inti', lat: -27.7820, lon: -63.2527 },
-    { name: 'Termas de Río Hondo', lat: -27.4960, lon: -64.8596 }
-],
-},
-      'Cuyo': {
-  'San Juan': [
-    { name: 'Parque Nacional El Leoncito', lat: -31.8000, lon: -69.3000 },
-    { name: 'Parque Nacional Ischigualasto', lat: -30.1499, lon: -68.0127 },
-    { name: 'Laguna Brava', lat: -28.6586, lon: -69.0033 },
-    { name: 'Dique de Ullum', lat: -31.5375, lon: -68.6711 },
-    { name: 'Parque Provincial El Chiflón', lat: -30.3498, lon: -67.0058 },
-    { name: 'Parque Nacional Talampaya', lat: -29.7883, lon: -67.8512 },
-    { name: 'La Cuesta de Huaco', lat: -30.1608, lon: -68.0384 },
-    { name: 'Mina La Mexicana', lat: -29.1600, lon: -68.9000 },
-    { name: 'Santuario Difunta Correa', lat: -31.5285, lon: -67.9456 },
-    { name: 'Pampa del Leoncito', lat: -31.8000, lon: -69.3000 },
-    { name: 'Parque de las Tinajas', lat: -31.7565, lon: -68.5976 },
-    { name: 'Barreal Blanco', lat: -30.6850, lon: -69.3239 },
-    { name: 'Paso de Agua Negra', lat: -30.5100, lon: -69.5472 },
-    { name: 'Represa Punta Negra', lat: -31.5439, lon: -68.6761 },
-    { name: 'Zonda', lat: -31.5737, lon: -68.5237 }
-],
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([-34.6581009, -58.7143126], 10);
 
-    'Mendoza': [
-      { name: 'Parque Provincial Aconcagua', lat: -32.6532, lon: -69.9796 },
-      { name: 'Cañon del Atuel', lat: -34.8923, lon: -68.5808 },
-      { name: 'Potrerillos', lat: -32.9568, lon: -69.1459 },
-      { name: 'Cerro de la Gloria', lat: -32.8897, lon: -68.8584 },
-      { name: 'Dique Los Reyunos', lat: -34.7464, lon: -68.5425 },
-      { name: 'Reserva La Payunia', lat: -36.3306, lon: -68.3438 },
-      { name: 'La Caverna de las Brujas Malargüe', lat: -36.7425, lon: -69.9755 },
-      { name: 'Puente del Inca', lat: -32.8236, lon: -69.9275 },
-      { name: 'Valle de Uco', lat: -33.6071, lon: -69.2052 },
-      { name: 'Reserva Natural Villavicencio', lat: -32.5820, lon: -69.0403 },
-      { name: 'Termas de Cacheuta', lat: -32.9662, lon: -69.1374 },
-      { name: 'Salinas del Diamante', lat: -35.0303, lon: -68.8504 },
-      { name: 'Pozo de las Ánimas', lat: -36.0147, lon: -69.6966 },
-      { name: 'Laguna Diamante', lat: -34.0516, lon: -69.7886 },
-      { name: 'Castillos de Pincheira', lat: -35.9853, lon: -69.6864 },
-      { name: 'Minas de Paramillos', lat: -32.5764, lon: -69.0713 },
-      { name: 'Cascada Maqui Malal', lat: -36.1203, lon: -69.5153 },
-      { name: 'Volcán Malacara', lat: -36.2920, lon: -69.6750 },
-      { name: 'Las Leñas', lat: -35.1308, lon: -70.0064 },
-      { name: 'Cristo Redentor de los Andes', lat: -32.8194, lon: -69.9272 },
-      { name: 'Reserva El Manzano Histórico', lat: -33.7320, lon: -69.0204 },
-      { name: 'Penitentes', lat: -32.8296, lon: -69.9076 },
-      { name: 'Laguna de la Niña Encantada', lat: -36.0781, lon: -69.7994 },
-      { name: 'Valle Hermoso', lat: -35.1406, lon: -69.9641 },
-      { name: 'Bodega La Rural', lat: -33.0547, lon: -68.8485 },
-      { name: 'Bodega Catena Zapata', lat: -33.2228, lon: -68.8848 },
-      { name: 'Parque General San Martín', lat: -32.8906, lon: -68.8726 },
-      // Añade más puntos turísticos de Mendoza aquí
-    ],
-    'San Luis': [
-      { name: 'Mirador del Sol', lat: -32.3618, lon: -65.0135 },
-      { name: 'Pasos Malos', lat: -32.3618, lon: -65.0135 },
-      { name: 'Merlo San Luis', lat: -32.3409, lon: -65.0107 },
-      { name: 'Dique Piscu Yaco', lat: -32.5362, lon: -65.0111 },
-      { name: 'Salto Tabaquillo', lat: -32.6819, lon: -64.9687 },
-      { name: 'Potrero de los Funes', lat: -33.2995, lon: -66.1942 },
-      { name: 'Mina Los Cóndores', lat: -32.7520, lon: -66.2221 },
-      { name: 'Salto de la Moneda', lat: -33.3303, lon: -65.0261 },
-      { name: 'Río El Trapiche', lat: -33.0575, lon: -66.0393 },
-      { name: 'Dique La Florida', lat: -33.1364, lon: -66.1533 },
-      { name: 'Ciudad de La Punta', lat: -33.1834, lon: -66.3133 },
-      { name: 'Parque Astronómico de La Punta', lat: -33.1906, lon: -66.3056 },
-      { name: 'Parque Nacional Sierra de las Quijadas', lat: -32.3558, lon: -67.2252 },
-      { name: 'Laguna de la Niña Encantada', lat: -36.0781, lon: -69.7994 },
-      { name: 'Parque Nacional Quebrada del Condorito', lat: -31.4965, lon: -64.7946 },
-      // Añade más puntos turísticos de San Luis aquí
-    ]
-  },
-
-      'Patagonia': [
-        { name: 'Parque Nacional Los Glaciares', lat: -50.4833, lon: -73.05 },
-        // Añade más puntos turísticos de la región Patagonia aquí
-      ],
-      'Extremo austral': [
-        { name: 'Parque Nacional Tierra del Fuego', lat: -54.2514, lon: -68.6058 },
-        // Añade más puntos turísticos de la región Extremo austral aquí
-      ],
-      'Pampeana': [
-        { name: 'Obelisco', lat: -34.6037, lon: -58.3816 },
-        // Añade más puntos turísticos de la región Pampeana aquí
-      ]
-    };
-
-    document.getElementById('geocodeForm').addEventListener('submit', async function(event) {
-      event.preventDefault();
-      const address = document.getElementById('address').value;
-
-      try {
-        const response = await fetch('http://localhost:3000/maps/geocode', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ address }),
-        });
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        document.getElementById('result').innerHTML = `
-          <p><strong>Display Name:</strong> ${data.display_name}</p>
-          <p><strong>Country:</strong> ${data.country}</p>
-          <p><strong>Region:</strong> ${data.region}</p>
-          <p><strong>State:</strong> ${data.state}</p>
-          <p><strong>Latitude:</strong> ${data.lat}</p>
-          <p><strong>Longitude:</strong> ${data.lon}</p>
-        `;
-
-        // Initialize the map
-        const map = L.map('map').setView([data.lat, data.lon], 10);
-
-        // Add a tile layer to the map
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Add a marker for the geocoded address
-        L.marker([data.lat, data.lon]).addTo(map)
-          .bindPopup(data.display_name)
-          .openPopup();
+        // Define un icono personalizado para el marcador principal
+        const mainIcon = L.icon({
+            iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+            shadowSize: [41, 41],
+            shadowAnchor: [12, 41]
+        });
 
-        // Add markers for tourist points in the region and province
-        if (Array.isArray(puntosTuristicos[data.region])) {
-          // If the region is a simple array, directly use it
-          puntosTuristicos[data.region].forEach(point => {
-            L.marker([point.lat, point.lon]).addTo(map)
-              .bindPopup(point.name);
-          });
-        } else if (typeof puntosTuristicos[data.region] === 'object' && puntosTuristicos[data.region][data.state]) {
-          // If the region has provinces defined and the province exists
-          puntosTuristicos[data.region][data.state].forEach(point => {
-            L.marker([point.lat, point.lon]).addTo(map)
-              .bindPopup(point.name);
-          });
-        }
+        let mainMarker = null; // Variable para almacenar el marcador principal
 
-      } catch (error) {
-        document.getElementById('result').innerHTML = `<p>Error: ${error.message}</p>`;
-      }
-    });
-  </script>
+        document.getElementById('geocodeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const address = document.getElementById('address').value;
+            
+            fetch('http://localhost:3000/maps/geocode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ address: address })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `
+                    <p><strong>Mensaje:</strong> ${data.message}</p>
+                    <p><strong>Latitud:</strong> ${data.lat}</p>
+                    <p><strong>Longitud:</strong> ${data.lon}</p>
+                    <p><strong>Nombre:</strong> ${data.display_name}</p>
+                    <p><strong>País:</strong> ${data.country}</p>
+                    <p><strong>Región:</strong> ${data.region}</p>
+                    <p><strong>Estado:</strong> ${data.state}</p>
+                `;
+
+                const mainLocation = [parseFloat(data.lat), parseFloat(data.lon)];
+                
+                // Si ya hay un marcador principal, lo eliminamos del mapa
+                if (mainMarker !== null) {
+                    map.removeLayer(mainMarker);
+                }
+
+                // Agregamos el marcador para la ubicación principal con el icono personalizado
+                mainMarker = L.marker(mainLocation, {icon: mainIcon}).addTo(map)
+                    .bindPopup(`<strong>${address}</strong>`).openPopup();
+
+                // Ajustamos la vista del mapa a la ubicación principal
+                map.setView(mainLocation, 12);
+
+                // Agregamos marcadores para los puntos turísticos
+                data.touristPoints.forEach(point => {
+                    L.marker([point.lat, point.lon]).addTo(map)
+                        .bindPopup(`<strong>${point.name}</strong>`);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = `<p>Error al procesar la solicitud</p>`;
+            });
+        });
+    </script>
 </body>
 </html>

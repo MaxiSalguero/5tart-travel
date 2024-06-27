@@ -1,15 +1,20 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { AgencyEntity } from "src/entities/agency.entity";
 import { TourEntity } from "src/entities/tour.entity";
+import { MapsService } from "src/maps/maps.service";
 import { Repository } from "typeorm";
 
 @Injectable()
 export class TourRepository {
     constructor(@InjectRepository(TourEntity)
-                private tourRepository: Repository<TourEntity> ){}
+    private tourRepository: Repository<TourEntity>,
+    @InjectRepository(AgencyEntity)
+    private agencyRepository: Repository<AgencyEntity>,
+        private readonly mapsservice: MapsService) { }
 
     async getTours() {
-        const Tours: TourEntity[] = await this.tourRepository.find({relations: {agency: true}})
+        const Tours: TourEntity[] = await this.tourRepository.find({ relations: { agency: true } })
 
         if (Tours.length == 0) {
             return 'No hay Publicaciones registradas en la base de datos'
@@ -18,16 +23,33 @@ export class TourRepository {
         return Tours
     }
 
-    async createAgency(tour) {
+    async createTour(tour, userId) {
 
-        const newTour = await this.tourRepository.create({...tour});
+        const agency: AgencyEntity = await this.agencyRepository.findOneBy({id: userId})
+
+        if (!agency) {
+            throw new UnauthorizedException('Problema en los datos del usuario agencia')
+        }
+
+        const geocodeData = await this.mapsservice.geocodeAddress(tour.address)
+        
+    
+        console.log(tour)
+        const newTour = await this.tourRepository.create({
+            ...tour,
+            country: geocodeData.country,
+            region: geocodeData.region,
+            state: geocodeData.state,
+            agency: agency
+        });
+        
         await this.tourRepository.save(newTour)
 
-        return 'Agencia creada'
+        return newTour
     }
 
     async deleteAgency(id: string) {
-        const Tour = await this.tourRepository.findOneBy({id});
+        const Tour = await this.tourRepository.findOneBy({ id });
 
         if (!Tour) {
             throw new BadRequestException('La publicacion no existe')
