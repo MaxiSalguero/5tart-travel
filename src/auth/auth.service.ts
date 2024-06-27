@@ -8,6 +8,7 @@ import { UserRepository } from 'src/user/user.repository';
 import * as bcrypt from "bcrypt";
 import { Repository } from 'typeorm';
 import { CreateUserDto } from 'src/DTOS/CreateUser.dto';
+import { mailsServices } from 'src/mails/mails.service';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,8 @@ export class AuthService {
                 @InjectRepository(UserEntity)
                 private readonly userDB: Repository<UserEntity>,
                 @InjectRepository(AgencyEntity)
-                private readonly agencyDb: Repository<AgencyEntity>
+                private readonly agencyDb: Repository<AgencyEntity>,
+                private readonly mailservice:mailsServices
     ){}
     
     async createUser(user: CreateUserDto) {
@@ -39,8 +41,16 @@ export class AuthService {
             throw new BadRequestException("Password no encryptada")
         }
 
-        return this.userRepository.createUser({...Nuser, password: hashed})
+        const createdUser = await this.userRepository.createUser({ ...Nuser, password: hashed });
+
+        // Si el usuario se creó correctamente, enviamos el correo electrónico
+        if (createdUser) {
+            await this.mailservice.registerUserMail(Nuser.mail, Nuser.username, Nuser.password);
+        }
+
+        return createdUser;
     }
+    
 
     async createAgency(agency) {
         const dbAgency = await this.userDB.findOneBy({mail: agency.mail})
