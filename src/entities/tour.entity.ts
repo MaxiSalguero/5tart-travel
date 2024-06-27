@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuid } from "uuid"
 import { AgencyEntity } from "./agency.entity";
-import { TransportType } from "./transporte.enum";
+
 
 
 @Entity({
@@ -29,6 +29,15 @@ export class TourEntity {
 
     @Column()
     fecha_egreso: Date
+
+    @Column({ nullable: true, type: 'float' })
+    lat?: number;
+
+    @Column({ nullable: true, type: 'float' })
+    lon?: number;
+
+    @Column({ nullable: true })
+    display_name?: string;
 
     @Column()
     destino: string
