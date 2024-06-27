@@ -5,26 +5,30 @@ import { Repository } from 'typeorm';
 
 
 @Injectable()
-export class FilterService {
+export class filterService {
   constructor(
     @InjectRepository(TourEntity)
     private tourRepository: Repository<TourEntity>,
   ) {}
 
   async searchGeneral(price:number,country:string,region:string,state:string) {
-    if (!price||!country||!region||!state) {
-        return [];
-    }
+      const sconditions: any = {};
 
-    const tour = await this.tourRepository.createQueryBuilder('tour')
-        .andWhere(
-            qb => {
-                qb.where('tour.country ILIKE :query', { query: `%${country}%` })
-                    .orWhere('tour.state ILIKE :query', { query: `%${state}%` })
-                    .orWhere('tour.region ILIKE :query', { query: `%${region}%` })
-                    .orWhere('tour.price ILIKE :query', { query: `%${price}%` })
-            }).getMany();
+        if (price) {
+            sconditions.price = price;
+        }
+        if (country) {
+            sconditions.country = country;
+        }
+        if (region) {
+            sconditions.region = region;
+        }
+        if (state) {
+          sconditions.state = state;
+      }
 
-return [...tour];
-}
+        const tourFil = await this.tourRepository.find({ where: sconditions })
+
+        return tourFil
+  }
 }

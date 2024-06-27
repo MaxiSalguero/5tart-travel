@@ -14,6 +14,16 @@ export class tourController {
         return this.tourService.getTours()
     }
 
+    @Get('/bus')
+    getToursBus(){
+        return this.tourService.getToursBus()
+    }
+
+    @Get('/plane')
+    getToursPlane(){
+        return this.tourService.getToursPlane()
+    }
+
     @ApiBearerAuth()
     @UseGuards(AuthGuard)
     @Post()

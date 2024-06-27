@@ -40,7 +40,7 @@ const regiones = {
 };
 
 const puntosTuristicos = {
-  'litoral': {
+  'Litoral': {
     'Misiones': [
       { name: 'Puerto Iguazú', lat: -25.597, lon: -54.5735 },
       { name: 'Las Cataratas del Iguazú', lat: -25.6866, lon: -54.4406 },

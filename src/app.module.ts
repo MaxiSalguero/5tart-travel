@@ -17,6 +17,7 @@ import { TourEntity } from './entities/tour.entity';
 import { AgencyEntity } from './entities/agency.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { MapsService } from './maps/maps.service';
+import { filterModule } from './filter/filter.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { MapsService } from './maps/maps.service';
     mailsModule,
     agencyModule,
     AuthModule,
+    filterModule,
     JwtModule.register({
       global: true,
       signOptions: {expiresIn: "1h" },

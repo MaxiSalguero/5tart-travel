@@ -1,12 +1,12 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { FilterService } from './filter.Service';
 import { TourEntity } from 'src/entities/tour.entity';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { filterService } from './filter.Service';
 
 @ApiTags('filter')
 @Controller('filter')
-export class ToursController {
-  constructor(private readonly filterservice: FilterService) { }
+export class filterController {
+  constructor(private readonly filterservice: filterService) { }
 
   @Get()
   @ApiQuery({ name: 'country', required: false })
@@ -18,7 +18,7 @@ export class ToursController {
     @Query('region') region: string,
     @Query('state') state: string,
     @Query('price') price: number,
-  ): Promise<TourEntity[]> {
+  ){
     return this.filterservice.searchGeneral(price, country, region, state);
   }
 }
