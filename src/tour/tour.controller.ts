@@ -14,8 +14,8 @@ export class tourController {
     }
 
     @Post()
-    createAgency(@Body() tour: CreateTourDto){
-        return this.tourService.createAgency(tour)
+    createTour(@Body() tour: CreateTourDto){
+        return this.tourService.createTour(tour)
     }
 
     @Delete(':id')

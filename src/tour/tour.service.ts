@@ -9,8 +9,8 @@ export class TourService {
         return this.tourRepository.getTours()
     }
     
-    createAgency(tour){
-        return this.tourRepository.createAgency(tour)
+    createTour(tour){
+        return this.tourRepository.createTour(tour)
     }
 
     deleteAgency(id: string) {

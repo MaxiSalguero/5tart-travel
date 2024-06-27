@@ -18,7 +18,7 @@ export class TourRepository {
         return Tours
     }
 
-    async createAgency(tour) {
+    async createTour(tour) {
 
         const newTour = await this.tourRepository.create({...tour});
         await this.tourRepository.save(newTour)
