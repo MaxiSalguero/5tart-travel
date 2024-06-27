@@ -5,7 +5,7 @@ import { ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('filter')
 @Controller('filter')
-export class ToursController {
+export class filterController {
   constructor(private readonly filterservice: FilterService) { }
 
   @Get()
