@@ -24,5 +24,9 @@ export class TourService {
     getToursPlane() {
         return this.tourRepository.getToursPlane()
     }
+
+    getToursOferta() {
+        return this.tourRepository.getToursOferta()
+    }
     
 }

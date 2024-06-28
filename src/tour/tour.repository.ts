@@ -82,4 +82,13 @@ export class TourRepository {
         return tours;
     }
 
+    async getToursOferta() {
+        const tours: TourEntity[] = await this.tourRepository.find({ where: { oferta: true }, relations: { agency: true } });
+
+        if (tours.length == 0) {
+            return 'No hay viajes con Ofertas todavía';
+        }
+
+        return tours;
+    }
 }
