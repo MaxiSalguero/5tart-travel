@@ -12,7 +12,6 @@
     "fecha_egreso": "2024-07-08",
     "salida": "buenos aires",
     "transportType": "bus",
-    "oferta": true,
     "empresa": "Via Bariloche"
   },
   {
@@ -43,7 +42,6 @@
     "fecha_egreso": "2024-07-27",
     "salida": "buenos aires",
     "transportType": "bus",
-    "oferta": true,
     "empresa": "Flecha Bus"
   },
   {
@@ -59,7 +57,6 @@
     "fecha_egreso": "2024-08-08",
     "salida": "buenos aires",
     "transportType": "plane",
-    "oferta": true,
     "empresa": "Flybondi"
   },
   {
@@ -151,5 +148,141 @@
     "salida": "buenos aires",
     "transportType": "plane",
     "empresa": "Aerolineas Argentinas"
+  },
+  {
+    "title": "Catamarca Cultural",
+    "price": 1800,
+    "description": "Descubre la cultura de Catamarca con este paquete que incluye alojamiento y visitas guiadas.",
+    "hotel": "Hotel Inti Huasi",
+    "address": "Republica 299, San Fernando del Valle de Catamarca, Catamarca",
+    "agency": "Viajes Patagonia",
+    "destino": "catamarca",
+    "fecha_ingreso": "2024-07-01",
+    "fecha_egreso": "2024-07-08",
+    "salida": "buenos aires",
+    "transportType": "avion",
+    "oferta": true,
+    "empresa": "Aerolineas Argentinas"
+  },
+  {
+    "title": "Córdoba Natural",
+    "price": 1600,
+    "description": "Disfruta de la naturaleza de Córdoba con este paquete que incluye alojamiento y excursiones.",
+    "hotel": "Hostel del Sol",
+    "address": "Gabino Ezeiza 450, Córdoba",
+    "agency": "Viajes del Valle",
+    "destino": "cordoba",
+    "fecha_ingreso": "2024-07-03",
+    "fecha_egreso": "2024-07-10",
+    "salida": "buenos aires",
+    "transportType": "avion",
+    "oferta": true,
+    "empresa": "Flybondi"
+  },
+  {
+    "title": "Tandil Relajante",
+    "price": 1200,
+    "description": "Escápate a Tandil y disfruta de la tranquilidad con este paquete que incluye alojamiento y actividades recreativas.",
+    "hotel": "Hotel Libertador",
+    "address": "Mitre 545, Tandil, Buenos Aires",
+    "agency": "Viajes Patagonia",
+    "destino": "tandil",
+    "fecha_ingreso": "2024-07-05",
+    "fecha_egreso": "2024-07-12",
+    "salida": "buenos aires",
+    "transportType": "bus",
+    "oferta": true,
+    "empresa": "Via Bariloche"
+  },
+  {
+    "title": "Trevelin Aventura",
+    "price": 2000,
+    "description": "Explora Trevelin y sus alrededores con este paquete que incluye alojamiento y actividades de aventura.",
+    "hotel": "Hosteria La Portada",
+    "address": "chacra 173,  Trevelin, Chubut",
+    "agency": "Patagonia Tours",
+    "destino": "trevelin",
+    "fecha_ingreso": "2024-07-07",
+    "fecha_egreso": "2024-07-14",
+    "salida": "buenos aires",
+    "transportType": "avion",
+    "oferta": true,
+    "empresa": "Aerolineas Argentinas"
+    
+  },
+  {
+    "title": "Esquel Escapada",
+    "price": 1900,
+    "description": "Descubre Esquel y sus alrededores con este paquete que incluye alojamiento y excursiones imperdibles.",
+    "hotel": "Hotel Esquel",
+    "address": "San Martín 1042,Esquel, Chubut",
+    "agency": "Patagonia Tours",
+    "destino": "esquel",
+    "fecha_ingreso": "2024-07-09",
+    "fecha_egreso": "2024-07-16",
+    "salida": "buenos aires",
+    "transportType": "bus",
+    "oferta": true,
+    "empresa": "Via Bariloche"
+  },
+  {
+    "title": "San Rafael Vinícola",
+    "price": 2200,
+    "description": "Sumérgete en San Rafael y sus bodegas con este paquete que incluye alojamiento y tours vinícolas.",
+    "hotel": "Hotel San Rafael",
+    "address": "Cnel. Ricardo Day 30, San Rafael, Mendoza",
+    "agency": "Viajes del Valle",
+    "destino": "san rafael",
+    "fecha_ingreso": "2024-07-11",
+    "fecha_egreso": "2024-07-18",
+    "salida": "buenos aires",
+    "transportType": "avion",
+    "oferta": true,
+    "empresa": "Aerolineas Argentinas"
+  },
+  {
+    "title": "Montañas de Jujuy",
+    "price": 1700,
+    "description": "Explora las montañas de Jujuy con este paquete que incluye alojamiento y excursiones.",
+    "hotel": "Hotel Munay Jujuy",
+    "address": "Gral. Alvear 1230, San Salvador de Jujuy, Jujuy",
+    "agency": "Patagonia Tours",
+    "destino": "jujuy",
+    "fecha_ingreso": "2024-07-04",
+    "fecha_egreso": "2024-07-11",
+    "salida": "buenos aires",
+    "transportType": "avion",
+    "oferta": true,
+    "empresa": "Flybondi"
+  },
+  {
+    "title": "Purmamarca Mágica",
+    "price": 1850,
+    "description": "Descubre la magia de Purmamarca con este paquete que incluye alojamiento y visitas a los cerros de colores.",
+    "hotel": "Hotel Colores de Purmamarca",
+    "address": "Av. San Martín al 600,  Purmamarca, Jujuy",
+    "agency": "Viajes del Norte",
+    "destino": "purmamarca",
+    "fecha_ingreso": "2024-07-06",
+    "fecha_egreso": "2024-07-13",
+    "salida": "buenos aires",
+    "transportType": "avion",
+    "oferta": true,
+    "empresa": "Aerolineas Argentinas"
+  },
+  {
+    "title": "Termas de Río Hondo",
+    "price": 1550,
+    "description": "Relájate en las Termas de Río Hondo con este paquete que incluye alojamiento y acceso a las termas.",
+    "hotel": "Hotel Termas",
+    "address": "Av. Hipólito Yrigoyen 552, Termas de Río Hondo, Santiago del Estero",
+    "agency": "Viajes del Sur",
+    "destino": "termas de rio hondo",
+    "fecha_ingreso": "2024-07-08",
+    "fecha_egreso": "2024-07-15",
+    "salida": "buenos aires",
+    "transportType": "avion",
+    "oferta": true,
+    "empresa": "Jetsmart"
   }
-]
+  ]
