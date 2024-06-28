@@ -76,6 +76,16 @@ export class TourEntity {
     })
     oferta: boolean;
 
+    @Column({
+        nullable: true
+    })
+    hotel?: string;
+
+    @Column({
+        nullable: true
+    })
+    empresa?: string;
+
 
     @ManyToOne(() => AgencyEntity, (agency) => agency.tours)
     @JoinColumn()

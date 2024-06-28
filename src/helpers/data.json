@@ -10,7 +10,8 @@
     "fecha_ingreso": "2024-07-01",
     "fecha_egreso": "2024-07-08",
     "salida": "buenos aires",
-    "transportType": "bus"
+    "transportType": "bus",
+    "oferta": true
   },
   {
     "title": "Mendoza Mágica",
@@ -36,7 +37,9 @@
     "fecha_ingreso": "2024-07-20",
     "fecha_egreso": "2024-07-27",
     "salida": "buenos aires",
-    "transportType": "bus"
+    "transportType": "bus",
+    "oferta": true
+
   },
   {
     "title": "Salta Encantadora",
@@ -49,7 +52,8 @@
     "fecha_ingreso": "2024-08-01",
     "fecha_egreso": "2024-08-08",
     "salida": "buenos aires",
-    "transportType": "plane"
+    "transportType": "plane",
+    "oferta": true
   },
   {
     "title": "Ushuaia Aventura",
