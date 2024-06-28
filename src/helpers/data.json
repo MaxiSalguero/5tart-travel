@@ -12,6 +12,7 @@
     "fecha_egreso": "2024-07-08",
     "salida": "buenos aires",
     "transportType": "bus",
+    "oferta": true,
     "empresa": "Via Bariloche"
   },
   {
@@ -42,6 +43,7 @@
     "fecha_egreso": "2024-07-27",
     "salida": "buenos aires",
     "transportType": "bus",
+    "oferta": true,
     "empresa": "Flecha Bus"
   },
   {
@@ -57,6 +59,7 @@
     "fecha_egreso": "2024-08-08",
     "salida": "buenos aires",
     "transportType": "plane",
+    "oferta": true,
     "empresa": "Flybondi"
   },
   {
@@ -155,7 +158,6 @@
     "description": "Descubre la cultura de Catamarca con este paquete que incluye alojamiento y visitas guiadas.",
     "hotel": "Hotel Inti Huasi",
     "address": "Republica 299, San Fernando del Valle de Catamarca, Catamarca",
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719431444/ncvde8xq30apqjk58ng9.jpg",
     "agency": "Viajes Patagonia",
     "destino": "catamarca",
     "fecha_ingreso": "2024-07-01",
@@ -286,4 +288,5 @@
     "oferta": true,
     "empresa": "Jetsmart"
   }
+
   ]
