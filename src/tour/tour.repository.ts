@@ -38,9 +38,9 @@ export class TourRepository {
             country: geocodeData.country,
             region: geocodeData.region,
             state: geocodeData.state,
-            lat:geocodeData.lat,
-            lon:geocodeData.lon,
-            display_name:geocodeData.display_name,
+            lat: geocodeData.lat,
+            lon: geocodeData.lon,
+            display_name: geocodeData.display_name,
             agency: agency
         });
 
@@ -63,7 +63,7 @@ export class TourRepository {
     }
 
     async getToursBus() {
-        const tours: TourEntity[] = await this.tourRepository.find({ where: { transportType: 'bus' } });
+        const tours: TourEntity[] = await this.tourRepository.find({ where: { transportType: 'bus' }, relations: { agency: true } });
 
         if (tours.length == 0) {
             return 'No hay viajes con Autobus todavía';
@@ -73,7 +73,7 @@ export class TourRepository {
     }
 
     async getToursPlane() {
-        const tours: TourEntity[] = await this.tourRepository.find({ where: { transportType: 'plane' } });
+        const tours: TourEntity[] = await this.tourRepository.find({ where: { transportType: 'plane' }, relations: { agency: true } });
 
         if (tours.length == 0) {
             return 'No hay viajes con Avion todavía';
