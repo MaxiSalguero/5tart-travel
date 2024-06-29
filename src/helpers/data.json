@@ -161,7 +161,7 @@
     "fecha_ingreso": "2024-07-01",
     "fecha_egreso": "2024-07-08",
     "salida": "buenos aires",
-    "transportType": "avion",
+    "transportType": "plane",
     "oferta": true,
     "empresa": "Aerolineas Argentinas"
   },
@@ -177,7 +177,7 @@
     "fecha_ingreso": "2024-07-03",
     "fecha_egreso": "2024-07-10",
     "salida": "buenos aires",
-    "transportType": "avion",
+    "transportType": "plane",
     "oferta": true,
     "empresa": "Flybondi"
   },
@@ -209,7 +209,7 @@
     "fecha_ingreso": "2024-07-07",
     "fecha_egreso": "2024-07-14",
     "salida": "buenos aires",
-    "transportType": "avion",
+    "transportType": "plane",
     "oferta": true,
     "empresa": "Aerolineas Argentinas"
     
@@ -242,7 +242,7 @@
     "fecha_ingreso": "2024-07-11",
     "fecha_egreso": "2024-07-18",
     "salida": "buenos aires",
-    "transportType": "avion",
+    "transportType": "plane",
     "oferta": true,
     "empresa": "Aerolineas Argentinas"
   },
@@ -258,7 +258,7 @@
     "fecha_ingreso": "2024-07-04",
     "fecha_egreso": "2024-07-11",
     "salida": "buenos aires",
-    "transportType": "avion",
+    "transportType": "plane",
     "oferta": true,
     "empresa": "Flybondi"
   },
@@ -274,7 +274,7 @@
     "fecha_ingreso": "2024-07-06",
     "fecha_egreso": "2024-07-13",
     "salida": "buenos aires",
-    "transportType": "avion",
+    "transportType": "plane",
     "oferta": true,
     "empresa": "Aerolineas Argentinas"
   },
@@ -290,7 +290,7 @@
     "fecha_ingreso": "2024-07-08",
     "fecha_egreso": "2024-07-15",
     "salida": "buenos aires",
-    "transportType": "avion",
+    "transportType": "plane",
     "oferta": true,
     "empresa": "Jetsmart"
   }
