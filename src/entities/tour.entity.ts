@@ -21,8 +21,10 @@ export class TourEntity {
     @Column()
     description: string
 
-    @Column()
-    imgUrl: string
+    @Column({
+        nullable: true
+    })
+    imgUrl?: string
 
     @Column()
     fecha_ingreso: Date
