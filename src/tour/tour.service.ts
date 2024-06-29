@@ -3,13 +3,13 @@ import { TourRepository } from "./tour.repository";
 
 @Injectable()
 export class TourService {
-    constructor(private tourRepository: TourRepository){}
-    
+    constructor(private tourRepository: TourRepository) { }
+
     getTours() {
         return this.tourRepository.getTours()
     }
-    
-    createTour(tour, userId){
+
+    createTour(tour, userId) {
         return this.tourRepository.createTour(tour, userId)
     }
 
@@ -28,8 +28,10 @@ export class TourService {
     getToursOferta() {
         return this.tourRepository.getToursOferta()
     }
-    mailoferta(email:string){
+    mailoferta(email: string) {
         return this.tourRepository.mailOfertas(email)
     }
-    
+    getTourById(id: string) {
+        return this.tourRepository.getTourById(id)
+    }
 }

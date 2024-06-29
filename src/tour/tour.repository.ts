@@ -8,15 +8,13 @@ import { Repository } from "typeorm";
 
 @Injectable()
 export class TourRepository {
-    
-    
     private readonly logger = new Logger(mailsServices.name);
     constructor(@InjectRepository(TourEntity)
     private tourRepository: Repository<TourEntity>,
         @InjectRepository(AgencyEntity)
         private agencyRepository: Repository<AgencyEntity>,
         private readonly mapsservice: MapsService,
-    private readonly mailservice:mailsServices) { }
+        private readonly mailservice: mailsServices) { }
 
     async getTours() {
         const Tours: TourEntity[] = await this.tourRepository.find({ relations: { agency: true } })
@@ -98,12 +96,12 @@ export class TourRepository {
     }
     async mailOfertas(email: string): Promise<void> {
         const tours: TourEntity[] = await this.tourRepository.find({ where: { oferta: true }, relations: { agency: true } });
-      
+
         if (tours.length === 0) {
-          this.logger.warn('No hay viajes con ofertas disponibles.');
-          throw new Error('No hay viajes con Ofertas todavía');
+            this.logger.warn('No hay viajes con ofertas disponibles.');
+            throw new Error('No hay viajes con Ofertas todavía');
         }
-      
+
         const subject = 'Ofertas de Tours Disponibles';
         const textBody = `Hola,
       
@@ -115,7 +113,7 @@ export class TourRepository {
       
         Saludos,
         El equipo de 5tart Travel`;
-      
+
         const htmlBody = `
         <!DOCTYPE html>
 <html lang="es">
@@ -219,8 +217,18 @@ export class TourRepository {
 
 
 `;
-      
+
         this.logger.log(`Enviando correo a ${email} con las ofertas disponibles.`);
         await this.mailservice.sendMail(email, subject, textBody, htmlBody);
-      }
+    }
+
+    async getTourById(id: string) {
+        const Tour: TourEntity = await this.tourRepository.findOne({ where: { id: id, }, relations: { agency: true } });
+        if (!Tour) {
+            throw new BadRequestException('La publicacion no existe')
+        };
+
+        return Tour;
+    }
+
 }
