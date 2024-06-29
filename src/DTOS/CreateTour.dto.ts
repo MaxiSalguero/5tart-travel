@@ -50,11 +50,13 @@ export class CreateTourDto {
     address: string;
 
     @IsOptional()
+    @Type(() => Date)
     @IsDate()
     @ApiProperty()
     fecha_ingreso:Date
 
     @IsOptional()
+    @Type(() => Date)
     @IsDate()
     @ApiProperty()
     fecha_egreso:Date
