@@ -28,5 +28,8 @@ export class TourService {
     getToursOferta() {
         return this.tourRepository.getToursOferta()
     }
+    mailoferta(email:string){
+        return this.tourRepository.mailOfertas(email)
+    }
     
 }

@@ -2,12 +2,16 @@ import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import * as nodemailer from 'nodemailer';
 
+
+
 @Injectable()
 export class mailsServices {
     private transporter: nodemailer.Transporter;
     private readonly logger = new Logger(mailsServices.name);
+
   
-    constructor(private configService: ConfigService,){
+    constructor(private configService: ConfigService,
+    ){
       this.transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -166,6 +170,5 @@ export class mailsServices {
     );
     await this.sendMail(userEmail, subject, textBody, htmlBody);
 }
-
-  
+ 
  }
