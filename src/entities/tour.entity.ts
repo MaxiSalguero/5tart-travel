@@ -22,7 +22,8 @@ export class TourEntity {
     description: string
 
     @Column({
-        nullable: true
+        nullable: true,
+        default: 'https://res.cloudinary.com/dia2gautk/image/upload/v1719696963/rnj81fqyz923mqu1whbp.png'
     })
     imgUrl?: string
 
