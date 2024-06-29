@@ -44,10 +44,22 @@ export class CreateTourDto {
     })
     imgUrl?: string;
 
+    @IsOptional()
+    @IsString()
+    @ApiProperty({
+        example: 'Nombre de hotel',
+    })
+    hotel?: string;
+    
     @IsNotEmpty()
     @IsString()
     @ApiProperty()
     address: string;
+
+    @IsOptional()
+    @IsString()
+    @ApiProperty()
+    destino: string;
 
     @IsOptional()
     @Type(() => Date)
@@ -64,11 +76,6 @@ export class CreateTourDto {
     @IsOptional()
     @IsString()
     @ApiProperty()
-    destino: string;
-
-    @IsOptional()
-    @IsString()
-    @ApiProperty()
     salida: string;
 
     @IsOptional()    
@@ -76,5 +83,12 @@ export class CreateTourDto {
     
     @ApiProperty()
     @IsNotEmpty()
-    transportType:TransportType.BUS | TransportType.PLANE
+    transportType: TransportType.BUS | TransportType.PLANE
+
+    @IsOptional()
+    @IsString()
+    @ApiProperty({
+        example: 'Nombre de empresa',
+    })
+    empresa?: string;
 }
