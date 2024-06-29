@@ -1,59 +1,93 @@
-const logo= 'data:image/jpg;base64,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'
-
-
-
-<div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%;">
-    <div class="animated-border" style="display: flex; align-items: center; justify-content: center;">
-        <img src= `${logo}`alt="Logo" style="height: 70px; border: 2px solid #003366; border-radius: 10%; margin-top: 40px;margin-right: 100px; animation: borderAnimation 3s infinite;">
-        <p style="margin-top: 0;"><strong>¡Hola, ${username}!</strong></p>
-        <img src=`${logo}` alt="Logo" style="height: 70px; border: 2px solid #003366; border-radius: 10%; margin-top: 40px;margin-left: 100px; animation: borderAnimation 3s infinite;">
-    </div>
-    <p style="margin-top:0;"><strong>¡Bienvenido/a a 5tart Travel!</strong></p>
-    <p>Nos alegra mucho que te hayas unido a la página de viajes más grande del país. En 5tart Travel, puedes cargar tus paquetes de viaje y la información sobre tu agencia. Ahora puedes explorar todas las herramientas que ofrecemos para que puedas promocionar tus servicios de viaje a nuestros usuarios.</p>
-    <p>Tus credenciales son:</p>
-    <div class="animated-border" style="border: 2px solid #003366; padding: 10px; border-radius: 10px; margin-bottom: 10px; background: white; text-align: center; display: inline-block; width: auto; max-width: 90%; animation: borderAnimation 3s infinite;">
-        <p style="margin: 0;"><strong>Usuario:</strong> ${userEmail}</p>
-        <p style="margin: 0;"><strong>Contraseña:</strong> ${password}</p>
-    </div>
-    <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
-    <p>¡Saludos!</p>
-    <p>El Equipo de 5tart Travel</p>
-</div>
-
-<style>
-    @keyframes borderAnimation {
-        0% {
-            border-color: #003366;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas de Tours Disponibles</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
         }
-        25% {
-            border-color: #0055b3;
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border: 2px solid #003366;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box;
         }
-        50% {
-            border-color: #0077ff;
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 20px;
         }
-        75% {
-            border-color: #3399ff;
+        .card {
+            width: calc(33.33% - 20px); /* Tres columnas */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            box-sizing: border-box;
+            text-align: left;
+            background-color: #f9f9f9;
+            overflow: hidden;
         }
-        100% {
-            border-color: #003366;
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px 8px 0 0;
         }
-    }
-
-    .animated-border {
-        animation: borderAnimation 3s infinite;
-    }
-
-    @media only screen and (max-width: 600px) {
-        div[style*="border: 2px solid #003366; padding: 20px;"] {
+        .card-content {
             padding: 10px;
         }
-        div[style*="border: 2px solid #003366; padding: 10px;"] {
-            padding: 5px;
+        .card h2 {
+            color: #003366;
+            font-size: 18px; /* Tamaño del título */
+            margin-bottom: 5px;
         }
-        img {
-            height: 30px;
-            margin-right: 5px;
-            margin-left: 5px;
+        .card p {
+            font-size: 14px; /* Tamaño del texto */
+            margin-bottom: 5px;
         }
-    }
-</style>
+        /* Estilos para dispositivos móviles */
+        @media only screen and (max-width: 800px) {
+            .card {
+                width: calc(50% - 20px); /* Dos columnas en dispositivos medianos */
+            }
+        }
+        @media only screen and (max-width: 600px) {
+            .card {
+                width: 100%; /* Una columna en dispositivos pequeños */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ofertas de Tours Disponibles</h1>
+        <div class="card-container">
+            ${tours.map(tour => `
+                <div class="card">
+                    <img src="${tour.image}" alt="${tour.title}">
+                    <div class="card-content">
+                        <h2>${tour.title}</h2>
+                        <p><strong>Destino:</strong> ${tour.destino}</p>
+                        <p><strong>Precio:</strong> $${tour.price}</p>
+                        <p>${tour.descripcion.substring(0, 100)}${tour.descripcion.length > 100 ? '...' : ''}</p> <!-- Mostrar solo los primeros 100 caracteres de la descripción -->
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+        <p>¡Esperamos que encuentres un tour de tu interés!</p>
+        <p>Saludos,</p>
+        <p>El equipo de 5tart Travel</p>
+    </div>
+</body>
+</html>

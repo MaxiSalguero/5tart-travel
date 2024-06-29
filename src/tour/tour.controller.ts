@@ -39,6 +39,14 @@ export class tourController {
 
         return this.tourService.createTour(tour, userId)
     }
+    @Post('mailOfertas')
+  async mailOfertas(@Body('email') email: string): Promise<void> {
+    try {
+      await this.tourService.mailoferta(email);
+    } catch (error) {
+      throw new Error(`Error al enviar el correo de ofertas: ${error.message}`);
+    }
+  }
 
     @Delete(':id')
     deleteAgency(@Param('id', ParseUUIDPipe) id:string,){
