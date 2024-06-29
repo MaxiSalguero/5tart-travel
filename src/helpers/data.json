@@ -153,7 +153,7 @@
     "title": "Catamarca Cultural",
     "price": 1800,
     "description": "Descubre la cultura de Catamarca con este paquete que incluye alojamiento y visitas guiadas.",
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597109/catamarca_nzl1kf.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719597109/catamarca_nzl1kf.jpg",
     "hotel": "Hotel Inti Huasi",
     "address": "Republica 299, San Fernando del Valle de Catamarca, Catamarca",
     "agency": "Viajes Patagonia",
@@ -169,7 +169,7 @@
     "title": "Córdoba Natural",
     "price": 1600,
     "description": "Disfruta de la naturaleza de Córdoba con este paquete que incluye alojamiento y excursiones.",
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597109/cordoba_dbxe0j.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719597109/cordoba_dbxe0j.jpg",
     "hotel": "Hostel del Sol",
     "address": "Gabino Ezeiza 450, Córdoba",
     "agency": "Viajes del Valle",
@@ -185,7 +185,7 @@
     "title": "Tandil Relajante",
     "price": 1200,
     "description": "Escápate a Tandil y disfruta de la tranquilidad con este paquete que incluye alojamiento y actividades recreativas.",
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/tqandil_ct2znd.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/tqandil_ct2znd.jpg",
     "hotel": "Hotel Libertador",
     "address": "Mitre 545, Tandil, Buenos Aires",
     "agency": "Viajes Patagonia",
@@ -201,7 +201,7 @@
     "title": "Trevelin Aventura",
     "price": 2000,
     "description": "Explora Trevelin y sus alrededores con este paquete que incluye alojamiento y actividades de aventura.",
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597109/trevelin_kls6o1.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719597109/trevelin_kls6o1.jpg",
     "hotel": "Hosteria La Portada",
     "address": "chacra 173,  Trevelin, Chubut",
     "agency": "Patagonia Tours",
@@ -218,7 +218,7 @@
     "title": "Esquel Escapada",
     "price": 1900,
     "description": "Descubre Esquel y sus alrededores con este paquete que incluye alojamiento y excursiones imperdibles.",
-   "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/esquel_kfqidu.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/esquel_kfqidu.jpg",
     "hotel": "Hotel Esquel",
     "address": "San Martín 1042,Esquel, Chubut",
     "agency": "Patagonia Tours",
@@ -233,7 +233,7 @@
   {
     "title": "San Rafael Vinícola",
     "price": 2200,
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/san_rafael_y1pobt.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/san_rafael_y1pobt.jpg",
     "description": "Sumérgete en San Rafael y sus bodegas con este paquete que incluye alojamiento y tours vinícolas.",
     "hotel": "Hotel San Martin",
     "address": "José de San Martín 435, San Rafael, Mendoza",
@@ -249,7 +249,7 @@
   {
     "title": "Montañas de Jujuy",
     "price": 1700,
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/jujuy_lvrnoz.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/jujuy_lvrnoz.jpg",
     "description": "Explora las montañas de Jujuy con este paquete que incluye alojamiento y excursiones.",
     "hotel": "Hotel Munay Jujuy",
     "address": "Alvear 1230, San Salvador de Jujuy, Jujuy",
@@ -266,7 +266,7 @@
     "title": "Purmamarca Mágica",
     "price": 1850,
     "description": "Descubre la magia de Purmamarca con este paquete que incluye alojamiento y visitas a los cerros de colores.",
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/purmamarca_s8kerc.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/purmamarca_s8kerc.jpg",
     "hotel": "Hotel Marquez de Tojo",
     "address": "Santa Rosa 4, Purmamarca, Jujuy",
     "agency": "Viajes del Norte",
@@ -282,7 +282,7 @@
     "title": "Termas de Río Hondo",
     "price": 1550,
     "description": "Relájate en las Termas de Río Hondo con este paquete que incluye alojamiento y acceso a las termas.",
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/termas_de_rio_hondo_alvnjo.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/termas_de_rio_hondo_alvnjo.jpg",
     "hotel": "Hotel Termas",
     "address": "Hipólito Yrigoyen 552, Termas de Río Hondo, Santiago del Estero",
     "agency": "Viajes del Sur",
@@ -294,5 +294,4 @@
     "oferta": true,
     "empresa": "Jetsmart"
   }
-
-  ]
+]
