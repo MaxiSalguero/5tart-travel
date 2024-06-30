@@ -18,6 +18,8 @@ import { AgencyEntity } from './entities/agency.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { MapsService } from './maps/maps.service';
 import { filterModule } from './filter/filter.module';
+import { FileUploadModule } from './file_upload/file_upload.module';
+import { jwtConfig } from './config/jwt.config';
 
 @Module({
   imports: [
@@ -34,11 +36,8 @@ import { filterModule } from './filter/filter.module';
     agencyModule,
     AuthModule,
     filterModule,
-    JwtModule.register({
-      global: true,
-      signOptions: {expiresIn: "1h" },
-      secret: process.env.JWT_SECRET,
-      }),
+    JwtModule.register(jwtConfig),
+    FileUploadModule,
   ],
   controllers: [AppController],
   providers: [AppService, PreloadService,MapsService],
