@@ -1,128 +1,119 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AgencyRepository } from 'src/agency/agency.repository';
 import { AgencyEntity } from 'src/entities/agency.entity';
 import { UserEntity } from 'src/entities/user.entity';
-import { UserRepository } from 'src/user/user.repository';
-import * as bcrypt from "bcrypt";
+import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
-import { CreateUserDto } from 'src/DTOS/CreateUser.dto';
 import { mailsServices } from 'src/mails/mails.service';
 
 @Injectable()
 export class AuthService {
-    constructor(private userRepository: UserRepository,
-                private agencyRepository: AgencyRepository,
-                private readonly jwtService: JwtService,
-                @InjectRepository(UserEntity)
-                private readonly userDB: Repository<UserEntity>,
-                @InjectRepository(AgencyEntity)
-                private readonly agencyDb: Repository<AgencyEntity>,
-                private readonly mailservice:mailsServices
-    ){}
-    
-    async createUser(user: CreateUserDto) {
-        const dbUser = await this.userDB.findOneBy({mail: user.mail})
+  constructor(
+    private readonly jwtService: JwtService,
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
+    @InjectRepository(AgencyEntity)
+    private readonly agencyRepository: Repository<AgencyEntity>,
+    private readonly mailservice: mailsServices,
+  ) {}
 
+  async createUser(user: Partial<UserEntity>) {
+    const { mail, password } = user;
 
-        if (user.password != user.confirm_password) {
-            throw new BadRequestException('La contraseña no coincide')
-        }
-        const {confirm_password , ...Nuser } = user
+    const dbUser = await this.userRepository.findOneBy({ mail });
 
-        if (dbUser) {
-            throw new BadRequestException("El Email ya existe")
-        }
+    if (dbUser) throw new ConflictException('Esta email ya existe');
 
-        const hashed = await bcrypt.hash(user.password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-        if (!hashed) {
-            throw new BadRequestException("Password no encryptada")
-        }
+    if (!hashedPassword)
+      throw new BadRequestException('El password no pudo ser hasheado');
 
-        const createdUser = await this.userRepository.createUser({ ...Nuser, password: hashed });
+    const createdUser = await this.userRepository.save({
+      ...user,
+      password: hashedPassword,
+    });
 
-        // Si el usuario se creó correctamente, enviamos el correo electrónico
-        if (createdUser) {
-            await this.mailservice.registerUserMail(Nuser.mail, Nuser.username, Nuser.password);
-        }
-
-        return createdUser;
-    }
-    
-
-    async createAgency(agency) {
-        const dbAgency = await this.userDB.findOneBy({mail: agency.mail})
-
-
-        if (agency.password != agency.confirm_password) {
-            throw new BadRequestException('La contraseña no coincide')
-        }
-
-        const {confirm_password , ...Nuser } = agency
-
-        if (dbAgency) {
-            throw new BadRequestException("El Email ya existe")
-        }
-
-        const hashed = await bcrypt.hash(agency.password, 10);
-
-        if (!hashed) {
-            throw new BadRequestException("Password no encryptada")
-        }
-
-        return this.agencyRepository.createAgency({...Nuser, password: hashed})
+    if (createdUser) {
+      await this.mailservice.registerUserMail(
+        user.mail,
+        user.username,
+        user.password,
+      );
     }
 
-    async login(log) {
+    return createdUser;
+  }
 
-        const agency: AgencyEntity = await this.agencyDb.findOneBy({mail: log.mail});
+  async createAgency(agency: Partial<AgencyEntity>) {
+    const { mail, password } = agency;
+    const dbAgency = await this.agencyRepository.findOneBy({ mail });
 
-        if (agency) {
-            
-            const isPassword = await bcrypt.compare(log.password, agency.password);
-
-            if (!isPassword) {
-                throw new BadRequestException("Mail o Contraseña incorrecta");
-            };
-            
-            const userpayload = {
-                sub: agency.id,
-                id: agency.id,
-                email: agency.mail,
-                name_agency: agency.name_agency
-            }
-            
-            const token = this.jwtService.sign(userpayload)
-            
-            
-            return {success: "Usuario logueado correctamente", token};
-        }
-
-        
-        const user = await this.userDB.findOneBy({mail: log.mail});
-        
-        if (!user) {
-            throw new BadRequestException("Mail o Contraseña incorrecta");
-        };
-        
-        const isPassword = await bcrypt.compare(log.password, user.password);
-        
-        if (!isPassword) {
-            throw new BadRequestException("Mail o Contraseña incorrecta");
-        };
-        
-        const userpayload = {
-            sub: user.id,
-            id: user.id,
-            email: user.mail,
-            username: user.username
-        }
-        
-        const token = this.jwtService.sign(userpayload)
-        
-        
-        return {success: "Usuario logueado correctamente", token};
+    if (dbAgency) {
+      throw new ConflictException('El Email ya existe');
     }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    if (!hashedPassword)
+      throw new BadRequestException('El password no pudo ser hasheado');
+
+    const createdAgency = await this.agencyRepository.save({
+      ...agency,
+      password: hashedPassword,
+    });
+
+    return createdAgency;
+  }
+
+  async login(mail: string, password: string) {
+    let user = await this.userRepository.findOneBy({ mail });
+    let agency = null;
+
+    if (!user) {
+      agency = await this.agencyRepository.findOneBy({ mail });
+    }
+
+    if (user) {
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid)
+        throw new UnauthorizedException('Credenciales incorrectas');
+
+      const userpayload = {
+        sub: user.id,
+        id: user.id,
+        email: user.mail,
+        username: user.username,
+        type: 'user',
+      };
+
+      const token = this.jwtService.sign(userpayload);
+
+      return { success: 'Usuario logueado correctamente', token };
+    } else if (agency) {
+      const isPasswordValid = await bcrypt.compare(password, agency.password);
+      if (!isPasswordValid)
+        throw new UnauthorizedException('Credenciales incorrectas');
+
+      const agencypayload = {
+        sub: agency.id,
+        id: agency.id,
+        email: agency.mail,
+        name_agency: agency.name_agency,
+        type: 'agency',
+      };
+
+      const token = this.jwtService.sign(agencypayload);
+
+      return { success: 'Agencia logueada correctamente', token };
+    } else {
+      throw new UnauthorizedException('Credenciales incorrectas');
+    }
+  }
 }

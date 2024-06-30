@@ -1,22 +1,19 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsEmpty, Length } from 'class-validator';
+import { Length, Validate } from 'class-validator';
 import {
   IsDate,
   IsEmail,
-  IsInt,
   IsNotEmpty,
-  IsOptional,
   IsString,
   Matches,
-  Validate,
 } from 'class-validator';
+import { MatchPassword } from 'src/decorators/password.decorator';
 
 export class CreateUserDto {
-
   @IsNotEmpty()
   @IsString()
-  @Length(2,30)
+  @Length(2, 30)
   @Matches(/^[a-zA-Z ]+$/, {
     message: 'El nombre solo puede contener letras y espacios',
   })
@@ -25,9 +22,7 @@ export class CreateUserDto {
   })
   username: string;
 
-
   @IsNotEmpty()
-  @IsString()
   @IsEmail()
   @ApiProperty({
     description: 'Debe ser un Email',
@@ -37,7 +32,7 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsString()
-  @Length(8)
+  @Length(5, 20)
   @ApiProperty({
     example: '********',
   })
@@ -49,9 +44,10 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsString()
+  @Validate(MatchPassword, ['password'])
   @ApiProperty({
     description: 'Repetir la password',
-    example: '...',
+    example: '********',
   })
   confirm_password: string;
 
@@ -60,5 +56,6 @@ export class CreateUserDto {
   @IsDate()
   @ApiProperty()
   birthday: Date;
-
 }
+
+export class LoginDto extends PickType(CreateUserDto, ['mail', 'password']) {}

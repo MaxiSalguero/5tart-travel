@@ -1,17 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmpty, Length } from 'class-validator';
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsString,
-  Matches,
-} from 'class-validator';
+import { IsEmpty, Length, Validate } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, Matches } from 'class-validator';
+import { MatchPassword } from 'src/decorators/password.decorator';
 
 export class CreateAgencyDto {
-
   @IsNotEmpty()
   @IsString()
-  @Length(2,30)
+  @Length(2, 30)
   @Matches(/^[a-zA-Z ]+$/, {
     message: 'El nombre solo puede contener letras y espacios',
   })
@@ -20,9 +15,7 @@ export class CreateAgencyDto {
   })
   name_agency: string;
 
-
   @IsNotEmpty()
-  @IsString()
   @IsEmail()
   @ApiProperty({
     description: 'Debe ser un Email',
@@ -32,7 +25,7 @@ export class CreateAgencyDto {
 
   @IsNotEmpty()
   @IsString()
-  @Length(8)
+  @Length(5, 20)
   @ApiProperty({
     example: '********',
   })
@@ -44,9 +37,10 @@ export class CreateAgencyDto {
 
   @IsNotEmpty()
   @IsString()
+  @Validate(MatchPassword, ['password'])
   @ApiProperty({
     description: 'Repetir la password',
-    example: '...',
+    example: '********',
   })
   confirm_password: string;
 
@@ -54,12 +48,10 @@ export class CreateAgencyDto {
   @IsString()
   @ApiProperty({
     description: 'Direccion real de la agencia',
-    example: 'Av. Victorica 598, Moreno'
+    example: 'Av. Victorica 598, Moreno',
   })
-  address : string;
-
+  address: string;
 
   @IsEmpty()
-  imgUrl: string
-
+  imgUrl: string;
 }
