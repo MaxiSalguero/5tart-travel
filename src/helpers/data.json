@@ -293,6 +293,61 @@
     "transportType": "plane",
     "oferta": true,
     "empresa": "Jetsmart"
+  },{
+    "title": "París Romántico",
+    "price": 2500,
+    "description": "Explora la ciudad del amor con estancia en hoteles de lujo y visitas guiadas a lugares icónicos.",
+    "hotel": "Hotel Le Meurice",
+    "address": "228 Rue de Rivoli, 75001 Paris, Francia",
+    "agency": "Viajes Patagonia",
+    "destino": "parís",
+    "fecha_ingreso": "2024-08-01",
+    "fecha_egreso": "2024-08-08",
+    "salida": "buenos aires",
+    "transportType": "plane",
+    "empresa": "Air France"
+  },
+  {
+    "title": "Tokio Aventurero",
+    "price": 3000,
+    "description": "Sumérgete en la cultura japonesa con una semana llena de actividades y experiencias únicas en Tokio.",
+    "hotel": "Hotel New Otani Tokyo",
+    "address": "4-1 Kioi-cho, Chiyoda-ku, Tokio 102-8578, Japón",
+    "agency": "Viajes Patagonia",
+    "destino": "tokio",
+    "fecha_ingreso": "2024-09-01",
+    "fecha_egreso": "2024-09-08",
+    "salida": "buenos aires",
+    "transportType": "plane",
+    "empresa": "Aerolineas Argentinas"
+  },
+  {
+    "title": "Nueva York Escénico",
+    "price": 2800,
+    "description": "Descubre la ciudad que nunca duerme con paseos por Central Park, Broadway y vistas panorámicas desde el Empire State.",
+    "hotel": "The Plaza Hotel",
+    "address": "Fifth Avenue at Central Park South, Nueva York, NY 10019, EE. UU.",
+    "agency": "Viajes Patagonia",
+    "destino": "nueva york",
+    "fecha_ingreso": "2024-10-01",
+    "fecha_egreso": "2024-10-08",
+    "salida": "buenos aires",
+    "transportType": "plane",
+    "empresa": "American Airlines"
+  },
+  {
+    "title": "Sidney Australiano",
+    "price": 3200,
+    "description": "Explora la vibrante ciudad de Sídney con excursiones a la Ópera de Sídney, la Bahía de Sídney y playas cercanas.",
+    "hotel": "Park Hyatt Sydney",
+    "address": "7 Hickson Road, The Rocks, Sídney, NSW 2000, Australia",
+    "agency": "Viajes Patagonia",
+    "destino": "sídney",
+    "fecha_ingreso": "2024-11-01",
+    "fecha_egreso": "2024-11-08",
+    "salida": "buenos aires",
+    "transportType": "plane",
+    "empresa": "Qantas Airways"
   }
 
   ]
