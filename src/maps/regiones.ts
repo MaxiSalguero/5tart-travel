@@ -32,5 +32,14 @@ export const regiones = {
       { latMin: -41, latMax: -32, lonMin: -64, lonMax: -57 },  // Buenos Aires
       { latMin: -39, latMax: -33, lonMin: -66, lonMax: -61 },  // La Pampa
       { latMin: -35, latMax: -30, lonMin: -66, lonMax: -62 }   // Córdoba
-    ]
+    ],
+    'Internacional': [
+    // Continente Americano excluyendo Argentina
+    { latMin: -90, latMax: 12, lonMin: -180, lonMax: -33 },  // América del Norte y Centroamérica
+    { latMin: 12, latMax: -55, lonMin: -118, lonMax: -33 },  // América del Sur excluyendo Argentina
+    // Continente Europeo
+    { latMin: 36, latMax: 72, lonMin: -15, lonMax: 39 },     // Europa
+    // Otros continentes
+    { latMin: -90, latMax: 90, lonMin: -180, lonMax: 180 }   // Resto del mundo
+  ]
   };

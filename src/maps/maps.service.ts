@@ -3,6 +3,7 @@ import axios from 'axios';
 import { puntosTuristicos } from './puntosturisticos';
 import { regiones } from './regiones';
 
+
 export class MapsService {
   private determineRegion(lat: number, lon: number): string {
     for (const [region, bounds] of Object.entries(regiones)) {
@@ -27,6 +28,8 @@ export class MapsService {
           format: 'json',
           addressdetails: 1,
           limit: 1,
+          target: 'es',
+           accept_language: 'en',
         },
         headers: {
           'User-Agent': 'cincotravel/5.0 (contact@cincotravel.com)',
