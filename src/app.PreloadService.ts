@@ -60,10 +60,11 @@ export class PreloadService implements OnModuleInit {
                         imgUrl: tour.imgUrl,
                         lat: geocodeData.lat,
                         lon: geocodeData.lon,
-                        display_name: geocodeData.display_name,
+                        display_name: `El ${tour.hotel} -Ubicado en: ${tour.address}`,
                         country: geocodeData.country,
                         region: geocodeData.region,
                         state: geocodeData.state,
+                        touristPoints:geocodeData.TuristPoints,
                         agency: agency
                     },
                 });
@@ -73,7 +74,7 @@ export class PreloadService implements OnModuleInit {
                         ...tour, agency: agency, country: geocodeData.country, region: geocodeData.region,
                         state: geocodeData.state, lat: geocodeData.lat,
                         lon: geocodeData.lon,
-                        display_name: geocodeData.display_name,
+                        display_name: `El ${tour.hotel} -Ubicado en: ${tour.address}`,touristPoints:geocodeData.touristPoints,
                     });
                 }
             }
