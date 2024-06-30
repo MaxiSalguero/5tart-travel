@@ -9,10 +9,15 @@ import { AgencyRepository } from 'src/agency/agency.repository';
 import { mailsServices } from 'src/mails/mails.service';
 import { ConfigService } from '@nestjs/config';
 
-
 @Module({
-  imports:[TypeOrmModule.forFeature([UserEntity, AgencyEntity])],
-  providers: [AuthService, UserRepository, AgencyRepository,mailsServices,ConfigService],
-  controllers: [AuthController]
+  imports: [TypeOrmModule.forFeature([UserEntity, AgencyEntity])],
+  providers: [
+    AuthService,
+    UserRepository,
+    AgencyRepository,
+    mailsServices,
+    ConfigService,
+  ],
+  controllers: [AuthController],
 })
 export class AuthModule {}
