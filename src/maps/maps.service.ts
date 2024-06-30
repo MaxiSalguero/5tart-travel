@@ -1,8 +1,7 @@
-import { HttpException, NotFoundException } from '@nestjs/common';
+import { HttpException, NotFoundException, HttpStatus } from '@nestjs/common';
 import axios from 'axios';
 import { puntosTuristicos } from './puntosturisticos';
 import { regiones } from './regiones';
-
 
 export class MapsService {
   private determineRegion(lat: number, lon: number): string {
@@ -29,12 +28,13 @@ export class MapsService {
           addressdetails: 1,
           limit: 1,
           target: 'es',
-           accept_language: 'en',
+          accept_language: 'en',
         },
         headers: {
           'User-Agent': 'cincotravel/5.0 (contact@cincotravel.com)',
         },
       });
+
       if (response.status !== 200) {
         throw new HttpException(`Request failed with status code ${response.status}`, response.status);
       }
@@ -60,8 +60,12 @@ export class MapsService {
         touristPoints: touristPoints
       };
     } catch (error) {
-      console.error('Error geocoding address:', error.message);
-      throw new HttpException(`Error al geocodificar la dirección: ${error.message}`, error.response?.status || 500);
+      if (error instanceof NotFoundException) {
+        throw new HttpException('Dirección no válida', HttpStatus.BAD_REQUEST);
+      } else {
+        console.error('Error geocoding address:', error.message);
+        throw new HttpException(`Error al geocodificar la dirección: ${error.message}`, error.response?.status || 500);
+      }
     }
   }
 }
