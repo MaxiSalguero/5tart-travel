@@ -2,6 +2,11 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 import { v4 as uuid } from "uuid"
 import { AgencyEntity } from "./agency.entity";
 
+export class TuristPoints {
+    nombre: string;
+    lat: number;
+    lon: number;
+}
 
 
 @Entity({
@@ -88,6 +93,9 @@ export class TourEntity {
         nullable: true
     })
     empresa?: string;
+
+    @Column('jsonb', { nullable: true })
+    touristPoints?: TuristPoints[];
 
 
     @ManyToOne(() => AgencyEntity, (agency) => agency.tours)

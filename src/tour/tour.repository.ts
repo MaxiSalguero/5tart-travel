@@ -43,7 +43,8 @@ export class TourRepository {
             state: geocodeData.state,
             lat: geocodeData.lat,
             lon: geocodeData.lon,
-            display_name: geocodeData.display_name,
+            display_name: `El ${tour.hotel} -Ubicado en: ${tour.address}`,
+            touristPoints:geocodeData.TuristPoints,
             agency: agency
         });
 
