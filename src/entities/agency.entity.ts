@@ -22,7 +22,9 @@ export class AgencyEntity {
     address: string
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: 'text',
+        default: 'https://res.cloudinary.com/dia2gautk/image/upload/v1719807466/logo_start_hy9j22.webp'
     })
     imgUrl?: string
 

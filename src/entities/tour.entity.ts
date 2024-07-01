@@ -28,7 +28,8 @@ export class TourEntity {
 
     @Column({
         nullable: true,
-        default: 'https://res.cloudinary.com/dia2gautk/image/upload/v1719696963/rnj81fqyz923mqu1whbp.png'
+        type: 'text',
+        default: 'https://res.cloudinary.com/dia2gautk/image/upload/v1719807466/logo_start_hy9j22.webp'
     })
     imgUrl?: string
 
