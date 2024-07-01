@@ -21,7 +21,7 @@ export class AuthService {
     @InjectRepository(AgencyEntity)
     private readonly agencyRepository: Repository<AgencyEntity>,
     private readonly mailservice: mailsServices,
-  ) {}
+  ) { }
 
   async createUser(user: Partial<UserEntity>) {
     const { mail, password } = user;
@@ -68,6 +68,12 @@ export class AuthService {
       ...agency,
       password: hashedPassword,
     });
+    if (createdAgency) {
+      await this.mailservice.registerAgencyMail(
+        createdAgency.mail,
+        createdAgency.name_agency,
+        createdAgency.password);
+    }
 
     return createdAgency;
   }
