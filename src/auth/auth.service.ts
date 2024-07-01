@@ -2,6 +2,7 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -21,7 +22,7 @@ export class AuthService {
     @InjectRepository(AgencyEntity)
     private readonly agencyRepository: Repository<AgencyEntity>,
     private readonly mailservice: mailsServices,
-  ) { }
+  ) {}
 
   async createUser(user: Partial<UserEntity>) {
     const { mail, password } = user;
@@ -72,7 +73,8 @@ export class AuthService {
       await this.mailservice.registerAgencyMail(
         createdAgency.mail,
         createdAgency.name_agency,
-        createdAgency.password);
+        createdAgency.password,
+      );
     }
 
     return createdAgency;
@@ -121,5 +123,34 @@ export class AuthService {
     } else {
       throw new UnauthorizedException('Credenciales incorrectas');
     }
+  }
+
+  async foundEmail(mail: string) {
+    const existingUser = await this.userRepository.findOneBy({ mail });
+    const existingAgency = await this.agencyRepository.findOneBy({ mail });
+
+    if (existingUser) {
+      return { id: existingUser.id, type: 'user' };
+    } else if (existingAgency) {
+      return { id: existingAgency.id, type: 'agency' };
+    } else {
+      throw new NotFoundException('Este email no se encuentra registrado');
+    }
+  }
+
+  async changePassword(id: string, type: string, newPassword: string) {
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    if (type === 'user') {
+      await this.userRepository.update(id, { password: hashedPassword });
+    } else if (type === 'agency') {
+      await this.agencyRepository.update(id, { password: hashedPassword });
+    } else {
+      throw new ConflictException('Tipo de entidad no reconocido');
+    }
+
+    return {
+      message: `El password del ${type === 'user' ? 'usuario' : 'agencia'} con ID: ${id}, fue modificado correctamente`,
+    };
   }
 }
