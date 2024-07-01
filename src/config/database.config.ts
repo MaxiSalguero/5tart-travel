@@ -6,7 +6,7 @@ const dbConfig: DataSourceOptions = {
   type: 'postgres',
   database: DB_NAME,
   host: DB_HOST,
-  port: +DB_PORT, 
+  port: +DB_PORT,
   username: DB_USERNAME,
   password: DB_PASSWORD,
   entities: ['dist/**/*.entity{.ts,.js}'],

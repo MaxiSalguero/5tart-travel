@@ -15,32 +15,30 @@ import { OnModuleInit } from '@nestjs/common';
   },
 })
 export class ChatGateway implements OnModuleInit {
-
   @WebSocketServer()
-  public server: Server; 
+  public server: Server;
 
   constructor(private readonly chatService: ChatService) {}
 
   onModuleInit() {
     this.server.on('connection', (socket: Socket) => {
+      const { name, token } = socket.handshake.auth;
 
-      const { name, token } = socket.handshake.auth
-      
       if (!name) {
-        socket.disconnect()
-        return
+        socket.disconnect();
+        return;
       }
       console.log('Cliente conectado: ', name, token);
-      
+
       this.chatService.onClientConnected({ id: socket.id, name: name });
 
-      socket.emit('welcome-message', 'Bienvenido al servidor')
+      socket.emit('welcome-message', 'Bienvenido al servidor');
 
-      this.server.emit('on-clients-changed', this.chatService.getClients() );
+      this.server.emit('on-clients-changed', this.chatService.getClients());
 
       socket.on('disconnect', () => {
         this.chatService.onClientDisconnected(socket.id);
-        this.server.emit('on-clients-changed', this.chatService.getClients() );
+        this.server.emit('on-clients-changed', this.chatService.getClients());
       });
     });
   }
@@ -48,11 +46,11 @@ export class ChatGateway implements OnModuleInit {
   @SubscribeMessage('send-message')
   handleMessage(
     @MessageBody() message: string,
-    @ConnectedSocket() client: Socket
+    @ConnectedSocket() client: Socket,
   ) {
     const { name } = client.handshake.auth;
     console.log(name, message);
-    
+
     if (!message) {
       return;
     }
@@ -60,14 +58,15 @@ export class ChatGateway implements OnModuleInit {
     this.server.emit('on-message', {
       userId: client.id,
       message: message,
-      name: name
+      name: name,
     });
   }
 
   @SubscribeMessage('send-private-message')
   async handleSendPrivateMessage(
-    @MessageBody() data: { senderId: string; receiverId: string; content: string },
-    @ConnectedSocket() client: Socket
+    @MessageBody()
+    data: { senderId: string; receiverId: string; content: string },
+    @ConnectedSocket() client: Socket,
   ) {
     try {
       // const message = await this.chatService.sendMessage(data.senderId, data.receiverId, data.content);

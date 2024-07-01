@@ -23,11 +23,11 @@ import { jwtConfig } from './config/jwt.config';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([TourEntity,AgencyEntity]),
+    TypeOrmModule.forFeature([TourEntity, AgencyEntity]),
     databaseConfig,
     ChatModule,
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public')
+      rootPath: join(__dirname, '..', 'public'),
     }),
     tourModule,
     userModule,
@@ -40,6 +40,6 @@ import { jwtConfig } from './config/jwt.config';
     FileUploadModule,
   ],
   controllers: [AppController],
-  providers: [AppService, PreloadService,MapsService],
+  providers: [AppService, PreloadService, MapsService],
 })
 export class AppModule {}
