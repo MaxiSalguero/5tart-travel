@@ -11,17 +11,22 @@ import {
 import { MatchPassword } from 'src/decorators/password.decorator';
 
 export class CreateUserDto {
+  /**
+  Ingresar el nombre de usuario
+  @example "Juan Carlos"
+  */
   @IsNotEmpty()
   @IsString()
   @Length(2, 30)
-  @Matches(/^[a-zA-Z ]+$/, {
+  @Matches(/^[a-zA-Z\s]*$/, {
     message: 'El nombre solo puede contener letras y espacios',
-  })
-  @ApiProperty({
-    example: 'Juan Carlos',
   })
   username: string;
 
+  /**
+  Ingresar el email de usuario
+  @example example@gmail.com
+  */
   @IsNotEmpty()
   @IsEmail()
   @ApiProperty({
@@ -30,27 +35,31 @@ export class CreateUserDto {
   })
   mail: string;
 
+  /**
+  Ingresar el password
+  @example Example123!
+  */
   @IsNotEmpty()
   @IsString()
-  @Length(5, 20)
-  @ApiProperty({
-    example: '********',
-  })
+  @Length(5, 30)
   @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&.*])/, {
     message:
       'Debe contener al menos una letra minúscula, una letra mayúscula, un número y un caracter especial',
   })
   password: string;
 
+  /**
+  Ingresar la confirmacion del password
+  @example Example123!
+  */
   @IsNotEmpty()
-  @IsString()
   @Validate(MatchPassword, ['password'])
-  @ApiProperty({
-    description: 'Repetir la password',
-    example: '********',
-  })
   confirm_password: string;
 
+  /**
+  Ingresar la fecha de nacimiento
+  @example 10-01-2001
+  */
   @IsNotEmpty()
   @Type(() => Date)
   @IsDate()

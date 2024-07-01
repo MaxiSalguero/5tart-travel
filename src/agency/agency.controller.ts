@@ -2,7 +2,7 @@ import { Controller, Delete, Get, Param, ParseUUIDPipe } from '@nestjs/common';
 import { AgencyServices } from './agency.service';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Agency')
+@ApiTags('agency')
 @Controller('agency')
 export class agencyController {
   constructor(private agencyService: AgencyServices) {}

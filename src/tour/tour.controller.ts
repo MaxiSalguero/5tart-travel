@@ -14,7 +14,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateTourDto } from 'src/DTOS/CreateTour.dto';
 import { AuthGuard } from 'src/guards/auth.guard';
 
-@ApiTags('Tours')
+@ApiTags('tours')
 @Controller('tours')
 export class tourController {
   constructor(private tourService: TourService) {}
