@@ -7,7 +7,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileUploadService } from './file_upload.service';
 import { FileValidatorPipe } from './fileValidator';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('files')
 @Controller('files')
@@ -15,6 +15,19 @@ export class FileUploadController {
   constructor(private readonly fileUploadService: FileUploadService) {}
 
   @Post('uploadFile')
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Archivo a cargar',
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile(FileValidatorPipe) file: Express.Multer.File) {
     const response = await this.fileUploadService.uploadFile(file);

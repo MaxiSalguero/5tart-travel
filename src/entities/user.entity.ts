@@ -9,26 +9,21 @@ export class UserEntity {
   id: string = uuid();
 
   @Column({
-    nullable: false,
     type: 'varchar',
   })
   username: string;
 
   @Column({
-    nullable: false,
     type: 'varchar',
     unique: true,
   })
   mail: string;
 
   @Column({
-    nullable: false,
     type: 'varchar',
   })
   password: string;
 
-  @Column({
-    nullable: false,
-  })
+  @Column()
   birthday: Date;
 }

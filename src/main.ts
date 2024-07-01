@@ -15,8 +15,8 @@ async function bootstrap() {
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('5tart-Travel')
-    .setDescription('')
-    .setVersion('0.6')
+    .setDescription('Proyecto creado en Nest JS para ser presentado como proyecto final')
+    .setVersion('1.0')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);
