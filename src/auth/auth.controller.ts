@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Put } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto, LoginDto } from 'src/DTOS/CreateUser.dto';
 import { CreateAgencyDto } from 'src/DTOS/CreateAgency.dto';
@@ -23,5 +23,18 @@ export class AuthController {
   login(@Body() log: LoginDto) {
     const { mail, password } = log;
     return this.authService.login(mail, password);
+  }
+
+  @Put('/password')
+  changePassword(@Body() body: any) {
+    const { id, type, newPassword } = body;
+    return this.authService.changePassword(id, type, newPassword);
+  }
+
+  @Post('/email')
+  async foundEmail(@Body() body: any) {
+    const { mail } = body;
+    const result = await this.authService.foundEmail(mail);
+    return result;
   }
 }
