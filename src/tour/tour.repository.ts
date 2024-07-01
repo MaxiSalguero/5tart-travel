@@ -39,15 +39,24 @@ export class TourRepository {
     const agency: AgencyEntity = await this.agencyRepository.findOneBy({
       id: userId,
     });
-
+  
     if (!agency) {
-      throw new UnauthorizedException(
-        'Problema en los datos del usuario agencia',
-      );
+      throw new UnauthorizedException('Problema en los datos del usuario agencia');
     }
-
+  
     const geocodeData = await this.mapsservice.geocodeAddress(tour.address);
-
+  
+    // Log para verificar la estructura de geocodeData
+    console.log('geocodeData:', geocodeData);
+  
+    if (!geocodeData) {
+      throw new Error('No se recibieron datos de geocodificación.');
+    }
+  
+    if (!geocodeData.touristPoints || !Array.isArray(geocodeData.touristPoints)) {
+      throw new Error('touristPoints no está presente o no es un array.');
+    }
+  
     const newTour = await this.tourRepository.create({
       ...tour,
       country: geocodeData.country,
@@ -56,14 +65,15 @@ export class TourRepository {
       lat: geocodeData.lat,
       lon: geocodeData.lon,
       display_name: `El ${tour.hotel} -Ubicado en: ${tour.address}`,
-      touristPoints: geocodeData.TuristPoints,
+      touristPoints: geocodeData.touristPoints,
       agency: agency,
     });
-
+  
     await this.tourRepository.save(newTour);
-
+  
     return newTour;
   }
+  
 
   async deleteTour(id: string) {
     const Tour = await this.tourRepository.findOneBy({ id });
