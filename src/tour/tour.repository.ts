@@ -1,121 +1,144 @@
-import { BadRequestException, Injectable, Logger, UnauthorizedException } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { AgencyEntity } from "src/entities/agency.entity";
-import { TourEntity } from "src/entities/tour.entity";
-import { mailsServices } from "src/mails/mails.service";
-import { MapsService } from "src/maps/maps.service";
-import { Repository } from "typeorm";
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { AgencyEntity } from 'src/entities/agency.entity';
+import { TourEntity } from 'src/entities/tour.entity';
+import { mailsServices } from 'src/mails/mails.service';
+import { MapsService } from 'src/maps/maps.service';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TourRepository {
-    private readonly logger = new Logger(mailsServices.name);
-    constructor(@InjectRepository(TourEntity)
+  private readonly logger = new Logger(mailsServices.name);
+  constructor(
+    @InjectRepository(TourEntity)
     private tourRepository: Repository<TourEntity>,
-        @InjectRepository(AgencyEntity)
-        private agencyRepository: Repository<AgencyEntity>,
-        private readonly mapsservice: MapsService,
-        private readonly mailservice: mailsServices) { }
+    @InjectRepository(AgencyEntity)
+    private agencyRepository: Repository<AgencyEntity>,
+    private readonly mapsservice: MapsService,
+    private readonly mailservice: mailsServices,
+  ) {}
 
-    async getTours() {
-        const Tours: TourEntity[] = await this.tourRepository.find({ relations: { agency: true } })
+  async getTours() {
+    const Tours: TourEntity[] = await this.tourRepository.find({
+      relations: { agency: true },
+    });
 
-        if (Tours.length == 0) {
-            return 'No hay Publicaciones registradas en la base de datos'
-        }
-
-        return Tours
+    if (Tours.length == 0) {
+      return 'No hay Publicaciones registradas en la base de datos';
     }
 
-    async createTour(tour, userId) {
+    return Tours;
+  }
 
-        const agency: AgencyEntity = await this.agencyRepository.findOneBy({ id: userId })
+  async createTour(tour, userId) {
+    const agency: AgencyEntity = await this.agencyRepository.findOneBy({
+      id: userId,
+    });
 
-        if (!agency) {
-            throw new UnauthorizedException('Problema en los datos del usuario agencia')
-        }
-
-        const geocodeData = await this.mapsservice.geocodeAddress(tour.address)
-
-        const newTour = await this.tourRepository.create({
-            ...tour,
-            country: geocodeData.country,
-            region: geocodeData.region,
-            state: geocodeData.state,
-            lat: geocodeData.lat,
-            lon: geocodeData.lon,
-            display_name: `El ${tour.hotel} -Ubicado en: ${tour.address}`,
-            touristPoints:geocodeData.TuristPoints,
-            agency: agency
-        });
-
-        await this.tourRepository.save(newTour)
-
-        return newTour
+    if (!agency) {
+      throw new UnauthorizedException(
+        'Problema en los datos del usuario agencia',
+      );
     }
 
-    async deleteAgency(id: string) {
-        const Tour = await this.tourRepository.findOneBy({ id });
+    const geocodeData = await this.mapsservice.geocodeAddress(tour.address);
 
-        if (!Tour) {
-            throw new BadRequestException('La publicacion no existe')
-        }
+    const newTour = await this.tourRepository.create({
+      ...tour,
+      country: geocodeData.country,
+      region: geocodeData.region,
+      state: geocodeData.state,
+      lat: geocodeData.lat,
+      lon: geocodeData.lon,
+      display_name: `El ${tour.hotel} -Ubicado en: ${tour.address}`,
+      touristPoints: geocodeData.TuristPoints,
+      agency: agency,
+    });
 
-        await this.tourRepository.remove(Tour)
+    await this.tourRepository.save(newTour);
 
-        return 'Publicacion eliminada correctamente'
+    return newTour;
+  }
 
+  async deleteTour(id: string) {
+    const Tour = await this.tourRepository.findOneBy({ id });
+
+    if (!Tour) {
+      throw new BadRequestException('La publicacion no existe');
     }
 
-    async getToursBus() {
-        const tours: TourEntity[] = await this.tourRepository.find({ where: { transportType: 'bus' }, relations: { agency: true } });
+    await this.tourRepository.remove(Tour);
 
-        if (tours.length == 0) {
-            return 'No hay viajes con Autobus todavía';
-        }
+    return 'Publicacion eliminada correctamente';
+  }
 
-        return tours;
+  async getToursBus() {
+    const tours: TourEntity[] = await this.tourRepository.find({
+      where: { transportType: 'bus' },
+      relations: { agency: true },
+    });
+
+    if (tours.length == 0) {
+      return 'No hay viajes con Autobus todavía';
     }
 
-    async getToursPlane() {
-        const tours: TourEntity[] = await this.tourRepository.find({ where: { transportType: 'plane' }, relations: { agency: true } });
+    return tours;
+  }
 
-        if (tours.length == 0) {
-            return 'No hay viajes con Avion todavía';
-        }
+  async getToursPlane() {
+    const tours: TourEntity[] = await this.tourRepository.find({
+      where: { transportType: 'plane' },
+      relations: { agency: true },
+    });
 
-        return tours;
+    if (tours.length == 0) {
+      return 'No hay viajes con Avion todavía';
     }
 
-    async getToursOferta() {
-        const tours: TourEntity[] = await this.tourRepository.find({ where: { oferta: true }, relations: { agency: true } });
+    return tours;
+  }
 
-        if (tours.length == 0) {
-            return 'No hay viajes con Ofertas todavía';
-        }
+  async getToursOferta() {
+    const tours: TourEntity[] = await this.tourRepository.find({
+      where: { oferta: true },
+      relations: { agency: true },
+    });
 
-        return tours;
+    if (tours.length == 0) {
+      return 'No hay viajes con Ofertas todavía';
     }
-    async mailOfertas(email: string): Promise<void> {
-        const tours: TourEntity[] = await this.tourRepository.find({ where: { oferta: true }, relations: { agency: true } });
 
-        if (tours.length === 0) {
-            this.logger.warn('No hay viajes con ofertas disponibles.');
-            throw new Error('No hay viajes con Ofertas todavía');
-        }
+    return tours;
+  }
+  async mailOfertas(email: string): Promise<void> {
+    const tours: TourEntity[] = await this.tourRepository.find({
+      where: { oferta: true },
+      relations: { agency: true },
+    });
 
-        const subject = 'Ofertas de Tours Disponibles';
-        const textBody = `Hola,
+    if (tours.length === 0) {
+      this.logger.warn('No hay viajes con ofertas disponibles.');
+      throw new Error('No hay viajes con Ofertas todavía');
+    }
+
+    const subject = 'Ofertas de Tours Disponibles';
+    const textBody = `Hola,
       
         Aquí tienes las ofertas de tours disponibles:
       
-        ${tours.map(tour => `${tour.title} - $${tour.price} - ${tour.destino}`).join('\n')}
+        ${tours.map((tour) => `${tour.title} - $${tour.price} - ${tour.destino}`).join('\n')}
       
         ¡Esperamos que encuentres un tour de tu interés!
       
         Saludos,
         El equipo de 5tart Travel`;
 
-        const htmlBody = `
+    const htmlBody = `
         <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -197,7 +220,9 @@ export class TourRepository {
         <p>¡Descubre los mejores paquetes y reserva tu aventura hoy! También puedes explorar otros emocionantes paquetes disponibles.</p>
         <!-- Iteración sobre los tours para mostrar cada tarjeta -->
         <!-- Asegúrate de que cada tarjeta tenga un tamaño fijo y se ajuste al contenido -->
-        ${tours.map(tour => `
+        ${tours
+          .map(
+            (tour) => `
             <div class="card">
                 <img src="${tour.imgUrl}" alt="${tour.title}">
                 <h2>${tour.title}</h2>
@@ -205,7 +230,9 @@ export class TourRepository {
                 <p><strong>Precio:</strong> $${tour.price}</p>
                 <p>${tour.description.substring(0, 80)}${tour.description.length > 80 ? '...' : ''}</p> <!-- Mostrar solo los primeros 80 caracteres de la descripción -->
             </div>
-        `).join('')}
+        `,
+          )
+          .join('')}
         <a href="url_de_tu_pagina_principal" class="btn">Ir a la página principal</a>
     </div>
 </body>
@@ -219,17 +246,19 @@ export class TourRepository {
 
 `;
 
-        this.logger.log(`Enviando correo a ${email} con las ofertas disponibles.`);
-        await this.mailservice.sendMail(email, subject, textBody, htmlBody);
+    this.logger.log(`Enviando correo a ${email} con las ofertas disponibles.`);
+    await this.mailservice.sendMail(email, subject, textBody, htmlBody);
+  }
+
+  async getTourById(id: string) {
+    const Tour: TourEntity = await this.tourRepository.findOne({
+      where: { id: id },
+      relations: { agency: true },
+    });
+    if (!Tour) {
+      throw new BadRequestException('La publicacion no existe');
     }
 
-    async getTourById(id: string) {
-        const Tour: TourEntity = await this.tourRepository.findOne({ where: { id: id, }, relations: { agency: true } });
-        if (!Tour) {
-            throw new BadRequestException('La publicacion no existe')
-        };
-
-        return Tour;
-    }
-
+    return Tour;
+  }
 }
