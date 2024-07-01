@@ -12,6 +12,11 @@ export class agencyController {
     return this.agencyService.getAgency();
   }
 
+  @Get(':id')
+  getByIdAgency(@Param('id', ParseUUIDPipe) id: string) {
+    return this.agencyService.getByIdAgency(id);
+  }
+
   @Delete(':id')
   deleteAgency(@Param('id', ParseUUIDPipe) id: string) {
     return this.agencyService.deleteAgency(id);

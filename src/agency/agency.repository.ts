@@ -48,4 +48,15 @@ export class AgencyRepository {
 
     return 'Agencia eliminada correctamente';
   }
+
+  async getByIdAgency(id: string) {
+    const agency: AgencyEntity = await this.agencyRepository.findOne({where: {id: id}, relations: {tours: true}});
+
+    if (!agency) {
+      throw new BadRequestException('La agencia no existe');
+    }
+
+    return agency;
+  }
+
 }
