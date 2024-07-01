@@ -7,7 +7,12 @@ export class MapsService {
   private determineRegion(lat: number, lon: number): string {
     for (const [region, bounds] of Object.entries(regiones)) {
       for (const bound of bounds) {
-        if (lat >= bound.latMin && lat <= bound.latMax && lon >= bound.lonMin && lon <= bound.lonMax) {
+        if (
+          lat >= bound.latMin &&
+          lat <= bound.latMax &&
+          lon >= bound.lonMin &&
+          lon <= bound.lonMax
+        ) {
           return region;
         }
       }
@@ -21,31 +26,44 @@ export class MapsService {
 
   async geocodeAddress(address: string): Promise<any> {
     try {
-      const response = await axios.get('https://nominatim.openstreetmap.org/search', {
-        params: {
-          q: address,
-          format: 'json',
-          addressdetails: 1,
-          limit: 1,
-          target: 'es',
-          accept_language: 'en',
+      const response = await axios.get(
+        'https://nominatim.openstreetmap.org/search',
+        {
+          params: {
+            q: address,
+            format: 'json',
+            addressdetails: 1,
+            limit: 1,
+            target: 'es',
+            accept_language: 'en',
+          },
+          headers: {
+            'User-Agent': 'cincotravel/5.0 (contact@cincotravel.com)',
+          },
         },
-        headers: {
-          'User-Agent': 'cincotravel/5.0 (contact@cincotravel.com)',
-        },
-      });
+      );
 
       if (response.status !== 200) {
-        throw new HttpException(`Request failed with status code ${response.status}`, response.status);
+        throw new HttpException(
+          `Request failed with status code ${response.status}`,
+          response.status,
+        );
       }
 
       const data = response.data;
       if (!data || data.length === 0) {
-        throw new NotFoundException('No se encontraron resultados para la dirección especificada');
+        throw new NotFoundException(
+          'No se encontraron resultados para la dirección especificada',
+        );
       }
 
       const location = data[0];
-      const { lat, lon, display_name, address: { country, state } } = location;
+      const {
+        lat,
+        lon,
+        display_name,
+        address: { country, state },
+      } = location;
 
       const region = this.determineRegion(parseFloat(lat), parseFloat(lon));
       const touristPoints = this.getTouristPoints(region, state);
@@ -57,14 +75,17 @@ export class MapsService {
         country: country,
         region: region,
         state: state,
-        touristPoints: touristPoints
+        touristPoints: touristPoints,
       };
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new HttpException('Dirección no válida', HttpStatus.BAD_REQUEST);
       } else {
         console.error('Error geocoding address:', error.message);
-        throw new HttpException(`Error al geocodificar la dirección: ${error.message}`, error.response?.status || 500);
+        throw new HttpException(
+          `Error al geocodificar la dirección: ${error.message}`,
+          error.response?.status || 500,
+        );
       }
     }
   }

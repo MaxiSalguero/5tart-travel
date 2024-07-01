@@ -6,7 +6,7 @@ import { filterService } from './filter.Service';
 @ApiTags('filter')
 @Controller('filter')
 export class filterController {
-  constructor(private readonly filterservice: filterService) { }
+  constructor(private readonly filterservice: filterService) {}
 
   @Get()
   @ApiQuery({ name: 'country', required: false })
@@ -18,7 +18,7 @@ export class filterController {
     @Query('region') region: string,
     @Query('state') state: string,
     @Query('price') price: number,
-  ){
+  ) {
     return this.filterservice.searchGeneral(price, country, region, state);
   }
 }

@@ -1,52 +1,51 @@
-import { Injectable, Logger } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
+import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
-
-
 
 @Injectable()
 export class mailsServices {
-    private transporter: nodemailer.Transporter;
-    private readonly logger = new Logger(mailsServices.name);
+  private transporter: nodemailer.Transporter;
+  private readonly logger = new Logger(mailsServices.name);
 
-  
-    constructor(private configService: ConfigService,
-    ){
-      this.transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: this.configService.get<string>('EMAIL_USER'),
-          pass: this.configService.get<string>('EMAIL_PASS'),
-        },
-      });
+  constructor(private configService: ConfigService) {
+    this.transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: this.configService.get<string>('EMAIL_USER'),
+        pass: this.configService.get<string>('EMAIL_PASS'),
+      },
+    });
+  }
+
+  async sendMail(to: string, subject: string, text: string, html?: string) {
+    if (!to) {
+      this.logger.error('No recipients defined');
+      throw new Error('No recipients defined');
     }
-  
-  
-    async sendMail(to: string, subject: string, text: string, html?: string) {
-      if (!to) {
-        this.logger.error('No recipients defined');
-        throw new Error('No recipients defined');
-      }
-  
-      const mailOptions = {
-        from: this.configService.get<string>('EMAIL_USER'),
-        to,
-        subject,
-        text,
-        html,
-      };
-  
-      try {
-        const info = await this.transporter.sendMail(mailOptions);
-        this.logger.log('Email sent: ' + info.response);
-      } catch (error) {
-        this.logger.error('Error sending email: ' + error.message);
-        throw new Error('Error sending email');
-      }
+
+    const mailOptions = {
+      from: this.configService.get<string>('EMAIL_USER'),
+      to,
+      subject,
+      text,
+      html,
+    };
+
+    try {
+      const info = await this.transporter.sendMail(mailOptions);
+      this.logger.log('Email sent: ' + info.response);
+    } catch (error) {
+      this.logger.error('Error sending email: ' + error.message);
+      throw new Error('Error sending email');
     }
-    async registerUserMail(userEmail: string, username: string, password: string) {
-      const subject = 'Bienvenido a 5tart Travel';
-      const textBody = `Hola ${username},
+  }
+  async registerUserMail(
+    userEmail: string,
+    username: string,
+    password: string,
+  ) {
+    const subject = 'Bienvenido a 5tart Travel';
+    const textBody = `Hola ${username},
       
       ¡Bienvenido/a a 5tart Travel!
   
@@ -60,8 +59,8 @@ export class mailsServices {
   
       Saludos cordiales,
       El equipo de 5tart Travel`;
-  
-      const htmlBody = `
+
+    const htmlBody = `
       <div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%;">
     <p><strong>¡Hola, ${username}!</strong></p>
     <p><strong>¡Bienvenido/a a 5tart Travel!</strong></p>
@@ -85,12 +84,16 @@ export class mailsServices {
         }
     }
 </style>`;
-      this.logger.log(
-        `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
-      );
-      await this.sendMail(userEmail, subject, textBody, htmlBody);
+    this.logger.log(
+      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
+    );
+    await this.sendMail(userEmail, subject, textBody, htmlBody);
   }
-  async registerAgencyMail(userEmail: string, username: string, password: string) {
+  async registerAgencyMail(
+    userEmail: string,
+    username: string,
+    password: string,
+  ) {
     const subject = 'Bienvenido a 5tart Travel';
     const textBody = `Hola ${username},
     
@@ -164,11 +167,10 @@ export class mailsServices {
     }
 </style>
 `;
-    
+
     this.logger.log(
       `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
     );
     await this.sendMail(userEmail, subject, textBody, htmlBody);
+  }
 }
- 
- }
