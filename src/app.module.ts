@@ -20,6 +20,7 @@ import { MapsService } from './maps/maps.service';
 import { filterModule } from './filter/filter.module';
 import { FileUploadModule } from './file_upload/file_upload.module';
 import { jwtConfig } from './config/jwt.config';
+import { GoogleModule } from './google/google.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { jwtConfig } from './config/jwt.config';
     filterModule,
     JwtModule.register(jwtConfig),
     FileUploadModule,
+    GoogleModule,
   ],
   controllers: [AppController],
   providers: [AppService, PreloadService, MapsService],
