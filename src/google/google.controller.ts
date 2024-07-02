@@ -37,7 +37,7 @@ export class GoogleController {
     const { user } = <any>req;
 
     const existingUser = await this.userRepository.findOne({
-      where: { mail: user.mail },
+      where: { mail: user.email },
     });
 
     if (!existingUser) {
