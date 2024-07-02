@@ -24,6 +24,6 @@ export class UserEntity {
   })
   password: string;
 
-  @Column()
+  @Column({nullable:true})
   birthday: Date;
 }
