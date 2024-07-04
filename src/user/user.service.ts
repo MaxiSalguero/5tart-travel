@@ -8,4 +8,8 @@ export class UserServices {
   getUsers() {
     return this.userRepository.getUsers();
   }
+
+  addTourFavorite(id: string, userId: any) {
+    return this.userRepository.addTourFavorite(id, userId)
+  }
 }
