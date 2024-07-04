@@ -2,12 +2,14 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { AgencyEntity } from './agency.entity';
+import { UserEntity } from './user.entity';
 
 export class TuristPoints {
   nombre: string;
@@ -107,4 +109,8 @@ export class TourEntity {
   @ManyToOne(() => AgencyEntity, (agency) => agency.tours)
   @JoinColumn()
   agency: AgencyEntity;
+
+  @ManyToMany(() => UserEntity, (user) => user.favorite_tours)
+  user: UserEntity[];
+
 }

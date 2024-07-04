@@ -21,6 +21,7 @@ import { filterModule } from './filter/filter.module';
 import { FileUploadModule } from './file_upload/file_upload.module';
 import { jwtConfig } from './config/jwt.config';
 import { GoogleModule } from './google/google.module';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { GoogleModule } from './google/google.module';
     JwtModule.register(jwtConfig),
     FileUploadModule,
     GoogleModule,
+    SearchModule,
   ],
   controllers: [AppController],
   providers: [AppService, PreloadService, MapsService],
