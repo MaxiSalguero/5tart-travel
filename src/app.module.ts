@@ -22,6 +22,7 @@ import { FileUploadModule } from './file_upload/file_upload.module';
 import { jwtConfig } from './config/jwt.config';
 import { GoogleModule } from './google/google.module';
 import { SearchModule } from './search/search.module';
+import { MercadoPagoModule } from './mercado-pago/mercado-pago.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { SearchModule } from './search/search.module';
     FileUploadModule,
     GoogleModule,
     SearchModule,
+    MercadoPagoModule,
   ],
   controllers: [AppController],
   providers: [AppService, PreloadService, MapsService],
