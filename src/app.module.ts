@@ -23,6 +23,8 @@ import { jwtConfig } from './config/jwt.config';
 import { GoogleModule } from './google/google.module';
 import { SearchModule } from './search/search.module';
 import { MercadoPagoModule } from './mercado-pago/mercado-pago.module';
+import { CommentModule } from './comment/comment.module';
+import { ContactModule } from './contact/contact.module';
 
 @Module({
   imports: [
@@ -44,6 +46,8 @@ import { MercadoPagoModule } from './mercado-pago/mercado-pago.module';
     GoogleModule,
     SearchModule,
     MercadoPagoModule,
+    CommentModule,
+    ContactModule,
   ],
   controllers: [AppController],
   providers: [AppService, PreloadService, MapsService],
