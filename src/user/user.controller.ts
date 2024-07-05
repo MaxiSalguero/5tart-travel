@@ -1,4 +1,4 @@
-import { Controller, Get, NotFoundException, Param, ParseUUIDPipe, Post, Req, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, NotFoundException, Param, ParseUUIDPipe, Post, Req, UseGuards } from '@nestjs/common';
 import { UserServices } from './user.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/guards/auth.guard';
@@ -39,5 +39,15 @@ export class userController {
     const userId = request.user.id
 
     return this.userService.addTourFavorite(id, userId)
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
+  @Delete('tour/favorite/:id')
+  deleteTourFavorite(@Param('id', ParseUUIDPipe) id: string, @Req() request) {
+  
+    const userId = request.user.id
+
+    return this.userService.deleteTourFavorite(id, userId)
   }
 }
