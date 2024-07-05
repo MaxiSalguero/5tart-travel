@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { CommentRepository } from './comment.repository';
+import { commentRepository } from './comment.repository';
+
 
 @Injectable()
 export class CommentService {
-    constructor(private commentRepository: CommentRepository) { }
+    constructor(private commentRepository: commentRepository) { }
 
     getAllComment() {
-        return this.commentRepository.getAllComment()
+        return this.commentRepository.getAllComments()
     }
 
     createComment(comm, id) {
