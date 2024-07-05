@@ -3,6 +3,7 @@ import { CommentService } from './comment.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateCommentDto } from 'src/DTOS/CreateComment.dto';
 import { TourService } from 'src/tour/tour.service';
+import { get } from 'http';
 
 
 
@@ -18,6 +19,7 @@ export class CommentController {
     getAllComment() {
         return this.commentService.getAllComment()
     }
+   
 
     @Post(':tourId')
     async createComment(@Body() commentDto: CreateCommentDto, @Param('tourId') tourId: string) {

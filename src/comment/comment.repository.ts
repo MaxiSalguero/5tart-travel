@@ -17,6 +17,7 @@ export class commentRepository {
     async getAllComments(): Promise<CommentEntity[]> {
         return await this.commentRepository.find();
     }
+    
 
     async createComment(comment: CreateCommentDto, tourId: string): Promise<string> {
         try {
