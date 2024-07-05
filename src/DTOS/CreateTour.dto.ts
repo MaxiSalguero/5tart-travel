@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsDate, IsNumber, IsOptional, Length } from 'class-validator';
+import { IsDate, IsNumber, IsOptional, Length, isNumber } from 'class-validator';
 import { IsNotEmpty, IsString, Matches } from 'class-validator';
 import { TransportType } from 'src/entities/transporte.enum';
 
@@ -120,4 +120,8 @@ export class CreateTourDto {
   @IsString()
   @Length(5, 30)
   empresa?: string;
+
+  @IsOptional()
+  @IsNumber()
+  rates?:number
 }

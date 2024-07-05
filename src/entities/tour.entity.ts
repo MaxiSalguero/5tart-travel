@@ -104,6 +104,10 @@ export class TourEntity {
   })
   empresa?: string;
 
+  @Column({ type: 'integer', nullable: true })
+  rates: number;
+
+
   @Column('jsonb', { nullable: true })
   touristPoints?: TuristPoints[];
 
@@ -115,5 +119,5 @@ export class TourEntity {
   user: UserEntity[];
 
   @OneToMany(() => CommentEntity, (comment) => comment.tour, { cascade: true })
-    comments: CommentEntity[];
+  comments: CommentEntity[];
 }
