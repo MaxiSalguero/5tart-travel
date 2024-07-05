@@ -270,7 +270,9 @@ export class TourRepository {
   async getTourById(id: string) {
     const Tour: TourEntity = await this.tourRepository.findOne({
       where: { id: id },
-      relations: { agency: true },
+      relations: { agency: true,
+        comments:true
+       },
     });
     if (!Tour) {
       throw new BadRequestException('La publicacion no existe');
