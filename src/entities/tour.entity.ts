@@ -10,6 +10,7 @@ import {
 import { v4 as uuid } from 'uuid';
 import { AgencyEntity } from './agency.entity';
 import { UserEntity } from './user.entity';
+import { CommentEntity } from './comment.entity';
 
 export class TuristPoints {
   nombre: string;
@@ -113,4 +114,6 @@ export class TourEntity {
   @ManyToMany(() => UserEntity, (user) => user.favorite_tours)
   user: UserEntity[];
 
+  @OneToMany(() => CommentEntity, (comment) => comment.tour, { cascade: true })
+    comments: CommentEntity[];
 }

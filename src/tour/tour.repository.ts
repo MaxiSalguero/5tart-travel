@@ -2,10 +2,12 @@ import {
   BadRequestException,
   Injectable,
   Logger,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AgencyEntity } from 'src/entities/agency.entity';
+import { CommentEntity } from 'src/entities/comment.entity';
 import { TourEntity } from 'src/entities/tour.entity';
 import { mailsServices } from 'src/mails/mails.service';
 import { MapsService } from 'src/maps/maps.service';
@@ -14,6 +16,7 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class TourRepository {
   private readonly logger = new Logger(mailsServices.name);
+  rate: null;
   constructor(
     @InjectRepository(TourEntity)
     private tourRepository: Repository<TourEntity>,
@@ -21,11 +24,15 @@ export class TourRepository {
     private agencyRepository: Repository<AgencyEntity>,
     private readonly mapsservice: MapsService,
     private readonly mailservice: mailsServices,
+    @InjectRepository(CommentEntity)
+    private comentrepository: Repository<CommentEntity>,
   ) {}
 
   async getTours() {
     const Tours: TourEntity[] = await this.tourRepository.find({
-      relations: { agency: true },
+      relations: { agency: true,
+        comments:true
+       },
     });
 
     if (Tours.length == 0) {

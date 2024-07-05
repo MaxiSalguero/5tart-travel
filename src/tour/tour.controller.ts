@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Patch,
   Post,
   Req,
   UseGuards,
@@ -13,6 +14,8 @@ import { TourService } from './tour.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateTourDto } from 'src/DTOS/CreateTour.dto';
 import { AuthGuard } from 'src/guards/auth.guard';
+import path from 'path';
+import { TourEntity } from 'src/entities/tour.entity';
 
 @ApiTags('tours')
 @Controller('tours')

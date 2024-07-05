@@ -1,5 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { AfterInsert, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuid } from 'uuid';
+import { TourEntity } from './tour.entity';
+import { TourRepository } from 'src/tour/tour.repository';
+ // Asegúrate de que la ruta sea correcta
 
 @Entity({
     name: 'comment',
@@ -29,5 +32,8 @@ export class CommentEntity {
         nullable: true
     })
     rate?: number;
+
+    @ManyToOne(() => TourEntity, tour => tour.comments)
+    tour: TourEntity;
 
 }

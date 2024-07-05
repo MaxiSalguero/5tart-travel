@@ -34,4 +34,4 @@ export class TourService {
   getTourById(id: string) {
     return this.tourRepository.getTourById(id);
   }
-}
+ }

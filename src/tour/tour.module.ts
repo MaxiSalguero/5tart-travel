@@ -8,9 +8,11 @@ import { MapsService } from 'src/maps/maps.service';
 import { AgencyEntity } from 'src/entities/agency.entity';
 import { mailsServices } from 'src/mails/mails.service';
 import { ConfigService } from '@nestjs/config';
+import { CommentEntity } from 'src/entities/comment.entity';
+
 
 @Module({
-  imports: [TypeOrmModule.forFeature([TourEntity, AgencyEntity])],
+  imports: [TypeOrmModule.forFeature([TourEntity, AgencyEntity,CommentEntity])],
   controllers: [tourController],
   providers: [
     TourService,
