@@ -104,9 +104,9 @@ export class TourEntity {
   })
   empresa?: string;
 
-  @Column({ type: 'integer', nullable: true })
-  rates: number;
 
+  @Column({ type: 'float', nullable: true }) // Define averageRate here
+  averageRate?: number;
 
   @Column('jsonb', { nullable: true })
   touristPoints?: TuristPoints[];
