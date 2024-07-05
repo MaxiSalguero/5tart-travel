@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmpty, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsEmpty, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Max, Min } from "class-validator";
+import { isBoxedPrimitive } from "util/types";
 
 export class CreateCommentDto{
 
@@ -19,7 +20,9 @@ export class CreateCommentDto{
     bad?: string;
 
     @IsOptional()
-    @IsNumber()
+    @IsInt()
+    @Min(1)
+    @Max(5)
     @ApiProperty()
     rate?: number;
     
