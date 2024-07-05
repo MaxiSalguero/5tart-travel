@@ -53,7 +53,7 @@ export class TourRepository {
   
     const geocodeData = await this.mapsservice.geocodeAddress(tour.address);
   
-    // Log para verificar la estructura de geocodeData
+    
     console.log('geocodeData:', geocodeData);
   
     if (!geocodeData) {
