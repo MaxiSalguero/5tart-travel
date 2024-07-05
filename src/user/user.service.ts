@@ -12,4 +12,7 @@ export class UserServices {
   addTourFavorite(id: string, userId: any) {
     return this.userRepository.addTourFavorite(id, userId)
   }
+  getUserById(id){
+    return this.userRepository.getUserById(id)
+  }
 }

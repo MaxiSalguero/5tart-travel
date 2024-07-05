@@ -13,4 +13,5 @@ export class CommentService {
     createComment(comm, id) {
         return this.commentRepository.createComment(comm, id)
     }
+    
 }

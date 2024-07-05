@@ -24,6 +24,18 @@ export class UserRepository {
 
     return users;
   }
+  async getUserById(userId: string) {
+    const user: UserEntity = await this.usersRepository.findOne({
+    where: { id: userId },
+    relations: { favorite_tours: true }
+    });
+   
+   if (!user) {
+    throw new NotFoundException('Usuario no encontrado');
+    }
+   
+   return user;
+    }
 
   async createUser(user) {
     const ExistUser: UserEntity = await this.usersRepository.findOne({
