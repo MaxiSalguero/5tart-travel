@@ -1,93 +1,23 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ofertas de Tours Disponibles</title>
-    <style>
-        /* Estilos generales */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: #ffffff;
-            border: 2px solid #003366;
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            box-sizing: border-box;
-        }
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .card {
-            width: calc(33.33% - 20px); /* Tres columnas */
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 10px;
-            box-sizing: border-box;
-            text-align: left;
-            background-color: #f9f9f9;
-            overflow: hidden;
-        }
-        .card img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px 8px 0 0;
-        }
-        .card-content {
-            padding: 10px;
-        }
-        .card h2 {
-            color: #003366;
-            font-size: 18px; /* Tamaño del título */
-            margin-bottom: 5px;
-        }
-        .card p {
-            font-size: 14px; /* Tamaño del texto */
-            margin-bottom: 5px;
-        }
-        /* Estilos para dispositivos móviles */
-        @media only screen and (max-width: 800px) {
-            .card {
-                width: calc(50% - 20px); /* Dos columnas en dispositivos medianos */
-            }
-        }
-        @media only screen and (max-width: 600px) {
-            .card {
-                width: 100%; /* Una columna en dispositivos pequeños */
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Ofertas de Tours Disponibles</h1>
-        <div class="card-container">
-            ${tours.map(tour => `
-                <div class="card">
-                    <img src="${tour.image}" alt="${tour.title}">
-                    <div class="card-content">
-                        <h2>${tour.title}</h2>
-                        <p><strong>Destino:</strong> ${tour.destino}</p>
-                        <p><strong>Precio:</strong> $${tour.price}</p>
-                        <p>${tour.descripcion.substring(0, 100)}${tour.descripcion.length > 100 ? '...' : ''}</p> <!-- Mostrar solo los primeros 100 caracteres de la descripción -->
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-        <p>¡Esperamos que encuentres un tour de tu interés!</p>
-        <p>Saludos,</p>
-        <p>El equipo de 5tart Travel</p>
+<div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%;">
+    <p><strong>¡Hola, ${username}!</strong></p>
+    <p><strong>¡Bienvenido/a a 5tart Travel!</strong></p>
+    <p>Nos alegra mucho que te hayas unido a la página de viajes más grande del país. En 5tart Travel, trabajamos para que puedas ubicar los viajes a distintos puntos del país y del mundo con las mejores agencias de viajes. Ahora puedes explorar y planificar tus próximos viajes con nosotros.</p>
+    <p>Tus credenciales son:</p>
+    <div style="border: 2px solid #003366; padding: 10px; border-radius: 10px; margin-bottom: 10px; background: white; text-align: center; display: inline-block; width: auto; max-width: 90%;">
+        <p style="margin: 0;"><strong>Usuario:</strong> ${userEmail}</p>
+        <p style="margin: 0;"><strong>Contraseña:</strong> ${password}</p>
     </div>
-</body>
-</html>
+    <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
+    <p>¡Saludos!</p>
+    <p>El Equipo de 5tart Travel</p>
+</div>
+<style>
+    @media only screen and (max-width: 600px) {
+        div[style*="border: 2px solid #003366; padding: 20px;"] {
+            padding: 10px;
+        }
+        div[style*="border: 2px solid #003366; padding: 10px;"] {
+            padding: 5px;
+        }
+    }
+</style>
