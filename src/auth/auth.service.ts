@@ -22,7 +22,7 @@ export class AuthService {
     @InjectRepository(AgencyEntity)
     private readonly agencyRepository: Repository<AgencyEntity>,
     private readonly mailservice: mailsServices,
-  ) {}
+  ) { }
 
   async createUser(user: Partial<UserEntity>) {
     const { mail, password } = user;
@@ -142,8 +142,10 @@ export class AuthService {
     const existingAgency = await this.agencyRepository.findOneBy({ mail });
 
     if (existingUser) {
+      await this.mailservice.cambioPasswordMail(existingUser.mail, existingUser.username);
       return { id: existingUser.id, type: 'user' };
     } else if (existingAgency) {
+      await this.mailservice.cambioPasswordMail(existingAgency.mail, existingAgency.name_agency);
       return { id: existingAgency.id, type: 'agency' };
     } else {
       throw new NotFoundException('Este email no se encuentra registrado');
@@ -152,17 +154,34 @@ export class AuthService {
 
   async changePassword(id: string, type: string, newPassword: string) {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-
+    let userEmail, username;
+  
     if (type === 'user') {
+      const user = await this.userRepository.findOne({where:{id}});
+      if (!user) {
+        throw new NotFoundException('Usuario no encontrado');
+      }
       await this.userRepository.update(id, { password: hashedPassword });
+      userEmail = user.mail;
+      username = user.username;
     } else if (type === 'agency') {
+      const agency = await this.agencyRepository.findOne({where:{id}});
+      if (!agency) {
+        throw new NotFoundException('Agencia no encontrada');
+      }
       await this.agencyRepository.update(id, { password: hashedPassword });
+      userEmail = agency.mail;
+      username = agency.name_agency;
     } else {
       throw new ConflictException('Tipo de entidad no reconocido');
     }
-
+  
+    // Send confirmation email
+    await this.mailservice.ConfirmCambiodePassword(userEmail, username,newPassword);
+  
     return {
       message: `El password del ${type === 'user' ? 'usuario' : 'agencia'} con ID: ${id}, fue modificado correctamente`,
     };
   }
+  
 }
