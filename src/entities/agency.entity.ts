@@ -35,6 +35,15 @@ export class AgencyEntity {
   })
   imgUrl?: string;
 
+  @Column({
+    nullable: true,
+    default: false,
+  })
+  isActive: boolean;
+
+  @Column({ nullable:true })
+  role: string
+
   @OneToMany(() => TourEntity, (tours) => tours.agency)
   @JoinColumn()
   tours: TourEntity[];

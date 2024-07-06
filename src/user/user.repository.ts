@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TourEntity } from 'src/entities/tour.entity';
 import { UserEntity } from 'src/entities/user.entity';
@@ -15,7 +19,7 @@ export class UserRepository {
 
   async getUsers() {
     const users: UserEntity[] = await this.usersRepository.find({
-      relations: { favorite_tours: true }
+      relations: { favorite_tours: true },
     });
 
     if (users.length == 0) {
@@ -24,18 +28,19 @@ export class UserRepository {
 
     return users;
   }
+
   async getUserById(userId: string) {
     const user: UserEntity = await this.usersRepository.findOne({
-    where: { id: userId },
-    relations: { favorite_tours: true }
+      where: { id: userId },
+      relations: { favorite_tours: true },
     });
-   
-   if (!user) {
-    throw new NotFoundException('Usuario no encontrado');
+
+    if (!user) {
+      throw new NotFoundException('Usuario no encontrado');
     }
-   
-   return user;
-    }
+
+    return user;
+  }
 
   async createUser(user) {
     const ExistUser: UserEntity = await this.usersRepository.findOne({
@@ -53,27 +58,90 @@ export class UserRepository {
   }
 
   async addTourFavorite(id: string, userId: any) {
-      const user: UserEntity = await this.usersRepository.findOne({
-        where: { id: userId },
-        relations: {favorite_tours: true}
-      });
-  
-      if (!user) {
-        throw new NotFoundException(`No se encontró el usuario`);
-      }
-  
-      const tour: TourEntity = await this.toursRepository.findOneBy({ id: id });
-  
-      if (!tour) {
-        throw new NotFoundException(`No se encontró el refugio`);
-      }
-  
-      user.favorite_tours.push(tour);
-  
-      await this.usersRepository.save(user);
-  
-  
-      return "Añadido a Favoritos";
-    
+    const user: UserEntity = await this.usersRepository.findOne({
+      where: { id: userId },
+      relations: { favorite_tours: true },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`No se encontró el usuario`);
+    }
+
+    const tour: TourEntity = await this.toursRepository.findOneBy({ id: id });
+
+    if (!tour) {
+      throw new NotFoundException(`No se encontró el tour`);
+    }
+
+    user.favorite_tours.push(tour);
+
+    await this.usersRepository.save(user);
+
+    return 'Añadido a Favoritos';
+  }
+
+  async deleteTourFavorite(id: string, userId: any) {
+    const user: UserEntity = await this.usersRepository.findOne({
+      where: { id: userId },
+      relations: { favorite_tours: true },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`No se encontró el usuario`);
+    }
+
+    const tour: TourEntity = await this.toursRepository.findOneBy({ id: id });
+
+    if (!tour) {
+      throw new NotFoundException(`No se encontró el tour`);
+    }
+
+    user.favorite_tours = user.favorite_tours.filter(
+      (favoriteTour) => favoriteTour.id !== id,
+    );
+
+    await this.usersRepository.save(user);
+
+    return 'Eliminado de Favoritos';
+  }
+
+  async activeUser(id: string) {
+    const user = await this.usersRepository.findOne({ where: { id } });
+
+    if (!user) {
+      throw new NotFoundException('no existe el usuario');
+    }
+
+    if (user.isActive === true) {
+      throw new NotFoundException('el usuario ya esta activo');
+    }
+
+    user.isActive = true;
+    user.role = 'user';
+
+    const updateUser = this.usersRepository.save(user);
+
+    return updateUser;
+  }
+
+  async disableUser(id: string) {
+    const user = await this.usersRepository.findOne({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`no se encontró el usuario con id ${id}`);
+    }
+
+    if (user.isActive === false) {
+      throw new NotFoundException('el usuario ya se encuentra inactivo');
+    }
+
+    user.isActive = false;
+    user.role = null;
+
+    const updateUser = this.usersRepository.save(user);
+
+    return updateUser;
   }
 }

@@ -30,9 +30,7 @@ export class TourRepository {
 
   async getTours() {
     const Tours: TourEntity[] = await this.tourRepository.find({
-      relations: { agency: true,
-        comments:true
-       },
+      relations: { agency: true, comments: true },
     });
 
     if (Tours.length == 0) {
@@ -46,24 +44,28 @@ export class TourRepository {
     const agency: AgencyEntity = await this.agencyRepository.findOneBy({
       id: userId,
     });
-  
+
     if (!agency) {
-      throw new UnauthorizedException('Problema en los datos del usuario agencia');
+      throw new UnauthorizedException(
+        'Problema en los datos del usuario agencia',
+      );
     }
-  
+
     const geocodeData = await this.mapsservice.geocodeAddress(tour.address);
-  
-    
+
     console.log('geocodeData:', geocodeData);
-  
+
     if (!geocodeData) {
       throw new Error('No se recibieron datos de geocodificación.');
     }
-  
-    if (!geocodeData.touristPoints || !Array.isArray(geocodeData.touristPoints)) {
+
+    if (
+      !geocodeData.touristPoints ||
+      !Array.isArray(geocodeData.touristPoints)
+    ) {
       throw new Error('touristPoints no está presente o no es un array.');
     }
-  
+
     const newTour = await this.tourRepository.create({
       ...tour,
       country: geocodeData.country,
@@ -75,12 +77,17 @@ export class TourRepository {
       touristPoints: geocodeData.touristPoints,
       agency: agency,
     });
-  
+
     await this.tourRepository.save(newTour);
-  
+
     return newTour;
   }
-  
+
+  async updateTour(id: string, tour: any) {
+    await this.tourRepository.update(id, tour);
+
+    return 'Tour modificado correctamente';
+  }
 
   async deleteTour(id: string) {
     const Tour = await this.tourRepository.findOneBy({ id });
@@ -270,9 +277,7 @@ export class TourRepository {
   async getTourById(id: string) {
     const Tour: TourEntity = await this.tourRepository.findOne({
       where: { id: id },
-      relations: { agency: true,
-        comments:true
-       },
+      relations: { agency: true, comments: true },
     });
     if (!Tour) {
       throw new BadRequestException('La publicacion no existe');
