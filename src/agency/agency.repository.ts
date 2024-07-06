@@ -91,4 +91,44 @@ export class AgencyRepository {
 
     return agency;
   }
+
+  async activeAgency(id: string) {
+    const agency = await this.agencyRepository.findOne({ where: { id } });
+
+    if (!agency) {
+      throw new NotFoundException('no existe la agencia');
+    }
+
+    if (agency.isActive === true) {
+      throw new NotFoundException('la agencia ya esta activa');
+    }
+
+    agency.isActive = true;
+    agency.role = 'agency';
+
+    const updateAgency = this.agencyRepository.save(agency);
+
+    return updateAgency;
+  }
+
+  async disableAgency(id: string) {
+    const agency = await this.agencyRepository.findOne({
+      where: { id },
+    });
+
+    if (!agency) {
+      throw new NotFoundException(`no se encontró la agencia con id ${id}`);
+    }
+
+    if (agency.isActive === false) {
+      throw new NotFoundException('la agencia ya se encuentra inactiva');
+    }
+
+    agency.isActive = false;
+    agency.role = null;
+
+    const updateAgency = this.agencyRepository.save(agency);
+
+    return updateAgency;
+  }
 }

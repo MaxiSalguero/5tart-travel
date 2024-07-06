@@ -104,4 +104,44 @@ export class UserRepository {
 
     return 'Eliminado de Favoritos';
   }
+
+  async activeUser(id: string) {
+    const user = await this.usersRepository.findOne({ where: { id } });
+
+    if (!user) {
+      throw new NotFoundException('no existe el usuario');
+    }
+
+    if (user.isActive === true) {
+      throw new NotFoundException('el usuario ya esta activo');
+    }
+
+    user.isActive = true;
+    user.role = 'user';
+
+    const updateUser = this.usersRepository.save(user);
+
+    return updateUser;
+  }
+
+  async disableUser(id: string) {
+    const user = await this.usersRepository.findOne({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`no se encontró el usuario con id ${id}`);
+    }
+
+    if (user.isActive === false) {
+      throw new NotFoundException('el usuario ya se encuentra inactivo');
+    }
+
+    user.isActive = false;
+    user.role = null;
+
+    const updateUser = this.usersRepository.save(user);
+
+    return updateUser;
+  }
 }

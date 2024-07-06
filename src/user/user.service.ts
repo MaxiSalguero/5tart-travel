@@ -20,4 +20,12 @@ export class UserServices {
   getUserById(id){
     return this.userRepository.getUserById(id)
   }
+
+  activeUser(id: string) {
+    return this.userRepository.activeUser(id);
+  }
+
+  disableUser(id: string) {
+    return this.userRepository.disableUser(id);
+  }
 }

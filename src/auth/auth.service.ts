@@ -89,9 +89,14 @@ export class AuthService {
     }
 
     if (user) {
+      const isActive = user.role ? true : false;
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid)
         throw new UnauthorizedException('Credenciales incorrectas');
+      if (!isActive)
+        throw new UnauthorizedException(
+          'Este usuario se encuentra desactivado',
+        );
 
       const userpayload = {
         sub: user.id,
@@ -105,9 +110,14 @@ export class AuthService {
 
       return { success: 'Usuario logueado correctamente', token };
     } else if (agency) {
+      const isActive = agency.role ? true : false;
       const isPasswordValid = await bcrypt.compare(password, agency.password);
       if (!isPasswordValid)
         throw new UnauthorizedException('Credenciales incorrectas');
+      if (!isActive)
+        throw new UnauthorizedException(
+          'Esta agencia aun no se encuentra activa',
+        );
 
       const agencypayload = {
         sub: agency.id,

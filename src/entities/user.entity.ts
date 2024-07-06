@@ -25,8 +25,20 @@ export class UserEntity {
   })
   password: string;
 
-  @Column({nullable:true})
+  @Column({ nullable:true })
   birthday: Date;
+
+  @Column({
+    nullable: true,
+    default: true,
+  })
+  isActive: boolean;
+
+  @Column({ 
+    nullable: true,
+    default: 'user',
+  })
+  role: string
 
   @ManyToMany(() => TourEntity, (favorite_tours) => favorite_tours.user)
   @JoinTable()

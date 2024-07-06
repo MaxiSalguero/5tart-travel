@@ -21,4 +21,12 @@ export class AgencyServices {
   getByIdAgency(id: string) {
     return this.agencyRepository.getByIdAgency(id);
   }
+
+  activeAgency(id: string) {
+    return this.agencyRepository.activeAgency(id);
+  }
+
+  disableAgency(id: string) {
+    return this.agencyRepository.disableAgency(id);
+  }
 }
