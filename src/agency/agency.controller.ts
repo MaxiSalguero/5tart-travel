@@ -1,6 +1,15 @@
-import { Controller, Delete, Get, Param, ParseUUIDPipe } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { AgencyServices } from './agency.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @ApiTags('agency')
 @Controller('agency')
@@ -20,5 +29,14 @@ export class agencyController {
   @Delete(':id')
   deleteAgency(@Param('id', ParseUUIDPipe) id: string) {
     return this.agencyService.deleteAgency(id);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
+  @Delete('tour/:id')
+  deleteTour(@Param('id', ParseUUIDPipe) id: string, @Req() request) {
+    const agencyId = request.user.id;
+
+    return this.agencyService.deleteTour(id, agencyId);
   }
 }

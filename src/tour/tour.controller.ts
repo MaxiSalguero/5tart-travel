@@ -7,12 +7,13 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
+  Put,
   Req,
   UseGuards,
 } from '@nestjs/common';
 import { TourService } from './tour.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { CreateTourDto } from 'src/DTOS/CreateTour.dto';
+import { CreateTourDto, UpdateTourDto } from 'src/DTOS/CreateTour.dto';
 import { AuthGuard } from 'src/guards/auth.guard';
 import path from 'path';
 import { TourEntity } from 'src/entities/tour.entity';
@@ -56,6 +57,7 @@ export class tourController {
 
     return this.tourService.createTour(tour, userId);
   }
+
   @Post('mailOfertas')
   async mailOfertas(@Body('email') email: string): Promise<void> {
     try {
@@ -63,6 +65,14 @@ export class tourController {
     } catch (error) {
       throw new Error(`Error al enviar el correo de ofertas: ${error.message}`);
     }
+  }
+
+  @Put(':id')
+  updateTour(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() tour: UpdateTourDto,
+  ) {
+    return this.tourService.updateTour(id, tour);
   }
 
   @Delete(':id')

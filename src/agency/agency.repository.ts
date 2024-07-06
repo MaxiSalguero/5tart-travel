@@ -1,6 +1,11 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AgencyEntity } from 'src/entities/agency.entity';
+import { TourEntity } from 'src/entities/tour.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -8,6 +13,8 @@ export class AgencyRepository {
   constructor(
     @InjectRepository(AgencyEntity)
     private readonly agencyRepository: Repository<AgencyEntity>,
+    @InjectRepository(TourEntity)
+    private readonly toursRepository: Repository<TourEntity>,
   ) {}
 
   async getAgency() {
@@ -49,8 +56,34 @@ export class AgencyRepository {
     return 'Agencia eliminada correctamente';
   }
 
+  async deleteTour(id: string, agencyId: string) {
+    const agency = await this.agencyRepository.findOne({
+      where: { id: agencyId },
+      relations: { tours: true },
+    });
+
+    if (!agency) {
+      throw new BadRequestException('La agencia no existe');
+    }
+
+    const tour: TourEntity = await this.toursRepository.findOneBy({ id: id });
+
+    if (!tour) {
+      throw new NotFoundException(`No se encontró el tour`);
+    }
+
+    agency.tours = agency.tours.filter((tour) => tour.id !== id);
+
+    await this.agencyRepository.save(agency);
+
+    return 'Tour eliminado correctamente';
+  }
+
   async getByIdAgency(id: string) {
-    const agency: AgencyEntity = await this.agencyRepository.findOne({where: {id: id}, relations: {tours: true}});
+    const agency: AgencyEntity = await this.agencyRepository.findOne({
+      where: { id: id },
+      relations: { tours: true },
+    });
 
     if (!agency) {
       throw new BadRequestException('La agencia no existe');
@@ -58,5 +91,4 @@ export class AgencyRepository {
 
     return agency;
   }
-
 }

@@ -70,7 +70,7 @@ export class UserRepository {
     const tour: TourEntity = await this.toursRepository.findOneBy({ id: id });
 
     if (!tour) {
-      throw new NotFoundException(`No se encontró el refugio`);
+      throw new NotFoundException(`No se encontró el tour`);
     }
 
     user.favorite_tours.push(tour);
@@ -93,7 +93,7 @@ export class UserRepository {
     const tour: TourEntity = await this.toursRepository.findOneBy({ id: id });
 
     if (!tour) {
-      throw new NotFoundException(`No se encontró el refugio`);
+      throw new NotFoundException(`No se encontró el tour`);
     }
 
     user.favorite_tours = user.favorite_tours.filter(

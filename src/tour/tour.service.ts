@@ -13,6 +13,10 @@ export class TourService {
     return this.tourRepository.createTour(tour, userId);
   }
 
+  updateTour(id: string, tour: any) {
+    return this.tourRepository.updateTour(id, tour);
+  }
+
   deleteTour(id: string) {
     return this.tourRepository.deleteTour(id);
   }
@@ -28,10 +32,12 @@ export class TourService {
   getToursOferta() {
     return this.tourRepository.getToursOferta();
   }
+
   mailoferta(email: string) {
     return this.tourRepository.mailOfertas(email);
   }
+  
   getTourById(id: string) {
     return this.tourRepository.getTourById(id);
   }
- }
+}

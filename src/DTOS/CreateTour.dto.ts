@@ -1,6 +1,11 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsDate, IsNumber, IsOptional, Length, isNumber } from 'class-validator';
+import {
+  IsDate,
+  IsNumber,
+  IsOptional,
+  Length,
+} from 'class-validator';
 import { IsNotEmpty, IsString, Matches } from 'class-validator';
 import { TransportType } from 'src/entities/transporte.enum';
 
@@ -123,5 +128,7 @@ export class CreateTourDto {
 
   @IsOptional()
   @IsNumber()
-  rates?:number
+  rates?: number;
 }
+
+export class UpdateTourDto extends PartialType(CreateTourDto) {}
