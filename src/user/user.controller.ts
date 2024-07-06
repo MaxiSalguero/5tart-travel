@@ -13,20 +13,21 @@ import {
 import { UserServices } from './user.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/guards/auth.guard';
-import { request } from 'http';
 import { UserEntity } from 'src/entities/user.entity';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from './role.enum';
 
 @ApiTags('user')
 @Controller('user')
 export class userController {
   constructor(private userService: UserServices) {}
 
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   @Get()
+  @Roles(Role.User)
+  @UseGuards(AuthGuard, RolesGuard)
   getUsers() {
-    // console.log(request.user.id);
-
     return this.userService.getUsers();
   }
 

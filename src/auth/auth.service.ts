@@ -103,6 +103,7 @@ export class AuthService {
         id: user.id,
         email: user.mail,
         username: user.username,
+        role: user.role,
         type: 'user',
       };
 
@@ -124,6 +125,7 @@ export class AuthService {
         id: agency.id,
         email: agency.mail,
         name_agency: agency.name_agency,
+        role: agency.role,
         type: 'agency',
       };
 
