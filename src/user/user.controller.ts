@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -17,6 +18,7 @@ import { UserEntity } from 'src/entities/user.entity';
 import { RolesGuard } from 'src/guards/roles.guard';
 import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from './role.enum';
+import { UpdateUserDto } from 'src/DTOS/CreateUser.dto';
 
 @ApiTags('user')
 @Controller('user')
@@ -60,6 +62,14 @@ export class userController {
     const userId = request.user.id;
 
     return this.userService.deleteTourFavorite(id, userId);
+  }
+
+  @Put('profile/:id')
+  updatedProfile(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() user: UpdateUserDto,
+  ) {
+    return this.userService.updatedProfile(id, user);
   }
 
   @Put('active/:id')

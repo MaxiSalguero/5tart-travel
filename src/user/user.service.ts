@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from './user.repository';
+import { UserEntity } from 'src/entities/user.entity';
 
 @Injectable()
 export class UserServices {
@@ -17,8 +18,12 @@ export class UserServices {
     return this.userRepository.deleteTourFavorite(id, userId);
   }
 
-  getUserById(id) {
+  getUserById(id: string) {
     return this.userRepository.getUserById(id);
+  }
+
+  updatedProfile(id: string, user: Partial<UserEntity>) {
+    return this.userRepository.updatedProfile(id, user);
   }
 
   activeUser(id: string) {

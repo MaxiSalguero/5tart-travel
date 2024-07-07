@@ -1,4 +1,4 @@
-import { ApiProperty, PickType } from '@nestjs/swagger';
+import { ApiProperty, PartialType, PickType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { Length, Validate } from 'class-validator';
 import {
@@ -66,5 +66,7 @@ export class CreateUserDto {
   @ApiProperty()
   birthday: Date;
 }
+
+export class UpdateUserDto extends PartialType(CreateUserDto) {}
 
 export class LoginDto extends PickType(CreateUserDto, ['mail', 'password']) {}
