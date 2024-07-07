@@ -101,9 +101,15 @@ export class TourEntity {
 
   @Column({
     nullable: true,
+    type: 'text',
+    array: true,
+  })
+  listImg?: string[];
+
+  @Column({
+    nullable: true,
   })
   empresa?: string;
-
 
   @Column({ type: 'float', nullable: true }) // Define averageRate here
   averageRate?: number;

@@ -1,4 +1,4 @@
-import { IsEmpty, Length, Validate } from 'class-validator';
+import { IsEmpty, IsOptional, Length, Validate } from 'class-validator';
 import { IsEmail, IsNotEmpty, IsString, Matches } from 'class-validator';
 import { MatchPassword } from 'src/decorators/password.decorator';
 
@@ -56,6 +56,7 @@ export class CreateAgencyDto {
   Ingresar la url de la imagen
   @example https://res.cloudinary.com/dia2gautk/image/upload/v1719807466/logo_start_hy9j22.webp
   */
-  @IsEmpty()
+  @IsOptional()
+  @IsString()
   imgUrl: string;
 }
