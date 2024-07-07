@@ -25,6 +25,7 @@ import { SearchModule } from './search/search.module';
 import { MercadoPagoModule } from './mercado-pago/mercado-pago.module';
 import { CommentModule } from './comment/comment.module';
 import { ContactModule } from './contact/contact.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { ContactModule } from './contact/contact.module';
     MercadoPagoModule,
     CommentModule,
     ContactModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService, PreloadService, MapsService],
