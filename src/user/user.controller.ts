@@ -71,4 +71,9 @@ export class userController {
   disableUser(@Param('id', ParseUUIDPipe) id: string) {
     return this.userService.disableUser(id);
   }
+
+  @Put('admin/:id')
+  adminUser(@Param('id', ParseUUIDPipe) id: string) {
+    return this.userService.adminUser(id);
+  }
 }

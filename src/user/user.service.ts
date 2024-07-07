@@ -10,15 +10,15 @@ export class UserServices {
   }
 
   addTourFavorite(id: string, userId: any) {
-    return this.userRepository.addTourFavorite(id, userId)
+    return this.userRepository.addTourFavorite(id, userId);
   }
 
   deleteTourFavorite(id: string, userId: any) {
-    return this.userRepository.deleteTourFavorite(id, userId)
+    return this.userRepository.deleteTourFavorite(id, userId);
   }
 
-  getUserById(id){
-    return this.userRepository.getUserById(id)
+  getUserById(id) {
+    return this.userRepository.getUserById(id);
   }
 
   activeUser(id: string) {
@@ -27,5 +27,9 @@ export class UserServices {
 
   disableUser(id: string) {
     return this.userRepository.disableUser(id);
+  }
+
+  adminUser(id: string) {
+    return this.userRepository.adminUser(id);
   }
 }

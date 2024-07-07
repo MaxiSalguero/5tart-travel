@@ -144,4 +144,18 @@ export class UserRepository {
 
     return updateUser;
   }
+
+  async adminUser(id: string) {
+    const user = await this.usersRepository.findOne({ where: { id } });
+
+    if (!user) throw new NotFoundException('no se encontro el usuario');
+    if (user.role === 'admin')
+      throw new BadRequestException('el usuario ya es un admin');
+
+    user.role = 'admin';
+
+    const updateUser = this.usersRepository.save(user);
+
+    return updateUser;
+  }
 }
