@@ -95,8 +95,8 @@ export class AuthService {
       if (!isPasswordValid)
         throw new UnauthorizedException('Credenciales incorrectas');
       if (!isActive)
-        throw new UnauthorizedException(
-          'Este usuario se encuentra desactivado',
+        throw new ImATeapotException(
+          'Esta agencia aun no se encuentra activa',
         );
 
       const userpayload = {
