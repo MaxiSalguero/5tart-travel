@@ -36,8 +36,16 @@ export class TourService {
   mailoferta(email: string) {
     return this.tourRepository.mailOfertas(email);
   }
-  
+
   getTourById(id: string) {
     return this.tourRepository.getTourById(id);
+  }
+
+  addTourImg(id: string, imgUrl) {
+    return this.tourRepository.addTourImg(id, imgUrl);
+  }
+
+  removeTourImg(id: string, imgUrl:string) {
+    return this.tourRepository.removeTourImg(id, imgUrl);
   }
 }

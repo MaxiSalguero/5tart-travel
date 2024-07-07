@@ -260,15 +260,7 @@ export class TourRepository {
         <a href="url_de_tu_pagina_principal" class="btn">Ir a la página principal</a>
     </div>
 </body>
-</html>
-
-
-
-
-
-
-
-`;
+</html>`;
 
     this.logger.log(`Enviando correo a ${email} con las ofertas disponibles.`);
     await this.mailservice.sendMail(email, subject, textBody, htmlBody);
@@ -284,5 +276,50 @@ export class TourRepository {
     }
 
     return Tour;
+  }
+
+  async addTourImg(id: string, imgUrl) {
+    const tour: TourEntity = await this.tourRepository.findOne({
+      where: { id },
+    });
+
+    if (tour.listImg === null) {
+      tour.listImg = [];
+    }
+
+    if (!tour) {
+      throw new NotFoundException('Tour no encontrado');
+    }
+
+    const arrayImg = await Promise.all(
+      imgUrl.map((img) => {
+        return img;
+      }),
+    );
+
+    await Promise.all(
+      arrayImg.map(async (img) => {
+        tour.listImg.push(img);
+        await this.tourRepository.save(tour);
+      }),
+    );
+
+    return tour;
+  }
+
+  async removeTourImg(id: string, imgUrl: string) {
+    const tour: TourEntity = await this.tourRepository.findOne({
+      where: { id },
+    });
+
+    if (!tour) {
+      throw new NotFoundException('Tour no encontrado');
+    }
+
+    tour.listImg = tour.listImg.filter((img) => img !== imgUrl);
+
+    await this.tourRepository.save(tour);
+
+    return tour;
   }
 }
