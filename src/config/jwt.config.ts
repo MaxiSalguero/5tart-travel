@@ -5,6 +5,6 @@ export const jwtConfig: JwtModuleOptions = {
   global: true,
   secret: JWT_SECRET,
   signOptions: {
-    expiresIn: '1h',
+    expiresIn: '24h',
   },
 };

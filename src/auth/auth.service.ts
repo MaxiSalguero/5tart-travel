@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   ConflictException,
+  ImATeapotException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -116,7 +117,7 @@ export class AuthService {
       if (!isPasswordValid)
         throw new UnauthorizedException('Credenciales incorrectas');
       if (!isActive)
-        throw new UnauthorizedException(
+        throw new ImATeapotException(
           'Esta agencia aun no se encuentra activa',
         );
 
@@ -125,6 +126,8 @@ export class AuthService {
         id: agency.id,
         email: agency.mail,
         name_agency: agency.name_agency,
+        address: agency.address,
+        imgUrl: agency.imgUrl,
         role: agency.role,
         type: 'agency',
       };

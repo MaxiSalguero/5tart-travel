@@ -105,6 +105,17 @@ export class UserRepository {
     return 'Eliminado de Favoritos';
   }
 
+  async updatedProfile(id: string, user: Partial<UserEntity>) {
+    const updateUser = await this.usersRepository.findOne({ where: { id } });
+    if (!updateUser) {
+      throw new NotFoundException(`no se encontro el usuario con id ${id}`);
+    }
+    const newUser = this.usersRepository.merge(updateUser, user);
+    await this.usersRepository.save(newUser);
+
+    return newUser;
+  }
+
   async activeUser(id: string) {
     const user = await this.usersRepository.findOne({ where: { id } });
 
