@@ -1,6 +1,7 @@
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { TourEntity } from './tour.entity';
+import { OrderEntity } from './order.entity';
 
 @Entity({
   name: 'users',
@@ -43,5 +44,9 @@ export class UserEntity {
   @ManyToMany(() => TourEntity, (favorite_tours) => favorite_tours.user)
   @JoinTable()
   favorite_tours: TourEntity[];
+
+  @ManyToMany(() => OrderEntity, (orders) => orders.user)
+  @JoinTable()
+  orders: OrderEntity[];
 
 }

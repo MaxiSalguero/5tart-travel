@@ -19,7 +19,7 @@ export class UserRepository {
 
   async getUsers() {
     const users: UserEntity[] = await this.usersRepository.find({
-      relations: { favorite_tours: true },
+      relations: { favorite_tours: true, orders: true }
     });
 
     if (users.length == 0) {
