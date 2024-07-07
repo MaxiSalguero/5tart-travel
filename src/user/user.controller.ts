@@ -64,11 +64,12 @@ export class userController {
     return this.userService.deleteTourFavorite(id, userId);
   }
 
-  @Put('profile/:id')
-  updatedProfile(
-    @Param('id', ParseUUIDPipe) id: string,
-    @Body() user: UpdateUserDto,
-  ) {
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
+  @Put('profile')
+  updatedProfile(@Body() user: UpdateUserDto, @Req() request) {
+    const id = request.user.id;
+
     return this.userService.updatedProfile(id, user);
   }
 
