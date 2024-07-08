@@ -23,7 +23,7 @@ export class MercadoPagoService {
               },
             ],
             back_urls: {
-              success: "https://static.wikia.nocookie.net/esstarwars/images/d/d5/MP-YodaSpecies.png/revision/latest?cb=20180802191916" ,
+              success: "https://5tart-travel-frontend.vercel.app/dashboard/compras" ,
               // failure: process.env.MP_FAILURE_URL,
               // pending: process.env.MP_PENDING_URL,
             },
