@@ -131,9 +131,9 @@ export class AuthService {
         role: agency.role,
         type: 'agency',
       };
-
+      await this.mailservice.agencyAcceptedMail(agency.mail,agency.name_agency)
       const token = this.jwtService.sign(agencypayload);
-
+      
       return { success: 'Agencia logueada correctamente', token };
     } else {
       throw new UnauthorizedException('Credenciales incorrectas');

@@ -90,57 +90,109 @@ export class mailsServices {
     await this.sendMail(userEmail, subject, textBody, htmlBody);
   }
   async registerAgencyMail(
-  userEmail: string,
-  username: string,
-  password: string,
-) {
-  const subject = 'Bienvenido a 5tart Travel';
-  const textBody = `Hola ${username},
+    userEmail: string,
+    username: string,
+    password: string,
+  ) {
+    const subject = 'Bienvenido a 5tart Travel';
+    const textBody = `Hola ${username},
+    
+    ¡Bienvenido/a a 5tart Travel!
   
-  ¡Bienvenido/a a 5tart Travel!
-
-  Nos alegra mucho que te hayas unido a la página de viajes más grande del país. En 5tart Travel, puedes cargar tus paquetes de viaje y crear información sobre tu agencia. Ahora puedes explorar todas las herramientas que ofrecemos para que puedas ofrecer tus mejores servicios de viaje a nuestros usuarios.
-
-  Tus credenciales son:
-  Usuario: ${userEmail}
-  Contraseña: ${password}
-
-  Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
-
-  Saludos cordiales,
-  El equipo de 5tart Travel`;
-
-  const htmlBody = `
-    <div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%;">
-        <p><strong>¡Hola, ${username}!</strong></p>
-        <p><strong>¡Bienvenido/a a 5tart Travel!</strong></p>
-        <p>Nos alegra mucho que te hayas unido a la página de viajes más grande del país. En 5tart Travel, puedes cargar tus paquetes de viaje y la información sobre tu agencia. Ahora puedes explorar todas las herramientas que ofrecemos para que puedas promocionar tus servicios de viaje a nuestros usuarios.</p>
-        <p>Tus credenciales son:</p>
-        <div style="border: 2px solid #003366; padding: 10px; border-radius: 10px; margin-bottom: 10px; background: white; text-align: center; display: inline-block; width: auto; max-width: 90%;">
-            <p style="margin: 0;"><strong>Usuario:</strong> ${userEmail}</p>
-            <p style="margin: 0;"><strong>Contraseña:</strong> ${password}</p>
-        </div>
-        <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
-        <p>¡Saludos!</p>
-        <p>El Equipo de 5tart Travel</p>
-    </div>
-    <style>
-        @media only screen and (max-width: 600px) {
-            div[style*="border: 2px solid #003366; padding: 20px;"] {
-                padding: 10px;
-            }
-            div[style*="border: 2px solid #003366; padding: 10px;"] {
-                padding: 5px;
-            }
-        }
-    </style>
-  `;
-
-  this.logger.log(
-    `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
-  );
-  await this.sendMail(userEmail, subject, textBody, htmlBody);
-}
+    Nos alegra mucho que te hayas unido a la página de viajes más grande del país. En 5tart Travel, puedes cargar tus paquetes de viaje y crear información sobre tu agencia. Ahora puedes explorar todas las herramientas que ofrecemos para que puedas ofrecer tus mejores servicios de viaje a nuestros usuarios.
+  
+    Tus credenciales son:
+    Usuario: ${userEmail}
+    Contraseña: ${password}
+  
+    Por favor ten en cuenta que no podrás completar tu registro hasta que recibas la confirmación de que tu agencia ha sido aceptada en nuestra plataforma.
+  
+    Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
+  
+    Saludos cordiales,
+    El equipo de 5tart Travel`;
+  
+    const htmlBody = `
+      <div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%;">
+          <p><strong>¡Hola, ${username}!</strong></p>
+          <p><strong>¡Bienvenido/a a 5tart Travel!</strong></p>
+          <p>Nos alegra mucho que te hayas unido a la página de viajes más grande del país. En 5tart Travel, puedes cargar tus paquetes de viaje y la información sobre tu agencia. Ahora puedes explorar todas las herramientas que ofrecemos para que puedas promocionar tus servicios de viaje a nuestros usuarios.</p>
+          <p>Tus credenciales son:</p>
+          <div style="border: 2px solid #003366; padding: 10px; border-radius: 10px; margin-bottom: 10px; background: white; text-align: center; display: inline-block; width: auto; max-width: 90%;">
+              <p style="margin: 0;"><strong>Usuario:</strong> ${userEmail}</p>
+              <p style="margin: 0;"><strong>Contraseña:</strong> ${password}</p>
+          </div>
+          <p>Por favor ten en cuenta que no podrás completar tu registro hasta que recibas la confirmación de que tu agencia ha sido aceptada en nuestra plataforma.</p>
+          <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
+          <p>¡Saludos!</p>
+          <p>El Equipo de 5tart Travel</p>
+      </div>
+      <style>
+          @media only screen and (max-width: 600px) {
+              div[style*="border: 2px solid #003366; padding: 20px;"] {
+                  padding: 10px;
+              }
+              div[style*="border: 2px solid #003366; padding: 10px;"] {
+                  padding: 5px;
+              }
+          }
+      </style>
+    `;
+  
+    this.logger.log(
+      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
+    );
+    await this.sendMail(userEmail, subject, textBody, htmlBody);
+  }
+  async agencyAcceptedMail(
+    userEmail: string,
+    username: string,
+  ) {
+    const subject = 'Tu agencia ha sido aceptada en 5tart Travel';
+    const textBody = `Hola ${username},
+    
+    ¡Felicidades!
+  
+    Nos complace informarte que tu agencia ha sido aceptada en 5tart Travel. Ahora puedes ingresar a nuestra plataforma y comenzar a ampliar la información de tu agencia y publicar tus paquetes turísticos para que nuestros usuarios puedan descubrir tus servicios.
+  
+    Si tienes alguna pregunta o necesitas ayuda para comenzar, no dudes en contactarnos.
+  
+    ¡Bienvenido/a y mucho éxito en 5tart Travel!
+  
+    Saludos cordiales,
+    El equipo de 5tart Travel`;
+  
+    const htmlBody = `
+      <div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%;">
+          <p><strong>¡Hola, ${username}!</strong></p>
+          <p><strong>¡Felicidades!</strong></p>
+          <p>Nos complace informarte que tu agencia ha sido aceptada en 5tart Travel. Ahora puedes ingresar a nuestra plataforma y comenzar a ampliar la información de tu agencia y publicar tus paquetes turísticos para que nuestros usuarios puedan descubrir tus servicios.</p>
+          <p>Si tienes alguna pregunta o necesitas ayuda para comenzar, no dudes en contactarnos.</p>
+          <p>¡Bienvenido/a y mucho éxito en 5tart Travel!</p>
+          <p>Saludos cordiales,</p>
+          <p>El equipo de 5tart Travel</p>
+          <div style="margin-top: 20px;">
+            <a href="https://5tart-travel-frontend.vercel.app/AUTH/login" style="display: inline-block; padding: 10px 20px; background: linear-gradient(to bottom, #003366, #ffffff); color: white; text-decoration: none; border-radius: 5px; box-shadow: 0 5px 15px rgba(0, 51, 102, 0.3); transition: all 0.3s ease;">
+              Iniciar Sesión
+            </a>
+          </div>
+      </div>
+      <style>
+          @media only screen and (max-width: 600px) {
+              div[style*="border: 2px solid #003366; padding: 20px;"] {
+                  padding: 10px;
+              }
+          }
+      </style>
+    `;
+  
+    this.logger.log(
+      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
+    );
+    await this.sendMail(userEmail, subject, textBody, htmlBody);
+  }
+  
+  
 
   async cambioPasswordMail(userEmail: string, username: string) {
     const subject = 'Solicitud de Cambio de Contraseña - 5tart Travel';
