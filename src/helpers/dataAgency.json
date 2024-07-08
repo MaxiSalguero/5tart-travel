@@ -4,7 +4,7 @@
       "mail": "info@viajespatagonia.com",
       "password": "password123",
       "confirm_password": "password123",
-      "address": "Av. San Martín 123, Buenos Aires",
+      "address": "Av. San Martín 123, CABA Buenos Aires",
       "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431868/vytadvpx2rxn3k3upmrp.jpg"
     },
     {
@@ -12,7 +12,7 @@
       "mail": "contacto@mendozatours.com",
       "password": "securepwd456",
       "confirm_password": "securepwd456",
-      "address": "Calle Libertador 567, Mendoza",
+      "address": "Av. Pueyrredón 2250, Balvanera",
       "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431868/gqovlwnb2kitjzgj410s.jpg"
     },
     {
@@ -20,7 +20,7 @@
       "mail": "info@cataratastravel.com",
       "password": "mystrongpassword",
       "confirm_password": "mystrongpassword",
-      "address": "Av. Cataratas 890, Iguazú",
+      "address": "Av. del Barco Centenera 1500, Parque Chacabuco",
       "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431868/yzsgqdevkc0clgczmrrv.jpg"
     },
     {
@@ -28,7 +28,7 @@
       "mail": "ventas@saltaaventura.com",
       "password": "saltaaventura321",
       "confirm_password": "saltaaventura321",
-      "address": "Av. Belgrano 456, Salta",
+      "address": "Av. Rivadavia 9500, Floresta",
       "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431868/siwtifhwdttybirvdrvl.jpg"
     },
     {
@@ -36,7 +36,7 @@
       "mail": "contacto@tierradelfuegotours.com",
       "password": "toursushuaia",
       "confirm_password": "toursushuaia",
-      "address": "Calle Fuego 789, Ushuaia",
+      "address": "Av. Triunvirato 4200, Villa Ortúzar",
       "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431868/epks6ggneutpn8ofxdu0.jpg"
     },
     {
@@ -52,7 +52,7 @@
         "mail": "info@marplataviajes.com",
         "password": "marplatapwd456",
         "confirm_password": "marplatapwd456",
-        "address": "Calle Mitre 567, Capital Federal",
+        "address": "Av. Scalabrini Ortiz 600, Villa Crespo",
         "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431868/kbffgrio2fbbpeqk667b.jpg"
       },
       {
@@ -60,7 +60,7 @@
         "mail": "info@cordobaturismo.com",
         "password": "cordobaturismo321",
         "confirm_password": "cordobaturismo321",
-        "address": "Calle Olmos 987, Capital Federal",
+        "address": "Av. La Plata 1700, Boedo",
         "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431867/mrzvbuhp9hzrszy3bp3h.jpg"
       },
       {
@@ -68,7 +68,7 @@
         "mail": "info@rosariotravel.com",
         "password": "rosariotravelpwd",
         "confirm_password": "rosariotravelpwd",
-        "address": "Bv. Oroño 345, Capital Federal",
+        "address": "Av. Corrientes 5800, caba",
         "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431867/f2cdsfu6pua8c99pnlph.jpg"
       },
       {

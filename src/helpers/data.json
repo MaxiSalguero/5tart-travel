@@ -5,6 +5,9 @@
     "description": "Disfruta de una semana en Bariloche con alojamiento y excursiones incluidas.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431444/ncvde8xq30apqjk58ng9.jpg",
     "hotel": "Hotel Gran Panamericano",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720416627/ensspi1lt4memsgdvtp8.jpg"
+    ],
     "address": "Av. Exequiel Bustillo 22900, San Carlos de Bariloche, Río Negro",
     "agency": "Viajes Patagonia",
     "destino": "bariloche",
@@ -18,8 +21,11 @@
     "title": "Mendoza Mágica",
     "price": 2000,
     "description": "Explora los viñedos de Mendoza con este paquete de 5 días.",
-    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/jdppzdewqpzbosdviinx.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720416791/i57xvalpfvdnjintur2j.jpg",
     "hotel": "Hotel Mendoza",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720416704/hy3w5pmtohgf5zrrfcv9.jpg"
+    ],
     "address": "Av. España 1210, Mendoza",
     "agency": "Mendoza Tours",
     "destino": "mendoza",
@@ -33,8 +39,11 @@
     "title": "Iguazú Inolvidable",
     "price": 2500,
     "description": "Visita las impresionantes Cataratas del Iguazú con alojamiento y tours incluidos.",
-    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431442/sarqdjgjo6ca1x7qu4uk.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720417073/dyusmqossynibdtk1usi.jpg",
     "hotel": "El libertador",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720416918/y9cn0ctsdps2ycwk9czm.jpg"
+    ],
     "address": "C. Bonpland 110, Puerto Iguazú, Misiones",
     "agency": "Cataratas Travel",
     "destino": "iguazu",
@@ -48,8 +57,11 @@
     "title": "Salta Encantadora",
     "price": 3000,
     "description": "Descubre la belleza de Salta y sus alrededores con este paquete de 7 días.",
-    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/gqlt8mkjkz8xumdjwdac.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720417118/s9zundfxyb1hewikoc5d.jpg",
     "hotel": "Hotel Salta",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720417165/swoopkycnqchdrypdbjv.jpg"
+    ],
     "address": "Buenos Aires Nº1, Salta",
     "agency": "Salta Aventura",
     "destino": "salta",
@@ -65,6 +77,9 @@
     "description": "Aventura en el fin del mundo: visita Ushuaia con este paquete completo.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/xnp9j5nsvgyoubaxdsx7.jpg",
     "hotel": "Alto Andino Hotel",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720417203/vwpcajcwxm2uuwe9chsg.jpg"
+    ],
     "address": "Paz 868, Ushuaia, Tierra del Fuego",
     "agency": "Tierra del Fuego Tours",
     "destino": "ushuaia",
@@ -80,6 +95,9 @@
     "description": "Maravíllate con el Glaciar Perito Moreno en El Calafate con este paquete de 4 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/xnaksx69wllmflvwr0cl.jpg",
     "hotel": "Hotel Mirador del Lago",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720417243/tlii4j9wdelckm0n2fgx.jpg"
+    ],
     "address": "Av. del Libertador 2047, El Calafate, Santa Cruz",
     "agency": "Glaciares Tours",
     "destino": "el calafate",
@@ -93,8 +111,11 @@
     "title": "Mar del Plata Relax",
     "price": 1800,
     "description": "Relájate en las playas de Mar del Plata con este paquete de 3 días.",
-    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/llin819v67a2fcwuzaqm.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720417311/zqlpk2xgpqm9ivnu7gg6.jpg",
     "hotel": "Hotel Golf Club",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720417288/cnr6kpbsc4jaoygvjivr.webp"
+    ],
     "address": "Aristóbulo del Valle 3641, Mar del Plata, Provincia de Buenos Aires",
     "agency": "Mar del Plata Viajes",
     "destino": "mar del plata",
@@ -110,6 +131,9 @@
     "description": "Explora la ciudad de Córdoba y sus sierras con este paquete de 5 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/gjenpsjdcyla0c5exiye.jpg",
     "hotel": "Amerian Cordoba Park Hotel",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720417370/kww0nk803thpdz53ibhe.jpg"
+    ],
     "address": "Boulevard San Juan 165, Córdoba",
     "agency": "Córdoba Turismo",
     "destino": "cordoba",
@@ -125,6 +149,9 @@
     "description": "Disfruta de un fin de semana en Rosario con actividades y tours incluidos.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/huvqpfg4moqc3pvk9e1g.jpg",
     "hotel": "Ariston Hotel",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720417407/cjkmvt3atuoiwcmglurq.jpg"
+    ],
     "address": "Córdoba 2554, Rosario, Santa Fe",
     "agency": "Rosario Travel",
     "destino": "rosario",
@@ -140,6 +167,9 @@
     "description": "Descubre los paisajes y la cultura de La Rioja con este paquete de 4 días.",
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719431443/jkxnskiplutyg0doiysg.jpg",
     "hotel": "Hotel Pucará",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720417456/nba3ur01pklr5z5q1yvx.jpg"
+    ],
     "address": "República de Siria 398, 5300 La Rioja",
     "agency": "La Rioja Explora",
     "destino": "la rioja",
@@ -153,8 +183,11 @@
     "title": "Catamarca Cultural",
     "price": 1800,
     "description": "Descubre la cultura de Catamarca con este paquete que incluye alojamiento y visitas guiadas.",
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597109/catamarca_nzl1kf.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720417600/w3hntwimyr6vrit0bxtw.jpg",
     "hotel": "Hotel Inti Huasi",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720417574/e44tvsypvivgostkdzh2.jpg"
+    ],
     "address": "Republica 299, San Fernando del Valle de Catamarca, Catamarca",
     "agency": "Viajes Patagonia",
     "destino": "catamarca",
@@ -169,8 +202,11 @@
     "title": "Córdoba Natural",
     "price": 1600,
     "description": "Disfruta de la naturaleza de Córdoba con este paquete que incluye alojamiento y excursiones.",
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597109/cordoba_dbxe0j.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720417734/yvye7ldkcie3ow8cjwyy.jpg",
     "hotel": "Hostel del Sol",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720417757/em0tllxen40tandhhru6.jpg"
+    ],
     "address": "Gabino Ezeiza 450, Córdoba",
     "agency": "Córdoba Turismo",
     "destino": "cordoba",
@@ -185,8 +221,11 @@
     "title": "Tandil Relajante",
     "price": 1200,
     "description": "Escápate a Tandil y disfruta de la tranquilidad con este paquete que incluye alojamiento y actividades recreativas.",
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/tqandil_ct2znd.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720417789/hdz2sdvdd6inw5gn0mxa.jpg",
     "hotel": "Hotel Libertador",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720417830/e5vhskvzejlsmiz09q37.jpg"
+    ],
     "address": "Mitre 545, Tandil, Buenos Aires",
     "agency": "Viajes Patagonia",
     "destino": "tandil",
@@ -201,8 +240,11 @@
     "title": "Trevelin Aventura",
     "price": 2000,
     "description": "Explora Trevelin y sus alrededores con este paquete que incluye alojamiento y actividades de aventura.",
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597109/trevelin_kls6o1.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720417894/vzq9nwdiiavziqirxwby.jpg",
     "hotel": "Hosteria La Portada",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720417868/wavnzzz169oy9lr2bnw9.jpg"
+    ],
     "address": "chacra 173,  Trevelin, Chubut",
     "agency": "Viajes Patagonia",
     "destino": "trevelin",
@@ -212,14 +254,16 @@
     "transportType": "plane",
     "oferta": true,
     "empresa": "Aerolineas Argentinas"
-    
   },
   {
     "title": "Esquel Escapada",
     "price": 1900,
     "description": "Descubre Esquel y sus alrededores con este paquete que incluye alojamiento y excursiones imperdibles.",
-   "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/esquel_kfqidu.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720417926/bczm3pidb3yr0ov9nur2.jpg",
     "hotel": "Hotel Esquel",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720418084/g6nibffvka0foevnqmo6.jpg"
+    ],
     "address": "San Martín 1042,Esquel, Chubut",
     "agency": "Viajes Patagonia",
     "destino": "esquel",
@@ -233,9 +277,12 @@
   {
     "title": "San Rafael Vinícola",
     "price": 2200,
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/san_rafael_y1pobt.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720418203/ghxg9pd4ntavpaw9ni5b.jpg",
     "description": "Sumérgete en San Rafael y sus bodegas con este paquete que incluye alojamiento y tours vinícolas.",
     "hotel": "Hotel San Martin",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720418131/oaz2858xxebuzhrw6moh.jpg"
+    ],
     "address": "José de San Martín 435, San Rafael, Mendoza",
     "agency": "Mendoza Tours",
     "destino": "san rafael",
@@ -249,9 +296,12 @@
   {
     "title": "Montañas de Jujuy",
     "price": 1700,
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/jujuy_lvrnoz.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720418275/il3pwx9rt3facc57mcno.jpg",
     "description": "Explora las montañas de Jujuy con este paquete que incluye alojamiento y excursiones.",
     "hotel": "Hotel Munay Jujuy",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720418247/knd6jepnkojnbzlyzmj9.jpg"
+    ],
     "address": "Alvear 1230, San Salvador de Jujuy, Jujuy",
     "agency": "Viajes Patagonia",
     "destino": "jujuy",
@@ -266,8 +316,11 @@
     "title": "Purmamarca Mágica",
     "price": 1850,
     "description": "Descubre la magia de Purmamarca con este paquete que incluye alojamiento y visitas a los cerros de colores.",
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/purmamarca_s8kerc.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720418306/iehzvmwyybkdv5a2x535.jpg",
     "hotel": "Hotel Marquez de Tojo",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720418334/a8kmcnlnchrny5kbso0b.jpg"
+    ],
     "address": "Santa Rosa 4, Purmamarca, Jujuy",
     "agency": "Salta Aventura",
     "destino": "purmamarca",
@@ -282,8 +335,11 @@
     "title": "Termas de Río Hondo",
     "price": 1550,
     "description": "Relájate en las Termas de Río Hondo con este paquete que incluye alojamiento y acceso a las termas.",
-    "imgUrl":"https://res.cloudinary.com/dia2gautk/image/upload/v1719597108/termas_de_rio_hondo_alvnjo.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720418404/eqtvckfei9hizz0ookpc.jpg",
     "hotel": "Hotel Termas",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720418374/xvnsxzzka2pjs4ugtlha.jpg"
+    ],
     "address": "Hipólito Yrigoyen 552, Termas de Río Hondo, Santiago del Estero",
     "agency": "Rosario Travel",
     "destino": "termas de rio hondo",
@@ -293,12 +349,16 @@
     "transportType": "plane",
     "oferta": true,
     "empresa": "Jetsmart"
-  },{
+  },
+  {
     "title": "Descubre Montevideo",
     "price": 1200,
     "description": "Explora la ciudad de Montevideo con tours guiados y alojamiento incluido.",
-    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719787246/montevideo_r2tmdk.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720418493/rtuirdtewazu8gygjif8.webp",
     "hotel": "Palladium Business Hotel",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720418523/sdlub2ga44wdbl7jeanb.jpg"
+    ],
     "address": "Tomás de Tezanos 1146,Uruguay",
     "agency": "Viajes Patagonia",
     "destino": "montevideo",
@@ -313,8 +373,11 @@
     "title": "Río de Janeiro Maravilloso",
     "price": 1800,
     "description": "Disfruta de las playas de Río de Janeiro y su vida nocturna vibrante.",
-    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719787247/rio_de_janeiro_nwmup2.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720418573/oxjvbvfmtrdmtugdcfba.jpg",
     "hotel": "Copacabana Design Hotel",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720418544/kl1hhv2bwycigojek54a.jpg"
+    ],
     "address": "R. Barata Ribeiro, 173 - Copacabana",
     "agency": "Viajes Patagonia",
     "destino": "Rio de Janeiro",
@@ -328,8 +391,11 @@
     "title": "Descubre París",
     "price": 3000,
     "description": "Explora la ciudad de la luz con tours guiados y alojamiento en el centro de París.",
-    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719787246/paris_detm0b.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720418788/vb6h49prc6nlab5mqvsf.jpg",
     "hotel": "Hôtel Europe Saint-Séverin",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720418813/kkffh5qbmltww5mcsshs.jpg"
+    ],
     "address": "38-40 Rue Saint-Séverin,  Paris, Francia",
     "agency": "Viajes Patagonia",
     "destino": "paris",
@@ -343,8 +409,11 @@
     "title": "Safari en Tanzania",
     "price": 4000,
     "description": "Experimenta un safari emocionante en los parques nacionales de Tanzania.",
-    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719787246/zafari_k7ujks.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720418859/o6czthprbtyyi8paimqy.jpg",
     "hotel": "Royal Zanzibar Beach Resort",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720418837/sjtfrl87q4g4chjcgr9q.jpg"
+    ],
     "address": "Nungwi Beach, Zanzibar, Nungwi, Tanzania",
     "agency": "Viajes Patagonia",
     "destino": "Tanzania",
@@ -358,8 +427,11 @@
     "title": "Nueva York: La Gran Manzana",
     "price": 2500,
     "description": "Explora la ciudad de Nueva York con paseos por Central Park y visitas a los principales puntos de interés.",
-    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1719787246/new_york_rlyf61.jpg",
+    "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720418950/ldqz4jsoqelqlersmlmq.jpg",
     "hotel": "The Manhattan at Times Square Hotel",
+    "listImg": [
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720418979/qnbtxowc0tjcf1iuyu4w.jpg"
+    ],
     "address": "790 7th Ave, New York",
     "agency": "Viajes Patagonia",
     "destino": "nueva york",
@@ -369,5 +441,4 @@
     "transportType": "plane",
     "empresa": "Aerolíneas Argentinas"
   }
-
-  ]
+]
