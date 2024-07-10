@@ -49,9 +49,8 @@ export class GoogleController {
     let isPasswordValid: boolean;
 
     if (existingAgency) {
-      throw new UnauthorizedException(
-        'Unicamente los usuarios pueden acceder con google',
-      );
+      const redirectUrl = `https://5tart-travel-frontend.vercel.app/AUTH/errorGoogle`;
+      return res.redirect(redirectUrl);
     } else if (existingUser) {
       isPasswordValid = await bcrypt.compare(user.email, existingUser.password);
     }
@@ -87,11 +86,8 @@ export class GoogleController {
         throw new UnauthorizedException('Credenciales invalidas');
       }
     } else if (existingUser && !isPasswordValid) {
-      // Agregar redireccion a paginas de error
-      //const redirectUrl = `https://5tart-travel-frontend.vercel.app/AUTH/callback?access_token=${access_token}`;
-      throw new UnauthorizedException(
-        'Credenciales invalidas usted se registro desde el formulario',
-      );
+      const redirectUrl = `https://5tart-travel-frontend.vercel.app/AUTH/errorUserRegister`;
+      return res.redirect(redirectUrl);
     }
   }
 }
