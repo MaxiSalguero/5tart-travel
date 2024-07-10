@@ -40,10 +40,15 @@ export class GoogleController {
       where: { mail: user.email },
     });
 
-    const hashedPassword = await bcrypt.hash(user.email, 10);
+    const isPasswordValid = await bcrypt.compare(
+      user.email,
+      existingUser.password,
+    );
 
     if (!existingUser) {
       try {
+        const hashedPassword = await bcrypt.hash(user.email, 10);
+
         const newUser = new UserEntity();
         newUser.username = user.firstName;
         newUser.mail = user.email;
@@ -61,7 +66,7 @@ export class GoogleController {
       } catch (error) {
         throw new UnauthorizedException('Credenciales invalidas');
       }
-    } else if (existingUser && existingUser.password === hashedPassword) {
+    } else if (existingUser && isPasswordValid) {
       try {
         const response = await this.authService.login(user.email, user.email);
         const access_token = response.token;
@@ -70,10 +75,10 @@ export class GoogleController {
       } catch (error) {
         throw new UnauthorizedException('Credenciales invalidas');
       }
-    } else if (existingUser && existingUser.password !== hashedPassword) {
+    } else if (existingUser && !isPasswordValid) {
       // Agregar redireccion a paginas de error
       //const redirectUrl = `https://5tart-travel-frontend.vercel.app/AUTH/callback?access_token=${access_token}`;
-      throw new UnauthorizedException('Credenciales invalidas'); 
+      throw new UnauthorizedException('Credenciales invalidas');
     } else {
       throw new UnauthorizedException(
         'Unicamente usuarios pueden acceder con google',
