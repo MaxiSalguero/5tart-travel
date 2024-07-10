@@ -70,6 +70,10 @@ export class GoogleController {
       } catch (error) {
         throw new UnauthorizedException('Credenciales invalidas');
       }
+    } else if (existingUser && existingUser.password !== hashedPassword) {
+      // Agregar redireccion a paginas de error
+      //const redirectUrl = `https://5tart-travel-frontend.vercel.app/AUTH/callback?access_token=${access_token}`;
+      throw new UnauthorizedException('Credenciales invalidas'); 
     } else {
       throw new UnauthorizedException(
         'Unicamente usuarios pueden acceder con google',
