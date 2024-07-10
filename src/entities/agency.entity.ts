@@ -2,11 +2,13 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { TourEntity } from './tour.entity';
+import { OrderEntity } from './order.entity';
 
 @Entity({
   name: 'agency',
@@ -41,10 +43,14 @@ export class AgencyEntity {
   })
   isActive: boolean;
 
-  @Column({ nullable:true })
-  role: string
+  @Column({ nullable: true })
+  role: string;
 
   @OneToMany(() => TourEntity, (tours) => tours.agency)
   @JoinColumn()
   tours: TourEntity[];
+
+  @OneToMany(() => OrderEntity, (orders) => orders.agency)
+  @JoinTable()
+  orders: OrderEntity[];
 }

@@ -18,6 +18,10 @@ export class AgencyServices {
     return this.agencyRepository.deleteTour(id, agencyId);
   }
 
+  deleteOrders(agencyId: string) {
+    return this.agencyRepository.deleteOrders(agencyId);
+  }
+
   getByIdAgency(id: string) {
     return this.agencyRepository.getByIdAgency(id);
   }
