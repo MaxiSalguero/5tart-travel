@@ -28,6 +28,15 @@ export class agencyController {
     return this.agencyService.getByIdAgency(id);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
+  @Delete('orders')
+  deleteOrders(@Req() request) {
+    const agencyId = request.user.id;
+
+    return this.agencyService.deleteOrders(agencyId);
+  }
+
   @Delete(':id')
   deleteAgency(@Param('id', ParseUUIDPipe) id: string) {
     return this.agencyService.deleteAgency(id);

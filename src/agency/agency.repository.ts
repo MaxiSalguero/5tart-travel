@@ -79,10 +79,27 @@ export class AgencyRepository {
     return 'Tour eliminado correctamente';
   }
 
+  async deleteOrders(agencyId: string) {
+    const agency = await this.agencyRepository.findOne({
+      where: { id: agencyId },
+      relations: { orders: true },
+    });
+
+    if (!agency) {
+      throw new BadRequestException('La agencia no existe');
+    }
+
+    agency.orders = [];
+
+    const updatedAgency = await this.agencyRepository.save(agency);
+
+    return updatedAgency;
+  }
+
   async getByIdAgency(id: string) {
     const agency: AgencyEntity = await this.agencyRepository.findOne({
-      where: { id: id },
-      relations: { tours: true },
+      where: { id },
+      relations: { tours: true, orders: true },
     });
 
     if (!agency) {
