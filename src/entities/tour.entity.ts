@@ -16,6 +16,7 @@ export class TuristPoints {
   nombre: string;
   lat: number;
   lon: number;
+  price:number;
 }
 
 @Entity({
