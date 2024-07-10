@@ -14,6 +14,10 @@ export class UserServices {
     return this.userRepository.addTourFavorite(id, userId);
   }
 
+  deleteAllUsers() {
+    return this.userRepository.deleteAllUsers();
+  }
+
   deleteTourFavorite(id: string, userId: any) {
     return this.userRepository.deleteTourFavorite(id, userId);
   }

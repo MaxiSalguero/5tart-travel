@@ -55,6 +55,11 @@ export class userController {
     return this.userService.addTourFavorite(id, userId);
   }
 
+  @Delete('delete')
+  deleteAllUsers() {
+    return this.userService.deleteAllUsers();
+  }
+
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Delete('tour/favorite/:id')

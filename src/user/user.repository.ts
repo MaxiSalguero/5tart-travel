@@ -19,7 +19,7 @@ export class UserRepository {
 
   async getUsers() {
     const users: UserEntity[] = await this.usersRepository.find({
-      relations: { favorite_tours: true, orders: true }
+      relations: { favorite_tours: true, orders: true },
     });
 
     if (users.length == 0) {
@@ -78,6 +78,20 @@ export class UserRepository {
     await this.usersRepository.save(user);
 
     return 'Añadido a Favoritos';
+  }
+
+  async deleteAllUsers() {
+    const users = await this.usersRepository.find();
+
+    if (users.length === 0) {
+      throw new NotFoundException(
+        'No hay usuarios en la base de datos para eliminar',
+      );
+    }
+
+    await this.usersRepository.clear();
+
+    return 'Todos los usuarios han sido eliminados';
   }
 
   async deleteTourFavorite(id: string, userId: any) {
