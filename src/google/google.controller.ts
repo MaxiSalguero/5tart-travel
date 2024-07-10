@@ -14,6 +14,7 @@ import { Repository } from 'typeorm';
 import { UserEntity } from 'src/entities/user.entity';
 import { AuthService } from 'src/auth/auth.service';
 import * as bcrypt from 'bcrypt';
+import { AgencyEntity } from 'src/entities/agency.entity';
 
 @Controller()
 export class GoogleController {
@@ -22,6 +23,8 @@ export class GoogleController {
   constructor(
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
+    @InjectRepository(AgencyEntity)
+    private readonly agencyRepository: Repository<AgencyEntity>,
     private authService: AuthService,
   ) {}
 
@@ -39,11 +42,15 @@ export class GoogleController {
     const existingUser = await this.userRepository.findOne({
       where: { mail: user.email },
     });
+    const existingAgency = await this.agencyRepository.findOne({
+      where: { mail: user.email },
+    });
 
-    const isPasswordValid = await bcrypt.compare(
-      user.email,
-      existingUser.password,
-    );
+    let isPasswordValid: boolean;
+
+    if (existingUser) {
+      isPasswordValid = await bcrypt.compare(user.email, existingUser.password);
+    }
 
     if (!existingUser) {
       try {
@@ -78,7 +85,7 @@ export class GoogleController {
     } else if (existingUser && !isPasswordValid) {
       // Agregar redireccion a paginas de error
       //const redirectUrl = `https://5tart-travel-frontend.vercel.app/AUTH/callback?access_token=${access_token}`;
-      throw new UnauthorizedException('Credenciales invalidas');
+      throw new UnauthorizedException('Credenciales invalidas usted se registro desde el formulario');
     } else {
       throw new UnauthorizedException(
         'Unicamente usuarios pueden acceder con google',
