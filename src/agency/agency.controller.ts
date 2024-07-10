@@ -23,6 +23,15 @@ export class agencyController {
     return this.agencyService.getAgency();
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
+  @Get('totalMount')
+  getTotalMount(@Req() request) {
+    const agencyId = request.user.id;
+
+    return this.agencyService.getTotalMount(agencyId);
+  }
+
   @Get(':id')
   getByIdAgency(@Param('id', ParseUUIDPipe) id: string) {
     return this.agencyService.getByIdAgency(id);

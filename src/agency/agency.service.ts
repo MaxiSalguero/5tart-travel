@@ -10,6 +10,10 @@ export class AgencyServices {
     return this.agencyRepository.getAgency();
   }
 
+  getTotalMount(agencyId:string) {
+    return this.agencyRepository.getTotalMount(agencyId);
+  }
+
   deleteAgency(id: string) {
     return this.agencyRepository.deleteAgency(id);
   }

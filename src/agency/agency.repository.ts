@@ -29,6 +29,27 @@ export class AgencyRepository {
     return agencys;
   }
 
+  async getTotalMount(agencyId: string) {
+    const agency: AgencyEntity = await this.agencyRepository.findOne({
+      where: { id: agencyId },
+      relations: { orders: true },
+    });
+
+    if (!agency) {
+      throw new NotFoundException('No se encontro la agencia');
+    }
+
+    let totalPrice: number = 0;
+
+    agency.orders.forEach((order) => {
+      totalPrice += order.price;
+    });
+
+    const totalMount = totalPrice * 0.95;
+
+    return totalMount;
+  }
+
   async createAgency(agency) {
     const ExistAgency: AgencyEntity = await this.agencyRepository.findOne({
       where: { mail: agency.mail },
