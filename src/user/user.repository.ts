@@ -1,6 +1,8 @@
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -81,7 +83,9 @@ export class UserRepository {
   }
 
   async deleteAllUsers() {
-    const users = await this.usersRepository.find();
+    const users = await this.usersRepository.find({
+      relations: ['favorite_tours', 'orders'],
+    });
 
     if (users.length === 0) {
       throw new NotFoundException(
@@ -89,9 +93,22 @@ export class UserRepository {
       );
     }
 
-    await this.usersRepository.clear();
+    const usersToDelete = users.filter(
+      (user) => user.favorite_tours.length === 0 && user.orders.length === 0,
+    );
 
-    return 'Todos los usuarios han sido eliminados';
+    if (usersToDelete.length === 0) {
+      throw new BadRequestException(
+        'No se pueden eliminar los usuarios porque todos tienen relaciones activas.',
+      );
+    }
+
+    try {
+      await this.usersRepository.remove(usersToDelete);
+      return `Se han eliminado ${usersToDelete.length} usuarios sin relaciones activas.`;
+    } catch (error) {
+      throw new ConflictException('Error eliminando los usuarios');
+    }
   }
 
   async deleteTourFavorite(id: string, userId: any) {
