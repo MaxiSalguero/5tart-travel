@@ -37,4 +37,8 @@ export class AgencyServices {
   disableAgency(id: string) {
     return this.agencyRepository.disableAgency(id);
   }
+
+  getDisableAgency() {
+    return this.agencyRepository.getDisableAgency();
+  }
 }

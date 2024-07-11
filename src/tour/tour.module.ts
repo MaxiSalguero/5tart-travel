@@ -9,6 +9,8 @@ import { AgencyEntity } from 'src/entities/agency.entity';
 import { mailsServices } from 'src/mails/mails.service';
 import { ConfigService } from '@nestjs/config';
 import { CommentEntity } from 'src/entities/comment.entity';
+import { AgencyGateway } from 'src/agency/agency.gateway';
+import { AgencyRepository } from 'src/agency/agency.repository';
 
 
 @Module({
@@ -20,6 +22,8 @@ import { CommentEntity } from 'src/entities/comment.entity';
     MapsService,
     mailsServices,
     ConfigService,
+    AgencyGateway,
+    AgencyRepository
   ],
 })
 export class tourModule {}

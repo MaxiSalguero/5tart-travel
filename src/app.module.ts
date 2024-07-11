@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ChatModule } from './chat/chat.module';
+// import { ChatModule } from './chat/chat.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { tourModule } from './tour/tour.module';
@@ -31,7 +31,7 @@ import { OrderModule } from './order/order.module';
   imports: [
     TypeOrmModule.forFeature([TourEntity, AgencyEntity]),
     databaseConfig,
-    ChatModule,
+    // ChatModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),
