@@ -27,8 +27,8 @@ export class userController {
 
   @ApiBearerAuth()
   @Get()
-  @Roles(Role.User)
-  @UseGuards(AuthGuard, RolesGuard)
+/*   @Roles(Role.User)
+  @UseGuards(AuthGuard, RolesGuard) */
   getUsers() {
     return this.userService.getUsers();
   }

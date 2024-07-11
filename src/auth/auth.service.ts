@@ -23,14 +23,15 @@ export class AuthService {
     @InjectRepository(AgencyEntity)
     private readonly agencyRepository: Repository<AgencyEntity>,
     private readonly mailservice: mailsServices,
-  ) { }
+  ) {}
 
   async createUser(user: Partial<UserEntity>) {
     const { mail, password } = user;
 
     const dbUser = await this.userRepository.findOneBy({ mail });
+    const dbAgency = await this.agencyRepository.findOneBy({ mail });
 
-    if (dbUser) throw new ConflictException('Esta email ya existe');
+    if (dbUser || dbAgency) throw new ConflictException('Esta email ya existe');
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -55,11 +56,10 @@ export class AuthService {
 
   async createAgency(agency: Partial<AgencyEntity>) {
     const { mail, password } = agency;
+    const dbUser = await this.userRepository.findOneBy({ mail });
     const dbAgency = await this.agencyRepository.findOneBy({ mail });
 
-    if (dbAgency) {
-      throw new ConflictException('El Email ya existe');
-    }
+    if (dbUser || dbAgency) throw new ConflictException('Esta email ya existe');
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -95,9 +95,7 @@ export class AuthService {
       if (!isPasswordValid)
         throw new UnauthorizedException('Credenciales incorrectas');
       if (!isActive)
-        throw new ImATeapotException(
-          'Esta agencia aun no se encuentra activa',
-        );
+        throw new ImATeapotException('Esta agencia aun no se encuentra activa');
 
       const userpayload = {
         sub: user.id,
@@ -117,9 +115,7 @@ export class AuthService {
       if (!isPasswordValid)
         throw new UnauthorizedException('Credenciales incorrectas');
       if (!isActive)
-        throw new ImATeapotException(
-          'Esta agencia aun no se encuentra activa',
-        );
+        throw new ImATeapotException('Esta agencia aun no se encuentra activa');
 
       const agencypayload = {
         sub: agency.id,
@@ -131,9 +127,12 @@ export class AuthService {
         role: agency.role,
         type: 'agency',
       };
-      await this.mailservice.agencyAcceptedMail(agency.mail,agency.name_agency)
+      await this.mailservice.agencyAcceptedMail(
+        agency.mail,
+        agency.name_agency,
+      );
       const token = this.jwtService.sign(agencypayload);
-      
+
       return { success: 'Agencia logueada correctamente', token };
     } else {
       throw new UnauthorizedException('Credenciales incorrectas');
@@ -145,10 +144,16 @@ export class AuthService {
     const existingAgency = await this.agencyRepository.findOneBy({ mail });
 
     if (existingUser) {
-      await this.mailservice.cambioPasswordMail(existingUser.mail, existingUser.username);
+      await this.mailservice.cambioPasswordMail(
+        existingUser.mail,
+        existingUser.username,
+      );
       return { id: existingUser.id, type: 'user' };
     } else if (existingAgency) {
-      await this.mailservice.cambioPasswordMail(existingAgency.mail, existingAgency.name_agency);
+      await this.mailservice.cambioPasswordMail(
+        existingAgency.mail,
+        existingAgency.name_agency,
+      );
       return { id: existingAgency.id, type: 'agency' };
     } else {
       throw new NotFoundException('Este email no se encuentra registrado');
@@ -158,9 +163,9 @@ export class AuthService {
   async changePassword(id: string, type: string, newPassword: string) {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     let userEmail, username;
-  
+
     if (type === 'user') {
-      const user = await this.userRepository.findOne({where:{id}});
+      const user = await this.userRepository.findOne({ where: { id } });
       if (!user) {
         throw new NotFoundException('Usuario no encontrado');
       }
@@ -168,7 +173,7 @@ export class AuthService {
       userEmail = user.mail;
       username = user.username;
     } else if (type === 'agency') {
-      const agency = await this.agencyRepository.findOne({where:{id}});
+      const agency = await this.agencyRepository.findOne({ where: { id } });
       if (!agency) {
         throw new NotFoundException('Agencia no encontrada');
       }
@@ -178,13 +183,16 @@ export class AuthService {
     } else {
       throw new ConflictException('Tipo de entidad no reconocido');
     }
-  
+
     // Send confirmation email
-    await this.mailservice.ConfirmCambiodePassword(userEmail, username,newPassword);
-  
+    await this.mailservice.ConfirmCambiodePassword(
+      userEmail,
+      username,
+      newPassword,
+    );
+
     return {
       message: `El password del ${type === 'user' ? 'usuario' : 'agencia'} con ID: ${id}, fue modificado correctamente`,
     };
   }
-  
 }
