@@ -9,6 +9,4 @@ export const CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME;
 export const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET;
 export const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;
 export const JWT_SECRET = process.env.JWT_SECRET;
-
-// export const POSTGRES_PASSWORD= process.env.POSTGRES_PASSWORD
-// export const POSTGRES_DB= process.env.POSTGRES_DB
+export const FRONT_URL = process.env.FRONT_URL;
