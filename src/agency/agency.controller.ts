@@ -23,6 +23,13 @@ export class agencyController {
     return this.agencyService.getAgency();
   }
 
+  @Get('disable')
+  getDisableAgency() {
+
+    return this.agencyService.getDisableAgency();
+  }
+
+  
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Get('totalMount')
@@ -31,6 +38,7 @@ export class agencyController {
 
     return this.agencyService.getTotalMount(agencyId);
   }
+
 
   @Get(':id')
   getByIdAgency(@Param('id', ParseUUIDPipe) id: string) {

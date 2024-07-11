@@ -169,4 +169,15 @@ export class AgencyRepository {
 
     return updateAgency;
   }
+
+  async getDisableAgency() {
+    const disAgency: AgencyEntity[] = await this.agencyRepository.find({where: {isActive: false}});
+
+    if (disAgency.length == 0) {
+      return 'no hay agencias desactivadas';
+    };
+
+    return disAgency;
+  };
+
 }
