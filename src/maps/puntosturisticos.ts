@@ -1,7 +1,7 @@
 export const puntosTuristicos = {
   'Litoral': {
     'Misiones': [
-      [
+      
         { name: 'Tour por Puerto Iguazú', lat: -25.6107508, lon: -54.5764199, price: 35000 },
         { name: 'Visita a las Cataratas del Iguazú', lat: -25.69253235, lon: -54.44111443902037, price: 45000 },
         { name: 'Exploración de las Ruinas de San Ignacio', lat: -27.33121475, lon: -55.51659001142544, price: 25000 },
@@ -10,7 +10,7 @@ export const puntosTuristicos = {
         { name: 'Exploración de las Minas de Wanda', lat: -20.6869706, lon: -43.7939871, price: 18000 },
         { name: 'Visita a Guira Oga', lat: -25.62969255, lon: -54.554796538876246, price: 32000 },
         { name: 'Visita al Parque Temático de la Cruz', lat: -27.44847315, lon: -55.57425277985213, price: 28000 },
-      ]
+      
       
     ],
     'Córdoba': [
