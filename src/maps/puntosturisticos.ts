@@ -2,16 +2,14 @@ export const puntosTuristicos = {
   'Litoral': {
     'Misiones': [
       [
-        { name: 'Tour por Puerto Iguazú', lat: -25.597, lon: -54.5735, price: 35000 },
-        { name: 'Visita a las Cataratas del Iguazú', lat: -25.6866, lon: -54.4406, price: 45000 },
-        { name: 'Exploración de las Ruinas de San Ignacio', lat: -27.2567, lon: -55.5369, price: 25000 },
-        { name: 'Recorrido por La Aripuca', lat: -25.6206, lon: -54.5101, price: 30000 },
-        { name: 'Visita al Hito de las Tres Fronteras', lat: -25.5973, lon: -54.5824, price: 20000 },
-        { name: 'Exploración de las Minas de Wanda', lat: -25.9747, lon: -54.5527, price: 18000 },
-        { name: 'Tour al Salto Yocuma', lat: -26.4303, lon: -54.9367, price: 40000 },
-        { name: 'Visita a Guira Oga', lat: -25.6862, lon: -54.5075, price: 32000 },
-        { name: 'Visita al Parque Temático de la Cruz', lat: -27.3896, lon: -55.8945, price: 28000 },
-        { name: 'Visita a la Casa de Botellas', lat: -26.8436, lon: -54.5498, price: 35000 }
+        { name: 'Tour por Puerto Iguazú', lat: -25.6107508, lon: -54.5764199, price: 35000 },
+        { name: 'Visita a las Cataratas del Iguazú', lat: -25.69253235, lon: -54.44111443902037, price: 45000 },
+        { name: 'Exploración de las Ruinas de San Ignacio', lat: -27.33121475, lon: -55.51659001142544, price: 25000 },
+        { name: 'Recorrido por La Aripuca', lat: -25.6184135, lon: -54.55834551352541, price: 30000 },
+        { name: 'Visita al Hito de las Tres Fronteras', lat: -25.5930149, lon: -54.6020428, price: 20000 },
+        { name: 'Exploración de las Minas de Wanda', lat: -20.6869706, lon: -43.7939871, price: 18000 },
+        { name: 'Visita a Guira Oga', lat: -25.62969255, lon: -54.554796538876246, price: 32000 },
+        { name: 'Visita al Parque Temático de la Cruz', lat: -27.44847315, lon: -55.57425277985213, price: 28000 },
       ]
       
     ],
@@ -419,64 +417,67 @@ export const puntosTuristicos = {
     
 
   },
-  'Internacional':{
-    "Tanzania": [
-      { "name": "Ascenso al Monte Kilimanjaro", "price": 1597500 },
-      { "name": "Safari en el Parque Nacional Serengueti", "price": 1923000 },
-      { "name": "Relax en la Isla de Zanzíbar", "price": 1712000 },
-      { "name": "Visita al Cráter Ngorongoro", "price": 1498000 },
-      { "name": "Exploración del Parque Nacional Tarangire", "price": 1365000 },
-      { "name": "Tour por el Lago Manyara", "price": 1260000 },
-      { "name": "Descubrimiento de Stone Town", "price": 1155000 },
-      { "name": "Historia en las Ruinas de Kilwa Kisiwani y Songo Mnara", "price": 1050000 },
-      { "name": "Safari en el Parque Nacional Mikumi", "price": 1312500 },
-      { "name": "Exploración de las Islas Pemba", "price": 1515000 }
-    ],
-    "Montevideo": [
-      { "name": "Recorrido por la Ciudad Vieja", "price": 340000 },
-      { "name": "Paseo por la Rambla de Montevideo", "price": 306000 },
-      { "name": "Degustación en el Mercado del Puerto", "price": 425000 },
-      { "name": "Visita a la Fortaleza del Cerro", "price": 374000 },
-      { "name": "Relax en el Parque Rodó", "price": 255000 },
-      { "name": "Excursión a Punta del Este", "price": 510000 },
-      { "name": "Aventura en Cabo Polonio", "price": 595000 },
-      { "name": "Exploración de Colonia del Sacramento", "price": 476000 },
-      { "name": "Visita a Piriápolis", "price": 442000 },
-      { "name": "Descanso en Termas del Daymán", "price": 544000 }
-    ],
-    "Nueva York": [
-      { "name": "Experiencia en Central Park", "price": 60000 },
-      { "name": "Visita a Times Square", "price": 65000 },
-      { "name": "Tour por la Estátua de la Libertad", "price": 70000 },
-      { "name": "Cultura en el Museo Metropolitano de Arte", "price": 55000 },
-      { "name": "Vista desde el Empire State Building", "price": 68000 },
-      { "name": "Caminata por el Brooklyn Bridge", "price": 62000 },
-      { "name": "Exploración del Museo Americano de Historia Natural", "price": 58000 },
-      { "name": "Visita al Rockefeller Center", "price": 67000 },
-      { "name": "Espectáculo en Broadway", "price": 69000 }
-    ],
-    "Rio de Janeiro": [
-      { "name": "Visita al Cristo Redentor", "price": 60000 },
-      { "name": "Ascenso al Pão de Açúcar", "price": 65000 },
-      { "name": "Diversión en Copacabana", "price": 70000 },
-      { "name": "Exploración del Jardim Botânico", "price": 55000 },
-      { "name": "Visita al Estadio Maracanã", "price": 68000 },
-      { "name": "Paseo por Lapa", "price": 62000 },
-      { "name": "Cultura en el Museu do Amanhã", "price": 58000 },
-      { "name": "Descanso en la Playa de Ipanema", "price": 67000 },
-      { "name": "Descubrimiento de la Escadaria Selarón", "price": 69000 }
-    ],
-    "Paris": [
-      { "name": "Vista desde la Torre Eiffel", "price": 60000 },
-      { "name": "Cultura en el Museo del Louvre", "price": 65000 },
-      { "name": "Visita a la Catedral de Notre-Dame", "price": 70000 },
-      { "name": "Exploración del Arco del Triunfo", "price": 55000 },
-      { "name": "Visita a la Basílica del Sagrado Corazón (Sacré-Cœur)", "price": 68000 },
-      { "name": "Cultura en el Museo de Orsay", "price": 62000 },
-      { "name": "Relax en los Jardines de Luxemburgo", "price": 58000 },
-      { "name": "Paseo por el Barrio de Montmartre", "price": 67000 },
-      { "name": "Caminata por la Avenida Champs-Élysées", "price": 69000 }
-    ]
+  
+    "Internacional": {
+      "Tanzania": [
+        { "name": "Ascenso al Monte Kilimanjaro", "lat": -3.0674, "lon": 37.3556, "price": 1597500 },
+        { "name": "Safari en el Parque Nacional Serengueti", "lat": -2.1540, "lon": 34.6857, "price": 1923000 },
+        { "name": "Relax en la Isla de Zanzíbar", "lat": -6.1659, "lon": 39.2026, "price": 1712000 },
+        { "name": "Visita al Cráter Ngorongoro", "lat": -3.1610, "lon": 35.5878, "price": 1498000 },
+        { "name": "Exploración del Parque Nacional Tarangire", "lat": -6.3173, "lon": 36.0492, "price": 1365000 },
+        { "name": "Tour por el Lago Manyara", "lat": -3.3928, "lon": 35.8310, "price": 1260000 },
+        { "name": "Descubrimiento de Stone Town", "lat": -6.1630, "lon": 39.1880, "price": 1155000 },
+        { "name": "Historia en las Ruinas de Kilwa Kisiwani y Songo Mnara", "lat": -8.9291, "lon": 39.5170, "price": 1050000 },
+        { "name": "Safari en el Parque Nacional Mikumi", "lat": -7.4046, "lon": 37.0423, "price": 1312500 },
+        { "name": "Exploración de las Islas Pemba", "lat": -5.2550, "lon": 39.7630, "price": 1515000 }
+      ],
+      "Montevideo": [
+        { "name": "Recorrido por la Ciudad Vieja", "lat": -34.9064, "lon": -56.1976, "price": 340000 },
+        { "name": "Paseo por la Rambla de Montevideo", "lat": -34.9011, "lon": -56.1653, "price": 306000 },
+        { "name": "Degustación en el Mercado del Puerto", "lat": -34.9075, "lon": -56.2057, "price": 425000 },
+        { "name": "Visita a la Fortaleza del Cerro", "lat": -34.8750, "lon": -56.2173, "price": 374000 },
+        { "name": "Relax en el Parque Rodó", "lat": -34.9085, "lon": -56.1711, "price": 255000 },
+        { "name": "Excursión a Punta del Este", "lat": -34.9684, "lon": -54.9502, "price": 510000 },
+        { "name": "Aventura en Cabo Polonio", "lat": -34.3995, "lon": -53.7923, "price": 595000 },
+        { "name": "Exploración de Colonia del Sacramento", "lat": -34.4691, "lon": -57.8584, "price": 476000 },
+        { "name": "Visita a Piriápolis", "lat": -34.8616, "lon": -55.2707, "price": 442000 },
+        { "name": "Descanso en Termas del Daymán", "lat": -31.3936, "lon": -57.9853, "price": 544000 }
+      ],
+      "Nueva York": [
+        { "name": "Experiencia en Central Park", "lat": 40.7850, "lon": -73.9680, "price": 60000 },
+        { "name": "Visita a Times Square", "lat": 40.7580, "lon": -73.9855, "price": 65000 },
+        { "name": "Tour por la Estátua de la Libertad", "lat": 40.6892, "lon": -74.0445, "price": 70000 },
+        { "name": "Cultura en el Museo Metropolitano de Arte", "lat": 40.7794, "lon": -73.9632, "price": 55000 },
+        { "name": "Vista desde el Empire State Building", "lat": 40.7484, "lon": -73.9857, "price": 68000 },
+        { "name": "Caminata por el Brooklyn Bridge", "lat": 40.7061, "lon": -73.9969, "price": 62000 },
+        { "name": "Exploración del Museo Americano de Historia Natural", "lat": 40.7813, "lon": -73.9738, "price": 58000 },
+        { "name": "Visita al Rockefeller Center", "lat": 40.7587, "lon": -73.9787, "price": 67000 },
+        { "name": "Espectáculo en Broadway", "lat": 40.7590, "lon": -73.9845, "price": 69000 }
+      ],
+      "Rio de Janeiro": [
+        { "name": "Visita al Cristo Redentor", "lat": -22.9519, "lon": -43.2106, "price": 60000 },
+        { "name": "Ascenso al Pão de Açúcar", "lat": -22.9519, "lon": -43.1549, "price": 65000 },
+        { "name": "Diversión en Copacabana", "lat": -22.9719, "lon": -43.1843, "price": 70000 },
+        { "name": "Exploración del Jardim Botânico", "lat": -22.9715, "lon": -43.2237, "price": 55000 },
+        { "name": "Visita al Estadio Maracanã", "lat": -22.9122, "lon": -43.2302, "price": 68000 },
+        { "name": "Paseo por Lapa", "lat": -22.9111, "lon": -43.1799, "price": 62000 },
+        { "name": "Cultura en el Museu do Amanhã", "lat": -22.8957, "lon": -43.1803, "price": 58000 },
+        { "name": "Descanso en la Playa de Ipanema", "lat": -22.9832, "lon": -43.2047, "price": 67000 },
+        { "name": "Descubrimiento de la Escadaria Selarón", "lat": -22.9154, "lon": -43.1796, "price": 69000 }
+      ],
+      "Paris": [
+        { "name": "Vista desde la Torre Eiffel", "lat": 48.8584, "lon": 2.2945, "price": 60000 },
+        { "name": "Cultura en el Museo del Louvre", "lat": 48.8606, "lon": 2.3376, "price": 65000 },
+        { "name": "Visita a la Catedral de Notre-Dame", "lat": 48.8529, "lon": 2.3499, "price": 70000 },
+        { "name": "Exploración del Arco del Triunfo", "lat": 48.8738, "lon": 2.2950, "price": 55000 },
+        { "name": "Visita a la Basílica del Sagrado Corazón (Sacré-Cœur)", "lat": 48.8867, "lon": 2.3431, "price": 68000 },
+        { "name": "Cultura en el Museo de Orsay", "lat": 48.8599, "lon": 2.3233, "price": 62000 },
+        { "name": "Relax en los Jardines de Luxemburgo", "lat": 48.8462, "lon": 2.3372, "price": 58000 },
+        { "name": "Paseo por el Barrio de Montmartre", "lat": 48.8867, "lon": 2.3431, "price": 67000 },
+        { "name": "Caminata por la Avenida Champs-Élysées", "lat": 48.8698, "lon": 2.3074, "price": 69000 }
+      ]
     }
+  
+  
 
 }
