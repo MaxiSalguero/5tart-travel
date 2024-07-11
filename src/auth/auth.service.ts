@@ -13,6 +13,7 @@ import { UserEntity } from 'src/entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { mailsServices } from 'src/mails/mails.service';
+import { AgencyGateway } from 'src/agency/agency.gateway';
 
 @Injectable()
 export class AuthService {
@@ -23,6 +24,8 @@ export class AuthService {
     @InjectRepository(AgencyEntity)
     private readonly agencyRepository: Repository<AgencyEntity>,
     private readonly mailservice: mailsServices,
+    private readonly agencyGateway: AgencyGateway,
+
   ) {}
 
   async createUser(user: Partial<UserEntity>) {
@@ -70,6 +73,10 @@ export class AuthService {
       ...agency,
       password: hashedPassword,
     });
+
+    this.agencyGateway.emitAgencyUpdate();
+
+
     if (createdAgency) {
       await this.mailservice.registerAgencyMail(
         createdAgency.mail,
