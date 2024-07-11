@@ -1,31 +1,30 @@
 import {
-  BadRequestException,
   Controller,
   Get,
   HttpStatus,
   Req,
   Res,
-  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from 'src/entities/user.entity';
-import { AuthService } from 'src/auth/auth.service';
 import * as bcrypt from 'bcrypt';
 import { AgencyEntity } from 'src/entities/agency.entity';
+import { GoogleService } from './google.service';
+import { FRONT_URL } from 'src/config/envs';
 
 @Controller()
 export class GoogleController {
   private readonly FRONT_URL = process.env.FRONT_URL;
 
   constructor(
+    private readonly googleService: GoogleService,
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
     @InjectRepository(AgencyEntity)
     private readonly agencyRepository: Repository<AgencyEntity>,
-    private authService: AuthService,
   ) {}
 
   @Get('google')
@@ -38,6 +37,7 @@ export class GoogleController {
   @UseGuards(AuthGuard('google'))
   async googleLoginRedirect(@Req() req, @Res() res): Promise<any> {
     const { user } = <any>req;
+    const redirectBaseUrl = `${FRONT_URL}/AUTH`;
 
     const existingUser = await this.userRepository.findOne({
       where: { mail: user.email },
@@ -46,48 +46,22 @@ export class GoogleController {
       where: { mail: user.email },
     });
 
-    let isPasswordValid: boolean;
-
     if (existingAgency) {
-      const redirectUrl = `https://5tart-travel-frontend.vercel.app/AUTH/errorGoogle`;
-      return res.redirect(redirectUrl);
-    } else if (existingUser) {
-      isPasswordValid = await bcrypt.compare(user.email, existingUser.password);
+      return res.redirect(`${redirectBaseUrl}/errorGoogle`);
     }
 
     if (!existingUser) {
-      try {
-        const hashedPassword = await bcrypt.hash(user.email, 10);
+      return this.googleService.handleNewUser(user, res);
+    }
 
-        const newUser = new UserEntity();
-        newUser.username = user.firstName;
-        newUser.mail = user.email;
-        newUser.password = hashedPassword;
-
-        await this.userRepository.save(newUser);
-      } catch (error) {
-        throw new BadRequestException('Error creando la cuenta del usuario');
-      }
-      try {
-        const response = await this.authService.login(user.email, user.email);
-        const access_token = response.token;
-        const redirectUrl = `https://5tart-travel-frontend.vercel.app/AUTH/callback?access_token=${access_token}`;
-        return res.redirect(redirectUrl);
-      } catch (error) {
-        throw new UnauthorizedException('Credenciales invalidas');
-      }
-    } else if (existingUser && isPasswordValid) {
-      try {
-        const response = await this.authService.login(user.email, user.email);
-        const access_token = response.token;
-        const redirectUrl = `https://5tart-travel-frontend.vercel.app/AUTH/callback?access_token=${access_token}`;
-        return res.redirect(redirectUrl);
-      } catch (error) {
-        throw new UnauthorizedException('Credenciales invalidas');
-      }
-    } else if (existingUser && !isPasswordValid) {
-      const redirectUrl = `https://5tart-travel-frontend.vercel.app/AUTH/errorUserRegister`;
-      return res.redirect(redirectUrl);
+    const isPasswordValid = await bcrypt.compare(
+      user.email,
+      existingUser.password,
+    );
+    if (isPasswordValid) {
+      return this.googleService.handleExistingUser(user.email, res);
+    } else {
+      return res.redirect(`${redirectBaseUrl}/errorUserRegister`);
     }
   }
 }
