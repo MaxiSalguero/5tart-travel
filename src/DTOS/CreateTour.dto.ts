@@ -1,6 +1,12 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsDate, IsNumber, IsOptional, Length } from 'class-validator';
+import {
+  ArrayNotEmpty,
+  IsDate,
+  IsNumber,
+  IsOptional,
+  Length,
+} from 'class-validator';
 import { IsNotEmpty, IsString, Matches } from 'class-validator';
 import { TransportType } from 'src/entities/transporte.enum';
 
@@ -41,6 +47,19 @@ export class CreateTourDto {
   @IsOptional()
   @IsString()
   imgUrl?: string;
+
+  @ApiProperty({
+    type: 'string[]',
+    description: 'Ingresar aqui urls de las imagenes',
+    example: [
+      'https://res.cloudinary.com/dia2gautk/image/upload/v1719807466/logo_start_hy9j22.webp',
+      'https://res.cloudinary.com/dia2gautk/image/upload/v1719807466/logo_start_hy9j22.webp',
+    ],
+  })
+  @IsOptional()
+  @ArrayNotEmpty()
+  @IsString({ each: true })
+  listImg?: string[];
 
   /**
   Ingresar el nombre del hotel
