@@ -14,6 +14,6 @@ export class CreateOrderDto{
     price: number;
 
     @IsEmpty()
-    date: string;
+    date?: string;
     
 }

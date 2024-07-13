@@ -22,13 +22,12 @@ export class OrderController {
   @UseGuards(AuthGuard)
   @Post(':id')
   addOrder(
-    @Body() order: CreateOrderDto,
+    @Param('id', ParseUUIDPipe) tourid: string,
     @Req() req,
-    @Param('id', ParseUUIDPipe) agencyId: string,
   ) {
     const userId = req.user.id;
 
-    return this.orderService.addOrder(order, userId, agencyId);
+    return this.orderService.addOrder(tourid, userId);
   }
 
   @Get()
