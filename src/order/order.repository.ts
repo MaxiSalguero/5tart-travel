@@ -1,9 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { NotFoundError } from 'rxjs';
 import { CreateOrderDto } from 'src/DTOS/CreateOrder.dto';
 import { AgencyEntity } from 'src/entities/agency.entity';
 import { OrderEntity } from 'src/entities/order.entity';
+import { TourEntity } from 'src/entities/tour.entity';
 import { UserEntity } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 
@@ -14,8 +14,8 @@ export class OrderRepository {
     private readonly orderRepository: Repository<OrderEntity>,
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-    @InjectRepository(AgencyEntity)
-    private readonly agencyRepository: Repository<AgencyEntity>,
+    @InjectRepository(TourEntity)
+    private readonly tourRepository: Repository<TourEntity>,
   ) {}
 
   getOrder() {
@@ -34,24 +34,28 @@ export class OrderRepository {
   }
 
   async addOrder(
-    order: Partial<OrderEntity>,
-    userId: string,
-    agencyId: string,
+    tourid: string,
+    userId: string
   ) {
     const user: UserEntity = await this.userRepository.findOne({
       where: { id: userId },
     });
-    const agency: AgencyEntity = await this.agencyRepository.findOneBy({
-      id: agencyId,
+    const tour: TourEntity = await this.tourRepository.findOne({
+      where: {id: tourid}, 
+      relations: {agency: true}
     });
 
+    const order : CreateOrderDto = {title: tour.title ,price: tour.price}
+    
     if (!user) {
       throw new BadRequestException('Usuario no encontrado');
     }
-    if (!agency) {
+    if (!tour) {
       throw new BadRequestException('Agencia no encontrada');
     }
 
+    const {agency} = tour
+    
     const newOrder: OrderEntity = await this.orderRepository.create({
       ...order,
       user: user,

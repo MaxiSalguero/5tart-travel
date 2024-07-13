@@ -47,7 +47,7 @@ export class GoogleService {
         `${redirectBaseUrl}/callback?access_token=${access_token}`,
       );
     } catch (error) {
-      throw new UnauthorizedException('Credenciales invalidas');
+      return res.redirect(`${redirectBaseUrl}/errorInactiveAccount`);
     }
   }
 }
