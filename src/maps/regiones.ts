@@ -5,7 +5,7 @@ export const regiones = {
       { latMin: -28, latMax: -22, lonMin: -56, lonMax: -54 },  // Misiones
       { latMin: -29, latMax: -28, lonMin: -61, lonMax: -57 },  // Corrientes
       { latMin: -34, latMax: -28, lonMin: -65, lonMax: -57 },  // Santa Fe
-      { latMin: -34, latMax: -28, lonMin: -65, lonMax: -57 }   // Entre Ríos
+      { latMin: -34, latMax: -28, lonMin: -65, lonMax: -57 },  // Entre Ríos
     ],
     'Noroeste': [
       { latMin: -27, latMax: -23, lonMin: -67, lonMax: -63 },  // Jujuy
@@ -34,12 +34,13 @@ export const regiones = {
       { latMin: -35, latMax: -30, lonMin: -66, lonMax: -62 }   // Córdoba
     ],
     'Internacional': [
-    // Continente Americano excluyendo Argentina
-    { latMin: -90, latMax: 12, lonMin: -180, lonMax: -33 },  // América del Norte y Centroamérica
-    { latMin: 12, latMax: -55, lonMin: -118, lonMax: -33 },  // América del Sur excluyendo Argentina
-    // Continente Europeo
-    { latMin: 36, latMax: 72, lonMin: -15, lonMax: 39 },     // Europa
-    // Otros continentes
-    { latMin: -90, latMax: 90, lonMin: -180, lonMax: 180 }   // Resto del mundo
-  ]
+  { latMin: -90, latMax: 12, lonMin: -180, lonMax: -33 },  // América del Norte y Centroamérica
+  { latMin: 12, latMax: -55, lonMin: -118, lonMax: -33 },  // América del Sur excluyendo Argentina
+  { latMin: 36, latMax: 72, lonMin: -15, lonMax: 39 },     // Europa
+  { latMin: -90, latMax: 90, lonMin: -180, lonMax: 180 },  // Resto del mundo
+  { lat:-5.732993, lon:39.2939216 },  // Tanzania
+  { latMin: 24.396308, latMax: 49.384358, lonMin: -125.0, lonMax: -66.93457 },  // Estados Unidos
+  { latMin: 41.36, latMax: 51.124, lonMin: -5.142, lonMax: 9.662 }  // Francia
+]
+
   };

@@ -80,7 +80,6 @@
     "hotel": "Hotel Salta",
     "listImg": [
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720417165/swoopkycnqchdrypdbjv.jpg",
-      "https://res.cloudinary.com/dia2gautk/image/upload/v1720982983/ubz0cyso7kncsomvwvxk.webp",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720982996/cgjc0hggwhqnihrcuahy.webp",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720983014/svn6fdbx5d7d02mgn5ww.webp",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720983027/kghryvxn9uharwhrz1o9.webp",
@@ -104,7 +103,6 @@
     "listImg": [
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720417203/vwpcajcwxm2uuwe9chsg.jpg",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720983217/g2fjl2rjsjsvdwvu2zcm.webp",
-      "https://res.cloudinary.com/dia2gautk/image/upload/v1720983228/jb8fl9eyvuipdxo4hqwb.webp",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720983254/ztdcidesh5vopxwlkywk.webp",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720983265/py4cghntkiscmnhf0i4n.webp",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720983275/cwpyalvgplelu4o4xsf5.webp",
@@ -150,7 +148,6 @@
     "hotel": "Hotel Golf Club",
     "listImg": [
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720417288/cnr6kpbsc4jaoygvjivr.webp",
-      "https://res.cloudinary.com/dia2gautk/image/upload/v1720416918/y9cn0ctsdps2ycwk9czm.jpg",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720983544/rjdh5sfb7hqbpe8k72hx.webp",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720983557/ilgoihvqnfzdijhai4ye.webp"
     ],
@@ -171,10 +168,10 @@
     "hotel": "Amerian Cordoba Park Hotel",
     "listImg": [
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720417370/kww0nk803thpdz53ibhe.jpg",
-      "https://res.cloudinary.com/dia2gautk/image/upload/v1720983544/rjdh5sfb7hqbpe8k72hx.webp",
-      "https://res.cloudinary.com/dia2gautk/image/upload/v1720416627/ensspi1lt4memsgdvtp8.jpg",
-      "https://res.cloudinary.com/dia2gautk/image/upload/v1720416627/ensspi1lt4memsgdvtp8.jpg",
-      "https://res.cloudinary.com/dia2gautk/image/upload/v1720416627/ensspi1lt4memsgdvtp8.jpg"
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720995042/uxx7tufy17tjr68975uu.webp",
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720995061/zqwxhrdqdiwpmgts0hqp.webp",
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720995081/wctjqldzersx9bandv0v.webp",
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720995096/lsfdgdccj6v1jqhltyzo.webp"
     ],
     "address": "Boulevard San Juan 165, Córdoba",
     "agency": "Mystic Argentina",
@@ -260,13 +257,12 @@
     "hotel": "Windsor Hotel & Tower",
     "listImg": [
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720986045/vmsaq4zq4gxnt7cqiyjq.webp",
-      "https://res.cloudinary.com/dia2gautk/image/upload/v1720416627/ensspi1lt4memsgdvtp8.jpg",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720986069/fhn0rvlvfgx78fhw49nu.webp",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720986080/givrcwfzwudkfk5ab1os.webp",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720986091/tolhx1qubcfom7kcjccz.webp",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720986104/f9zp1q1quwphvio8zaeu.webp",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720986116/jgadl1hs1idhrpst7qrv.webp",
-      "https://res.cloudinary.com/dia2gautk/image/upload/v1720986125/kvfjt9gazn5z6xmr2ehd.webp"
+      "https://res.cloudinary.com/dia2gautk/image/upload/v1720995326/tfedwjj8dw29fqiq0gch.webp"
     ],
     "address": "Buenos Aires 214,cordoba",
     "agency": "Mystic Argentina",
@@ -403,7 +399,6 @@
     "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720418404/eqtvckfei9hizz0ookpc.jpg",
     "hotel": "Hotel Termas",
     "listImg": [
-      "https://res.cloudinary.com/dia2gautk/image/upload/v1720418374/xvnsxzzka2pjs4ugtlha.jpg",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720987888/i5wxbhxgczeolqdslxfi.webp",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720987901/rgnkhwumalsrvptatll3.webp",
       "https://res.cloudinary.com/dia2gautk/image/upload/v1720987910/w7jiayr2tam0puqa8qmq.webp",
