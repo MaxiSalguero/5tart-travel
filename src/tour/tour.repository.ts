@@ -257,7 +257,7 @@ export class TourRepository {
         `,
           )
           .join('')}
-        <a href="url_de_tu_pagina_principal" class="btn">Ir a la página principal</a>
+        <a href="https://5tart-travel-frontend.vercel.app/ofertas" class="btn">Ir a la página principal</a>
     </div>
 </body>
 </html>`;
