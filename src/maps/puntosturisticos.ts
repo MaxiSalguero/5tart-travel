@@ -218,7 +218,7 @@ export const puntosTuristicos = {
     ]
 
   },
-  'Patagonia': {
+  'Patagonica': {
     'Santa Cruz': [
       { name: 'Exploración en el Parque Nacional Los Glaciares', price: 45000, lat: -50.4833, lon: -73.05 },
       { name: 'Senderismo en Laguna de los Tres', price: 42000, lat: -49.2733, lon: -73.0347 },
@@ -417,21 +417,18 @@ export const puntosTuristicos = {
     
 
   },
-  
-    "Internacional": {
-      "Tanzania": [
-        { name: "Ascenso al Monte Kilimanjaro", lat: -3.0674, lon: 37.3556, price: 1597500 },
-        { name: "Safari en el Parque Nacional Serengueti", lat: -2.1540, lon: 34.6857, "price": 1923000 },
-        { name: "Relax en la Isla de Zanzíbar", lat: -6.1659, lon: 39.2026, price: 1712000 },
-        { name: "Visita al Cráter Ngorongoro", lat: -3.1610, lon: 35.5878, price: 1498000 },
-        { name: "Exploración del Parque Nacional Tarangire", lat: -6.3173, lon: 36.0492, "price": 1365000 },
-        { name: "Tour por el Lago Manyara", lat: -3.3928, lon: 35.8310, price: 1260000 },
-        { name: "Descubrimiento de Stone Town", lat: -6.1630, lon: 39.1880, price: 1155000 },
-        { name: "Historia en las Ruinas de Kilwa Kisiwani y Songo Mnara", lat: -8.9291, lon: 39.5170, "price": 1050000 },
-        { name: "Safari en el Parque Nacional Mikumi", lat: -7.4046, lon: 37.0423, price: 1312500 },
-        { name: "Exploración de las Islas Pemba", lat: -5.2550, lon: 39.7630, price: 1515000 }
+  'Internacional': {
+      'Tanzania': [
+        { name: "Ascenso al Monte Kilimanjaro", lat: 25.8010669, lon: -100.1756996, price: 1597500 },
+        { name: "Relax en la Isla de Zanzíbar", lat:-5.16906245, lon: 39.799425084716006, price: 1712000 },
+        { name: "Visita al Cráter Ngorongoro", lat: -3.17663415, lon: 35.57881246344549, price: 1498000 },
+        { name: "Tour por el Lago Manyara", lat: -3.62220965, lon: 35.806488328097174, price: 1260000 },
+        { name: "Descubrimiento de Stone Town", lat: -6.162658, lon: 39.1900121, price: 1155000 },
+        { name: "Historia en las Ruinas de Kilwa Kisiwani y Songo Mnara", lat: -8.97527655, lon: 39.51436721648727, "price": 1050000 },
+        { name: "Safari en el Parque Nacional Mikumi", lat: -7.4048524, lon: 36.9770319, price: 1312500 },
+        { name: "Exploración de las Islas Pemba", lat: -5.16906245, lon: 39.799425084716006, price: 1515000 }
       ],
-      "Montevideo": [
+      'Montevideo': [
         { name: "Recorrido por la Ciudad Vieja", lat: -34.9064, lon: -56.1976, price: 340000 },
         { name: "Paseo por la Rambla de Montevideo", lat: -34.9011, lon: -56.1653, price: 306000 },
         { name: "Degustación en el Mercado del Puerto", lat: -34.9075, lon: -56.2057, price: 425000 },
@@ -443,18 +440,16 @@ export const puntosTuristicos = {
         { name: "Visita a Piriápolis", lat: -34.8616, lon: -55.2707, price: 442000 },
         { name: "Descanso en Termas del Daymán", lat: -31.3936, lon: -57.9853, price: 544000 }
       ],
-      "Nueva York": [
-        { name: "Experiencia en Central Park", lat: 40.7850, lon: -73.9680, price: 60000 },
-        { name: "Visita a Times Square", lat: 40.7580, lon: -73.9855, price: 65000 },
-        { name: "Tour por la Estátua de la Libertad", lat: 40.6892, lon: -74.0445, price: 70000 },
-        { name: "Cultura en el Museo Metropolitano de Arte", lat: 40.7794, lon: -73.9632, price: 55000 },
-        { name: "Vista desde el Empire State Building", lat: 40.7484, lon: -73.9857, price: 68000 },
-        { name: "Caminata por el Brooklyn Bridge", lat: 40.7061, lon: -73.9969, price: 62000 },
-        { name: "Exploración del Museo Americano de Historia Natural", lat: 40.7813, lon: -73.9738, price: 58000 },
-        { name: "Visita al Rockefeller Center", lat: 40.7587, lon: -73.9787, price: 67000 },
-        { name: "Espectáculo en Broadway", lat: 40.7590, lon: -73.9845, price: 69000 }
+      'Nueva York': [
+        { name: "Experiencia en Central Park", lat: 40.7827725, lon: -73.9653627406542, price: 60000 },
+        { name: "Visita a Times Square", lat: 40.757261400000004, lon: -73.98589982948505, price: 65000 },
+        { name: "Tour por la Estátua de la Libertad", lat: 40.689253199999996, lon: -74.04454817144321, price: 70000 },
+        { name: "Vista desde el Empire State Building", lat: 40.74844205, lon: -73.98565890160751, price: 68000 },
+        { name: "Exploración del Museo Americano de Historia Natural", lat: 40.78110065, lon: -73.97423619833333, price: 58000 },
+        { name: "Visita al Rockefeller Center", lat: 40.75925755, lon: -73.97995686116377, price: 67000 },
+        { name: "Espectáculo en Broadway", lat: 40.88589, lon: -73.9002635, price: 69000 }
       ],
-      "Rio de Janeiro": [
+      'Rio de Janeiro': [
         { name: "Visita al Cristo Redentor", lat: -22.9519, lon: -43.2106, price: 60000 },
         { name: "Ascenso al Pão de Açúcar", lat: -22.9519, lon: -43.1549, price: 65000 },
         { name: "Diversión en Copacabana", lat: -22.9719, lon: -43.1843, price: 70000 },
@@ -465,16 +460,14 @@ export const puntosTuristicos = {
         { name: "Descanso en la Playa de Ipanema", lat: -22.9832, lon: -43.2047, price: 67000 },
         { name: "Descubrimiento de la Escadaria Selarón", lat: -22.9154, lon: -43.1796, price: 69000 }
       ],
-      "Paris": [
-        { "name": "Vista desde la Torre Eiffel", lat: 48.8584, lon: 2.2945, price: 60000 },
-        { "name": "Cultura en el Museo del Louvre", lat: 48.8606, lon: 2.3376, price: 65000 },
-        { "name": "Visita a la Catedral de Notre-Dame", lat: 48.8529, lon: 2.3499, price: 70000 },
-        { "name": "Exploración del Arco del Triunfo", lat: 48.8738, lon: 2.2950, price: 55000 },
-        { "name": "Visita a la Basílica del Sagrado Corazón (Sacré-Cœur)", lat: 48.8867, lon: 2.3431, price: 68000 },
-        { "name": "Cultura en el Museo de Orsay", lat: 48.8599, lon: 2.3233, price: 62000 },
-        { "name": "Relax en los Jardines de Luxemburgo", lat: 48.8462, lon: 2.3372, price: 58000 },
-        { "name": "Paseo por el Barrio de Montmartre", lat: 48.8867, lon: 2.3431, price: 67000 },
-        { "name": "Caminata por la Avenida Champs-Élysées", lat: 48.8698, lon: 2.3074, price: 69000 }
+      'Paris': [
+        { "name": "Vista desde la Torre Eiffel", lat: 48.8582599,lon: 2.2945006358633115, price: 60000 },
+        { "name": "Cultura en el Museo del Louvre", lat: 48.8611473,lon: 2.33802768704666, price: 65000 },
+        { "name": "Visita a la Catedral de Notre-Dame", lat: 48.85293705,lon: 2.3500501225000026, price: 70000 },
+        { "name": "Exploración del Arco del Triunfo", lat: 48.8739543,lon: 2.2949681, price: 55000 },
+        { "name": "Visita a la Basílica del Sagrado Corazón (Sacré-Cœur)", lat: 48.88680575,lon: 2.3430153448835087,price: 68000 },
+        { "name": "Cultura en el Museo de Orsay", lat: 48.85991785,lon: 2.3265849372230356,price: 62000 },
+        { "name": "Caminata por la Avenida Champs-Élysées",  lat: 48.8707573,lon: 2.3053312, price: 69000 }
       ]
     }
   
