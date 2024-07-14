@@ -20,7 +20,7 @@ export const regiones = {
       { latMin: -36, latMax: -31, lonMin: -71, lonMax: -66 },  // Mendoza
       { latMin: -36, latMax: -32, lonMin: -68, lonMax: -65 }   // San Luis
     ],
-    'Patagonia': [
+    'Patagonica': [
       { latMin: -42, latMax: -36, lonMin: -73, lonMax: -65 },  // Neuquén
       { latMin: -42, latMax: -38, lonMin: -70, lonMax: -62 },  // Río Negro
       { latMin: -46, latMax: -41, lonMin: -74, lonMax: -65 },  // Chubut
