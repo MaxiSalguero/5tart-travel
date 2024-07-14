@@ -111,7 +111,7 @@ export class mailsServices {
   
     Saludos cordiales,
     El equipo de 5tart Travel`;
-  
+
     const htmlBody = `
       <div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%;">
           <p><strong>¡Hola, ${username}!</strong></p>
@@ -138,7 +138,7 @@ export class mailsServices {
           }
       </style>
     `;
-  
+
     this.logger.log(
       `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
     );
@@ -161,7 +161,7 @@ export class mailsServices {
   
     Saludos cordiales,
     El equipo de 5tart Travel`;
-  
+
     const htmlBody = `
       <div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%;">
           <p><strong>¡Hola, ${username}!</strong></p>
@@ -185,15 +185,12 @@ export class mailsServices {
           }
       </style>
     `;
-  
+
     this.logger.log(
       `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
     );
     await this.sendMail(userEmail, subject, textBody, htmlBody);
   }
-  
-  
-
   async cambioPasswordMail(userEmail: string, username: string) {
     const subject = 'Solicitud de Cambio de Contraseña - 5tart Travel';
     const textBody = `Hola ${username},
@@ -208,7 +205,7 @@ export class mailsServices {
   
     Saludos cordiales,
     El equipo de 5tart Travel`;
-  
+
     const htmlBody = `
     <div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%;">
       <p><strong>¡Hola, ${username}!</strong></p>
@@ -230,11 +227,11 @@ export class mailsServices {
           }
       }
     </style>`;
-  
+
     this.logger.log(`Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`);
     await this.sendMail(userEmail, subject, textBody, htmlBody);
   }
-  
+
   async ConfirmCambiodePassword(userEmail: string, username: string, newPassword: string) {
     const subject = 'Confirmación de Cambio de Contraseña - 5tart Travel';
     const textBody = `Hola ${username},
@@ -249,7 +246,7 @@ export class mailsServices {
     
     Saludos cordiales,
     El equipo de 5tart Travel`;
-  
+
     const htmlBody = `
     <div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto;">
       <p>¡Hola, <strong>${username}</strong>!</p>
@@ -271,9 +268,45 @@ export class mailsServices {
           }
       }
     </style>`;
-  
+
     this.logger.log(`Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`);
     await this.sendMail(userEmail, subject, textBody, htmlBody);
   }
+  async sendThankYouMail(userEmail: string, username: string) {
+    const subject = 'Gracias por contactarnos - 5tart Travel';
+    const textBody = `Hola ${username},
+    
+      ¡Gracias por contactarnos!
+    
+      Hemos recibido tu mensaje y nuestro equipo de 5tart Travel se estará comunicando contigo en breve para asistirte en tu consulta.
+    
+      Si tienes alguna pregunta adicional mientras tanto, no dudes en responder a este correo.
+    
+      Saludos cordiales,
+      El equipo de 5tart Travel`;
   
+    const htmlBody = `
+      <div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%;">
+        <p><strong>¡Hola, ${username}!</strong></p>
+        <p>¡Gracias por contactarnos!</p>
+        <p>Hemos recibido tu mensaje y nuestro equipo de 5tart Travel se estará comunicando contigo en breve para asistirte en tu consulta.</p>
+        <p>Si tienes alguna pregunta adicional mientras tanto, no dudes en responder a este correo.</p>
+        <p>¡Saludos!</p>
+        <p>El Equipo de 5tart Travel</p>
+      </div>
+      <style>
+        @media only screen and (max-width: 600px) {
+          div[style*="border: 2px solid #003366; padding: 20px;"] {
+            padding: 10px;
+          }
+        }
+      </style>`;
+  
+    this.logger.log(
+      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
+    );
+    await this.sendMail(userEmail, subject, textBody, htmlBody);
+  }
+  
+
 }

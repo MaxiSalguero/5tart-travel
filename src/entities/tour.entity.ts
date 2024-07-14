@@ -111,6 +111,12 @@ export class TourEntity {
     nullable: true,
   })
   empresa?: string;
+  
+  @Column({
+    nullable: true,
+    default: true,
+  })
+  isActive: boolean;
 
   @Column({ type: 'float', nullable: true }) // Define averageRate here
   averageRate?: number;

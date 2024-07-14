@@ -9,6 +9,8 @@ export class ContactService {
     getAllContact() {
         return this.contactRepository.getAllContact()
     }
+    getcontactById(userId:string)
+    {return this.contactRepository.getContactById(userId)}
     
     createContact(comm: CreateContactDto) {
         return this.contactRepository.createContact(comm)
