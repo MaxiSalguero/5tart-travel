@@ -11,15 +11,9 @@ const dbConfig: DataSourceOptions = {
   password: DB_PASSWORD,
   entities: ['dist/**/*.entity{.ts,.js}'],
   migrations: ['dist/migrations/*{.ts,.js}'],
-<<<<<<< Updated upstream
-  logging: true,
-  synchronize: false,
-  dropSchema: false,
-=======
   logging: false,
   synchronize: true,
   dropSchema: true,
->>>>>>> Stashed changes
 };
 
 export const databaseConfig = TypeOrmModule.forRoot({
