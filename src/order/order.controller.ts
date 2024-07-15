@@ -24,10 +24,11 @@ export class OrderController {
   addOrder(
     @Param('id', ParseUUIDPipe) tourid: string,
     @Req() req,
+    @Body() order: CreateOrderDto
   ) {
     const userId = req.user.id;
 
-    return this.orderService.addOrder(tourid, userId);
+    return this.orderService.addOrder(tourid, userId, order);
   }
 
   @Get()

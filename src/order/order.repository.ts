@@ -37,7 +37,8 @@ export class OrderRepository {
 
   async addOrder(
     tourid: string,
-    userId: string
+    userId: string,
+    order: CreateOrderDto
   ) {
     const user: UserEntity = await this.userRepository.findOne({
       where: { id: userId },
@@ -54,8 +55,6 @@ export class OrderRepository {
       throw new BadRequestException('Agencia no encontrada');
     }
 
-
-    const order: CreateOrderDto = { title: tour.title, price: tour.price }
 
     const { agency } = tour
 
