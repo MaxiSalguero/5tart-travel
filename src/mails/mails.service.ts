@@ -333,8 +333,8 @@ export class mailsServices {
     <div style="border: 2px solid #005BBB; padding: 20px; background: white; border-radius: 10px; text-align: left; width: fit-content; margin: 0 auto; color: black; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative;">
         <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Detalles de tu compra</p>
         <hr style="border-top: 2px solid #005BBB; margin-top: 10px; margin-bottom: 15px;">
-        <p><strong>Agencia:</strong> {agencyName}</p>
-        <p><strong>Tour:</strong> {tourName}</p>
+        <p><strong>Agencia:</strong> ${agencyName}</p>
+        <p><strong>Tour:</strong> ${tourName}</p>
         <p><strong>Precio Total:</strong> ${totalPrice}</p>
 
         <!-- Marca de agua MercadoPago -->
