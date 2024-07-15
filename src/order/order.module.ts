@@ -7,10 +7,12 @@ import { OrderEntity } from 'src/entities/order.entity';
 import { UserEntity } from 'src/entities/user.entity';
 import { AgencyEntity } from 'src/entities/agency.entity';
 import { TourEntity } from 'src/entities/tour.entity';
+import { mailsServices } from 'src/mails/mails.service';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [TypeOrmModule.forFeature([OrderEntity, UserEntity, AgencyEntity, TourEntity])],
   controllers: [OrderController],
-  providers: [OrderService, OrderRepository],
+  providers: [OrderService, OrderRepository,mailsServices,ConfigService],
 })
 export class OrderModule {}

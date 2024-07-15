@@ -307,6 +307,67 @@ export class mailsServices {
     );
     await this.sendMail(userEmail, subject, textBody, htmlBody);
   }
+  async sendConfirmCompra(userEmail: string, username: string, agencyName: string, tourName: string, totalPrice: number) {
+    const subject = 'Confirmación de Compra - 5tart Travel';
+    const textBody = `Hola ${username},
+    
+      ¡Gracias por tu compra con 5tart Travel!
+    
+      Detalles de tu compra:
+      - Agencia: ${agencyName}
+      - Tour: ${tourName}
+      - Precio Total: ${totalPrice} USD
+    
+      Recibirás información adicional por correo electrónico antes de tu viaje.
+    
+      Si tienes alguna pregunta adicional, no dudes en responder a este correo.
+    
+      Saludos cordiales,
+      El equipo de 5tart Travel`;
+  
+    const htmlBody = `
+      <div style="border: 2px solid #005BBB; padding: 20px; background: #f5f5f5; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%; color: black; position: relative;">
+    <p style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">¡Hola, ${username}!</p>
+    <p style="font-size: 18px;">¡Gracias por tu compra con 5tart Travel!</p>
+
+    <div style="border: 2px solid #005BBB; padding: 20px; background: white; border-radius: 10px; text-align: left; width: fit-content; margin: 0 auto; color: black; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative;">
+        <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Detalles de tu compra</p>
+        <hr style="border-top: 2px solid #005BBB; margin-top: 10px; margin-bottom: 15px;">
+        <p><strong>Agencia:</strong> {agencyName}</p>
+        <p><strong>Tour:</strong> {tourName}</p>
+        <p><strong>Precio Total:</strong> ${totalPrice}</p>
+
+        <!-- Marca de agua MercadoPago -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden;">
+            <div style="position: absolute; top: -20px; left: -20px; width: 200%; height: 200%; transform: rotate(-45deg); opacity: 0.2; pointer-events: none; background: #005BBB; color: white; font-size: 24px; line-height: 1.5; text-align: center;">MercadoPago</div>
+        </div>
+    </div>
+
+    <p style="margin-top: 20px;">Recibirás información adicional por correo electrónico antes de tu viaje.</p>
+    <p>Si tienes alguna pregunta adicional, no dudes en responder a este correo.</p>
+    <p style="margin-top: 20px;">¡Saludos!</p>
+    <p>El Equipo de 5tart Travel</p>
+</div>
+
+<style>
+    @media only screen and (max-width: 600px) {
+        div[style*="border: 2px solid #005BBB; padding: 20px;"] {
+            padding: 10px;
+        }
+        div[style*="text-align: left; width: fit-content;"] {
+            width: auto;
+            max-width: calc(100% - 40px);
+        }
+    }
+</style>
+`;
+  
+    this.logger.log(
+      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
+    );
+    await this.sendMail(userEmail, subject, textBody, htmlBody);
+}
+
   
 
 }
