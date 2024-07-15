@@ -32,6 +32,17 @@ export class ContactRepository {
         await this.mailService.sendThankYouMail(contact.mail, contact.username)
         return contact;
       }
+      async deleteContactById(userId: string): Promise<void> {
+        const contact: ContactEntity = await this.contactRepository.findOne({
+          where: { id: userId },
+        });
+    
+        if (!contact) {
+          throw new NotFoundException('Usuario no encontrado');
+        }
+    
+        await this.contactRepository.remove(contact);
+      }
 
     async createContact(comm: CreateContactDto) {
         const newContact = await this.contactRepository.create(comm);

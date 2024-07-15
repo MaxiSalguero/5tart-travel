@@ -15,4 +15,7 @@ export class ContactService {
     createContact(comm: CreateContactDto) {
         return this.contactRepository.createContact(comm)
     }
+    deleteContactById(userId:string){
+        return this.contactRepository.deleteContactById(userId)
+    }
 }
