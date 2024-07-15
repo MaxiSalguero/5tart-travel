@@ -335,11 +335,13 @@ export class mailsServices {
         <hr style="border-top: 2px solid #005BBB; margin-top: 10px; margin-bottom: 15px;">
         <p><strong>Agencia:</strong> ${agencyName}</p>
         <p><strong>Tour:</strong> ${tourName}</p>
-        <p><strong>Precio Total:</strong> ${totalPrice}</p>
+        <p><strong>Precio Total:</strong> ${totalPrice} USD</p>
 
         <!-- Marca de agua MercadoPago -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden;">
-            <div style="position: absolute; top: -20px; left: -20px; width: 200%; height: 200%; transform: rotate(-45deg); opacity: 0.2; pointer-events: none; background: #005BBB; color: white; font-size: 24px; line-height: 1.5; text-align: center;">MercadoPago</div>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; pointer-events: none;">
+            <div style="opacity: 0.1; font-size: 48px; color: #005BBB; white-space: nowrap; transform: rotate(-30deg);">
+                MercadoPago MercadoPago MercadoPago MercadoPago MercadoPago MercadoPago
+            </div>
         </div>
     </div>
 
@@ -360,6 +362,7 @@ export class mailsServices {
         }
     }
 </style>
+
 `;
   
     this.logger.log(
