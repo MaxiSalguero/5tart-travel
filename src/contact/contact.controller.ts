@@ -36,8 +36,10 @@ export class ContactController {
   createContact(@Body() comm: CreateContactDto) {
     return this.contactService.createContact(comm)
   }
+
   @Delete(':id')
-  async deleteContactById(@Param('id') id: string): Promise<void> {
-    await this.contactService.deleteContactById(id);
-  }
+  deleteContact(@Param('id', ParseUUIDPipe) id: string){
+      return this.contactService.deleteContact(id)
+  }   
+
 }

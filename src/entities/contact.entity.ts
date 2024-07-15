@@ -30,4 +30,9 @@ export class ContactEntity {
     })
     telefono?: string;
 
+    @Column({
+        default: new Date(),
+      })
+      date: Date;
+
 }

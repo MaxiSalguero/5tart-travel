@@ -43,12 +43,10 @@ export class OrderRepository {
       where: { id: userId },
     });
     const tour: TourEntity = await this.tourRepository.findOne({
-      where: {id: tourid}, 
-      relations: {agency: true}
+      where: { id: tourid },
+      relations: { agency: true }
     });
 
-    const order : CreateOrderDto = {title: tour.title ,price: tour.price}
-    
     if (!user) {
       throw new BadRequestException('Usuario no encontrado');
     }
@@ -56,8 +54,12 @@ export class OrderRepository {
       throw new BadRequestException('Agencia no encontrada');
     }
 
-    const {agency} = tour
-    
+
+    const order: CreateOrderDto = { title: tour.title, price: tour.price }
+
+    const { agency } = tour
+
+
     const newOrder: OrderEntity = await this.orderRepository.create({
       ...order,
       user: user,

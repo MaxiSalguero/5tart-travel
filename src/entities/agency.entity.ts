@@ -43,6 +43,17 @@ export class AgencyEntity {
   })
   isActive: boolean;
 
+  @Column({
+    nullable: true,
+    default: false,
+  })
+  isSeen: boolean;
+
+  @Column({
+    default: new Date(),
+  })
+  date: Date;
+
   @Column({ nullable: true })
   role: string;
 
