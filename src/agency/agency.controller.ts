@@ -29,6 +29,12 @@ export class agencyController {
     return this.agencyService.getDisableAgency();
   }
 
+  @Get('disable/seen')
+  getSeenDisableAgency() {
+
+    return this.agencyService.getSeenDisableAgency();
+  }
+
   
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
@@ -67,6 +73,14 @@ export class agencyController {
 
     return this.agencyService.deleteTour(id, agencyId);
   }
+
+
+  @Put('/disable/seen/:id')
+  postSeenDisableAgency(@Param('id', ParseUUIDPipe) id: string) {
+
+    return this.agencyService.putSeenDisableAgency(id);
+  }
+
 
   @Put('active/:id')
   activeAgency(@Param('id', ParseUUIDPipe) id: string) {

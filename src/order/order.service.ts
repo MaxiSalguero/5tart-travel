@@ -13,7 +13,7 @@ export class OrderService {
   getOrder() {
     return this.orderRepository.getOrder();
   }
-  addOrder(orderid, userId: string) {
-    return this.orderRepository.addOrder(orderid, userId);
+  addOrder(orderid, userId: string, order: CreateOrderDto) {
+    return this.orderRepository.addOrder(orderid, userId, order);
   }
 }

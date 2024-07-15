@@ -35,6 +35,11 @@ export class UserEntity {
   })
   isActive: boolean;
 
+  @Column({
+    default: new Date(),
+  })
+  date: Date;
+
   @Column({ 
     nullable: true,
     default: 'user',

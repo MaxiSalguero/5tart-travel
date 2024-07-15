@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateContactDto } from 'src/DTOS/CreateContact.dto';
 import { ContactEntity } from 'src/entities/contact.entity';
@@ -32,22 +32,26 @@ export class ContactRepository {
         await this.mailService.sendThankYouMail(contact.mail, contact.username)
         return contact;
       }
-      async deleteContactById(userId: string): Promise<void> {
-        const contact: ContactEntity = await this.contactRepository.findOne({
-          where: { id: userId },
-        });
-    
-        if (!contact) {
-          throw new NotFoundException('Usuario no encontrado');
-        }
-    
-        await this.contactRepository.remove(contact);
-      }
-
-    async createContact(comm: CreateContactDto) {
+      
+      async createContact(comm: CreateContactDto) {
         const newContact = await this.contactRepository.create(comm);
-        await this.contactRepository.save(newContact)
+        await this.contactRepository.save(newContact);
+        
+        return `Enviado`;
+      }
+      
+      
+      
+    async deleteContact(id: string) {
+        const consult: ContactEntity = await this.contactRepository.findOne({where: {id: id}});
+        
+        if (!consult) {
+            throw new BadRequestException('id de la consulta no encontrado')
+        }
 
-        return `Enviado`
+        await this.contactRepository.remove(consult)
+
+        return 'Consulta eliminada'
     }
+
 }

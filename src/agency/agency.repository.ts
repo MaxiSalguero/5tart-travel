@@ -180,4 +180,27 @@ export class AgencyRepository {
     return disAgency;
   };
 
+  async getSeenDisableAgency() {
+    const disAgency: AgencyEntity[] = await this.agencyRepository.find({where: {isActive: false, isSeen: false}});
+
+    if (disAgency.length == 0) {
+      return 'no hay agencias desactivadas';
+    };
+
+    return disAgency;
+  };
+
+  async putSeenDisableAgency(id: string) {
+    const disAgency: AgencyEntity = await this.agencyRepository.findOne({where: {id: id}});
+
+    if (!disAgency) {
+      throw new BadRequestException('id no encontrado')
+    };
+
+    disAgency.isSeen = true;
+    await this.agencyRepository.save(disAgency);
+
+    return disAgency;
+  };
+
 }

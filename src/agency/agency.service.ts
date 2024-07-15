@@ -41,4 +41,13 @@ export class AgencyServices {
   getDisableAgency() {
     return this.agencyRepository.getDisableAgency();
   }
+
+  putSeenDisableAgency(id: string) {
+    return this.agencyRepository.putSeenDisableAgency(id);
+  }
+
+  getSeenDisableAgency() {
+    return this.agencyRepository.getSeenDisableAgency()
+  }
+
 }
