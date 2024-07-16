@@ -284,7 +284,7 @@ export class mailsServices {
     
       Saludos cordiales,
       El equipo de 5tart Travel`;
-  
+
     const htmlBody = `
       <div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%;">
         <p><strong>¡Hola, ${username}!</strong></p>
@@ -301,7 +301,7 @@ export class mailsServices {
           }
         }
       </style>`;
-  
+
     this.logger.log(
       `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
     );
@@ -324,20 +324,27 @@ export class mailsServices {
     
       Saludos cordiales,
       El equipo de 5tart Travel`;
-  
-      const htmlBody = `
+
+    const htmlBody = `
       <div style="border: 2px solid #005BBB; padding: 20px; background: #f5f5f5; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%; color: black; position: relative;">
           <p style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">¡Hola, ${username}!</p>
           <p style="font-size: 18px;">¡Gracias por tu compra con 5tart Travel!</p>
       
           <div style="border: 2px solid #005BBB; padding: 20px; background: white; border-radius: 10px; text-align: left; width: fit-content; margin: 0 auto; color: black; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative;">
-              <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Detalles de tu compra</p>
-              <hr style="border-top: 2px solid #005BBB; margin-top: 10px; margin-bottom: 15px;">
-              <p><strong>Agencia:</strong> ${agencyName}</p>
-              <p><strong>Tour:</strong> ${tourName}</p>
-              <p><strong>Precio Total:</strong> ${totalPrice} USD</p>
-          </div>
-      
+
+    <!-- Marca de agua -->
+    <img src="ruta/a/tu/marca-de-agua.png" alt="Marca de Agua" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.2; pointer-events: none; z-index: 1;">
+
+    <!-- Contenido principal -->
+    <div style="position: relative; z-index: 2;">
+        <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Detalles de tu compra</p>
+        <hr style="border-top: 2px solid #005BBB; margin-top: 10px; margin-bottom: 15px;">
+        <p><strong>Agencia:</strong> ${agencyName}</p>
+        <p><strong>Tour:</strong> ${tourName}</p>
+        <p><strong>Precio Total:</strong> ${totalPrice}</p>
+    </div>
+</div>
+
           <p style="margin-top: 20px;">Recibirás información adicional por correo electrónico antes de tu viaje.</p>
           <p>Si tienes alguna pregunta adicional, no dudes en responder a este correo.</p>
           <p style="margin-top: 20px;">¡Saludos!</p>
@@ -356,14 +363,14 @@ export class mailsServices {
           }
       </style>
       `;
-      
-  
+
+
     this.logger.log(
       `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
     );
     await this.sendMail(userEmail, subject, textBody, htmlBody);
-}
+  }
 
-  
+
 
 }
