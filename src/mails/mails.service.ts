@@ -325,45 +325,38 @@ export class mailsServices {
       Saludos cordiales,
       El equipo de 5tart Travel`;
   
-    const htmlBody = `
+      const htmlBody = `
       <div style="border: 2px solid #005BBB; padding: 20px; background: #f5f5f5; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%; color: black; position: relative;">
-    <p style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">¡Hola, ${username}!</p>
-    <p style="font-size: 18px;">¡Gracias por tu compra con 5tart Travel!</p>
-
-    <div style="border: 2px solid #005BBB; padding: 20px; background: white; border-radius: 10px; text-align: left; width: fit-content; margin: 0 auto; color: black; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative;">
-        <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Detalles de tu compra</p>
-        <hr style="border-top: 2px solid #005BBB; margin-top: 10px; margin-bottom: 15px;">
-        <p><strong>Agencia:</strong> ${agencyName}</p>
-        <p><strong>Tour:</strong> ${tourName}</p>
-        <p><strong>Precio Total:</strong> ${totalPrice} USD</p>
-
-        <!-- Marca de agua MercadoPago -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; pointer-events: none;">
-            <div style="opacity: 0.1; font-size: 48px; color: #005BBB; white-space: nowrap; transform: rotate(-30deg);">
-                MercadoPago MercadoPago MercadoPago MercadoPago MercadoPago MercadoPago
-            </div>
-        </div>
-    </div>
-
-    <p style="margin-top: 20px;">Recibirás información adicional por correo electrónico antes de tu viaje.</p>
-    <p>Si tienes alguna pregunta adicional, no dudes en responder a este correo.</p>
-    <p style="margin-top: 20px;">¡Saludos!</p>
-    <p>El Equipo de 5tart Travel</p>
-</div>
-
-<style>
-    @media only screen and (max-width: 600px) {
-        div[style*="border: 2px solid #005BBB; padding: 20px;"] {
-            padding: 10px;
-        }
-        div[style*="text-align: left; width: fit-content;"] {
-            width: auto;
-            max-width: calc(100% - 40px);
-        }
-    }
-</style>
-
-`;
+          <p style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">¡Hola, ${username}!</p>
+          <p style="font-size: 18px;">¡Gracias por tu compra con 5tart Travel!</p>
+      
+          <div style="border: 2px solid #005BBB; padding: 20px; background: white; border-radius: 10px; text-align: left; width: fit-content; margin: 0 auto; color: black; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative;">
+              <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Detalles de tu compra</p>
+              <hr style="border-top: 2px solid #005BBB; margin-top: 10px; margin-bottom: 15px;">
+              <p><strong>Agencia:</strong> ${agencyName}</p>
+              <p><strong>Tour:</strong> ${tourName}</p>
+              <p><strong>Precio Total:</strong> ${totalPrice} USD</p>
+          </div>
+      
+          <p style="margin-top: 20px;">Recibirás información adicional por correo electrónico antes de tu viaje.</p>
+          <p>Si tienes alguna pregunta adicional, no dudes en responder a este correo.</p>
+          <p style="margin-top: 20px;">¡Saludos!</p>
+          <p>El Equipo de 5tart Travel</p>
+      </div>
+      
+      <style>
+          @media only screen and (max-width: 600px) {
+              div[style*="border: 2px solid #005BBB; padding: 20px;"] {
+                  padding: 10px !important;
+              }
+              div[style*="text-align: left; width: fit-content;"] {
+                  width: auto !important;
+                  max-width: calc(100% - 40px) !important;
+              }
+          }
+      </style>
+      `;
+      
   
     this.logger.log(
       `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
