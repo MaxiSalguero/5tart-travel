@@ -284,7 +284,7 @@ export class mailsServices {
     
       Saludos cordiales,
       El equipo de 5tart Travel`;
-
+  
     const htmlBody = `
       <div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%;">
         <p><strong>¡Hola, ${username}!</strong></p>
@@ -301,7 +301,7 @@ export class mailsServices {
           }
         }
       </style>`;
-
+  
     this.logger.log(
       `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
     );
@@ -324,16 +324,18 @@ export class mailsServices {
     
       Saludos cordiales,
       El equipo de 5tart Travel`;
-
-    const htmlBody = `
+  
+      const htmlBody = `
       <div style="border: 2px solid #005BBB; padding: 20px; background: #f5f5f5; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%; color: black; position: relative;">
           <p style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">¡Hola, ${username}!</p>
           <p style="font-size: 18px;">¡Gracias por tu compra con 5tart Travel!</p>
       
           <div style="border: 2px solid #005BBB; padding: 20px; background: white; border-radius: 10px; text-align: left; width: fit-content; margin: 0 auto; color: black; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative;">
 
-    <!-- Marca de agua -->
-    <img src="ruta/a/tu/marca-de-agua.png" alt="Marca de Agua" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.2; pointer-events: none; z-index: 1;">
+    <!-- Fondo con marca de agua -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 155, 187, 0.1); z-index: 1; pointer-events: none; display: flex; justify-content: center; align-items: center; border-radius: 10px;">
+        <p style="font-size: 24px; font-weight: bold; color: #009BBA; opacity: 0.6; transform: rotate(-30deg);">MercadoPago</p>
+    </div>
 
     <!-- Contenido principal -->
     <div style="position: relative; z-index: 2;">
@@ -363,14 +365,14 @@ export class mailsServices {
           }
       </style>
       `;
-
-
+      
+  
     this.logger.log(
       `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
     );
     await this.sendMail(userEmail, subject, textBody, htmlBody);
-  }
+}
 
-
+  
 
 }
