@@ -200,4 +200,29 @@ export class UserRepository {
 
     return updateUser;
   }
+
+  async putSeenUser(id: string) {
+    const disUser: UserEntity = await this.usersRepository.findOne({where: {id: id}});
+
+    if (!disUser) {
+      throw new BadRequestException('id no encontrado')
+    };
+
+    disUser.isSeen = true;
+    await this.usersRepository.save(disUser);
+
+
+    return disUser;
+  };
+
+  async getSeenUser() {
+    const disUser: UserEntity[] = await this.usersRepository.find({where: {isSeen: false}});
+    
+    if (disUser.length == 0) {
+      return 'no hay Usuarios Nuevos';
+    };
+
+    return disUser;  
+  }
+
 }
