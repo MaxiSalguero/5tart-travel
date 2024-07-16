@@ -2,6 +2,7 @@
 import { SubscribeMessage, WebSocketGateway, WebSocketServer, OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { AgencyRepository } from './agency.repository';
+import { UserRepository } from 'src/user/user.repository';
 
 
 @WebSocketGateway({
@@ -12,7 +13,9 @@ import { AgencyRepository } from './agency.repository';
 export class AgencyGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer() server: Server;
 
-  constructor(private readonly agencyRepository: AgencyRepository) {}
+  constructor(private readonly agencyRepository: AgencyRepository,
+              private readonly usersRepository: UserRepository
+  ) {}
 
   afterInit(server: Server) {
     console.log('WebSocket initialized');
@@ -41,6 +44,11 @@ export class AgencyGateway implements OnGatewayInit, OnGatewayConnection, OnGate
   async emitAgencyUpdate(): Promise<void> {
     const items = await this.agencyRepository.getDisableAgency();
     this.server.emit('allDisableAgency', items);
+  }
+
+  async emitUserUpdate(): Promise<void> {
+    const items = await this.usersRepository.getUsers();
+    this.server.emit('allUsers', items);
   }
 }
 

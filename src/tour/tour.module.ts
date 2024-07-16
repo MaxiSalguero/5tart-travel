@@ -11,10 +11,12 @@ import { ConfigService } from '@nestjs/config';
 import { CommentEntity } from 'src/entities/comment.entity';
 import { AgencyGateway } from 'src/agency/agency.gateway';
 import { AgencyRepository } from 'src/agency/agency.repository';
+import { UserRepository } from 'src/user/user.repository';
+import { UserEntity } from 'src/entities/user.entity';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([TourEntity, AgencyEntity,CommentEntity])],
+  imports: [TypeOrmModule.forFeature([TourEntity, AgencyEntity, CommentEntity, UserEntity])],
   controllers: [tourController],
   providers: [
     TourService,
@@ -23,7 +25,8 @@ import { AgencyRepository } from 'src/agency/agency.repository';
     mailsServices,
     ConfigService,
     AgencyGateway,
-    AgencyRepository
+    AgencyRepository,
+    UserRepository
   ],
 })
 export class tourModule {}

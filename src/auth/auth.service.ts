@@ -46,6 +46,9 @@ export class AuthService {
       password: hashedPassword,
     });
 
+    this.agencyGateway.emitUserUpdate();
+
+
     if (createdUser) {
       await this.mailservice.registerUserMail(
         user.mail,

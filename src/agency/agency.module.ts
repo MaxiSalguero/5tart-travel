@@ -6,10 +6,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AgencyRepository } from './agency.repository';
 import { TourEntity } from 'src/entities/tour.entity';
 import { AgencyGateway } from './agency.gateway';
+import { UserRepository } from 'src/user/user.repository';
+import { UserEntity } from 'src/entities/user.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([AgencyEntity, TourEntity])],
+  imports: [TypeOrmModule.forFeature([AgencyEntity, TourEntity, UserEntity])],
   controllers: [agencyController],
-  providers: [AgencyServices, AgencyRepository, AgencyGateway],
+  providers: [AgencyServices, AgencyRepository, AgencyGateway, UserRepository],
 })
 export class agencyModule {}

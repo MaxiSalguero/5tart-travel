@@ -9,10 +9,11 @@ import { ConfigService } from '@nestjs/config';
 import { AgencyGateway } from 'src/agency/agency.gateway';
 import { AgencyRepository } from 'src/agency/agency.repository';
 import { TourEntity } from 'src/entities/tour.entity';
+import { UserRepository } from 'src/user/user.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity, AgencyEntity, TourEntity])],
-  providers: [AuthService, mailsServices, ConfigService, AgencyGateway, AgencyRepository],
+  providers: [AuthService, mailsServices, ConfigService, AgencyGateway, AgencyRepository, UserRepository],
   controllers: [AuthController],
   exports: [AuthService],
 })
