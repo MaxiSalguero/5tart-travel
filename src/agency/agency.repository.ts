@@ -6,6 +6,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { AgencyEntity } from 'src/entities/agency.entity';
 import { TourEntity } from 'src/entities/tour.entity';
+import { UserEntity } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -15,6 +16,8 @@ export class AgencyRepository {
     private readonly agencyRepository: Repository<AgencyEntity>,
     @InjectRepository(TourEntity)
     private readonly toursRepository: Repository<TourEntity>,
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
   ) {}
 
   async getAgency() {
@@ -192,15 +195,20 @@ export class AgencyRepository {
 
   async putSeenDisableAgency(id: string) {
     const disAgency: AgencyEntity = await this.agencyRepository.findOne({where: {id: id}});
+    const disUser: UserEntity = await this.userRepository.findOne({where: {id: id}});
 
-    if (!disAgency) {
-      throw new BadRequestException('id no encontrado')
+    if (disAgency) {
+      disAgency.isSeen = true;
+      await this.agencyRepository.save(disAgency);
+      return disAgency
     };
 
-    disAgency.isSeen = true;
-    await this.agencyRepository.save(disAgency);
-
-    return disAgency;
+    if (disUser) {
+      disUser.isSeen = true;
+      await this.userRepository.save(disUser);
+      return disUser    
+    };
+      
   };
 
 }
