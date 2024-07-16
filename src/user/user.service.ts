@@ -41,4 +41,12 @@ export class UserServices {
   adminUser(id: string) {
     return this.userRepository.adminUser(id);
   }
+
+  async putSeenUser(id: string) {
+    return this.userRepository.putSeenUser(id)
+  };
+
+  getSeenUser() {
+    return this.userRepository.getSeenUser()
+  }
 }

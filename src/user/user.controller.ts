@@ -33,6 +33,12 @@ export class userController {
     return this.userService.getUsers();
   }
 
+  @Get('disable/seen')
+  getSeenUser() {
+
+    return this.userService.getSeenUser();
+  }
+
   @Get(':id')
   async getUserById(@Param('id') id: string): Promise<UserEntity> {
     try {
@@ -81,6 +87,11 @@ export class userController {
   @Put('active/:id')
   activeUser(@Param('id', ParseUUIDPipe) id: string) {
     return this.userService.activeUser(id);
+  }
+
+  @Put('seen/:id')
+  putSeenUser(@Param('id', ParseUUIDPipe) id: string) {
+    return this.userService.putSeenUser(id);
   }
 
   @Put('disable/:id')

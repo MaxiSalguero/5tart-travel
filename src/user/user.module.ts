@@ -11,10 +11,9 @@ import { mailsServices } from 'src/mails/mails.service';
 import { ConfigService } from '@nestjs/config';
 import { TourEntity } from 'src/entities/tour.entity';
 import { AgencyGateway } from 'src/agency/agency.gateway';
-import { tourModule } from 'src/tour/tour.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity, AgencyEntity, TourEntity, tourModule])],
+  imports: [TypeOrmModule.forFeature([UserEntity, AgencyEntity, TourEntity])],
   controllers: [userController],
   providers: [
     UserServices,
