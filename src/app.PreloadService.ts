@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
+import { Connection, DataSource, Repository } from 'typeorm';
 import { AgencyEntity } from './entities/agency.entity';
 import { TourEntity } from './entities/tour.entity';
 import * as data from './helpers/data.json';
@@ -15,11 +15,23 @@ export class PreloadService implements OnModuleInit {
     @InjectRepository(TourEntity)
     private readonly tourRepository: Repository<TourEntity>,
     private readonly mapsservice: MapsService,
+    @InjectDataSource() private readonly dataSource: DataSource,
+
   ) {}
 
   async onModuleInit() {
+    await this.installUnaccentExtension();
     await this.loadShelters();
     await this.loadTours();
+  }
+
+  private async installUnaccentExtension() {
+    try {
+      await this.dataSource.query(`CREATE EXTENSION IF NOT EXISTS unaccent;`);
+      console.log('Extension unaccent installed or already exists.');
+    } catch (error) {
+      console.error('Failed to install unaccent extension:', error);
+    }
   }
 
   async loadShelters() {
