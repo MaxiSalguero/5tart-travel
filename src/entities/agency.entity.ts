@@ -61,7 +61,7 @@ export class AgencyEntity {
   @JoinColumn()
   tours: TourEntity[];
 
-  @OneToMany(() => OrderEntity, (orders) => orders.agency)
+  @OneToMany(() => OrderEntity, (orders) => orders.agency, { cascade: true })
   @JoinTable()
   orders: OrderEntity[];
 }

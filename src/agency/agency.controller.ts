@@ -25,17 +25,14 @@ export class agencyController {
 
   @Get('disable')
   getDisableAgency() {
-
     return this.agencyService.getDisableAgency();
   }
 
   @Get('disable/seen')
   getSeenDisableAgency() {
-
     return this.agencyService.getSeenDisableAgency();
   }
 
-  
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Get('totalMount')
@@ -45,7 +42,6 @@ export class agencyController {
     return this.agencyService.getTotalMount(agencyId);
   }
 
-
   @Get(':id')
   getByIdAgency(@Param('id', ParseUUIDPipe) id: string) {
     return this.agencyService.getByIdAgency(id);
@@ -53,11 +49,11 @@ export class agencyController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
-  @Delete('orders')
-  deleteOrders(@Req() request) {
+  @Delete('orders/amount')
+  emptyTotalAmount(@Req() request) {
     const agencyId = request.user.id;
 
-    return this.agencyService.deleteOrders(agencyId);
+    return this.agencyService.emptyTotalAmount(agencyId);
   }
 
   @Delete(':id')
@@ -74,13 +70,10 @@ export class agencyController {
     return this.agencyService.deleteTour(id, agencyId);
   }
 
-
   @Put('/disable/seen/:id')
   postSeenDisableAgency(@Param('id', ParseUUIDPipe) id: string) {
-
     return this.agencyService.putSeenDisableAgency(id);
   }
-
 
   @Put('active/:id')
   activeAgency(@Param('id', ParseUUIDPipe) id: string) {

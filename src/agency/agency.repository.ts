@@ -44,13 +44,17 @@ export class AgencyRepository {
 
     let totalPrice: number = 0;
 
-    agency.orders.forEach((order) => {
+    const ordersNotFinished = agency.orders.filter(
+      (order) => !order.isFinished,
+    );
+
+    ordersNotFinished.forEach((order) => {
       totalPrice += order.price;
     });
 
-    const totalMount = totalPrice * 0.95;
+    const totalAmount = totalPrice * 0.95;
 
-    return totalMount;
+    return totalAmount;
   }
 
   async createAgency(agency) {
@@ -103,7 +107,7 @@ export class AgencyRepository {
     return 'Tour eliminado correctamente';
   }
 
-  async deleteOrders(agencyId: string) {
+  async emptyTotalAmount(agencyId: string) {
     const agency = await this.agencyRepository.findOne({
       where: { id: agencyId },
       relations: { orders: true },
@@ -113,11 +117,13 @@ export class AgencyRepository {
       throw new BadRequestException('La agencia no existe');
     }
 
-    agency.orders = [];
+    agency.orders.forEach((order) => {
+      order.isFinished = true;
+    });
 
-    const updatedAgency = await this.agencyRepository.save(agency);
+    await this.agencyRepository.save(agency);
 
-    return updatedAgency;
+    return agency;
   }
 
   async getByIdAgency(id: string) {
@@ -174,41 +180,47 @@ export class AgencyRepository {
   }
 
   async getDisableAgency() {
-    const disAgency: AgencyEntity[] = await this.agencyRepository.find({where: {isActive: false}});
+    const disAgency: AgencyEntity[] = await this.agencyRepository.find({
+      where: { isActive: false },
+    });
 
     if (disAgency.length == 0) {
       return 'no hay agencias desactivadas';
-    };
+    }
 
     return disAgency;
-  };
+  }
 
   async getSeenDisableAgency() {
-    const disAgency: AgencyEntity[] = await this.agencyRepository.find({where: {isActive: false, isSeen: false}});
+    const disAgency: AgencyEntity[] = await this.agencyRepository.find({
+      where: { isActive: false, isSeen: false },
+    });
 
     if (disAgency.length == 0) {
       return 'no hay agencias desactivadas';
-    };
+    }
 
     return disAgency;
-  };
+  }
 
   async putSeenDisableAgency(id: string) {
-    const disAgency: AgencyEntity = await this.agencyRepository.findOne({where: {id: id}});
-    const disUser: UserEntity = await this.userRepository.findOne({where: {id: id}});
+    const disAgency: AgencyEntity = await this.agencyRepository.findOne({
+      where: { id: id },
+    });
+    const disUser: UserEntity = await this.userRepository.findOne({
+      where: { id: id },
+    });
 
     if (disAgency) {
       disAgency.isSeen = true;
       await this.agencyRepository.save(disAgency);
-      return disAgency
-    };
+      return disAgency;
+    }
 
     if (disUser) {
       disUser.isSeen = true;
       await this.userRepository.save(disUser);
-      return disUser    
-    };
-      
-  };
-
+      return disUser;
+    }
+  }
 }
