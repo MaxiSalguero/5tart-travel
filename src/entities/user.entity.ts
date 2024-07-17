@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeInsert, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { TourEntity } from './tour.entity';
 import { OrderEntity } from './order.entity';
@@ -42,9 +42,15 @@ export class UserEntity {
   isSeen: boolean;
 
   @Column({
-    default: new Date(),
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   date: Date;
+
+  @BeforeInsert()
+  setDate() {
+    this.date = new Date();
+  }
 
   @Column({ 
     nullable: true,

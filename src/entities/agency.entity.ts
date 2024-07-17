@@ -1,4 +1,5 @@
 import {
+  BeforeInsert,
   Column,
   Entity,
   JoinColumn,
@@ -50,9 +51,15 @@ export class AgencyEntity {
   isSeen: boolean;
 
   @Column({
-    default: new Date(),
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   date: Date;
+
+  @BeforeInsert()
+  setDate() {
+    this.date = new Date();
+  }
 
   @Column({ nullable: true })
   role: string;
