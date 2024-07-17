@@ -36,18 +36,18 @@ export class AgencyGateway implements OnGatewayInit, OnGatewayConnection, OnGate
   }
 
   private async sendAllItems(client: Socket): Promise<void> {
-    const items = await this.agencyRepository.getDisableAgency()
+    const items = await this.agencyRepository.getSeenDisableAgency()
     // console.log('Items fetched from database:', items);
     client.emit('allDisableAgency', items);
   }
 
   async emitAgencyUpdate(): Promise<void> {
-    const items = await this.agencyRepository.getDisableAgency();
+    const items = await this.agencyRepository.getSeenDisableAgency();
     this.server.emit('allDisableAgency', items);
   }
 
   async emitUserUpdate(): Promise<void> {
-    const items = await this.usersRepository.getUsers();
+    const items = await this.usersRepository.getSeenUser();
     this.server.emit('allUsers', items);
   }
 }
