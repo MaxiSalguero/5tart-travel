@@ -30,6 +30,11 @@ export class OrderEntity {
   })
   date: Date;
 
+  @Column({
+    default: false,
+  })
+  isFinished: boolean;
+
   @ManyToOne(() => UserEntity, (user) => user.orders)
   @JoinColumn()
   user: UserEntity;

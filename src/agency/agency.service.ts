@@ -10,7 +10,7 @@ export class AgencyServices {
     return this.agencyRepository.getAgency();
   }
 
-  getTotalMount(agencyId:string) {
+  getTotalMount(agencyId: string) {
     return this.agencyRepository.getTotalMount(agencyId);
   }
 
@@ -22,8 +22,8 @@ export class AgencyServices {
     return this.agencyRepository.deleteTour(id, agencyId);
   }
 
-  deleteOrders(agencyId: string) {
-    return this.agencyRepository.deleteOrders(agencyId);
+  emptyTotalAmount(agencyId: string) {
+    return this.agencyRepository.emptyTotalAmount(agencyId);
   }
 
   getByIdAgency(id: string) {
@@ -47,7 +47,6 @@ export class AgencyServices {
   }
 
   getSeenDisableAgency() {
-    return this.agencyRepository.getSeenDisableAgency()
+    return this.agencyRepository.getSeenDisableAgency();
   }
-
 }
