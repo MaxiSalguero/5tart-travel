@@ -49,4 +49,7 @@ export class AgencyServices {
   getSeenDisableAgency() {
     return this.agencyRepository.getSeenDisableAgency();
   }
+  preLoad() {
+    return this.agencyRepository.preLoad()
+  }
 }

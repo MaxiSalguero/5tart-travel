@@ -11,6 +11,7 @@ import { mailsServices } from 'src/mails/mails.service';
 import { ConfigService } from '@nestjs/config';
 import { TourEntity } from 'src/entities/tour.entity';
 import { AgencyGateway } from 'src/agency/agency.gateway';
+import { MapsService } from 'src/maps/maps.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity, AgencyEntity, TourEntity])],
@@ -22,7 +23,8 @@ import { AgencyGateway } from 'src/agency/agency.gateway';
     AgencyRepository,
     mailsServices,
     ConfigService,
-    AgencyGateway
+    AgencyGateway,
+    MapsService
   ],
 })
 export class userModule {}

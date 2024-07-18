@@ -26,7 +26,7 @@ import { UserEntity } from 'src/entities/user.entity';
     ConfigService,
     AgencyGateway,
     AgencyRepository,
-    UserRepository
+    UserRepository,
   ],
 })
 export class tourModule {}
