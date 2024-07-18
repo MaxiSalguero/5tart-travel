@@ -20,9 +20,9 @@ export class PreloadService implements OnModuleInit {
   ) {}
 
   async onModuleInit() {
-    await this.installUnaccentExtension();
     await this.loadShelters();
     await this.loadTours();
+    await this.installUnaccentExtension();
   }
 
   private async installUnaccentExtension() {
@@ -64,17 +64,17 @@ export class PreloadService implements OnModuleInit {
         const existingTour = await this.tourRepository.findOne({
           where: {
             title: tour.title,
-            price: tour.price,
-            description: tour.description,
-            address: tour.address,
-            imgUrl: tour.imgUrl,
-            lat: geocodeData.lat,
-            lon: geocodeData.lon,
-            display_name: `El ${tour.hotel} -Ubicado en: ${tour.address}`,
-            country: geocodeData.country,
-            region: geocodeData.region,
-            state: geocodeData.state,
-            touristPoints: geocodeData.TuristPoints,
+            // price: tour.price,
+            // description: tour.description,
+            // address: tour.address,
+            // imgUrl: tour.imgUrl,
+            // lat: geocodeData.lat,
+            // lon: geocodeData.lon,
+            // display_name: `El ${tour.hotel} -Ubicado en: ${tour.address}`,
+            // country: geocodeData.country,
+            // region: geocodeData.region,
+            // state: geocodeData.state,
+            // touristPoints: geocodeData.TuristPoints,
             agency: agency,
           },
         });

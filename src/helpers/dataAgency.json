@@ -5,7 +5,9 @@
       "password": "password123",
       "confirm_password": "password123",
       "address": "Av. San Martín 123, CABA Buenos Aires",
-      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720990930/kpszyawyvmbli3xotywe.webp"
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720990930/kpszyawyvmbli3xotywe.webp",
+      "isActive": true,
+      "role": "agency"
     },
     {
       "name_agency": "Interturis",
@@ -13,7 +15,9 @@
       "password": "securepwd456",
       "confirm_password": "securepwd456",
       "address": "Av. Pueyrredón 2250, Balvanera",
-      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720990831/ptwqcgrqpynagzny04vf.webp"
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720990831/ptwqcgrqpynagzny04vf.webp",
+      "isActive": true,
+      "role": "agency"
     },
     {
       "name_agency": "Norte Adventours",
@@ -21,7 +25,9 @@
       "password": "mystrongpassword",
       "confirm_password": "mystrongpassword",
       "address": "Av. del Barco Centenera 1500, Parque Chacabuco",
-      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720990881/wx9n09j5dy8pmxbjtl0c.webp"
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720990881/wx9n09j5dy8pmxbjtl0c.webp",
+      "isActive": true,
+      "role": "agency"
     },
     {
       "name_agency": "Confluencia",
@@ -29,7 +35,9 @@
       "password": "saltaaventura321",
       "confirm_password": "saltaaventura321",
       "address": "Av. Rivadavia 9500, Floresta",
-      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720990992/kc31vkxxec8jikyoqgdh.webp"
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720990992/kc31vkxxec8jikyoqgdh.webp",
+      "isActive": true,
+      "role": "agency"
     },
     {
       "name_agency": "Mystic Argentina",
@@ -37,47 +45,59 @@
       "password": "toursushuaia",
       "confirm_password": "toursushuaia",
       "address": "Av. Triunvirato 4200, Villa Ortúzar",
-      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720991022/mlpcez2tfxpy9fwsoapp.webp"
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720991022/mlpcez2tfxpy9fwsoapp.webp",
+      "isActive": true,
+      "role": "agency"
     },
     {
-        "name_agency": "Rutur",
-        "mail": "info@rutursss.com",
-        "password": "glaciarespwd789",
-        "confirm_password": "glaciarespwd789",
-        "address": "Av. Cabildo 4321, Capital Federal",
-        "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720991064/y4uyitamp3fzyjdedt6f.webp"
-      },
-      {
-        "name_agency": "San Guillermo",
-        "mail": "info@sanguillermino.com",
-        "password": "marplatapwd456",
-        "confirm_password": "marplatapwd456",
-        "address": "Av. Scalabrini Ortiz 600, Villa Crespo",
-        "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720991205/ibbgkfwzwerkgxv54wzq.webp"
-      },
-      {
-        "name_agency": "Travel Viajes",
-        "mail": "info@travelsviajess.com",
-        "password": "cordobaturismo321",
-        "confirm_password": "cordobaturismo321",
-        "address": "Av. La Plata 1700, Boedo",
-        "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720991240/mjozvclgkvtv1dosahew.webp"
-      },
-      {
-        "name_agency": "Serena",
-        "mail": "info@serenasss.com",
-        "password": "rosariotravelpwd",
-        "confirm_password": "rosariotravelpwd",
-        "address": "Av. Corrientes 5800, caba",
-        "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720991408/jqfk0awqedzsxwqst4am.webp"
-      },
-      {
-        "name_agency": "Turismo Luna",
-        "mail": "info@turismolunaa.com",
-        "password": "lariojaexplora987",
-        "confirm_password": "lariojaexplora987",
-        "address": "Av. San Juan 654, Capital Federal",
-        "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720991433/knntg8afvol4tuagm5gu.webp"
-      }
+      "name_agency": "Rutur",
+      "mail": "info@rutursss.com",
+      "password": "glaciarespwd789",
+      "confirm_password": "glaciarespwd789",
+      "address": "Av. Cabildo 4321, Capital Federal",
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720991064/y4uyitamp3fzyjdedt6f.webp",
+      "isActive": true,
+      "role": "agency"
+    },
+    {
+      "name_agency": "San Guillermo",
+      "mail": "info@sanguillermino.com",
+      "password": "marplatapwd456",
+      "confirm_password": "marplatapwd456",
+      "address": "Av. Scalabrini Ortiz 600, Villa Crespo",
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720991205/ibbgkfwzwerkgxv54wzq.webp",
+      "isActive": true,
+      "role": "agency"
+    },
+    {
+      "name_agency": "Travel Viajes",
+      "mail": "info@travelsviajess.com",
+      "password": "cordobaturismo321",
+      "confirm_password": "cordobaturismo321",
+      "address": "Av. La Plata 1700, Boedo",
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720991240/mjozvclgkvtv1dosahew.webp",
+      "isActive": true,
+      "role": "agency"
+    },
+    {
+      "name_agency": "Serena",
+      "mail": "info@serenasss.com",
+      "password": "rosariotravelpwd",
+      "confirm_password": "rosariotravelpwd",
+      "address": "Av. Corrientes 5800, caba",
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720991408/jqfk0awqedzsxwqst4am.webp",
+      "isActive": true,
+      "role": "agency"
+    },
+    {
+      "name_agency": "Turismo Luna",
+      "mail": "info@turismolunaa.com",
+      "password": "lariojaexplora987",
+      "confirm_password": "lariojaexplora987",
+      "address": "Av. San Juan 654, Capital Federal",
+      "imgUrl": "https://res.cloudinary.com/dia2gautk/image/upload/v1720991433/knntg8afvol4tuagm5gu.webp",
+      "isActive": true,
+      "role": "agency"
+    }
   ]
   
