@@ -140,7 +140,10 @@ export class AgencyRepository {
   }
 
   async activeAgency(id: string) {
-    const agency = await this.agencyRepository.findOne({ where: { id } });
+    const agency = await this.agencyRepository.findOne({
+      where: { id },
+      relations: { tours: true },
+    });
 
     if (!agency) {
       throw new NotFoundException('no existe la agencia');
@@ -153,14 +156,21 @@ export class AgencyRepository {
     agency.isActive = true;
     agency.role = 'agency';
 
-    const updateAgency = this.agencyRepository.save(agency);
+    const tours = agency.tours.map((tour) => {
+      tour.isActive = true;
+      return tour;
+    });
+  
+    await this.toursRepository.save(tours);
+    await this.agencyRepository.save(agency);
 
-    return updateAgency;
+    return agency;
   }
 
   async disableAgency(id: string) {
     const agency = await this.agencyRepository.findOne({
       where: { id },
+      relations: { tours: true },
     });
 
     if (!agency) {
@@ -174,9 +184,15 @@ export class AgencyRepository {
     agency.isActive = false;
     agency.role = null;
 
-    const updateAgency = this.agencyRepository.save(agency);
+    const tours = agency.tours.map((tour) => {
+      tour.isActive = false;
+      return tour;
+    });
+  
+    await this.toursRepository.save(tours);
+    await this.agencyRepository.save(agency);
 
-    return updateAgency;
+    return agency;
   }
 
   async getDisableAgency() {
