@@ -33,6 +33,11 @@ export class agencyController {
     return this.agencyService.getSeenDisableAgency();
   }
 
+  @Get('preload')
+  preLoad() {
+    return this.agencyService.preLoad();
+  }
+
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Get('totalMount')

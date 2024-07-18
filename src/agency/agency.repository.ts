@@ -8,6 +8,10 @@ import { AgencyEntity } from 'src/entities/agency.entity';
 import { TourEntity } from 'src/entities/tour.entity';
 import { UserEntity } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
+import * as data from '../helpers/data.json';
+import * as dataAgency from '../helpers/dataAgency.json';
+import { MapsService } from '../maps/maps.service';
+
 
 @Injectable()
 export class AgencyRepository {
@@ -18,6 +22,8 @@ export class AgencyRepository {
     private readonly toursRepository: Repository<TourEntity>,
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
+    private readonly mapsservice: MapsService,
+
   ) {}
 
   async getAgency() {
@@ -239,4 +245,76 @@ export class AgencyRepository {
       return disUser;
     }
   }
+
+  async preLoad(){
+    await this.loadShelters()
+    await this.loadTours()
+  }
+
+
+  async loadShelters() {
+    for (const agency of dataAgency) {
+      const existingShelter = await this.agencyRepository.findOne({
+        where: {
+          name_agency: agency.name_agency,
+          mail: agency.mail,
+          password: agency.password,
+          address: agency.address,
+          imgUrl: agency.imgUrl,
+        },
+      });
+
+      if (!existingShelter) {
+        await this.agencyRepository.save(agency);
+      }
+    }
+
+    return 'Refugios cargados';
+  }
+
+  async loadTours() {
+    for (const tour of data) {
+      const agency = await this.agencyRepository.findOne({
+        where: { name_agency: tour.agency },
+      });
+      const geocodeData = await this.mapsservice.geocodeAddress(tour.address);
+      if (agency) {
+        const existingTour = await this.toursRepository.findOne({
+          where: {
+            title: tour.title,
+            // price: tour.price,
+            // description: tour.description,
+            // address: tour.address,
+            // imgUrl: tour.imgUrl,
+            // lat: geocodeData.lat,
+            // lon: geocodeData.lon,
+            // display_name: `El ${tour.hotel} -Ubicado en: ${tour.address}`,
+            // country: geocodeData.country,
+            // region: geocodeData.region,
+            // state: geocodeData.state,
+            // touristPoints: geocodeData.TuristPoints,
+            agency: agency,
+          },
+        });
+
+        if (!existingTour) {
+          await this.toursRepository.save({
+            ...tour,
+            agency: agency,
+            country: geocodeData.country,
+            region: geocodeData.region,
+            state: geocodeData.state,
+            lat: geocodeData.lat,
+            lon: geocodeData.lon,
+            display_name: `El ${tour.hotel} -Ubicado en: ${tour.address}`,
+            touristPoints: geocodeData.touristPoints,
+          });
+        }
+      }
+    }
+
+    return 'Publicaciones cargadas';
+  }
+
+
 }

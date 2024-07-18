@@ -20,8 +20,8 @@ export class PreloadService implements OnModuleInit {
   ) {}
 
   async onModuleInit() {
-    await this.loadShelters();
-    await this.loadTours();
+    // await this.loadShelters();
+    // await this.loadTours();
     await this.installUnaccentExtension();
   }
 

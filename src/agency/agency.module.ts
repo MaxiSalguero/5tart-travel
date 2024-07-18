@@ -8,10 +8,11 @@ import { TourEntity } from 'src/entities/tour.entity';
 import { AgencyGateway } from './agency.gateway';
 import { UserRepository } from 'src/user/user.repository';
 import { UserEntity } from 'src/entities/user.entity';
+import { MapsService } from 'src/maps/maps.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([AgencyEntity, TourEntity, UserEntity])],
   controllers: [agencyController],
-  providers: [AgencyServices, AgencyRepository, AgencyGateway, UserRepository],
+  providers: [AgencyServices, AgencyRepository, AgencyGateway, UserRepository, MapsService],
 })
 export class agencyModule {}
