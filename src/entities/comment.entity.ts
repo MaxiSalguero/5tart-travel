@@ -33,6 +33,12 @@ export class CommentEntity {
     })
     rate?: number;
 
+    @Column({
+        type: 'timestamp',
+        default: () => 'CURRENT_TIMESTAMP',
+    })
+    date: Date;
+
     @ManyToOne(type => TourEntity, tour => tour.comments)
     @JoinColumn({ name: 'tourId' })
     tour: TourEntity;
