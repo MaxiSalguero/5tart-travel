@@ -1,33 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { AgencyRepository } from './agency.repository';
-import { TourEntity } from 'src/entities/tour.entity';
 
 @Injectable()
 export class AgencyServices {
   constructor(private agencyRepository: AgencyRepository) {}
 
-  getAgency() {
-    return this.agencyRepository.getAgency();
+  getAgencies() {
+    return this.agencyRepository.getAgencies();
+  }
+
+  getDisableAgencies() {
+    return this.agencyRepository.getDisableAgencies();
+  }
+
+  getSeenDisableAgency() {
+    return this.agencyRepository.getSeenDisableAgency();
   }
 
   getTotalMount(agencyId: string) {
     return this.agencyRepository.getTotalMount(agencyId);
   }
 
-  deleteAgency(id: string) {
-    return this.agencyRepository.deleteAgency(id);
-  }
-
-  deleteTour(id: string, agencyId: string) {
-    return this.agencyRepository.deleteTour(id, agencyId);
-  }
-
-  emptyTotalAmount(agencyId: string) {
-    return this.agencyRepository.emptyTotalAmount(agencyId);
-  }
-
   getByIdAgency(id: string) {
     return this.agencyRepository.getByIdAgency(id);
+  }
+
+  putSeenDisableAgency(id: string) {
+    return this.agencyRepository.putSeenDisableAgency(id);
   }
 
   activeAgency(id: string) {
@@ -38,18 +37,15 @@ export class AgencyServices {
     return this.agencyRepository.disableAgency(id);
   }
 
-  getDisableAgency() {
-    return this.agencyRepository.getDisableAgency();
+  emptyTotalAmount(agencyId: string) {
+    return this.agencyRepository.emptyTotalAmount(agencyId);
   }
 
-  putSeenDisableAgency(id: string) {
-    return this.agencyRepository.putSeenDisableAgency(id);
+  deleteTour(id: string, agencyId: string) {
+    return this.agencyRepository.deleteTour(id, agencyId);
   }
 
-  getSeenDisableAgency() {
-    return this.agencyRepository.getSeenDisableAgency();
-  }
-  preLoad() {
-    return this.agencyRepository.preLoad()
+  deleteAgency(id: string) {
+    return this.agencyRepository.deleteAgency(id);
   }
 }

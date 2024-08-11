@@ -5,7 +5,7 @@ import {
   CLOUDINARY_API_KEY,
 } from './envs';
 
-export const CloudinaryConfig = {
+export const cloudinaryConfig = {
   provide: 'CLOUDINARY',
   useFactory: () => {
     return cloudinary.config({

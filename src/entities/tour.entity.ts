@@ -7,7 +7,6 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { v4 as uuid } from 'uuid';
 import { AgencyEntity } from './agency.entity';
 import { UserEntity } from './user.entity';
 import { CommentEntity } from './comment.entity';
@@ -16,7 +15,7 @@ export class TuristPoints {
   nombre: string;
   lat: number;
   lon: number;
-  price:number;
+  price: number;
 }
 
 @Entity({
@@ -24,7 +23,7 @@ export class TuristPoints {
 })
 export class TourEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string = uuid();
+  id: string;
 
   @Column()
   title: string;
@@ -111,7 +110,7 @@ export class TourEntity {
     nullable: true,
   })
   empresa?: string;
-  
+
   @Column({
     nullable: true,
     default: true,

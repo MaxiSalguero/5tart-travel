@@ -3,9 +3,9 @@ import { SearchRepository } from './search.repository';
 
 @Injectable()
 export class SearchService {
-    constructor(private searchRepository: SearchRepository ){}
+  constructor(private searchRepository: SearchRepository) {}
 
-    searchLupa(query){
-        return this.searchRepository.searchLupa(query)
-    }
+  searchLupa(query: string) {
+    return this.searchRepository.searchLupa(query);
+  }
 }

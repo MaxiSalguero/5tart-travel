@@ -3,9 +3,9 @@ import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
 
 @Injectable()
-export class mailsServices {
+export class MailsServices {
   private transporter: nodemailer.Transporter;
-  private readonly logger = new Logger(mailsServices.name);
+  private readonly logger = new Logger(MailsServices.name);
 
   constructor(private configService: ConfigService) {
     this.transporter = nodemailer.createTransport({
@@ -144,10 +144,7 @@ export class mailsServices {
     );
     await this.sendMail(userEmail, subject, textBody, htmlBody);
   }
-  async agencyAcceptedMail(
-    userEmail: string,
-    username: string,
-  ) {
+  async agencyAcceptedMail(userEmail: string, username: string) {
     const subject = 'Tu agencia ha sido aceptada en 5tart Travel';
     const textBody = `Hola ${username},
     
@@ -228,11 +225,17 @@ export class mailsServices {
       }
     </style>`;
 
-    this.logger.log(`Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`);
+    this.logger.log(
+      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
+    );
     await this.sendMail(userEmail, subject, textBody, htmlBody);
   }
 
-  async ConfirmCambiodePassword(userEmail: string, username: string, newPassword: string) {
+  async ConfirmCambiodePassword(
+    userEmail: string,
+    username: string,
+    newPassword: string,
+  ) {
     const subject = 'Confirmación de Cambio de Contraseña - 5tart Travel';
     const textBody = `Hola ${username},
   
@@ -269,7 +272,9 @@ export class mailsServices {
       }
     </style>`;
 
-    this.logger.log(`Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`);
+    this.logger.log(
+      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
+    );
     await this.sendMail(userEmail, subject, textBody, htmlBody);
   }
   async sendThankYouMail(userEmail: string, username: string) {
@@ -284,7 +289,7 @@ export class mailsServices {
     
       Saludos cordiales,
       El equipo de 5tart Travel`;
-  
+
     const htmlBody = `
       <div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%;">
         <p><strong>¡Hola, ${username}!</strong></p>
@@ -301,13 +306,19 @@ export class mailsServices {
           }
         }
       </style>`;
-  
+
     this.logger.log(
       `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
     );
     await this.sendMail(userEmail, subject, textBody, htmlBody);
   }
-  async sendConfirmCompra(userEmail: string, username: string, agencyName: string, tourName: string, totalPrice: number) {
+  async sendConfirmCompra(
+    userEmail: string,
+    username: string,
+    agencyName: string,
+    tourName: string,
+    totalPrice: number,
+  ) {
     const subject = 'Confirmación de Compra - 5tart Travel';
     const textBody = `Hola ${username},
     
@@ -324,7 +335,7 @@ export class mailsServices {
     
       Saludos cordiales,
       El equipo de 5tart Travel`;
-  
+
     const htmlBody = `
       <div style="border: 2px solid #005BBB; padding: 20px; background: #f5f5f5; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%; color: black; position: relative;">
     <p style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">¡Hola, ${username}!</p>
@@ -357,13 +368,10 @@ export class mailsServices {
 </style>
 
 `;
-  
+
     this.logger.log(
       `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
     );
     await this.sendMail(userEmail, subject, textBody, htmlBody);
-}
-
-  
-
+  }
 }

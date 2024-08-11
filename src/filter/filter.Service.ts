@@ -4,7 +4,7 @@ import { TourEntity } from 'src/entities/tour.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class filterService {
+export class FilterService {
   constructor(
     @InjectRepository(TourEntity)
     private tourRepository: Repository<TourEntity>,

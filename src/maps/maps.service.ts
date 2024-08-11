@@ -13,7 +13,6 @@ export class MapsService {
           lon >= bound.lonMin &&
           lon <= bound.lonMax
         ) {
-          
           return region;
         }
       }

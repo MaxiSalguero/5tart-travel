@@ -1,5 +1,11 @@
-import { BeforeInsert, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { v4 as uuid } from 'uuid';
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { TourEntity } from './tour.entity';
 import { OrderEntity } from './order.entity';
 
@@ -8,7 +14,7 @@ import { OrderEntity } from './order.entity';
 })
 export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string = uuid();
+  id: string;
 
   @Column({
     type: 'varchar',
@@ -26,7 +32,7 @@ export class UserEntity {
   })
   password: string;
 
-  @Column({ nullable:true })
+  @Column({ nullable: true })
   birthday: Date;
 
   @Column({
@@ -52,11 +58,11 @@ export class UserEntity {
     this.date = new Date();
   }
 
-  @Column({ 
+  @Column({
     nullable: true,
     default: 'user',
   })
-  role: string
+  role: string;
 
   @ManyToMany(() => TourEntity, (favorite_tours) => favorite_tours.user)
   @JoinTable()
@@ -65,5 +71,4 @@ export class UserEntity {
   @ManyToMany(() => OrderEntity, (orders) => orders.user)
   @JoinTable()
   orders: OrderEntity[];
-
 }

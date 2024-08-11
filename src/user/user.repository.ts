@@ -2,7 +2,6 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -18,6 +17,65 @@ export class UserRepository {
     @InjectRepository(TourEntity)
     private readonly toursRepository: Repository<TourEntity>,
   ) {}
+
+  async addTourFavorite(id: string, userId: any) {
+    const user: UserEntity = await this.usersRepository.findOne({
+      where: { id: userId },
+      relations: { favorite_tours: true },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`No se encontró el usuario`);
+    }
+
+    const tour: TourEntity = await this.toursRepository.findOneBy({ id });
+
+    if (!tour) {
+      throw new NotFoundException(`No se encontró el tour`);
+    }
+
+    user.favorite_tours.push(tour);
+
+    await this.usersRepository.save(user);
+
+    return 'Añadido a Favoritos';
+  }
+
+  async updatedProfile(id: string, user: Partial<UserEntity>) {
+    const updateUser = await this.usersRepository.findOne({ where: { id } });
+    if (!updateUser) {
+      throw new NotFoundException(`no se encontro el usuario con id ${id}`);
+    }
+    const newUser = this.usersRepository.merge(updateUser, user);
+    await this.usersRepository.save(newUser);
+
+    return newUser;
+  }
+
+  async deleteTourFavorite(id: string, userId: any) {
+    const user: UserEntity = await this.usersRepository.findOne({
+      where: { id: userId },
+      relations: { favorite_tours: true },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`No se encontró el usuario`);
+    }
+
+    const tour: TourEntity = await this.toursRepository.findOneBy({ id });
+
+    if (!tour) {
+      throw new NotFoundException(`No se encontró el tour`);
+    }
+
+    user.favorite_tours = user.favorite_tours.filter(
+      (favoriteTour) => favoriteTour.id !== id,
+    );
+
+    await this.usersRepository.save(user);
+
+    return 'Eliminado de Favoritos';
+  }
 
   async getUsers() {
     const users: UserEntity[] = await this.usersRepository.find({
@@ -44,107 +102,16 @@ export class UserRepository {
     return user;
   }
 
-  async createUser(user) {
-    const ExistUser: UserEntity = await this.usersRepository.findOne({
-      where: { mail: user.mail },
+  async getSeenUser() {
+    const disUser: UserEntity[] = await this.usersRepository.find({
+      where: { isSeen: false },
     });
 
-    if (ExistUser) {
-      throw new BadRequestException('El mail ingresado ya esta registrado');
+    if (disUser.length == 0) {
+      return 'no hay Usuarios Nuevos';
     }
 
-    const newUser = this.usersRepository.create({ ...user });
-    await this.usersRepository.save(newUser);
-
-    return 'Usuario Creado';
-  }
-
-  async addTourFavorite(id: string, userId: any) {
-    const user: UserEntity = await this.usersRepository.findOne({
-      where: { id: userId },
-      relations: { favorite_tours: true },
-    });
-
-    if (!user) {
-      throw new NotFoundException(`No se encontró el usuario`);
-    }
-
-    const tour: TourEntity = await this.toursRepository.findOneBy({ id: id });
-
-    if (!tour) {
-      throw new NotFoundException(`No se encontró el tour`);
-    }
-
-    user.favorite_tours.push(tour);
-
-    await this.usersRepository.save(user);
-
-    return 'Añadido a Favoritos';
-  }
-
-  async deleteAllUsers() {
-    const users = await this.usersRepository.find({
-      relations: ['favorite_tours', 'orders'],
-    });
-
-    if (users.length === 0) {
-      throw new NotFoundException(
-        'No hay usuarios en la base de datos para eliminar',
-      );
-    }
-
-    const usersToDelete = users.filter(
-      (user) => user.favorite_tours.length === 0 && user.orders.length === 0,
-    );
-
-    if (usersToDelete.length === 0) {
-      throw new BadRequestException(
-        'No se pueden eliminar los usuarios porque todos tienen relaciones activas.',
-      );
-    }
-
-    try {
-      await this.usersRepository.remove(usersToDelete);
-      return `Se han eliminado ${usersToDelete.length} usuarios sin relaciones activas.`;
-    } catch (error) {
-      throw new ConflictException('Error eliminando los usuarios');
-    }
-  }
-
-  async deleteTourFavorite(id: string, userId: any) {
-    const user: UserEntity = await this.usersRepository.findOne({
-      where: { id: userId },
-      relations: { favorite_tours: true },
-    });
-
-    if (!user) {
-      throw new NotFoundException(`No se encontró el usuario`);
-    }
-
-    const tour: TourEntity = await this.toursRepository.findOneBy({ id: id });
-
-    if (!tour) {
-      throw new NotFoundException(`No se encontró el tour`);
-    }
-
-    user.favorite_tours = user.favorite_tours.filter(
-      (favoriteTour) => favoriteTour.id !== id,
-    );
-
-    await this.usersRepository.save(user);
-
-    return 'Eliminado de Favoritos';
-  }
-
-  async updatedProfile(id: string, user: Partial<UserEntity>) {
-    const updateUser = await this.usersRepository.findOne({ where: { id } });
-    if (!updateUser) {
-      throw new NotFoundException(`no se encontro el usuario con id ${id}`);
-    }
-    const newUser = this.usersRepository.merge(updateUser, user);
-    await this.usersRepository.save(newUser);
-
-    return newUser;
+    return disUser;
   }
 
   async activeUser(id: string) {
@@ -187,6 +154,21 @@ export class UserRepository {
     return updateUser;
   }
 
+  async putSeenUser(id: string) {
+    const disUser: UserEntity = await this.usersRepository.findOne({
+      where: { id },
+    });
+
+    if (!disUser) {
+      throw new BadRequestException('id no encontrado');
+    }
+
+    disUser.isSeen = true;
+    await this.usersRepository.save(disUser);
+
+    return disUser;
+  }
+
   async adminUser(id: string) {
     const user = await this.usersRepository.findOne({ where: { id } });
 
@@ -201,28 +183,32 @@ export class UserRepository {
     return updateUser;
   }
 
-  async putSeenUser(id: string) {
-    const disUser: UserEntity = await this.usersRepository.findOne({where: {id: id}});
+  async deleteAllUsers() {
+    const users = await this.usersRepository.find({
+      relations: ['favorite_tours', 'orders'],
+    });
 
-    if (!disUser) {
-      throw new BadRequestException('id no encontrado')
-    };
+    if (users.length === 0) {
+      throw new NotFoundException(
+        'No hay usuarios en la base de datos para eliminar',
+      );
+    }
 
-    disUser.isSeen = true;
-    await this.usersRepository.save(disUser);
+    const usersToDelete = users.filter(
+      (user) => user.favorite_tours.length === 0 && user.orders.length === 0,
+    );
 
+    if (usersToDelete.length === 0) {
+      throw new BadRequestException(
+        'No se pueden eliminar los usuarios porque todos tienen relaciones activas.',
+      );
+    }
 
-    return disUser;
-  };
-
-  async getSeenUser() {
-    const disUser: UserEntity[] = await this.usersRepository.find({where: {isSeen: false}});
-    
-    if (disUser.length == 0) {
-      return 'no hay Usuarios Nuevos';
-    };
-
-    return disUser;  
+    try {
+      await this.usersRepository.remove(usersToDelete);
+      return `Se han eliminado ${usersToDelete.length} usuarios sin relaciones activas.`;
+    } catch (error) {
+      throw new ConflictException('Error eliminando los usuarios');
+    }
   }
-
 }

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { agencyController } from './agency.controller';
+import { AgencyController } from './agency.controller';
 import { AgencyServices } from './agency.service';
 import { AgencyEntity } from 'src/entities/agency.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -12,7 +12,13 @@ import { MapsService } from 'src/maps/maps.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([AgencyEntity, TourEntity, UserEntity])],
-  controllers: [agencyController],
-  providers: [AgencyServices, AgencyRepository, AgencyGateway, UserRepository, MapsService],
+  controllers: [AgencyController],
+  providers: [
+    AgencyServices,
+    AgencyRepository,
+    AgencyGateway,
+    UserRepository,
+    MapsService,
+  ],
 })
-export class agencyModule {}
+export class AgencyModule {}

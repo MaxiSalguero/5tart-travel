@@ -7,7 +7,15 @@ export class FileValidatorPipe implements PipeTransform {
       throw new BadRequestException('No se ha proporcionado ningún archivo');
     }
 
-    const allowedFileTypes = ['jpg','jpeg','png','webp','gif','jfif','svg',];
+    const allowedFileTypes = [
+      'jpg',
+      'jpeg',
+      'png',
+      'webp',
+      'gif',
+      'jfif',
+      'svg',
+    ];
     if (!allowedFileTypes.includes(file.mimetype.split('/')[1])) {
       throw new BadRequestException('Tipo de archivo no válido');
     }

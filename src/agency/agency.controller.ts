@@ -4,7 +4,6 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
-  Post,
   Put,
   Req,
   UseGuards,
@@ -12,20 +11,24 @@ import {
 import { AgencyServices } from './agency.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/user/role.enum';
+import { RequestWithUser } from 'src/interfaces/requestWithUser';
 
-@ApiTags('agency')
+@ApiTags('Agency')
 @Controller('agency')
-export class agencyController {
+export class AgencyController {
   constructor(private agencyService: AgencyServices) {}
 
   @Get()
-  getAgency() {
-    return this.agencyService.getAgency();
+  getAgencies() {
+    return this.agencyService.getAgencies();
   }
 
   @Get('disable')
-  getDisableAgency() {
-    return this.agencyService.getDisableAgency();
+  getDisableAgencies() {
+    return this.agencyService.getDisableAgencies();
   }
 
   @Get('disable/seen')
@@ -33,15 +36,11 @@ export class agencyController {
     return this.agencyService.getSeenDisableAgency();
   }
 
-  @Get('preload')
-  preLoad() {
-    return this.agencyService.preLoad();
-  }
-
   @ApiBearerAuth()
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.Agency)
   @Get('totalMount')
-  getTotalMount(@Req() request) {
+  getTotalMount(@Req() request: RequestWithUser) {
     const agencyId = request.user.id;
 
     return this.agencyService.getTotalMount(agencyId);
@@ -52,41 +51,52 @@ export class agencyController {
     return this.agencyService.getByIdAgency(id);
   }
 
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard)
-  @Delete('orders/amount')
-  emptyTotalAmount(@Req() request) {
-    const agencyId = request.user.id;
-
-    return this.agencyService.emptyTotalAmount(agencyId);
-  }
-
-  @Delete(':id')
-  deleteAgency(@Param('id', ParseUUIDPipe) id: string) {
-    return this.agencyService.deleteAgency(id);
-  }
-
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard)
-  @Delete('tour/:id')
-  deleteTour(@Param('id', ParseUUIDPipe) id: string, @Req() request) {
-    const agencyId = request.user.id;
-
-    return this.agencyService.deleteTour(id, agencyId);
-  }
-
   @Put('/disable/seen/:id')
-  postSeenDisableAgency(@Param('id', ParseUUIDPipe) id: string) {
+  putSeenDisableAgency(@Param('id', ParseUUIDPipe) id: string) {
     return this.agencyService.putSeenDisableAgency(id);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Put('active/:id')
   activeAgency(@Param('id', ParseUUIDPipe) id: string) {
     return this.agencyService.activeAgency(id);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Put('disable/:id')
   disableAgency(@Param('id', ParseUUIDPipe) id: string) {
     return this.agencyService.disableAgency(id);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.Agency)
+  @Delete('orders/amount')
+  emptyTotalAmount(@Req() request: RequestWithUser) {
+    const agencyId = request.user.id;
+
+    return this.agencyService.emptyTotalAmount(agencyId);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.Agency)
+  @Delete('tour/:id')
+  deleteTour(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Req() request: RequestWithUser,
+  ) {
+    const agencyId = request.user.id;
+
+    return this.agencyService.deleteTour(id, agencyId);
+  }
+
+  @Delete(':id')
+  deleteAgency(@Param('id', ParseUUIDPipe) id: string) {
+    return this.agencyService.deleteAgency(id);
   }
 }

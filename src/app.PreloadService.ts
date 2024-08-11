@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
-import { Connection, DataSource, Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { AgencyEntity } from './entities/agency.entity';
 import { TourEntity } from './entities/tour.entity';
 import * as data from './helpers/data.json';
@@ -16,27 +16,25 @@ export class PreloadService implements OnModuleInit {
     private readonly tourRepository: Repository<TourEntity>,
     private readonly mapsservice: MapsService,
     @InjectDataSource() private readonly dataSource: DataSource,
-
   ) {}
 
   async onModuleInit() {
-    // await this.loadShelters();
-    // await this.loadTours();
     await this.installUnaccentExtension();
+    await this.loadAgencies();
+    await this.loadTours();
   }
 
   private async installUnaccentExtension() {
     try {
-      await this.dataSource.query(`CREATE EXTENSION IF NOT EXISTS unaccent;`);
-      console.log('Extension unaccent installed or already exists.');
+      await this.dataSource.query(`Create extension if not exists unaccent;`);
     } catch (error) {
       console.error('Failed to install unaccent extension:', error);
     }
   }
 
-  async loadShelters() {
+  async loadAgencies() {
     for (const agency of dataAgency) {
-      const existingShelter = await this.agencyRepository.findOne({
+      const existingAgency = await this.agencyRepository.findOne({
         where: {
           name_agency: agency.name_agency,
           mail: agency.mail,
@@ -46,12 +44,12 @@ export class PreloadService implements OnModuleInit {
         },
       });
 
-      if (!existingShelter) {
+      if (!existingAgency) {
         await this.agencyRepository.save(agency);
       }
     }
 
-    return 'Refugios cargados';
+    return 'Agencias cargadas correctamente';
   }
 
   async loadTours() {
@@ -64,17 +62,6 @@ export class PreloadService implements OnModuleInit {
         const existingTour = await this.tourRepository.findOne({
           where: {
             title: tour.title,
-            // price: tour.price,
-            // description: tour.description,
-            // address: tour.address,
-            // imgUrl: tour.imgUrl,
-            // lat: geocodeData.lat,
-            // lon: geocodeData.lon,
-            // display_name: `El ${tour.hotel} -Ubicado en: ${tour.address}`,
-            // country: geocodeData.country,
-            // region: geocodeData.region,
-            // state: geocodeData.state,
-            // touristPoints: geocodeData.TuristPoints,
             agency: agency,
           },
         });
@@ -95,6 +82,6 @@ export class PreloadService implements OnModuleInit {
       }
     }
 
-    return 'Publicaciones cargadas';
+    return 'Tours cargados correctamente';
   }
 }

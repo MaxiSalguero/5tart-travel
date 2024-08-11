@@ -29,7 +29,7 @@ export class CreateTourDto {
   */
   @IsNotEmpty()
   @IsNumber()
-  price: Number;
+  price: number;
 
   /**
   Ingresar la descripcion

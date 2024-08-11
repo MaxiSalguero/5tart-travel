@@ -1,4 +1,4 @@
-import { IsEmpty, IsOptional, Length, Validate } from 'class-validator';
+import { IsOptional, Length, Validate } from 'class-validator';
 import { IsEmail, IsNotEmpty, IsString, Matches } from 'class-validator';
 import { MatchPassword } from 'src/decorators/password.decorator';
 

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { userController } from './user.controller';
+import { UserController } from './user.controller';
 import { UserServices } from './user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from 'src/entities/user.entity';
@@ -7,7 +7,7 @@ import { UserRepository } from './user.repository';
 import { AuthService } from 'src/auth/auth.service';
 import { AgencyRepository } from 'src/agency/agency.repository';
 import { AgencyEntity } from 'src/entities/agency.entity';
-import { mailsServices } from 'src/mails/mails.service';
+import { MailsServices } from 'src/mails/mails.service';
 import { ConfigService } from '@nestjs/config';
 import { TourEntity } from 'src/entities/tour.entity';
 import { AgencyGateway } from 'src/agency/agency.gateway';
@@ -15,16 +15,16 @@ import { MapsService } from 'src/maps/maps.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity, AgencyEntity, TourEntity])],
-  controllers: [userController],
+  controllers: [UserController],
   providers: [
     UserServices,
     UserRepository,
     AuthService,
     AgencyRepository,
-    mailsServices,
+    MailsServices,
     ConfigService,
     AgencyGateway,
-    MapsService
+    MapsService,
   ],
 })
-export class userModule {}
+export class UserModule {}

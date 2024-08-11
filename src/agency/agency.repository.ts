@@ -8,10 +8,6 @@ import { AgencyEntity } from 'src/entities/agency.entity';
 import { TourEntity } from 'src/entities/tour.entity';
 import { UserEntity } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
-import * as data from '../helpers/data.json';
-import * as dataAgency from '../helpers/dataAgency.json';
-import { MapsService } from '../maps/maps.service';
-
 
 @Injectable()
 export class AgencyRepository {
@@ -22,20 +18,42 @@ export class AgencyRepository {
     private readonly toursRepository: Repository<TourEntity>,
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-    private readonly mapsservice: MapsService,
-
   ) {}
 
-  async getAgency() {
-    const agencys: AgencyEntity[] = await this.agencyRepository.find({
+  async getAgencies() {
+    const agencies: AgencyEntity[] = await this.agencyRepository.find({
       relations: { tours: true },
     });
 
-    if (agencys.length == 0) {
+    if (agencies.length == 0) {
       return 'No hay agencias registradas en la base de datos';
     }
 
-    return agencys;
+    return agencies;
+  }
+
+  async getDisableAgencies() {
+    const disAgency: AgencyEntity[] = await this.agencyRepository.find({
+      where: { isActive: false },
+    });
+
+    if (disAgency.length == 0) {
+      return 'no hay agencias desactivadas';
+    }
+
+    return disAgency;
+  }
+
+  async getSeenDisableAgency() {
+    const disAgency: AgencyEntity[] = await this.agencyRepository.find({
+      where: { isActive: false, isSeen: false },
+    });
+
+    if (disAgency.length == 0) {
+      return 'no hay agencias desactivadas';
+    }
+
+    return disAgency;
   }
 
   async getTotalMount(agencyId: string) {
@@ -58,78 +76,9 @@ export class AgencyRepository {
       totalPrice += order.price;
     });
 
-    const totalAmount = totalPrice * 0.95;
+    const totalAmount = totalPrice * 0.9;
 
     return totalAmount;
-  }
-
-  async createAgency(agency) {
-    const ExistAgency: AgencyEntity = await this.agencyRepository.findOne({
-      where: { mail: agency.mail },
-    });
-
-    if (ExistAgency) {
-      throw new BadRequestException('El mail ingresado ya esta registrado');
-    }
-
-    const newUser = this.agencyRepository.create({ ...agency });
-    await this.agencyRepository.save(newUser);
-
-    return 'Agencia creada';
-  }
-
-  async deleteAgency(id: string) {
-    const Agency = await this.agencyRepository.findOneBy({ id });
-
-    if (!Agency) {
-      throw new BadRequestException('La agencia no existe');
-    }
-
-    await this.agencyRepository.remove(Agency);
-
-    return 'Agencia eliminada correctamente';
-  }
-
-  async deleteTour(id: string, agencyId: string) {
-    const agency = await this.agencyRepository.findOne({
-      where: { id: agencyId },
-      relations: { tours: true },
-    });
-
-    if (!agency) {
-      throw new BadRequestException('La agencia no existe');
-    }
-
-    const tour: TourEntity = await this.toursRepository.findOneBy({ id: id });
-
-    if (!tour) {
-      throw new NotFoundException(`No se encontró el tour`);
-    }
-
-    agency.tours = agency.tours.filter((tour) => tour.id !== id);
-
-    await this.agencyRepository.save(agency);
-
-    return 'Tour eliminado correctamente';
-  }
-
-  async emptyTotalAmount(agencyId: string) {
-    const agency = await this.agencyRepository.findOne({
-      where: { id: agencyId },
-      relations: { orders: true },
-    });
-
-    if (!agency) {
-      throw new BadRequestException('La agencia no existe');
-    }
-
-    agency.orders.forEach((order) => {
-      order.isFinished = true;
-    });
-
-    await this.agencyRepository.save(agency);
-
-    return agency;
   }
 
   async getByIdAgency(id: string) {
@@ -143,6 +92,27 @@ export class AgencyRepository {
     }
 
     return agency;
+  }
+
+  async putSeenDisableAgency(id: string) {
+    const disAgency: AgencyEntity = await this.agencyRepository.findOne({
+      where: { id: id },
+    });
+    const disUser: UserEntity = await this.userRepository.findOne({
+      where: { id: id },
+    });
+
+    if (disAgency) {
+      disAgency.isSeen = true;
+      await this.agencyRepository.save(disAgency);
+      return disAgency;
+    }
+
+    if (disUser) {
+      disUser.isSeen = true;
+      await this.userRepository.save(disUser);
+      return disUser;
+    }
   }
 
   async activeAgency(id: string) {
@@ -166,7 +136,7 @@ export class AgencyRepository {
       tour.isActive = true;
       return tour;
     });
-  
+
     await this.toursRepository.save(tours);
     await this.agencyRepository.save(agency);
 
@@ -194,127 +164,64 @@ export class AgencyRepository {
       tour.isActive = false;
       return tour;
     });
-  
+
     await this.toursRepository.save(tours);
     await this.agencyRepository.save(agency);
 
     return agency;
   }
 
-  async getDisableAgency() {
-    const disAgency: AgencyEntity[] = await this.agencyRepository.find({
-      where: { isActive: false },
+  async emptyTotalAmount(agencyId: string) {
+    const agency = await this.agencyRepository.findOne({
+      where: { id: agencyId },
+      relations: { orders: true },
     });
 
-    if (disAgency.length == 0) {
-      return 'no hay agencias desactivadas';
+    if (!agency) {
+      throw new BadRequestException('La agencia no existe');
     }
 
-    return disAgency;
-  }
-
-  async getSeenDisableAgency() {
-    const disAgency: AgencyEntity[] = await this.agencyRepository.find({
-      where: { isActive: false, isSeen: false },
+    agency.orders.forEach((order) => {
+      order.isFinished = true;
     });
 
-    if (disAgency.length == 0) {
-      return 'no hay agencias desactivadas';
-    }
+    await this.agencyRepository.save(agency);
 
-    return disAgency;
+    return agency;
   }
 
-  async putSeenDisableAgency(id: string) {
-    const disAgency: AgencyEntity = await this.agencyRepository.findOne({
-      where: { id: id },
-    });
-    const disUser: UserEntity = await this.userRepository.findOne({
-      where: { id: id },
+  async deleteTour(id: string, agencyId: string) {
+    const agency = await this.agencyRepository.findOne({
+      where: { id: agencyId },
+      relations: { tours: true },
     });
 
-    if (disAgency) {
-      disAgency.isSeen = true;
-      await this.agencyRepository.save(disAgency);
-      return disAgency;
+    if (!agency) {
+      throw new BadRequestException('La agencia no existe');
     }
 
-    if (disUser) {
-      disUser.isSeen = true;
-      await this.userRepository.save(disUser);
-      return disUser;
-    }
-  }
+    const tour: TourEntity = await this.toursRepository.findOneBy({ id: id });
 
-  async preLoad(){
-    await this.loadShelters()
-    await this.loadTours()
-  }
-
-
-  async loadShelters() {
-    for (const agency of dataAgency) {
-      const existingShelter = await this.agencyRepository.findOne({
-        where: {
-          name_agency: agency.name_agency,
-          mail: agency.mail,
-          password: agency.password,
-          address: agency.address,
-          imgUrl: agency.imgUrl,
-        },
-      });
-
-      if (!existingShelter) {
-        await this.agencyRepository.save(agency);
-      }
+    if (!tour) {
+      throw new NotFoundException(`No se encontró el tour`);
     }
 
-    return 'Refugios cargados';
+    agency.tours = agency.tours.filter((tour) => tour.id !== id);
+
+    await this.agencyRepository.save(agency);
+
+    return 'Tour eliminado correctamente';
   }
 
-  async loadTours() {
-    for (const tour of data) {
-      const agency = await this.agencyRepository.findOne({
-        where: { name_agency: tour.agency },
-      });
-      const geocodeData = await this.mapsservice.geocodeAddress(tour.address);
-      if (agency) {
-        const existingTour = await this.toursRepository.findOne({
-          where: {
-            title: tour.title,
-            // price: tour.price,
-            // description: tour.description,
-            // address: tour.address,
-            // imgUrl: tour.imgUrl,
-            // lat: geocodeData.lat,
-            // lon: geocodeData.lon,
-            // display_name: `El ${tour.hotel} -Ubicado en: ${tour.address}`,
-            // country: geocodeData.country,
-            // region: geocodeData.region,
-            // state: geocodeData.state,
-            // touristPoints: geocodeData.TuristPoints,
-            agency: agency,
-          },
-        });
+  async deleteAgency(id: string) {
+    const Agency = await this.agencyRepository.findOneBy({ id });
 
-        if (!existingTour) {
-          await this.toursRepository.save({
-            ...tour,
-            agency: agency,
-            country: geocodeData.country,
-            region: geocodeData.region,
-            state: geocodeData.state,
-            lat: geocodeData.lat,
-            lon: geocodeData.lon,
-            display_name: `El ${tour.hotel} -Ubicado en: ${tour.address}`,
-            touristPoints: geocodeData.touristPoints,
-          });
-        }
-      }
+    if (!Agency) {
+      throw new BadRequestException('La agencia no existe');
     }
 
-    return 'Publicaciones cargadas';
+    await this.agencyRepository.remove(Agency);
+
+    return 'Agencia eliminada correctamente';
   }
-
-
 }

@@ -1,24 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { TourRepository } from './tour.repository';
+import { TourEntity } from 'src/entities/tour.entity';
 
 @Injectable()
 export class TourService {
   constructor(private tourRepository: TourRepository) {}
 
-  getTours() {
-    return this.tourRepository.getTours();
-  }
-
-  createTour(tour, userId) {
+  createTour(tour: Partial<TourEntity>, userId: string) {
     return this.tourRepository.createTour(tour, userId);
   }
 
-  updateTour(id: string, tour: any) {
+  addTourImg(id: string, imgUrl) {
+    return this.tourRepository.addTourImg(id, imgUrl);
+  }
+
+  updateTour(id: string, tour: Partial<TourEntity>) {
     return this.tourRepository.updateTour(id, tour);
+  }
+
+  removeTourImg(id: string, imgUrl: string) {
+    return this.tourRepository.removeTourImg(id, imgUrl);
   }
 
   deleteTour(id: string) {
     return this.tourRepository.deleteTour(id);
+  }
+
+  mailoferta(email: string) {
+    return this.tourRepository.mailOfertas(email);
+  }
+
+  getTours() {
+    return this.tourRepository.getTours();
   }
 
   getToursBus() {
@@ -33,19 +46,7 @@ export class TourService {
     return this.tourRepository.getToursOferta();
   }
 
-  mailoferta(email: string) {
-    return this.tourRepository.mailOfertas(email);
-  }
-
   getTourById(id: string) {
     return this.tourRepository.getTourById(id);
-  }
-
-  addTourImg(id: string, imgUrl) {
-    return this.tourRepository.addTourImg(id, imgUrl);
-  }
-
-  removeTourImg(id: string, imgUrl:string) {
-    return this.tourRepository.removeTourImg(id, imgUrl);
   }
 }

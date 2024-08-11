@@ -12,7 +12,7 @@ import { AgencyEntity } from 'src/entities/agency.entity';
 import { UserEntity } from 'src/entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
-import { mailsServices } from 'src/mails/mails.service';
+import { MailsServices } from 'src/mails/mails.service';
 import { AgencyGateway } from 'src/agency/agency.gateway';
 
 @Injectable()
@@ -23,9 +23,8 @@ export class AuthService {
     private readonly userRepository: Repository<UserEntity>,
     @InjectRepository(AgencyEntity)
     private readonly agencyRepository: Repository<AgencyEntity>,
-    private readonly mailservice: mailsServices,
+    private readonly mailservice: MailsServices,
     private readonly agencyGateway: AgencyGateway,
-
   ) {}
 
   async createUser(user: Partial<UserEntity>) {
@@ -47,7 +46,6 @@ export class AuthService {
     });
 
     this.agencyGateway.emitUserUpdate();
-
 
     if (createdUser) {
       await this.mailservice.registerUserMail(
@@ -79,7 +77,6 @@ export class AuthService {
 
     this.agencyGateway.emitAgencyUpdate();
 
-
     if (createdAgency) {
       await this.mailservice.registerAgencyMail(
         createdAgency.mail,
@@ -92,7 +89,7 @@ export class AuthService {
   }
 
   async login(mail: string, password: string) {
-    let user = await this.userRepository.findOneBy({ mail });
+    const user = await this.userRepository.findOneBy({ mail });
     let agency = null;
 
     if (!user) {
@@ -172,7 +169,7 @@ export class AuthService {
 
   async changePassword(id: string, type: string, newPassword: string) {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-    let userEmail, username;
+    let userEmail: string, username: string;
 
     if (type === 'user') {
       const user = await this.userRepository.findOne({ where: { id } });
@@ -194,7 +191,6 @@ export class AuthService {
       throw new ConflictException('Tipo de entidad no reconocido');
     }
 
-    // Send confirmation email
     await this.mailservice.ConfirmCambiodePassword(
       userEmail,
       username,

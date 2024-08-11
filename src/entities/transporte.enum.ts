@@ -1,4 +1,4 @@
 export enum TransportType {
-    BUS = "bus",
-    PLANE = "plane"
+  BUS = 'bus',
+  PLANE = 'plane',
 }
