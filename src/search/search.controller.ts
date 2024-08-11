@@ -5,12 +5,11 @@ import { ApiQuery, ApiTags } from '@nestjs/swagger';
 @ApiTags('Search')
 @Controller('search')
 export class SearchController {
-    constructor(private searchservice: SearchService){}
+  constructor(private searchservice: SearchService) {}
 
-    @Get()
-    @ApiQuery({ name: 'q', required: false })  
-    searchGeneral(@Query('q') query: string){
-        return this.searchservice.searchLupa(query)
-    }
-
+  @Get()
+  @ApiQuery({ name: 'q', required: false })
+  searchGeneral(@Query('q') query: string) {
+    return this.searchservice.searchLupa(query);
+  }
 }

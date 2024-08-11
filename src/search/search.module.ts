@@ -8,6 +8,6 @@ import { TourEntity } from 'src/entities/tour.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([TourEntity])],
   controllers: [SearchController],
-  providers: [SearchService, SearchRepository]
+  providers: [SearchService, SearchRepository],
 })
 export class SearchModule {}

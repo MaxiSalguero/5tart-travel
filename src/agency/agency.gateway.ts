@@ -1,20 +1,28 @@
-// item.gateway.ts
-import { SubscribeMessage, WebSocketGateway, WebSocketServer, OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect } from '@nestjs/websockets';
+import {
+  SubscribeMessage,
+  WebSocketGateway,
+  WebSocketServer,
+  OnGatewayInit,
+  OnGatewayConnection,
+  OnGatewayDisconnect,
+} from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { AgencyRepository } from './agency.repository';
 import { UserRepository } from 'src/user/user.repository';
 
-
 @WebSocketGateway({
-    cors: {
-      origin: '*',
-    },
-  })
-export class AgencyGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
+  cors: {
+    origin: '*',
+  },
+})
+export class AgencyGateway
+  implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
+{
   @WebSocketServer() server: Server;
 
-  constructor(private readonly agencyRepository: AgencyRepository,
-              private readonly usersRepository: UserRepository
+  constructor(
+    private readonly agencyRepository: AgencyRepository,
+    private readonly usersRepository: UserRepository,
   ) {}
 
   afterInit(server: Server) {
@@ -36,8 +44,7 @@ export class AgencyGateway implements OnGatewayInit, OnGatewayConnection, OnGate
   }
 
   private async sendAllItems(client: Socket): Promise<void> {
-    const items = await this.agencyRepository.getSeenDisableAgency()
-    // console.log('Items fetched from database:', items);
+    const items = await this.agencyRepository.getSeenDisableAgency();
     client.emit('allDisableAgency', items);
   }
 
@@ -51,4 +58,3 @@ export class AgencyGateway implements OnGatewayInit, OnGatewayConnection, OnGate
     this.server.emit('allUsers', items);
   }
 }
-

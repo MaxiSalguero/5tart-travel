@@ -14,11 +14,11 @@ import * as bcrypt from 'bcrypt';
 import { AgencyEntity } from 'src/entities/agency.entity';
 import { GoogleService } from './google.service';
 import { FRONT_URL } from 'src/config/envs';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Google')
 @Controller()
 export class GoogleController {
-  private readonly FRONT_URL = process.env.FRONT_URL;
-
   constructor(
     private readonly googleService: GoogleService,
     @InjectRepository(UserEntity)

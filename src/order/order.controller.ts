@@ -11,36 +11,40 @@ import {
 import { OrderService } from './order.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateOrderDto } from 'src/DTOS/CreateOrder.dto';
-import { AuthGuard } from 'src/guards/auth.guard';
+import { RequestWithUser } from 'src/interfaces/requestWithUser';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/user/role.enum';
+import { GlobalGuard } from 'src/guards/global.guard';
 
 @ApiTags('Order')
+@UseGuards(GlobalGuard)
 @Controller('order')
 export class OrderController {
   constructor(private orderService: OrderService) {}
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard)
+  @Roles(Role.User)
   @Post(':id')
   addOrder(
-    @Param('id', ParseUUIDPipe) tourid: string,
-    @Req() req,
-    @Body() order: CreateOrderDto
+    @Param('id', ParseUUIDPipe) tourId: string,
+    @Req() req: RequestWithUser,
+    @Body() order: CreateOrderDto,
   ) {
     const userId = req.user.id;
 
-    return this.orderService.addOrder(tourid, userId, order);
+    return this.orderService.addOrder(tourId, userId, order);
   }
 
   @Get()
-  getOrder() {
-    return this.orderService.getOrder();
+  getOrders() {
+    return this.orderService.getOrders();
   }
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard)
+  @Roles(Role.User)
   @Get('user')
-  getMyOrder(@Req() req) {
+  getMyOrders(@Req() req: RequestWithUser) {
     const userId = req.user.id;
-    return this.orderService.getMyOrder(userId);
+    return this.orderService.getMyOrders(userId);
   }
 }

@@ -1,57 +1,62 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateContactDto } from 'src/DTOS/CreateContact.dto';
 import { ContactEntity } from 'src/entities/contact.entity';
-import { mailsServices } from 'src/mails/mails.service';
+import { MailsServices } from 'src/mails/mails.service';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class ContactRepository {
-    constructor(@InjectRepository(ContactEntity)
-                private readonly contactRepository: Repository<ContactEntity>,
-                private readonly mailService: mailsServices,){}
+  constructor(
+    @InjectRepository(ContactEntity)
+    private readonly contactRepository: Repository<ContactEntity>,
+    private readonly mailService: MailsServices,
+  ) {}
 
+  async createContact(contact: Partial<ContactEntity>) {
+    const newContact = this.contactRepository.create(contact);
+    await this.contactRepository.save(newContact);
 
-    async getAllContact() {
-        const message: ContactEntity[] = await this.contactRepository.find()
+    return `Formulario enviado exitosamente`;
+  }
 
-        if (message.length == 0) {
-            return `No hay mensajes`
-        }
+  async sendMail(contactId: string) {
+    const contact: ContactEntity = await this.contactRepository.findOne({
+      where: { id: contactId },
+    });
 
-        return message
-    }
-    async getContactById(userId: string) {
-        const contact: ContactEntity = await this.contactRepository.findOne({
-          where: { id: userId },
-        });
-    
-        if (!contact) {
-          throw new NotFoundException('Usuario no encontrado');
-        }
-        await this.mailService.sendThankYouMail(contact.mail, contact.username)
-        return contact;
-      }
-      
-      async createContact(comm: CreateContactDto) {
-        const newContact = await this.contactRepository.create(comm);
-        await this.contactRepository.save(newContact);
-        
-        return `Enviado`;
-      }
-      
-      
-      
-    async deleteContact(id: string) {
-        const consult: ContactEntity = await this.contactRepository.findOne({where: {id: id}});
-        
-        if (!consult) {
-            throw new BadRequestException('id de la consulta no encontrado')
-        }
-
-        await this.contactRepository.remove(consult)
-
-        return 'Consulta eliminada'
+    if (!contact) {
+      throw new NotFoundException('Contacto no encontrado');
     }
 
+    await this.mailService.sendThankYouMail(contact.mail, contact.username);
+    return 'Mensaje generico enviado exitosamente';
+  }
+
+  async getAllContacts() {
+    const message: ContactEntity[] = await this.contactRepository.find();
+
+    if (message.length == 0) {
+      return `No hay mensajes de contactos aun`;
+    }
+
+    return message;
+  }
+
+  async deleteContact(id: string) {
+    const contact: ContactEntity = await this.contactRepository.findOne({
+      where: { id },
+    });
+
+    if (!contact) {
+      throw new BadRequestException('id de contacto no encontrado');
+    }
+
+    await this.contactRepository.remove(contact);
+
+    return 'Contacto eliminado exitosamente';
+  }
 }

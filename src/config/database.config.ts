@@ -1,5 +1,5 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource, DataSourceOptions, Tree } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USERNAME } from './envs';
 
 const dbConfig: DataSourceOptions = {
@@ -12,8 +12,8 @@ const dbConfig: DataSourceOptions = {
   entities: ['dist/**/*.entity{.ts,.js}'],
   migrations: ['dist/migrations/*{.ts,.js}'],
   logging: false,
-  synchronize: false,
-  dropSchema: false,
+  synchronize: true,
+  dropSchema: true,
 };
 
 export const databaseConfig = TypeOrmModule.forRoot({

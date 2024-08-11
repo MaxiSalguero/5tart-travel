@@ -9,7 +9,7 @@ import { FileUploadService } from './file_upload.service';
 import { FileValidatorPipe } from './fileValidator';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('files')
+@ApiTags('Files')
 @Controller('files')
 export class FileUploadController {
   constructor(private readonly fileUploadService: FileUploadService) {}

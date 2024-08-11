@@ -7,15 +7,14 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AgencyEntity } from 'src/entities/agency.entity';
-import { CommentEntity } from 'src/entities/comment.entity';
 import { TourEntity } from 'src/entities/tour.entity';
-import { mailsServices } from 'src/mails/mails.service';
+import { MailsServices } from 'src/mails/mails.service';
 import { MapsService } from 'src/maps/maps.service';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class TourRepository {
-  private readonly logger = new Logger(mailsServices.name);
+  private readonly logger = new Logger(MailsServices.name);
   rate: null;
   constructor(
     @InjectRepository(TourEntity)
@@ -23,24 +22,10 @@ export class TourRepository {
     @InjectRepository(AgencyEntity)
     private agencyRepository: Repository<AgencyEntity>,
     private readonly mapsservice: MapsService,
-    private readonly mailservice: mailsServices,
-    @InjectRepository(CommentEntity)
-    private comentrepository: Repository<CommentEntity>,
+    private readonly mailservice: MailsServices,
   ) {}
 
-  async getTours() {
-    const Tours: TourEntity[] = await this.tourRepository.find({
-      relations: { agency: true, comments: true },
-    });
-
-    if (Tours.length == 0) {
-      return 'No hay Publicaciones registradas en la base de datos';
-    }
-
-    return Tours;
-  }
-
-  async createTour(tour, userId) {
+  async createTour(tour: Partial<TourEntity>, userId: string) {
     const agency: AgencyEntity = await this.agencyRepository.findOneBy({
       id: userId,
     });
@@ -83,10 +68,55 @@ export class TourRepository {
     return newTour;
   }
 
-  async updateTour(id: string, tour: any) {
+  async addTourImg(id: string, imgUrl) {
+    const tour: TourEntity = await this.tourRepository.findOne({
+      where: { id },
+    });
+
+    if (tour.listImg === null) {
+      tour.listImg = [];
+    }
+
+    if (!tour) {
+      throw new NotFoundException('Tour no encontrado');
+    }
+
+    const arrayImg = await Promise.all(
+      imgUrl.map((img) => {
+        return img;
+      }),
+    );
+
+    await Promise.all(
+      arrayImg.map(async (img) => {
+        tour.listImg.push(img);
+        await this.tourRepository.save(tour);
+      }),
+    );
+
+    return tour;
+  }
+
+  async updateTour(id: string, tour: Partial<TourEntity>) {
     await this.tourRepository.update(id, tour);
 
     return 'Tour modificado correctamente';
+  }
+
+  async removeTourImg(id: string, imgUrl: string) {
+    const tour: TourEntity = await this.tourRepository.findOne({
+      where: { id },
+    });
+
+    if (!tour) {
+      throw new NotFoundException('Tour no encontrado');
+    }
+
+    tour.listImg = tour.listImg.filter((img) => img !== imgUrl);
+
+    await this.tourRepository.save(tour);
+
+    return tour;
   }
 
   async deleteTour(id: string) {
@@ -101,44 +131,6 @@ export class TourRepository {
     return 'Publicacion eliminada correctamente';
   }
 
-  async getToursBus() {
-    const tours: TourEntity[] = await this.tourRepository.find({
-      where: { transportType: 'bus' },
-      relations: { agency: true },
-    });
-
-    if (tours.length == 0) {
-      return 'No hay viajes con Autobus todavía';
-    }
-
-    return tours;
-  }
-
-  async getToursPlane() {
-    const tours: TourEntity[] = await this.tourRepository.find({
-      where: { transportType: 'plane' },
-      relations: { agency: true },
-    });
-
-    if (tours.length == 0) {
-      return 'No hay viajes con Avion todavía';
-    }
-
-    return tours;
-  }
-
-  async getToursOferta() {
-    const tours: TourEntity[] = await this.tourRepository.find({
-      where: { oferta: true },
-      relations: { agency: true },
-    });
-
-    if (tours.length == 0) {
-      return 'No hay viajes con Ofertas todavía';
-    }
-
-    return tours;
-  }
   async mailOfertas(email: string): Promise<void> {
     const tours: TourEntity[] = await this.tourRepository.find({
       where: { oferta: true },
@@ -266,9 +258,60 @@ export class TourRepository {
     await this.mailservice.sendMail(email, subject, textBody, htmlBody);
   }
 
+  async getTours() {
+    const Tours: TourEntity[] = await this.tourRepository.find({
+      relations: { agency: true, comments: true },
+    });
+
+    if (Tours.length == 0) {
+      return 'No hay Publicaciones registradas en la base de datos';
+    }
+
+    return Tours;
+  }
+
+  async getToursBus() {
+    const tours: TourEntity[] = await this.tourRepository.find({
+      where: { transportType: 'bus' },
+      relations: { agency: true },
+    });
+
+    if (tours.length == 0) {
+      return 'No hay viajes con Autobus todavía';
+    }
+
+    return tours;
+  }
+
+  async getToursPlane() {
+    const tours: TourEntity[] = await this.tourRepository.find({
+      where: { transportType: 'plane' },
+      relations: { agency: true },
+    });
+
+    if (tours.length == 0) {
+      return 'No hay viajes con Avion todavía';
+    }
+
+    return tours;
+  }
+
+  async getToursOferta() {
+    const tours: TourEntity[] = await this.tourRepository.find({
+      where: { oferta: true },
+      relations: { agency: true },
+    });
+
+    if (tours.length == 0) {
+      return 'No hay viajes con Ofertas todavía';
+    }
+
+    return tours;
+  }
+
   async getTourById(id: string) {
     const Tour: TourEntity = await this.tourRepository.findOne({
-      where: { id: id },
+      where: { id },
       relations: { agency: true, comments: true },
     });
     if (!Tour) {
@@ -276,50 +319,5 @@ export class TourRepository {
     }
 
     return Tour;
-  }
-
-  async addTourImg(id: string, imgUrl) {
-    const tour: TourEntity = await this.tourRepository.findOne({
-      where: { id },
-    });
-
-    if (tour.listImg === null) {
-      tour.listImg = [];
-    }
-
-    if (!tour) {
-      throw new NotFoundException('Tour no encontrado');
-    }
-
-    const arrayImg = await Promise.all(
-      imgUrl.map((img) => {
-        return img;
-      }),
-    );
-
-    await Promise.all(
-      arrayImg.map(async (img) => {
-        tour.listImg.push(img);
-        await this.tourRepository.save(tour);
-      }),
-    );
-
-    return tour;
-  }
-
-  async removeTourImg(id: string, imgUrl: string) {
-    const tour: TourEntity = await this.tourRepository.findOne({
-      where: { id },
-    });
-
-    if (!tour) {
-      throw new NotFoundException('Tour no encontrado');
-    }
-
-    tour.listImg = tour.listImg.filter((img) => img !== imgUrl);
-
-    await this.tourRepository.save(tour);
-
-    return tour;
   }
 }

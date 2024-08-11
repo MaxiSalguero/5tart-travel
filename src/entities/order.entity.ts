@@ -2,11 +2,9 @@ import {
   Column,
   Entity,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { v4 as uuid } from 'uuid';
 import { UserEntity } from './user.entity';
 import { AgencyEntity } from './agency.entity';
 
@@ -15,7 +13,7 @@ import { AgencyEntity } from './agency.entity';
 })
 export class OrderEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string = uuid();
+  id: string;
 
   @Column({
     type: 'varchar',

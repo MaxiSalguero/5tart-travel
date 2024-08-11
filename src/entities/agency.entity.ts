@@ -7,7 +7,6 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { v4 as uuid } from 'uuid';
 import { TourEntity } from './tour.entity';
 import { OrderEntity } from './order.entity';
 
@@ -16,7 +15,7 @@ import { OrderEntity } from './order.entity';
 })
 export class AgencyEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string = uuid();
+  id: string;
 
   @Column()
   name_agency: string;

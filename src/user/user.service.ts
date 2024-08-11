@@ -4,30 +4,30 @@ import { UserEntity } from 'src/entities/user.entity';
 
 @Injectable()
 export class UserServices {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private readonly userRepository: UserRepository) {}
+
+  addTourFavorite(tourId: string, userId: string) {
+    return this.userRepository.addTourFavorite(tourId, userId);
+  }
+
+  updatedProfile(id: string, user: Partial<UserEntity>) {
+    return this.userRepository.updatedProfile(id, user);
+  }
+
+  deleteTourFavorite(tourId: string, userId: string) {
+    return this.userRepository.deleteTourFavorite(tourId, userId);
+  }
 
   getUsers() {
     return this.userRepository.getUsers();
-  }
-
-  addTourFavorite(id: string, userId: any) {
-    return this.userRepository.addTourFavorite(id, userId);
-  }
-
-  deleteAllUsers() {
-    return this.userRepository.deleteAllUsers();
-  }
-
-  deleteTourFavorite(id: string, userId: any) {
-    return this.userRepository.deleteTourFavorite(id, userId);
   }
 
   getUserById(id: string) {
     return this.userRepository.getUserById(id);
   }
 
-  updatedProfile(id: string, user: Partial<UserEntity>) {
-    return this.userRepository.updatedProfile(id, user);
+  getSeenUser() {
+    return this.userRepository.getSeenUser();
   }
 
   activeUser(id: string) {
@@ -38,15 +38,15 @@ export class UserServices {
     return this.userRepository.disableUser(id);
   }
 
+  putSeenUser(id: string) {
+    return this.userRepository.putSeenUser(id);
+  }
+
   adminUser(id: string) {
     return this.userRepository.adminUser(id);
   }
 
-  async putSeenUser(id: string) {
-    return this.userRepository.putSeenUser(id)
-  };
-
-  getSeenUser() {
-    return this.userRepository.getSeenUser()
+  deleteAllUsers() {
+    return this.userRepository.deleteAllUsers();
   }
 }

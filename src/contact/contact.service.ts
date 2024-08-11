@@ -1,22 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { CreateContactDto } from 'src/DTOS/CreateContact.dto';
 import { ContactRepository } from './contact.repository';
+import { ContactEntity } from 'src/entities/contact.entity';
 
 @Injectable()
 export class ContactService {
-    constructor(private contactRepository: ContactRepository){}
+  constructor(private contactRepository: ContactRepository) {}
 
-    getAllContact() {
-        return this.contactRepository.getAllContact()
-    }
-    getcontactById(userId:string)
-    {return this.contactRepository.getContactById(userId)}
-    
-    createContact(comm: CreateContactDto) {
-        return this.contactRepository.createContact(comm)
-    }
-    deleteContact(id: string) {
-        return this.contactRepository.deleteContact(id)
-    }
-    
+  createContact(contact: Partial<ContactEntity>) {
+    return this.contactRepository.createContact(contact);
+  }
+
+  sendMail(contactId: string) {
+    return this.contactRepository.sendMail(contactId);
+  }
+
+  getAllContacts() {
+    return this.contactRepository.getAllContacts();
+  }
+
+  deleteContact(id: string) {
+    return this.contactRepository.deleteContact(id);
+  }
 }

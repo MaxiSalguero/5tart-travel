@@ -2,9 +2,11 @@ import { Body, Controller, Post, Put } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto, LoginDto } from 'src/DTOS/CreateUser.dto';
 import { CreateAgencyDto } from 'src/DTOS/CreateAgency.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
+import { FoundEmailDto } from 'src/DTOS/FoundEmail.dto';
+import { ChangePasswordDto } from 'src/DTOS/ChangePassword.dto';
 
-@ApiTags('auth')
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -25,16 +27,16 @@ export class AuthController {
     return this.authService.login(mail, password);
   }
 
-  @Put('/password')
-  changePassword(@Body() body: any) {
-    const { id, type, newPassword } = body;
-    return this.authService.changePassword(id, type, newPassword);
+  @Post('/email')
+  foundEmail(@Body() body: FoundEmailDto) {
+    const { mail } = body;
+    const result = this.authService.foundEmail(mail);
+    return result;
   }
 
-  @Post('/email')
-  async foundEmail(@Body() body: any) {
-    const { mail } = body;
-    const result = await this.authService.foundEmail(mail);
-    return result;
+  @Put('/password')
+  changePassword(@Body() body: ChangePasswordDto) {
+    const { id, type, newPassword } = body;
+    return this.authService.changePassword(id, type, newPassword);
   }
 }
