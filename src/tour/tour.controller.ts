@@ -13,20 +13,19 @@ import {
 import { TourService } from './tour.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateTourDto, ImgDto, UpdateTourDto } from 'src/DTOS/CreateTour.dto';
-import { AuthGuard } from 'src/guards/auth.guard';
 import { RequestWithUser } from 'src/interfaces/requestWithUser';
-import { RolesGuard } from 'src/guards/roles.guard';
 import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from 'src/user/role.enum';
+import { GlobalGuard } from 'src/guards/global.guard';
 
 @ApiTags('Tours')
+@UseGuards(GlobalGuard)
 @Controller('tours')
 export class TourController {
   constructor(private tourService: TourService) {}
 
   // Agency Methods
   @ApiBearerAuth()
-  @UseGuards(AuthGuard, RolesGuard)
   @Roles(Role.Agency)
   @Post()
   createTour(@Body() tour: CreateTourDto, @Req() req: RequestWithUser) {
@@ -36,7 +35,6 @@ export class TourController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard, RolesGuard)
   @Roles(Role.Agency)
   @Post('addImg/:id')
   addTourImg(@Param('id', ParseUUIDPipe) id: string, @Body() imgUrl: ImgDto[]) {
@@ -44,7 +42,6 @@ export class TourController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard, RolesGuard)
   @Roles(Role.Agency)
   @Put(':id')
   updateTour(
@@ -55,7 +52,6 @@ export class TourController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard, RolesGuard)
   @Roles(Role.Agency)
   @Delete('deleteImg/:id')
   removeTourImg(
@@ -66,8 +62,8 @@ export class TourController {
     return this.tourService.removeTourImg(id, imgUrl);
   }
 
+  // Admin Methods
   @ApiBearerAuth()
-  @UseGuards(AuthGuard, RolesGuard)
   @Roles(Role.Admin)
   @Delete(':id')
   deleteTour(@Param('id', ParseUUIDPipe) id: string) {

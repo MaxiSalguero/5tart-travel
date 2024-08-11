@@ -9,6 +9,8 @@ import { AgencyEntity } from 'src/entities/agency.entity';
 import { TourEntity } from 'src/entities/tour.entity';
 import { MailsServices } from 'src/mails/mails.service';
 import { ConfigService } from '@nestjs/config';
+import { AuthGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from 'src/guards/roles.guard';
 
 @Module({
   imports: [
@@ -20,6 +22,13 @@ import { ConfigService } from '@nestjs/config';
     ]),
   ],
   controllers: [OrderController],
-  providers: [OrderService, OrderRepository, MailsServices, ConfigService],
+  providers: [
+    OrderService,
+    OrderRepository,
+    MailsServices,
+    ConfigService,
+    AuthGuard,
+    RolesGuard,
+  ],
 })
 export class OrderModule {}

@@ -13,6 +13,9 @@ import { AgencyGateway } from 'src/agency/agency.gateway';
 import { AgencyRepository } from 'src/agency/agency.repository';
 import { UserRepository } from 'src/user/user.repository';
 import { UserEntity } from 'src/entities/user.entity';
+import { AuthGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { GlobalGuard } from 'src/guards/global.guard';
 
 @Module({
   imports: [
@@ -33,6 +36,8 @@ import { UserEntity } from 'src/entities/user.entity';
     AgencyGateway,
     AgencyRepository,
     UserRepository,
+    AuthGuard,
+    RolesGuard,
   ],
 })
 export class TourModule {}

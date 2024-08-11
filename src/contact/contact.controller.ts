@@ -3,8 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpException,
-  HttpStatus,
   Param,
   ParseUUIDPipe,
   Post,
@@ -15,10 +13,10 @@ import { CreateContactDto } from 'src/DTOS/CreateContact.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from 'src/user/role.enum';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { RolesGuard } from 'src/guards/roles.guard';
+import { GlobalGuard } from 'src/guards/global.guard';
 
 @ApiTags('Contact')
+@UseGuards(GlobalGuard)
 @Controller('contact')
 export class ContactController {
   constructor(private contactService: ContactService) {}
@@ -29,7 +27,6 @@ export class ContactController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard, RolesGuard)
   @Roles(Role.Admin)
   @Post('sendEmail/:id')
   sendMail(@Param('id') contactId: string) {
@@ -37,7 +34,6 @@ export class ContactController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard, RolesGuard)
   @Roles(Role.Admin)
   @Get()
   getAllContacts() {
@@ -45,7 +41,6 @@ export class ContactController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard, RolesGuard)
   @Roles(Role.Admin)
   @Delete(':id')
   deleteContact(@Param('id', ParseUUIDPipe) id: string) {

@@ -96,10 +96,10 @@ export class AgencyRepository {
 
   async putSeenDisableAgency(id: string) {
     const disAgency: AgencyEntity = await this.agencyRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
     const disUser: UserEntity = await this.userRepository.findOne({
-      where: { id: id },
+      where: { id },
     });
 
     if (disAgency) {

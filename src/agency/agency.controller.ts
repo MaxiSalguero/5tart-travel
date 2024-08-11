@@ -6,17 +6,18 @@ import {
   ParseUUIDPipe,
   Put,
   Req,
+  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { AgencyServices } from './agency.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { RolesGuard } from 'src/guards/roles.guard';
 import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from 'src/user/role.enum';
 import { RequestWithUser } from 'src/interfaces/requestWithUser';
+import { GlobalGuard } from 'src/guards/global.guard';
 
 @ApiTags('Agency')
+@UseGuards(GlobalGuard)
 @Controller('agency')
 export class AgencyController {
   constructor(private agencyService: AgencyServices) {}
@@ -37,7 +38,6 @@ export class AgencyController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard, RolesGuard)
   @Roles(Role.Agency)
   @Get('totalMount')
   getTotalMount(@Req() request: RequestWithUser) {
@@ -57,7 +57,6 @@ export class AgencyController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard, RolesGuard)
   @Roles(Role.Admin)
   @Put('active/:id')
   activeAgency(@Param('id', ParseUUIDPipe) id: string) {
@@ -65,7 +64,6 @@ export class AgencyController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard, RolesGuard)
   @Roles(Role.Admin)
   @Put('disable/:id')
   disableAgency(@Param('id', ParseUUIDPipe) id: string) {
@@ -73,7 +71,6 @@ export class AgencyController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard, RolesGuard)
   @Roles(Role.Agency)
   @Delete('orders/amount')
   emptyTotalAmount(@Req() request: RequestWithUser) {
@@ -83,7 +80,6 @@ export class AgencyController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard, RolesGuard)
   @Roles(Role.Agency)
   @Delete('tour/:id')
   deleteTour(

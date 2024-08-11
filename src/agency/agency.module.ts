@@ -9,6 +9,8 @@ import { AgencyGateway } from './agency.gateway';
 import { UserRepository } from 'src/user/user.repository';
 import { UserEntity } from 'src/entities/user.entity';
 import { MapsService } from 'src/maps/maps.service';
+import { AuthGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from 'src/guards/roles.guard';
 
 @Module({
   imports: [TypeOrmModule.forFeature([AgencyEntity, TourEntity, UserEntity])],
@@ -19,6 +21,8 @@ import { MapsService } from 'src/maps/maps.service';
     AgencyGateway,
     UserRepository,
     MapsService,
+    AuthGuard,
+    RolesGuard,
   ],
 })
 export class AgencyModule {}

@@ -12,6 +12,9 @@ import { ConfigService } from '@nestjs/config';
 import { TourEntity } from 'src/entities/tour.entity';
 import { AgencyGateway } from 'src/agency/agency.gateway';
 import { MapsService } from 'src/maps/maps.service';
+import { AuthGuard } from 'src/guards/auth.guard';
+import { GlobalGuard } from 'src/guards/global.guard';
+import { RolesGuard } from 'src/guards/roles.guard';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity, AgencyEntity, TourEntity])],
@@ -25,6 +28,8 @@ import { MapsService } from 'src/maps/maps.service';
     ConfigService,
     AgencyGateway,
     MapsService,
+    AuthGuard,
+    RolesGuard,
   ],
 })
 export class UserModule {}

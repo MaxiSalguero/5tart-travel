@@ -11,19 +11,18 @@ import {
 import { OrderService } from './order.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateOrderDto } from 'src/DTOS/CreateOrder.dto';
-import { AuthGuard } from 'src/guards/auth.guard';
 import { RequestWithUser } from 'src/interfaces/requestWithUser';
 import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from 'src/user/role.enum';
-import { RolesGuard } from 'src/guards/roles.guard';
+import { GlobalGuard } from 'src/guards/global.guard';
 
 @ApiTags('Order')
-@ApiBearerAuth()
-@UseGuards(AuthGuard, RolesGuard)
+@UseGuards(GlobalGuard)
 @Controller('order')
 export class OrderController {
   constructor(private orderService: OrderService) {}
 
+  @ApiBearerAuth()
   @Roles(Role.User)
   @Post(':id')
   addOrder(
@@ -41,6 +40,7 @@ export class OrderController {
     return this.orderService.getOrders();
   }
 
+  @ApiBearerAuth()
   @Roles(Role.User)
   @Get('user')
   getMyOrders(@Req() req: RequestWithUser) {
