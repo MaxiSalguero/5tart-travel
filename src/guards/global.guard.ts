@@ -28,6 +28,7 @@ export class GlobalGuard implements CanActivate {
       (url === '/tours/plane' && method === 'GET') ||
       (url === '/tours/oferta' && method === 'GET') ||
       (url.match(/^\/tours\/[^/]+$/) && method === 'GET') || // GET /tours/:id
+      (url.match(/^\/tours\/[^/]+$/) && method === 'PUT') || // PUT /tours/:id
       (url === '/tours/mailOfertas' && method === 'POST') ||
       // Excluir rutas en OrderController
       (url === '/order' && method === 'GET') ||

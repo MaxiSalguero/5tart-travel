@@ -200,7 +200,7 @@ export class AgencyRepository {
       throw new BadRequestException('La agencia no existe');
     }
 
-    const tour: TourEntity = await this.toursRepository.findOneBy({ id: id });
+    const tour: TourEntity = await this.toursRepository.findOneBy({ id });
 
     if (!tour) {
       throw new NotFoundException(`No se encontró el tour`);

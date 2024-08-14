@@ -33,53 +33,61 @@ export class PreloadService implements OnModuleInit {
   }
 
   async loadAgencies() {
-    for (const agency of dataAgency) {
-      const existingAgency = await this.agencyRepository.findOne({
-        where: {
-          name_agency: agency.name_agency,
-          mail: agency.mail,
-          password: agency.password,
-          address: agency.address,
-          imgUrl: agency.imgUrl,
-        },
-      });
+    const agencies: AgencyEntity[] = await this.agencyRepository.find();
 
-      if (!existingAgency) {
-        await this.agencyRepository.save(agency);
+    if (agencies.length == 0) {
+      for (const agency of dataAgency) {
+        const existingAgency = await this.agencyRepository.findOne({
+          where: {
+            name_agency: agency.name_agency,
+            mail: agency.mail,
+            password: agency.password,
+            address: agency.address,
+            imgUrl: agency.imgUrl,
+          },
+        });
+
+        if (!existingAgency) {
+          await this.agencyRepository.save(agency);
+        }
       }
+      return 'Agencias cargadas correctamente';
     }
-
-    return 'Agencias cargadas correctamente';
   }
 
   async loadTours() {
-    for (const tour of data) {
-      const agency = await this.agencyRepository.findOne({
-        where: { name_agency: tour.agency },
-      });
+    const tours: TourEntity[] = await this.tourRepository.find();
 
-      const geocodeData = await this.mapsservice.geocodeAddress(tour.address);
-
-      const existingTour = await this.tourRepository.findOne({
-        where: {
-          title: tour.title,
-          agency: agency,
-        },
-      });
-
-      if (!existingTour) {
-        await this.tourRepository.save({
-          ...tour,
-          agency: agency,
-          country: geocodeData.country,
-          region: geocodeData.region,
-          state: geocodeData.state,
-          lat: geocodeData.lat,
-          lon: geocodeData.lon,
-          display_name: `El ${tour.hotel} - Ubicado en: ${tour.address}`,
-          touristPoints: geocodeData.touristPoints,
+    if (tours.length == 0) {
+      for (const tour of data) {
+        const agency = await this.agencyRepository.findOne({
+          where: { name_agency: tour.agency },
         });
+
+        const geocodeData = await this.mapsservice.geocodeAddress(tour.address);
+
+        const existingTour = await this.tourRepository.findOne({
+          where: {
+            title: tour.title,
+            agency: agency,
+          },
+        });
+
+        if (!existingTour) {
+          await this.tourRepository.save({
+            ...tour,
+            agency: agency,
+            country: geocodeData.country,
+            region: geocodeData.region,
+            state: geocodeData.state,
+            lat: geocodeData.lat,
+            lon: geocodeData.lon,
+            display_name: `El ${tour.hotel} - Ubicado en: ${tour.address}`,
+            touristPoints: geocodeData.touristPoints,
+          });
+        }
       }
+      return 'Tours cargados correctamente';
     }
   }
 }
