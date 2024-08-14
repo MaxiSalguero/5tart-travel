@@ -57,31 +57,29 @@ export class PreloadService implements OnModuleInit {
       const agency = await this.agencyRepository.findOne({
         where: { name_agency: tour.agency },
       });
-      const geocodeData = await this.mapsservice.geocodeAddress(tour.address);
-      if (agency) {
-        const existingTour = await this.tourRepository.findOne({
-          where: {
-            title: tour.title,
-            agency: agency,
-          },
-        });
 
-        if (!existingTour) {
-          await this.tourRepository.save({
-            ...tour,
-            agency: agency,
-            country: geocodeData.country,
-            region: geocodeData.region,
-            state: geocodeData.state,
-            lat: geocodeData.lat,
-            lon: geocodeData.lon,
-            display_name: `El ${tour.hotel} -Ubicado en: ${tour.address}`,
-            touristPoints: geocodeData.touristPoints,
-          });
-        }
+      const geocodeData = await this.mapsservice.geocodeAddress(tour.address);
+
+      const existingTour = await this.tourRepository.findOne({
+        where: {
+          title: tour.title,
+          agency: agency,
+        },
+      });
+
+      if (!existingTour) {
+        await this.tourRepository.save({
+          ...tour,
+          agency: agency,
+          country: geocodeData.country,
+          region: geocodeData.region,
+          state: geocodeData.state,
+          lat: geocodeData.lat,
+          lon: geocodeData.lon,
+          display_name: `El ${tour.hotel} - Ubicado en: ${tour.address}`,
+          touristPoints: geocodeData.touristPoints,
+        });
       }
     }
-
-    return 'Tours cargados correctamente';
   }
 }
