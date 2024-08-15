@@ -25,6 +25,7 @@ import { MercadoPagoModule } from './mercado-pago/mercado-pago.module';
 import { CommentModule } from './comment/comment.module';
 import { ContactModule } from './contact/contact.module';
 import { OrderModule } from './order/order.module';
+import { PdfService } from './mails/generatePdf.service';
 
 @Module({
   imports: [

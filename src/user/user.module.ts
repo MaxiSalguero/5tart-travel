@@ -15,6 +15,7 @@ import { MapsService } from 'src/maps/maps.service';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { GlobalGuard } from 'src/guards/global.guard';
 import { RolesGuard } from 'src/guards/roles.guard';
+import { PdfService } from 'src/mails/generatePdf.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity, AgencyEntity, TourEntity])],
@@ -23,6 +24,7 @@ import { RolesGuard } from 'src/guards/roles.guard';
     UserServices,
     UserRepository,
     AuthService,
+    PdfService,
     AgencyRepository,
     MailsServices,
     ConfigService,

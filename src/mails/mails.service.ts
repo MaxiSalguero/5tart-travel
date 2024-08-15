@@ -1,13 +1,17 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
+import { PdfService } from './generatePdf.service';
 
 @Injectable()
 export class MailsServices {
   private transporter: nodemailer.Transporter;
   private readonly logger = new Logger(MailsServices.name);
+  pdfService: any;
 
-  constructor(private configService: ConfigService) {
+  constructor(
+    private configService: ConfigService,
+    private generatepdf: PdfService) {
     this.transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -16,8 +20,16 @@ export class MailsServices {
       },
     });
   }
+  private formatDate(date: Date): string {
+    const options: Intl.DateTimeFormatOptions = {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    };
+    return date.toLocaleDateString('es-ES', options);
+  }
 
-  async sendMail(to: string, subject: string, text: string, html?: string) {
+  async sendMail(to: string, subject: string, text: string, html?: string, attachments?: { filename: string; content: Buffer; }[]) {
     if (!to) {
       this.logger.error('No recipients defined');
       throw new Error('No recipients defined');
@@ -29,6 +41,7 @@ export class MailsServices {
       subject,
       text,
       html,
+      attachments, // Aquí agregamos los archivos adjuntos
     };
 
     try {
@@ -39,6 +52,7 @@ export class MailsServices {
       throw new Error('Error sending email');
     }
   }
+
   async registerUserMail(
     userEmail: string,
     username: string,
@@ -318,60 +332,135 @@ export class MailsServices {
     agencyName: string,
     tourName: string,
     totalPrice: number,
+    fecha_egreso: Date,
+    fecha_ingreso: Date,
+    hotel: string,
+    destino: string,
+    salida: string,
+    address: string,
+    empresa: string,
+    transportType: string,
+    addressAgency: string,
+    agencymail: string,
+    description: string,
   ) {
     const subject = 'Confirmación de Compra - 5tart Travel';
     const textBody = `Hola ${username},
-    
-      ¡Gracias por tu compra con 5tart Travel!
-    
-      Detalles de tu compra:
-      - Agencia: ${agencyName}
-      - Tour: ${tourName}
-      - Precio Total: ${totalPrice} USD
-    
-      Recibirás información adicional por correo electrónico antes de tu viaje.
-    
-      Si tienes alguna pregunta adicional, no dudes en responder a este correo.
-    
-      Saludos cordiales,
-      El equipo de 5tart Travel`;
+  
+    ¡Gracias por tu compra con 5tart Travel!
+  
+    Adjunto a este correo encontrarás las facturas correspondientes a tu compra:
+  
+    - Factura del Paquete
+    - Factura del Vuelo
+    - Factura del Hotel
+  
+    Si tienes alguna pregunta adicional, no dudes en responder a este correo.
+  
+    Saludos cordiales,
+    El equipo de 5tart Travel`;
 
     const htmlBody = `
-      <div style="border: 2px solid #005BBB; padding: 20px; background: #f5f5f5; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%; color: black; position: relative;">
-    <p style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">¡Hola, ${username}!</p>
-    <p style="font-size: 18px;">¡Gracias por tu compra con 5tart Travel!</p>
+      <div style="border: 2px solid #005BBB; padding: 20px; background: #f5f5f5; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%; color: black;">
+        <p style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">¡Hola, ${username}!</p>
+        <p style="font-size: 18px;">¡Gracias por tu compra con 5tart Travel!</p>
+        <p style="font-size: 18px; margin-top: 20px;">Adjunto a este correo encontrarás las facturas correspondientes a tu compra:</p>
+        <ul style="text-align: center; margin: 20px auto; padding: 0; list-style-type: none;">
+          <li><strong>Voucher del Paquete</strong></li>
+          <li><strong>Voucher de Vuelo y hotel</strong></li>
+        </ul>
+        <p style="margin-top: 20px;">Si tienes alguna pregunta adicional, no dudes en responder a este correo.</p>
+        <p style="margin-top: 20px;">¡Saludos!</p>
+        <p>El Equipo de 5tart Travel</p>
+      </div>
+    `;
 
-    <div style="border: 2px solid #005BBB; padding: 20px; background: white; border-radius: 10px; text-align: left; width: fit-content; margin: 0 auto; color: black; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative;">
-        <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Detalles de tu compra</p>
-        <hr style="border-top: 2px solid #005BBB; margin-top: 10px; margin-bottom: 15px;">
-        <p><strong>Agencia:</strong> ${agencyName}</p>
-        <p><strong>Tour:</strong> ${tourName}</p>
-        <p><strong>Precio Total:</strong> $ ${totalPrice} </p>
-    </div>
-
-    <p style="margin-top: 20px;">Recibirás información adicional por correo electrónico antes de tu viaje.</p>
-    <p>Si tienes alguna pregunta adicional, no dudes en responder a este correo.</p>
-    <p style="margin-top: 20px;">¡Saludos!</p>
-    <p>El Equipo de 5tart Travel</p>
-</div>
-
-<style>
-    @media only screen and (max-width: 600px) {
-        div[style*="border: 2px solid #005BBB; padding: 20px;"] {
-            padding: 10px;
+    const ticketPDF = await this.generatepdf.generatePackagePDF(
+      {
+        'Tipo de Voucher': 'Paquete de Tour',
+        'Comprador': {
+          'Nombre del Usuario': username,
+          'Nombre de la Agencia': agencyName,
+          'Dirección de la Agencia': addressAgency,
+          'Email Agencia': agencymail,
+        },
+        'Detalles del Tour': {
+          'Nombre del Tour': tourName,
+          'Descripción del Tour': description,
+          'Total Paquete': `$${totalPrice.toFixed(2)}`,
         }
-        div[style*="text-align: left; width: fit-content;"] {
-            width: auto;
-            max-width: calc(100% - 40px);
-        }
-    }
-</style>
-
-`;
-
-    this.logger.log(
-      `Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`,
+      }
     );
-    await this.sendMail(userEmail, subject, textBody, htmlBody);
+
+
+    const combinedPDF = await this.generatepdf.generateCombinedPDF(
+      {
+        'Tipo de Voucher': 'Voucher Aéreo',
+        'Origen': {
+          'Salida': salida,
+          'Fecha de Ingreso': this.formatDate(fecha_ingreso),
+          'Tipo de Transporte': transportType,
+          'Nombre de la Empresa': empresa,
+        },
+        'Destino': {
+          'Llegada': destino,
+          'Fecha de Egreso': this.formatDate(fecha_egreso),
+          'Tipo de Transporte': transportType,
+          'Nombre de la Empresa': empresa,
+        },
+      },
+      {
+        'Hotel': hotel,
+        'Dirección': address,
+      }
+    );
+
+
+    const attachments = [
+      { filename: 'Voucher_Paquete.pdf', content: ticketPDF },
+      { filename: 'Voucher_VueloyHotel.pdf', content: combinedPDF },
+
+    ];
+
+    this.logger.log(`Enviando correo a ${userEmail} con asunto "${subject}" y texto "${textBody}"`);
+
+    await this.sendMail(userEmail, subject, textBody, htmlBody, attachments);
   }
+  async sendDeleteTourMail(agencyEmail: string, tourName: string, agencyName: string) {
+    const subject = 'Notificación de Eliminación de Tour - 5tart Travel';
+    const textBody = `Estimado equipo de ${agencyName},
+    
+      Nos dirigimos a ustedes para informarles que, lamentablemente, hemos tenido que eliminar el tour titulado "${tourName}" debido a que incumplía con nuestros términos y condiciones.
+  
+      Esta decisión se ha tomado siguiendo nuestras políticas de empresa, las cuales requieren el cumplimiento de ciertos estándares para asegurar la calidad y la satisfacción de nuestros clientes. Lamentamos cualquier inconveniente que esto pueda causar y agradecemos su comprensión en esta materia.
+  
+      Si tienen alguna pregunta o necesitan más información, no duden en ponerse en contacto con nosotros. Estamos aquí para ayudarles.
+  
+      Atentamente,
+      El equipo de 5tart Travel`;
+  
+    const htmlBody = `
+      <div style="border: 2px solid #003366; padding: 20px; background: white; border-radius: 15px; text-align: center; max-width: 600px; margin: 0 auto; width: 100%;">
+        <p><strong>Estimado equipo de ${agencyName},</strong></p>
+        <p>Nos dirigimos a ustedes para informarles que, lamentablemente, hemos tenido que eliminar el tour titulado "<strong>${tourName}</strong>" debido a que incumplía con nuestros términos y condiciones.</p>
+        <p>Esta decisión se ha tomado siguiendo nuestras políticas de empresa, las cuales requieren el cumplimiento de ciertos estándares para asegurar la calidad y la satisfacción de nuestros clientes. Lamentamos cualquier inconveniente que esto pueda causar y agradecemos su comprensión en esta materia.</p>
+        <p>Si tienen alguna pregunta o necesitan más información, no duden en ponerse en contacto con nosotros. Estamos aquí para ayudarles.</p>
+        <p>Atentamente,</p>
+        <p>El equipo de 5tart Travel</p>
+      </div>
+      <style>
+        @media only screen and (max-width: 600px) {
+          div[style*="border: 2px solid #003366; padding: 20px;"] {
+            padding: 10px;
+          }
+        }
+      </style>`;
+  
+    this.logger.log(
+      `Enviando correo a ${agencyEmail} con asunto "${subject}" y texto "${textBody}"`,
+    );
+    await this.sendMail(agencyEmail, subject, textBody, htmlBody);
+  }
+  
+
 }

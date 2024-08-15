@@ -16,6 +16,7 @@ import { UserEntity } from 'src/entities/user.entity';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { RolesGuard } from 'src/guards/roles.guard';
 import { GlobalGuard } from 'src/guards/global.guard';
+import { PdfService } from 'src/mails/generatePdf.service';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { GlobalGuard } from 'src/guards/global.guard';
     UserRepository,
     AuthGuard,
     RolesGuard,
+    PdfService
   ],
 })
 export class TourModule {}
