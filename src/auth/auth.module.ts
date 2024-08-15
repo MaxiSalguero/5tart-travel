@@ -11,6 +11,7 @@ import { AgencyRepository } from 'src/agency/agency.repository';
 import { TourEntity } from 'src/entities/tour.entity';
 import { UserRepository } from 'src/user/user.repository';
 import { MapsService } from 'src/maps/maps.service';
+import { PdfService } from 'src/mails/generatePdf.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity, AgencyEntity, TourEntity])],
@@ -22,6 +23,7 @@ import { MapsService } from 'src/maps/maps.service';
     AgencyRepository,
     UserRepository,
     MapsService,
+    PdfService
   ],
   controllers: [AuthController],
   exports: [AuthService],

@@ -17,7 +17,7 @@ export class OrderRepository {
     @InjectRepository(TourEntity)
     private readonly tourRepository: Repository<TourEntity>,
     private readonly mailservices: MailsServices,
-  ) {}
+  ) { }
 
   getOrders() {
     return this.orderRepository.find({ relations: { user: true } });
@@ -77,6 +77,18 @@ export class OrderRepository {
       agency.name_agency,
       tour.title,
       order.price,
+      tour.fecha_egreso,
+      tour.fecha_ingreso,
+      tour.hotel,
+      tour.destino,
+      tour.salida,
+      tour.address,
+      tour.empresa,
+      tour.transportType,
+      tour.agency.address,
+      tour.agency.mail,
+      tour.description
+      
     );
 
     return newOrder;

@@ -11,6 +11,7 @@ import { MailsServices } from 'src/mails/mails.service';
 import { ConfigService } from '@nestjs/config';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { RolesGuard } from 'src/guards/roles.guard';
+import { PdfService } from 'src/mails/generatePdf.service';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { RolesGuard } from 'src/guards/roles.guard';
     ConfigService,
     AuthGuard,
     RolesGuard,
+    PdfService
   ],
 })
 export class OrderModule {}
