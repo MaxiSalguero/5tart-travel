@@ -120,20 +120,25 @@ export class TourRepository {
   }
 
   async deleteTour(id: string): Promise<string> {
-    const tour = await this.tourRepository.findOneBy({ id });
-  
+    const tour = await this.tourRepository.findOne({
+      where: { id },
+      relations: { agency: true },
+    });
+
     if (!tour) {
       throw new BadRequestException('La publicación no existe');
     }
-  
-    
+
     await this.tourRepository.remove(tour);
-  
-    await this.mailservice.sendDeleteTourMail(tour.agency.mail, tour.title, tour.agency.name_agency);
-  
+
+    await this.mailservice.sendDeleteTourMail(
+      tour.agency.mail,
+      tour.title,
+      tour.agency.name_agency,
+    );
+
     return 'Publicación eliminada correctamente';
   }
-  
 
   async mailOfertas(email: string): Promise<void> {
     const tours: TourEntity[] = await this.tourRepository.find({
