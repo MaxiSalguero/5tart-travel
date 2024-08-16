@@ -15,15 +15,17 @@ import { RequestWithUser } from 'src/interfaces/requestWithUser';
 import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from 'src/user/role.enum';
 import { GlobalGuard } from 'src/guards/global.guard';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @ApiTags('Order')
-@UseGuards(GlobalGuard)
+/* @UseGuards(GlobalGuard) */
 @Controller('order')
 export class OrderController {
   constructor(private orderService: OrderService) {}
 
   @ApiBearerAuth()
-  @Roles(Role.User)
+  @UseGuards(AuthGuard)
+  /*   @Roles(Role.User) */
   @Post(':id')
   addOrder(
     @Param('id', ParseUUIDPipe) tourId: string,
@@ -41,7 +43,8 @@ export class OrderController {
   }
 
   @ApiBearerAuth()
-  @Roles(Role.User)
+  @UseGuards(AuthGuard)
+  /*   @Roles(Role.User) */
   @Get('user')
   getMyOrders(@Req() req: RequestWithUser) {
     const userId = req.user.id;
